@@ -20,6 +20,7 @@ const roles = [
     "color": "#0c4897",
     "gradient": "linear-gradient(135deg, #FF00FF, #8A2BE2)"
   },
+    {
   "name": "Главный администратор",
     "description": "За ........",
     "category": "Администрация",
