@@ -17,8 +17,8 @@
     </div>
     <div class="nav-right">
       <ul class="nav-menu">
-        <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-        <li><a href="#"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
         <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
         <li><a href="#"><i class="fas fa-user"></i> Админ-панель</a></li>
       </ul>
@@ -30,7 +30,11 @@
     <section class="welcome-section">
       <h1 class="welcome-title">Добро пожаловать!</h1>
       
-      <h2><i class="fas fa-book"></i> Справочник ролей</h2>
+      <!-- Справочник ролей -->
+      <div class="roles-guide">
+        <h2><i class="fas fa-book"></i> Справочник ролей</h2>
+        <div id="roles"></div>
+      </div>
       
       <!-- Discord сервер -->
       <div class="discord-server">
@@ -48,5 +52,33 @@
   </main>
 
   <script src="roles.js"></script>
+  <script>
+    const container = document.getElementById("roles");
+    if (roles && roles.length > 0) {
+      const categories = [...new Set(roles.map(r => r.category))];
+
+      categories.forEach(cat => {
+        const section = document.createElement("div");
+        section.className = "category-section";
+        section.innerHTML = `<h3>${cat}</h3>`;
+        container.appendChild(section);
+
+        roles.filter(r => r.category === cat).forEach(role => {
+          const card = document.createElement("div");
+          card.className = "role-card";
+          card.style.background = role.gradient;
+
+          card.innerHTML = `
+            <span class="dot" style="background:${role.color}"></span>
+            <div>
+              <div class="role-name">${role.name}</div>
+              <div class="role-desc">${role.description}</div>
+            </div>
+          `;
+          section.appendChild(card);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
