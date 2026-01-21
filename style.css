@@ -294,4 +294,9 @@ body {
   .server-details h3 {
     font-size: 1.5rem;
   }
+  /* Активное меню */
+.nav-menu li a.active {
+  background-color: rgba(255, 107, 107, 0.3);
+  border: 1px solid rgba(255, 107, 107, 0.7);
+}
 }
