@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Справочник ролей - The Outlast Trials RU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -21,15 +22,18 @@
       flex-direction: column;
     }
 
-    /* Навбар */
+    /* Навбар - адаптивный */
     .navbar {
       background-color: #1a1a2e;
-      padding: 15px 30px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #ff2a2a;
       box-shadow: 0 4px 12px rgba(255, 42, 42, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .nav-left {
@@ -40,17 +44,17 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
 
     .logo-img {
-      height: 50px;
+      height: 45px;
       width: auto;
       border-radius: 8px;
     }
 
     .site-name {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       color: #ff2a2a;
       text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
@@ -63,19 +67,19 @@
     .nav-menu {
       display: flex;
       list-style: none;
-      gap: 30px;
+      gap: 15px;
     }
 
     .nav-menu li a {
       color: #f0f0f0;
       text-decoration: none;
-      font-size: 18px;
-      padding: 8px 15px;
+      font-size: 16px;
+      padding: 8px 12px;
       border-radius: 5px;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .nav-menu li a:hover {
@@ -89,12 +93,24 @@
       color: white;
     }
 
+    /* Мобильное меню */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #f0f0f0;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
     /* Основной контент */
     .content {
       max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
+      margin: 20px auto;
+      padding: 0 15px;
       flex: 1;
+      width: 100%;
     }
 
     .page-header {
@@ -107,7 +123,7 @@
     }
 
     .page-title {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
       color: #ff6b6b;
       text-shadow: 
         0 0 10px #ff6b6b,
@@ -115,13 +131,17 @@
         -2px 2px 0 #fff,
         2px -2px 0 #fff,
         -2px -2px 0 #fff;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       animation: pulse 2s infinite;
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 15px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     @keyframes pulse {
@@ -131,7 +151,7 @@
     }
 
     .page-title i {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       color: #ff6b6b;
       text-shadow: 0 0 8px #ff6b6b;
     }
@@ -147,10 +167,12 @@
       background-color: rgba(40, 41, 45, 0.7);
       border-radius: 8px;
       border: 1px solid rgba(255, 107, 107, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
     }
 
-    /* Остальные стили из файла roles.html... */
-    /* Панель фильтров */
+    /* Панель фильтров - исправлена */
     .filter-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -166,7 +188,7 @@
     .filter-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
       justify-content: center;
       min-height: 50px;
@@ -270,15 +292,14 @@
       box-sizing: border-box;
     }
 
-    /* Кнопки действий */
+    /* Кнопки действий - исправлено */
     .filter-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex: 1;
       min-width: 250px;
       justify-content: flex-end;
-      height: 40px;
     }
 
     .reset-btn {
@@ -296,6 +317,7 @@
       align-items: center;
       gap: 6px;
       box-sizing: border-box;
+      white-space: nowrap;
     }
 
     .reset-btn:hover {
@@ -314,6 +336,7 @@
       border-radius: 4px;
       border: 1px solid rgba(255, 107, 107, 0.3);
       box-sizing: border-box;
+      white-space: nowrap;
     }
 
     /* Отображение текущей категории */
@@ -327,6 +350,9 @@
       max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
     }
 
     .current-category-text {
@@ -341,7 +367,7 @@
       font-weight: bold;
     }
 
-    /* Панель сортировки (второй навбар) */
+    /* Панель сортировки - исправлено расстояние */
     .sort-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -352,6 +378,9 @@
       max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
     }
 
     .sort-container {
@@ -406,7 +435,7 @@
       box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.2);
     }
 
-    /* Информация о сортировке */
+    /* Информация о сортировке - исправлено расстояние */
     .sort-info {
       display: flex;
       align-items: center;
@@ -445,6 +474,7 @@
       align-items: center;
       gap: 6px;
       box-sizing: border-box;
+      white-space: nowrap;
     }
 
     .sort-reset-btn:hover {
@@ -462,48 +492,60 @@
       margin-left: auto;
       margin-right: auto;
       min-height: 200px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s;
     }
 
     .roles-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 12px;
+      gap: 15px;
     }
 
     /* Карточка роли */
     .role-card-detailed {
       background-color: rgba(40, 41, 45, 0.9);
       border-radius: 8px;
-      padding: 12px;
+      padding: 15px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .role-card-detailed.animated {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .role-card-detailed:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       border-color: rgba(255, 107, 107, 0.5);
     }
 
     .role-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
+      gap: 10px;
+      margin-bottom: 8px;
     }
 
     .role-dot-large {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
     }
 
     .role-title {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #ffffff;
       font-weight: bold;
       flex: 1;
@@ -512,21 +554,22 @@
     .role-category {
       background-color: rgba(255, 107, 107, 0.2);
       color: #ff6b6b;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 12px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: bold;
       border: 1px solid rgba(255, 107, 107, 0.3);
+      white-space: nowrap;
     }
 
     .role-description-detailed {
       color: #cccccc;
-      line-height: 1.4;
-      font-size: 0.85rem;
+      line-height: 1.5;
+      font-size: 0.9rem;
       background-color: rgba(30, 31, 34, 0.5);
-      padding: 10px;
-      border-radius: 4px;
-      border-left: 2px solid rgba(255, 107, 107, 0.5);
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 3px solid rgba(255, 107, 107, 0.5);
     }
 
     /* Сообщение "ничего не найдено" */
@@ -558,25 +601,7 @@
     }
 
     /* Адаптивность */
-    @media (max-width: 768px) {
-      .page-title {
-        font-size: 2.2rem;
-      }
-      
-      .page-title i {
-        font-size: 2rem;
-      }
-      
-      .page-description {
-        font-size: 0.95rem;
-        padding: 12px 15px;
-      }
-      
-      .filter-panel,
-      .sort-panel {
-        padding: 12px;
-      }
-      
+    @media (max-width: 992px) {
       .filter-container,
       .sort-container {
         flex-direction: column;
@@ -605,6 +630,81 @@
         justify-content: center;
       }
       
+      .results-count,
+      .sort-status {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 15px;
+        flex-wrap: wrap;
+      }
+      
+      .logo-img {
+        height: 40px;
+      }
+      
+      .site-name {
+        font-size: 18px;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #1a1a2e;
+        flex-direction: column;
+        padding: 15px;
+        border-top: 1px solid #2a2a3e;
+        border-bottom: 2px solid #ff2a2a;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .nav-menu li {
+        width: 100%;
+      }
+      
+      .nav-menu li a {
+        justify-content: center;
+        padding: 12px;
+        font-size: 18px;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .page-title i {
+        font-size: 1.8rem;
+      }
+      
+      .page-description {
+        font-size: 0.95rem;
+        padding: 12px 15px;
+      }
+      
+      .filter-panel,
+      .sort-panel {
+        padding: 12px;
+      }
+      
       .current-category {
         padding: 8px 15px;
       }
@@ -621,6 +721,51 @@
         grid-template-columns: 1fr;
         gap: 12px;
       }
+      
+      .role-card-detailed {
+        padding: 12px;
+      }
+      
+      .role-title {
+        font-size: 1.1rem;
+      }
+      
+      .role-description-detailed {
+        font-size: 0.85rem;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1.6rem;
+      }
+      
+      .page-title i {
+        font-size: 1.5rem;
+      }
+      
+      .page-description {
+        font-size: 0.85rem;
+        padding: 10px;
+      }
+      
+      .search-input,
+      .category-select,
+      .sort-select {
+        font-size: 0.8rem;
+      }
+      
+      .reset-btn,
+      .sort-reset-btn {
+        font-size: 0.8rem;
+        padding: 0 12px;
+      }
+      
+      .results-count,
+      .sort-status {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
@@ -633,8 +778,11 @@
         <span class="site-name">The Outlast Trials RU</span>
       </div>
     </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="nav-right">
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html" class="active"><i class="fas fa-users"></i> Справочник ролей</a></li>
         <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
@@ -689,7 +837,7 @@
       </p>
     </div>
 
-    <!-- Панель сортировки (второй навбар) -->
+    <!-- Панель сортировки -->
     <section class="sort-panel">
       <div class="sort-container">
         <div class="sort-order">
@@ -728,6 +876,16 @@
   <script>
     // Переменная для хранения текущих отфильтрованных ролей
     let currentFilteredRoles = [];
+    
+    // Функция для анимации появления карточек ролей
+    function animateRoleCards() {
+      const roleCards = document.querySelectorAll('.role-card-detailed');
+      roleCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('animated');
+        }, index * 100);
+      });
+    }
 
     // Функция для обновления отображения текущей категории
     function updateCurrentCategory(category) {
@@ -764,17 +922,13 @@
       
       switch(sortType) {
         case 'alphabetical':
-          // Сортировка по алфавиту (A-Z)
           return sortedRoles.sort((a, b) => a.name.localeCompare(b.name));
           
         case 'reverse':
-          // Сортировка в обратном порядке (Z-A)
           return sortedRoles.sort((a, b) => b.name.localeCompare(a.name));
           
         case 'color':
-          // Сортировка по цвету (сначала красные, затем синие, зеленые и т.д.)
           return sortedRoles.sort((a, b) => {
-            // Преобразуем HEX цвет в числовое значение для сравнения
             const colorA = parseInt(a.color.replace('#', ''), 16);
             const colorB = parseInt(b.color.replace('#', ''), 16);
             return colorA - colorB;
@@ -815,6 +969,9 @@
         `;
         rolesList.appendChild(roleCard);
       });
+      
+      // Запуск анимации карточек
+      setTimeout(animateRoleCards, 100);
     }
 
     function populateCategories() {
@@ -838,17 +995,14 @@
       const selectedCategory = document.getElementById('category-select').value;
       const sortType = document.getElementById('sort-select').value;
       
-      // Обновляем отображение текущей категории
       updateCurrentCategory(selectedCategory);
       
       let filteredRoles = roles;
       
-      // Фильтрация по категории
       if (selectedCategory !== 'all') {
         filteredRoles = filteredRoles.filter(role => role.category === selectedCategory);
       }
       
-      // Фильтрация по поисковому запросу
       if (searchTerm) {
         filteredRoles = filteredRoles.filter(role => 
           role.name.toLowerCase().includes(searchTerm) || 
@@ -856,16 +1010,9 @@
         );
       }
       
-      // Сохраняем отфильтрованные роли для сортировки
       currentFilteredRoles = filteredRoles;
-      
-      // Применяем сортировку
       const sortedRoles = sortRoles(currentFilteredRoles, sortType);
-      
-      // Обновляем статус сортировки
       updateSortStatus(sortType);
-      
-      // Отображаем роли
       displayRoles(sortedRoles);
     }
 
@@ -882,6 +1029,40 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+      // Запуск анимации заголовков
+      setTimeout(() => {
+        const pageTitle = document.querySelector('.page-title');
+        const pageDesc = document.querySelector('.page-description');
+        const currentCategory = document.querySelector('.current-category');
+        const sortPanel = document.querySelector('.sort-panel');
+        const rolesContainer = document.querySelector('.roles-container');
+        
+        if (pageTitle) {
+          pageTitle.style.opacity = '1';
+          pageTitle.style.transform = 'translateY(0)';
+        }
+        
+        if (pageDesc) {
+          pageDesc.style.opacity = '1';
+          pageDesc.style.transform = 'translateY(0)';
+        }
+        
+        if (currentCategory) {
+          currentCategory.style.opacity = '1';
+          currentCategory.style.transform = 'translateY(0)';
+        }
+        
+        if (sortPanel) {
+          sortPanel.style.opacity = '1';
+          sortPanel.style.transform = 'translateY(0)';
+        }
+        
+        if (rolesContainer) {
+          rolesContainer.style.opacity = '1';
+          rolesContainer.style.transform = 'translateY(0)';
+        }
+      }, 100);
+      
       if (!roles || roles.length === 0) {
         document.getElementById('no-results').style.display = 'block';
         return;
@@ -892,7 +1073,6 @@
       updateSortStatus('alphabetical');
       currentFilteredRoles = roles;
       
-      // Сначала фильтруем, затем сортируем
       const sortedRoles = sortRoles(roles, 'alphabetical');
       displayRoles(sortedRoles);
       
@@ -929,6 +1109,43 @@
         const sortedRoles = sortRoles(currentFilteredRoles, 'alphabetical');
         displayRoles(sortedRoles);
       });
+      
+      // Мобильное меню
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          });
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', function(event) {
+          if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          }
+        });
+      }
     });
   </script>
 </body>
