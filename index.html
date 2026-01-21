@@ -93,37 +93,37 @@
     .welcome-section {
       background-color: #1a1a2e;
       border-radius: 15px;
-      padding: 60px 40px;
+      padding: 40px;
       margin-bottom: 30px;
       border: 1px solid #2a2a3e;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       text-align: center;
-      min-height: 300px;
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
     .welcome-title {
-      color: #ff2a2a;
-      font-size: 52px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 15px rgba(255, 42, 42, 0.4);
-      letter-spacing: 1.5px;
-    }
-
-    .welcome-subtitle {
       color: #f0f0f0;
-      font-size: 24px;
-      margin-bottom: 30px;
-      opacity: 0.9;
+      font-size: 42px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      font-weight: 600;
     }
 
-    /* Панель соцсетей в стиле второй картинки */
+    .roles-title {
+      color: #ff2a2a;
+      font-size: 36px;
+      text-shadow: 0 0 10px rgba(255, 42, 42, 0.3);
+      font-weight: bold;
+    }
+
+    /* Панель соцсетей - УМЕНЬШЕННАЯ ВЕРСИЯ */
     .social-panel {
       background-color: #141422;
       border-radius: 10px;
-      padding: 30px;
+      padding: 20px;
       border: 2px solid #2a2a3e;
       text-align: center;
       margin-top: 20px;
@@ -131,20 +131,20 @@
 
     .social-panel-title {
       color: #f0f0f0;
-      font-size: 28px;
-      margin-bottom: 30px;
+      font-size: 22px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .social-icons-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 50px;
-      margin-bottom: 30px;
+      gap: 35px;
+      margin-bottom: 20px;
     }
 
     .social-icon-link {
@@ -153,71 +153,71 @@
       align-items: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      width: 120px;
+      width: 90px;
     }
 
     .social-icon-link:hover {
-      transform: translateY(-8px);
+      transform: translateY(-5px);
     }
 
     .social-icon-container {
-      width: 90px;
-      height: 90px;
-      border-radius: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 15px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      margin-bottom: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
     }
 
     .social-icon-link:hover .social-icon-container {
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     }
 
     .social-icon-container i {
-      font-size: 45px;
+      font-size: 35px;
       color: white;
     }
 
     .social-name {
       color: #f0f0f0;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
-      margin-top: 5px;
+      margin-top: 3px;
     }
 
-    /* Кнопка присоединиться в стиле второй картинки */
+    /* Кнопка присоединиться - УМЕНЬШЕННАЯ */
     .join-container {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .join-button-large {
       background-color: #ff2a2a;
       color: white;
       border: none;
-      padding: 20px 60px;
-      font-size: 24px;
+      padding: 15px 40px;
+      font-size: 18px;
       font-weight: bold;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
       transition: all 0.3s ease;
       text-decoration: none;
-      box-shadow: 0 5px 15px rgba(255, 42, 42, 0.3);
+      box-shadow: 0 4px 10px rgba(255, 42, 42, 0.3);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
     }
 
     .join-button-large:hover {
       background-color: #ff4a4a;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(255, 42, 42, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(255, 42, 42, 0.4);
     }
 
     /* Цвета для иконок соцсетей */
@@ -258,13 +258,13 @@
   </nav>
 
   <main class="content">
-    <!-- Добро пожаловать -->
+    <!-- Добро пожаловать и Справочник ролей -->
     <section class="welcome-section">
       <h1 class="welcome-title">Добро пожаловать!</h1>
-      <p class="welcome-subtitle">Официальное русскоязычное сообщество The Outlast Trials</p>
+      <h2 class="roles-title">Справочник ролей</h2>
     </section>
 
-    <!-- Панель соцсетей в стиле второй картинки -->
+    <!-- Панель соцсетей в стиле второй картинки - УМЕНЬШЕННАЯ -->
     <div class="social-panel">
       <h3 class="social-panel-title"><i class="fas fa-users"></i> Присоединяйтесь к нашему сообществу</h3>
       
@@ -302,7 +302,7 @@
         </a>
       </div>
       
-      <!-- Кнопка "Присоединиться" как на второй картинке -->
+      <!-- Кнопка "Присоединиться" -->
       <div class="join-container">
         <a href="https://discord.gg/the-outlast-trials-ru-1112365468435628102" target="_blank" class="join-button-large">
           <i class="fab fa-discord"></i> ПРИСОЕДИНИТЬСЯ К DISCORD
@@ -315,31 +315,41 @@
     // Простая анимация при загрузке
     document.addEventListener('DOMContentLoaded', function() {
       const welcomeTitle = document.querySelector('.welcome-title');
+      const rolesTitle = document.querySelector('.roles-title');
       const socialIcons = document.querySelectorAll('.social-icon-link');
       
-      // Анимация заголовка
+      // Анимация заголовков
       setTimeout(() => {
         welcomeTitle.style.opacity = '1';
         welcomeTitle.style.transform = 'translateY(0)';
       }, 300);
+      
+      setTimeout(() => {
+        rolesTitle.style.opacity = '1';
+        rolesTitle.style.transform = 'translateY(0)';
+      }, 500);
       
       // Последовательная анимация иконок соцсетей
       socialIcons.forEach((icon, index) => {
         setTimeout(() => {
           icon.style.opacity = '1';
           icon.style.transform = 'translateY(0)';
-        }, 500 + (index * 150));
+        }, 700 + (index * 100));
       });
       
       // Изначальные стили для анимации
       welcomeTitle.style.opacity = '0';
-      welcomeTitle.style.transform = 'translateY(-30px)';
-      welcomeTitle.style.transition = 'opacity 1s ease, transform 1s ease';
+      welcomeTitle.style.transform = 'translateY(-20px)';
+      welcomeTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      
+      rolesTitle.style.opacity = '0';
+      rolesTitle.style.transform = 'translateY(-20px)';
+      rolesTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
       
       socialIcons.forEach(icon => {
         icon.style.opacity = '0';
-        icon.style.transform = 'translateY(30px)';
-        icon.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        icon.style.transform = 'translateY(20px)';
+        icon.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       });
     });
   </script>
