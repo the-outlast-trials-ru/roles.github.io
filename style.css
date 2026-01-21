@@ -1,23 +1,17 @@
 body {
   margin: 0;
   min-height: 100vh;
-
-  /* Фоновое изображение */
   background-image: url("bg-outlast.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  /* Запасной цвет + затемнение */
   background-color: #1e1f22;
-
-  /* Текст и интерфейс */
   color: #fff;
   font-family: sans-serif;
 }
 
-/* Стили для навбара */
+/* Навбар */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -82,7 +76,13 @@ body {
   font-size: 1.1rem;
 }
 
-/* Основной контент - БЕЗ РАЗМЫТОГО ФОНА */
+/* Активное меню */
+.nav-menu li a.active {
+  background-color: rgba(255, 107, 107, 0.3);
+  border: 1px solid rgba(255, 107, 107, 0.7);
+}
+
+/* Основной контент */
 .content {
   padding: 30px;
   max-width: 1200px;
@@ -90,25 +90,21 @@ body {
   margin-top: 20px;
 }
 
-/* Стили для приветственной секции */
+/* Приветственная секция */
 .welcome-section {
   text-align: center;
   padding: 20px;
 }
 
 .welcome-title {
-  font-size: 6rem;
+  font-size: 5rem;
+  color: #252dfa;
   text-shadow: 
-    0 0 15px #2e13f5,
-    /* Белая обводка */
-    2px 0 0 #fff,
-    -2px 0 0 #fff,
-    0 2px 0 #fff,
-    0 -2px 0 #fff,
+    0 0 15px #252dfa,
     1px 1px 0 #fff,
-    -1px -1px 0 #fff,
     1px -1px 0 #fff,
-    -1px 1px 0 #fff;
+    -1px 1px 0 #fff,
+    -1px -1px 0 #fff;
   margin-bottom: 40px;
   animation: pulse 2s infinite;
 }
@@ -119,7 +115,7 @@ body {
   100% { opacity: 0.9; }
 }
 
-/* Стили для справочника ролей */
+/* Справочник ролей на главной */
 .roles-guide {
   background-color: rgba(40, 41, 45, 0.8);
   border-radius: 15px;
@@ -151,7 +147,7 @@ body {
   font-size: 1.5rem;
 }
 
-/* Стили для ролей */
+/* Карточки ролей */
 .role-card {
   display: flex;
   gap: 10px;
@@ -187,7 +183,7 @@ body {
   opacity: 0.85;
 }
 
-/* Стили для Discord сервера */
+/* Discord сервер */
 .discord-server {
   background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(88, 101, 242, 0.1));
   border-radius: 15px;
@@ -248,7 +244,7 @@ body {
   border-color: #ffffff;
 }
 
-/* Адаптивность для мобильных устройств */
+/* Адаптивность */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -274,11 +270,7 @@ body {
   }
   
   .welcome-title {
-    font-size: 2.2rem;
-  }
-  
-  .roles-guide h2 {
-    font-size: 1.7rem;
+    font-size: 3rem;
   }
   
   .discord-info {
@@ -290,13 +282,4 @@ body {
     text-align: center;
     min-width: auto;
   }
-  
-  .server-details h3 {
-    font-size: 1.5rem;
-  }
-  /* Активное меню */
-.nav-menu li a.active {
-  background-color: rgba(255, 107, 107, 0.3);
-  border: 1px solid rgba(255, 107, 107, 0.7);
-}
 }
