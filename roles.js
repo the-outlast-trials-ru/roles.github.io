@@ -19,7 +19,7 @@ const roles = [
     color: "#2ecc71",
     gradient: "linear-gradient(135deg, #2ecc71, #27ae60)",
     category: "Основные роли"
-  }
+  },
     {
     name: "Главный администратор",
     description: "Контроль порядка на сервере",
