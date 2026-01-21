@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Справочник ролей - The Outlast Trials RU</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="roles-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="roles-page">
+  <!-- Навбар -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo">
+        <img src="logo.png" alt="Логотип" class="logo-img">
+        <span class="site-name">The Outlast Trials RU</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="roles.html" class="active"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
+        <li><a href="#"><i class="fas fa-user"></i> Админ-панель</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="content">
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+      <h1 class="page-title">Справочник ролей</h1>
+      <p class="page-description">
+        В этом разделе вы можете ознакомиться со всеми ролями нашего сервера Discord. 
+        Используйте фильтры ниже для поиска нужных ролей по категориям или названиям.
+      </p>
+    </section>
+
+    <!-- Панель фильтров и поиска -->
+    <section class="filter-panel">
+      <div class="filter-container">
+        <!-- Поиск по названию -->
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="role-search" placeholder="Поиск роли по названию..." class="search-input">
+          <button id="clear-search" class="clear-btn" title="Очистить поиск">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <!-- Фильтр по категориям -->
+        <div class="category-filter">
+          <label for="category-select" class="filter-label">
+            <i class="fas fa-filter"></i> Фильтр по категориям:
+          </label>
+          <select id="category-select" class="category-select">
+            <option value="all">Все категории</option>
+            <!-- Категории будут добавлены через JavaScript -->
+          </select>
+        </div>
+
+        <!-- Кнопка сброса фильтров -->
+        <div class="filter-actions">
+          <button id="reset-filters" class="reset-btn">
+            <i class="fas fa-redo"></i> Сбросить фильтры
+          </button>
+          <span id="results-count" class="results-count">Найдено ролей: <span>0</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Отображение ролей -->
+    <section class="roles-container">
+      <div id="roles-list" class="roles-list">
+        <!-- Роли будут загружены через JavaScript -->
+      </div>
+    </section>
+
+    <!-- Сообщение если ничего не найдено -->
+    <div id="no-results" class="no-results" style="display: none;">
+      <i class="fas fa-search fa-3x"></i>
+      <h3>Роли не найдены</h3>
+      <p>Попробуйте изменить параметры поиска или выбрать другую категорию</p>
+    </div>
+  </main>
+
+  <script src="roles.js"></script>
+  <script src="roles-script.js"></script>
+</body>
+</html>
