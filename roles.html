@@ -218,6 +218,31 @@
       box-sizing: border-box;
     }
 
+    /* Отображение текущей категории */
+    .current-category {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: rgba(40, 41, 45, 0.8);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .current-category-text {
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .current-category-text .category-name {
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+
     /* Контейнер ролей */
     .roles-container {
       background-color: rgba(30, 31, 34, 0.9);
@@ -371,6 +396,14 @@
         justify-content: center;
       }
       
+      .current-category {
+        padding: 8px 15px;
+      }
+      
+      .current-category-text {
+        font-size: 1rem;
+      }
+      
       .roles-container {
         padding: 15px;
       }
@@ -447,6 +480,13 @@
       </div>
     </section>
 
+    <!-- Блок отображения текущей категории -->
+    <div class="current-category">
+      <p id="current-category-text" class="current-category-text">
+        Категория: <span class="category-name">Все</span>
+      </p>
+    </div>
+
     <section class="roles-container">
       <div id="roles-list" class="roles-list"></div>
       <div id="no-results" class="no-results" style="display: none;">
@@ -459,6 +499,13 @@
 
   <script src="roles.js"></script>
   <script>
+    // Функция для обновления отображения текущей категории
+    function updateCurrentCategory(category) {
+      const categoryText = document.getElementById('current-category-text');
+      const categoryName = category === 'all' ? 'Все' : category;
+      categoryText.innerHTML = `Категория: <span class="category-name">${categoryName}</span>`;
+    }
+
     function displayRoles(filteredRoles) {
       const rolesList = document.getElementById('roles-list');
       const noResults = document.getElementById('no-results');
@@ -511,6 +558,9 @@
       const searchTerm = document.getElementById('role-search').value.toLowerCase();
       const selectedCategory = document.getElementById('category-select').value;
       
+      // Обновляем отображение текущей категории
+      updateCurrentCategory(selectedCategory);
+      
       let filteredRoles = roles;
       
       if (selectedCategory !== 'all') {
@@ -534,6 +584,7 @@
       }
       
       populateCategories();
+      updateCurrentCategory('all'); // Устанавливаем начальную категорию
       displayRoles(roles);
       
       document.getElementById('role-search').addEventListener('input', filterRoles);
@@ -547,6 +598,7 @@
       document.getElementById('reset-filters').addEventListener('click', function() {
         document.getElementById('role-search').value = '';
         document.getElementById('category-select').value = 'all';
+        updateCurrentCategory('all');
         filterRoles();
       });
     });
