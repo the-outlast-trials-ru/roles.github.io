@@ -1,6 +1,6 @@
 const roles = [
   {
-    name: "Администратор по цифровым технологиям",
+    name: "Администратор по цифровым технологиям РУ",
     description: "Полный доступ к управлению сервером",
     color: "#ff6b6b",
     gradient: "linear-gradient(135deg, #ff6b6b, #ff4757)",
