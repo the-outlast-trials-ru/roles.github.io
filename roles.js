@@ -1,16 +1,23 @@
 const roles = [
   {
-"name": "Легенда 😜😜😜",
-    "description": "За -------",
-    "category": "Достижения",
-    "color": "#da2b2b",
-    "gradient": "linear-gradient(135deg, #5865F2, #404EED)"
+    name: "Администратор",
+    description: "Полный доступ к управлению сервером",
+    color: "#ff6b6b",
+    gradient: "linear-gradient(135deg, #ff6b6b, #ff4757)",
+    category: "Администрация"
   },
   {
-"name": "Гемофилик",
-    "description": "За ........",
-    "category": "Кастомные роли",
-    "color": "#0c4897",
-    "gradient": "linear-gradient(135deg, #FF00FF, #8A2BE2)"
+    name: "Модератор",
+    description: "Контроль порядка на сервере",
+    color: "#3498db",
+    gradient: "linear-gradient(135deg, #3498db, #2980b9)",
+    category: "Администрация"
+  },
+  {
+    name: "Игрок",
+    description: "Основная роль для участников",
+    color: "#2ecc71",
+    gradient: "linear-gradient(135deg, #2ecc71, #27ae60)",
+    category: "Основные роли"
   }
 ];
