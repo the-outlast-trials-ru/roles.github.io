@@ -8,38 +8,48 @@
   <style>
     .page-header {
       text-align: center;
-      padding: 20px;
+      padding: 20px 0;
       margin-bottom: 20px;
-      background-color: rgba(30, 31, 34, 0.7);
-      border-radius: 8px;
-      border: 1px solid rgba(255, 107, 107, 0.3);
       max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .page-title {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       color: #ff6b6b;
       text-shadow: 
-        0 0 8px #ff6b6b,
-        1px 1px 0 #fff,
-        -1px 1px 0 #fff,
-        1px -1px 0 #fff,
-        -1px -1px 0 #fff;
-      margin-bottom: 15px;
+        0 0 10px #ff6b6b,
+        2px 2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px -2px 0 #fff;
+      margin-bottom: 10px;
       animation: pulse 2s infinite;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .page-title i {
+      font-size: 2.8rem;
+      color: #ff6b6b;
+      text-shadow: 0 0 8px #ff6b6b;
     }
 
     .page-description {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #f0f0f0;
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.5;
-      padding: 0 15px;
+      padding: 15px 20px;
       text-align: center;
+      background-color: rgba(40, 41, 45, 0.7);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
     }
 
     /* Панель фильтров */
@@ -322,12 +332,16 @@
     /* Адаптивность */
     @media (max-width: 768px) {
       .page-title {
+        font-size: 2.2rem;
+      }
+      
+      .page-title i {
         font-size: 2rem;
       }
       
       .page-description {
-        font-size: 0.85rem;
-        padding: 0 10px;
+        font-size: 0.95rem;
+        padding: 12px 15px;
       }
       
       .filter-panel {
@@ -396,7 +410,9 @@
 
   <main class="content">
     <section class="page-header">
-      <h1 class="page-title">Справочник ролей</h1>
+      <h1 class="page-title">
+        <i class="fas fa-book"></i> Справочник ролей
+      </h1>
       <p class="page-description">
         В этом разделе вы можете ознакомиться со всеми ролями нашего сервера Discord.<br>
         Используйте фильтры ниже для поиска нужных ролей по категориям или названиям.
