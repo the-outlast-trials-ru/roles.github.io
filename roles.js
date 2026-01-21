@@ -28,7 +28,7 @@ const roles = [
     color: "#3498db",
     gradient: "linear-gradient(135deg, #3498db, #2980b9)",
     category: "Администрация"
-  },
+  }
 ];
 
 // Функция для создания карточки роли с адаптивным текстом
@@ -83,7 +83,7 @@ function displayRoles() {
   // Группируем роли по категориям
   const rolesByCategory = {};
   
-  roles.forEach(role => {
+  roles.forEach(function(role) {
     if (!rolesByCategory[role.category]) {
       rolesByCategory[role.category] = [];
     }
@@ -91,7 +91,7 @@ function displayRoles() {
   });
   
   // Создаем секции по категориям
-  Object.keys(rolesByCategory).forEach(category => {
+  Object.keys(rolesByCategory).forEach(function(category) {
     // Заголовок категории с адаптивным текстом
     const categoryHeader = document.createElement('h2');
     categoryHeader.className = 'category-header adaptive-text';
@@ -115,7 +115,7 @@ function displayRoles() {
     rolesGrid.style.marginBottom = '30px';
     
     // Добавляем карточки ролей
-    rolesByCategory[category].forEach(role => {
+    rolesByCategory[category].forEach(function(role) {
       const roleCard = createRoleCard(role);
       rolesGrid.appendChild(roleCard);
     });
@@ -127,119 +127,119 @@ function displayRoles() {
 // Функция для добавления CSS стилей адаптивного текста
 function addAdaptiveStyles() {
   const style = document.createElement('style');
-  style.textContent = `
-    /* Адаптивные стили для текста ролей */
-    .adaptive-text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-      min-width: 0;
-    }
-    
-    .role-title {
-      font-size: clamp(16px, 4vw, 22px);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0.2);
-      text-align: center;
-      display: inline-block;
-      width: fit-content;
-    }
-    
-    .role-category {
-      font-size: clamp(12px, 3vw, 14px);
-      padding: 6px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 15px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .role-description {
-      font-size: clamp(14px, 3.5vw, 16px);
-      line-height: 1.5;
-      padding: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    
-    .role-card {
-      padding: 20px;
-      border-radius: 15px;
-      color: white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    
-    .role-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    
-    .category-header {
-      position: relative;
-      padding-bottom: 10px;
-    }
-    
-    .category-header::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, #3498db, #2ecc71);
-      border-radius: 2px;
-    }
-    
-    /* Адаптация для мобильных устройств */
-    @media (max-width: 768px) {
-      .roles-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
-        gap: 15px !important;
-      }
-      
-      .role-card {
-        padding: 15px !important;
-        min-height: 160px !important;
-      }
-      
-      .role-title {
-        font-size: clamp(15px, 5vw, 20px) !important;
-        padding: 6px 10px !important;
-      }
-      
-      .role-category {
-        font-size: clamp(11px, 4vw, 13px) !important;
-        padding: 5px 10px !important;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .roles-grid {
-        grid-template-columns: 1fr !important;
-      }
-      
-      .role-title {
-        font-size: clamp(14px, 6vw, 18px) !important;
-      }
-      
-      .role-category {
-        font-size: clamp(10px, 5vw, 12px) !important;
-      }
-    }
-  `;
+  style.textContent = '\
+    /* Адаптивные стили для текста ролей */\
+    .adaptive-text {\
+      white-space: nowrap;\
+      overflow: hidden;\
+      text-overflow: ellipsis;\
+      max-width: 100%;\
+      min-width: 0;\
+    }\
+    \
+    .role-title {\
+      font-size: clamp(16px, 4vw, 22px);\
+      font-weight: 700;\
+      line-height: 1.2;\
+      margin-bottom: 10px;\
+      padding: 8px 12px;\
+      border-radius: 8px;\
+      background-color: rgba(0, 0, 0, 0.2);\
+      text-align: center;\
+      display: inline-block;\
+      width: fit-content;\
+    }\
+    \
+    .role-category {\
+      font-size: clamp(12px, 3vw, 14px);\
+      padding: 6px 12px;\
+      border-radius: 20px;\
+      display: inline-block;\
+      margin-bottom: 15px;\
+      font-weight: 600;\
+      text-transform: uppercase;\
+      letter-spacing: 0.5px;\
+    }\
+    \
+    .role-description {\
+      font-size: clamp(14px, 3.5vw, 16px);\
+      line-height: 1.5;\
+      padding: 10px;\
+      background-color: rgba(255, 255, 255, 0.1);\
+      border-radius: 8px;\
+      margin-top: 10px;\
+    }\
+    \
+    .role-card {\
+      padding: 20px;\
+      border-radius: 15px;\
+      color: white;\
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);\
+      transition: transform 0.3s ease, box-shadow 0.3s ease;\
+      min-height: 180px;\
+      display: flex;\
+      flex-direction: column;\
+      overflow: hidden;\
+    }\
+    \
+    .role-card:hover {\
+      transform: translateY(-5px);\
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);\
+    }\
+    \
+    .category-header {\
+      position: relative;\
+      padding-bottom: 10px;\
+    }\
+    \
+    .category-header::after {\
+      content: \'\';\
+      position: absolute;\
+      bottom: 0;\
+      left: 0;\
+      width: 100px;\
+      height: 3px;\
+      background: linear-gradient(90deg, #3498db, #2ecc71);\
+      border-radius: 2px;\
+    }\
+    \
+    /* Адаптация для мобильных устройств */\
+    @media (max-width: 768px) {\
+      .roles-grid {\
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;\
+        gap: 15px !important;\
+      }\
+      \
+      .role-card {\
+        padding: 15px !important;\
+        min-height: 160px !important;\
+      }\
+      \
+      .role-title {\
+        font-size: clamp(15px, 5vw, 20px) !important;\
+        padding: 6px 10px !important;\
+      }\
+      \
+      .role-category {\
+        font-size: clamp(11px, 4vw, 13px) !important;\
+        padding: 5px 10px !important;\
+      }\
+    }\
+    \
+    @media (max-width: 480px) {\
+      .roles-grid {\
+        grid-template-columns: 1fr !important;\
+      }\
+      \
+      .role-title {\
+        font-size: clamp(14px, 6vw, 18px) !important;\
+      }\
+      \
+      .role-category {\
+        font-size: clamp(10px, 5vw, 12px) !important;\
+      }\
+    }\
+  ';
   
   document.head.appendChild(style);
 }
@@ -261,10 +261,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Экспорт функций для использования в других файлах
-window.RolesManager = {
-  roles: roles,
-  createRoleCard: createRoleCard,
-  displayRoles: displayRoles,
-  addAdaptiveStyles: addAdaptiveStyles
-};
+if (typeof window !== 'undefined') {
+  window.RolesManager = {
+    roles: roles,
+    createRoleCard: createRoleCard,
+    displayRoles: displayRoles,
+    addAdaptiveStyles: addAdaptiveStyles
+  };
+}
 [file content end]
