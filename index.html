@@ -93,68 +93,46 @@
     .welcome-section {
       background-color: #1a1a2e;
       border-radius: 15px;
-      padding: 40px;
+      padding: 60px 40px;
       margin-bottom: 30px;
       border: 1px solid #2a2a3e;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       text-align: center;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .welcome-title {
       color: #ff2a2a;
-      font-size: 48px;
-      margin-bottom: 30px;
+      font-size: 52px;
+      margin-bottom: 20px;
       text-shadow: 0 0 15px rgba(255, 42, 42, 0.4);
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
-    /* Секция справочника ролей */
-    .roles-guide-section {
-      background-color: #1a1a2e;
-      border-radius: 15px;
-      padding: 40px;
-      margin-bottom: 30px;
-      border: 1px solid #2a2a3e;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .section-title {
+    .welcome-subtitle {
       color: #f0f0f0;
-      font-size: 36px;
+      font-size: 24px;
       margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-bottom: 2px solid #ff2a2a;
-      padding-bottom: 15px;
-    }
-
-    .section-title i {
-      color: #ff2a2a;
-    }
-
-    .roles-description {
-      font-size: 20px;
-      line-height: 1.6;
-      color: #d0d0d0;
-      margin-bottom: 30px;
-      padding: 0 20px;
+      opacity: 0.9;
     }
 
     /* Панель соцсетей в стиле второй картинки */
     .social-panel {
       background-color: #141422;
       border-radius: 10px;
-      padding: 25px;
-      margin-top: 40px;
+      padding: 30px;
       border: 2px solid #2a2a3e;
       text-align: center;
+      margin-top: 20px;
     }
 
     .social-panel-title {
       color: #f0f0f0;
-      font-size: 24px;
-      margin-bottom: 25px;
+      font-size: 28px;
+      margin-bottom: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -165,7 +143,7 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 40px;
+      gap: 50px;
       margin-bottom: 30px;
     }
 
@@ -175,32 +153,37 @@
       align-items: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      width: 100px;
+      width: 120px;
     }
 
     .social-icon-link:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
     }
 
     .social-icon-container {
-      width: 80px;
-      height: 80px;
-      border-radius: 15px;
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      margin-bottom: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .social-icon-link:hover .social-icon-container {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
     }
 
     .social-icon-container i {
-      font-size: 40px;
+      font-size: 45px;
       color: white;
     }
 
     .social-name {
       color: #f0f0f0;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
       margin-top: 5px;
     }
@@ -216,10 +199,10 @@
       background-color: #ff2a2a;
       color: white;
       border: none;
-      padding: 18px 50px;
-      font-size: 22px;
+      padding: 20px 60px;
+      font-size: 24px;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -228,13 +211,13 @@
       text-decoration: none;
       box-shadow: 0 5px 15px rgba(255, 42, 42, 0.3);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     .join-button-large:hover {
       background-color: #ff4a4a;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 42, 42, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 42, 42, 0.5);
     }
 
     /* Цвета для иконок соцсетей */
@@ -252,41 +235,6 @@
 
     .telegram-bg {
       background: linear-gradient(135deg, #0088cc, #006699);
-    }
-
-    /* Роли в справочнике */
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .role-card {
-      background-color: #25253e;
-      border-radius: 10px;
-      padding: 25px;
-      border-left: 5px solid #ff2a2a;
-      transition: all 0.3s ease;
-    }
-
-    .role-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(255, 42, 42, 0.2);
-    }
-
-    .role-title {
-      color: #ff2a2a;
-      font-size: 24px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .role-description {
-      color: #d0d0d0;
-      line-height: 1.5;
     }
   </style>
 </head>
@@ -313,46 +261,7 @@
     <!-- Добро пожаловать -->
     <section class="welcome-section">
       <h1 class="welcome-title">Добро пожаловать!</h1>
-      <p class="roles-description">Официальное русскоязычное сообщество по игре The Outlast Trials. Здесь вы найдете справочник ролей, гайды и сможете присоединиться к нашему активному сообществу.</p>
-    </section>
-
-    <!-- Справочник ролей -->
-    <section class="roles-guide-section">
-      <h2 class="section-title"><i class="fas fa-book"></i> Справочник ролей</h2>
-      
-      <p class="roles-description">В The Outlast Trials каждый игрок может выбрать определенную роль, которая определяет его стиль игры и доступные способности. Изучите все доступные роли ниже:</p>
-      
-      <div class="roles-grid">
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-shield-alt"></i> Защитник</h3>
-          <p class="role-description">Специализируется на защите команды от опасностей. Имеет повышенное здоровье и способности блокировки атак.</p>
-        </div>
-        
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-first-aid"></i> Медик</h3>
-          <p class="role-description">Отвечает за лечение союзников. Может быстро восстанавливать здоровье команды и снимать негативные эффекты.</p>
-        </div>
-        
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-eye"></i> Разведчик</h3>
-          <p class="role-description">Обнаруживает опасности и ловушки. Имеет улучшенное зрение и может помечать врагов для команды.</p>
-        </div>
-        
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-running"></i> Бегун</h3>
-          <p class="role-description">Самый быстрый член команды. Может отвлекать врагов и быстро перемещаться по локациям.</p>
-        </div>
-        
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-tools"></i> Инженер</h3>
-          <p class="role-description">Работает с механизмами и ловушками. Может открывать дополнительные пути и создавать оборонительные сооружения.</p>
-        </div>
-        
-        <div class="role-card">
-          <h3 class="role-title"><i class="fas fa-mask"></i> Диверсант</h3>
-          <p class="role-description">Специалист по скрытности и диверсиям. Может обезвреживать врагов тихо и незаметно.</p>
-        </div>
-      </div>
+      <p class="welcome-subtitle">Официальное русскоязычное сообщество The Outlast Trials</p>
     </section>
 
     <!-- Панель соцсетей в стиле второй картинки -->
@@ -361,7 +270,7 @@
       
       <div class="social-icons-row">
         <!-- Discord -->
-        <a href="https://discord.gg/outlast-ru" target="_blank" class="social-icon-link">
+        <a href="https://discord.gg/the-outlast-trials-ru-1112365468435628102" target="_blank" class="social-icon-link">
           <div class="social-icon-container discord-bg">
             <i class="fab fa-discord"></i>
           </div>
@@ -369,7 +278,7 @@
         </a>
         
         <!-- Twitch -->
-        <a href="https://twitch.tv/outlast-ru" target="_blank" class="social-icon-link">
+        <a href="https://www.twitch.tv/outlasttrialscl" target="_blank" class="social-icon-link">
           <div class="social-icon-container twitch-bg">
             <i class="fab fa-twitch"></i>
           </div>
@@ -377,7 +286,7 @@
         </a>
         
         <!-- YouTube -->
-        <a href="https://youtube.com/c/outlast-ru" target="_blank" class="social-icon-link">
+        <a href="https://www.youtube.com/@TrialsRU" target="_blank" class="social-icon-link">
           <div class="social-icon-container youtube-bg">
             <i class="fab fa-youtube"></i>
           </div>
@@ -385,7 +294,7 @@
         </a>
         
         <!-- Telegram -->
-        <a href="https://t.me/outlast_ru" target="_blank" class="social-icon-link">
+        <a href="https://t.me/+SlROwVI_pM8zYmYy" target="_blank" class="social-icon-link">
           <div class="social-icon-container telegram-bg">
             <i class="fab fa-telegram"></i>
           </div>
@@ -395,8 +304,8 @@
       
       <!-- Кнопка "Присоединиться" как на второй картинке -->
       <div class="join-container">
-        <a href="https://discord.gg/outlast-ru" target="_blank" class="join-button-large">
-          <i class="fab fa-discord"></i> ПРИСОЕДИНИТЬСЯ
+        <a href="https://discord.gg/the-outlast-trials-ru-1112365468435628102" target="_blank" class="join-button-large">
+          <i class="fab fa-discord"></i> ПРИСОЕДИНИТЬСЯ К DISCORD
         </a>
       </div>
     </div>
@@ -406,7 +315,7 @@
     // Простая анимация при загрузке
     document.addEventListener('DOMContentLoaded', function() {
       const welcomeTitle = document.querySelector('.welcome-title');
-      const roleCards = document.querySelectorAll('.role-card');
+      const socialIcons = document.querySelectorAll('.social-icon-link');
       
       // Анимация заголовка
       setTimeout(() => {
@@ -414,23 +323,23 @@
         welcomeTitle.style.transform = 'translateY(0)';
       }, 300);
       
-      // Последовательная анимация карточек ролей
-      roleCards.forEach((card, index) => {
+      // Последовательная анимация иконок соцсетей
+      socialIcons.forEach((icon, index) => {
         setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, 500 + (index * 100));
+          icon.style.opacity = '1';
+          icon.style.transform = 'translateY(0)';
+        }, 500 + (index * 150));
       });
       
       // Изначальные стили для анимации
       welcomeTitle.style.opacity = '0';
-      welcomeTitle.style.transform = 'translateY(-20px)';
-      welcomeTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      welcomeTitle.style.transform = 'translateY(-30px)';
+      welcomeTitle.style.transition = 'opacity 1s ease, transform 1s ease';
       
-      roleCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      socialIcons.forEach(icon => {
+        icon.style.opacity = '0';
+        icon.style.transform = 'translateY(30px)';
+        icon.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
       });
     });
   </script>
