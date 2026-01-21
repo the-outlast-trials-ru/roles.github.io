@@ -26,6 +26,5 @@ const roles = [
     color: "#3498db",
     gradient: "linear-gradient(135deg, #3498db, #2980b9)",
     category: "Администрация"
-  },
+  }
 ];
-
