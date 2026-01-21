@@ -84,6 +84,11 @@
       transform: translateY(-2px);
     }
 
+    .nav-menu li a.active {
+      background-color: #ff2a2a;
+      color: white;
+    }
+
     /* Основной контент - растягиваем */
     .content {
       max-width: 1200px;
@@ -271,8 +276,8 @@
     </div>
     <div class="nav-right">
       <ul class="nav-menu">
-        <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-        <li><a href="#"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
         <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
         <li><a href="#"><i class="fas fa-user"></i> Админ-панель</a></li>
       </ul>
@@ -285,7 +290,7 @@
       <h1 class="welcome-title">Добро пожаловать!</h1>
       <h2 class="roles-title">Справочник ролей</h2>
       <p class="description-text">
-        Здесь вы найдете полную информацию о своих и интересующих вас ролей нашего Discord сервера
+        Здесь вы найдете полную информацию о своих и интересующих вас ролях нашего Discord сервера
       </p>
     </section>
 
