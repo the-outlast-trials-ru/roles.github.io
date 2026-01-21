@@ -221,8 +221,8 @@
     /* Отображение текущей категории */
     .current-category {
       text-align: center;
-      margin-bottom: 20px;
-      padding: 10px 20px;
+      margin-bottom: 15px;
+      padding: 12px 20px;
       background-color: rgba(40, 41, 45, 0.8);
       border-radius: 8px;
       border: 1px solid rgba(255, 107, 107, 0.3);
@@ -241,6 +241,117 @@
     .current-category-text .category-name {
       color: #ff6b6b;
       font-weight: bold;
+    }
+
+    /* Панель сортировки (второй навбар) */
+    .sort-panel {
+      background-color: rgba(30, 31, 34, 0.9);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(88, 101, 242, 0.4);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sort-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 50px;
+    }
+
+    /* Сортировка по порядку */
+    .sort-order {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .sort-label {
+      color: #f0f0f0;
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .sort-label i {
+      color: #5865F2;
+    }
+
+    .sort-select {
+      flex: 1;
+      padding: 0 12px;
+      height: 40px;
+      background-color: rgba(40, 41, 45, 0.8);
+      border: 1px solid rgba(88, 101, 242, 0.5);
+      border-radius: 6px;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: #5865F2;
+      box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.2);
+    }
+
+    /* Информация о сортировке */
+    .sort-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+      min-width: 300px;
+      justify-content: flex-end;
+    }
+
+    .sort-status {
+      color: #f0f0f0;
+      font-size: 0.85rem;
+      background-color: rgba(40, 41, 45, 0.8);
+      padding: 8px 15px;
+      border-radius: 4px;
+      border: 1px solid rgba(88, 101, 242, 0.3);
+    }
+
+    .sort-status .status-text {
+      color: #5865F2;
+      font-weight: bold;
+    }
+
+    .sort-reset-btn {
+      padding: 0 15px;
+      height: 40px;
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-sizing: border-box;
+    }
+
+    .sort-reset-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(88, 101, 242, 0.4);
     }
 
     /* Контейнер ролей */
@@ -369,11 +480,13 @@
         padding: 12px 15px;
       }
       
-      .filter-panel {
+      .filter-panel,
+      .sort-panel {
         padding: 12px;
       }
       
-      .filter-container {
+      .filter-container,
+      .sort-container {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
@@ -381,17 +494,21 @@
       
       .search-box,
       .category-filter,
-      .filter-actions {
+      .filter-actions,
+      .sort-order,
+      .sort-info {
         min-width: 100%;
       }
       
-      .filter-actions {
+      .filter-actions,
+      .sort-info {
         justify-content: center;
         flex-direction: column;
         gap: 12px;
       }
       
-      .reset-btn {
+      .reset-btn,
+      .sort-reset-btn {
         width: 100%;
         justify-content: center;
       }
@@ -487,6 +604,31 @@
       </p>
     </div>
 
+    <!-- Панель сортировки (второй навбар) -->
+    <section class="sort-panel">
+      <div class="sort-container">
+        <div class="sort-order">
+          <label for="sort-select" class="sort-label">
+            <i class="fas fa-sort-amount-down"></i> Сортировать:
+          </label>
+          <select id="sort-select" class="sort-select">
+            <option value="alphabetical">В алфавитном порядке</option>
+            <option value="reverse">В обратном порядке</option>
+            <option value="color">По цветовой гамме</option>
+          </select>
+        </div>
+
+        <div class="sort-info">
+          <span id="sort-status" class="sort-status">
+            Сортировка: <span class="status-text">Алфавитная</span>
+          </span>
+          <button id="reset-sort" class="sort-reset-btn">
+            <i class="fas fa-sync-alt"></i> Сбросить сортировку
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section class="roles-container">
       <div id="roles-list" class="roles-list"></div>
       <div id="no-results" class="no-results" style="display: none;">
@@ -499,6 +641,9 @@
 
   <script src="roles.js"></script>
   <script>
+    // Переменная для хранения текущих отфильтрованных ролей
+    let currentFilteredRoles = [];
+
     // Функция для обновления отображения текущей категории
     function updateCurrentCategory(category) {
       const categoryText = document.getElementById('current-category-text');
@@ -506,22 +651,71 @@
       categoryText.innerHTML = `Категория: <span class="category-name">${categoryName}</span>`;
     }
 
-    function displayRoles(filteredRoles) {
+    // Функция для обновления статуса сортировки
+    function updateSortStatus(sortType) {
+      const statusElement = document.getElementById('sort-status');
+      let statusText = '';
+      
+      switch(sortType) {
+        case 'alphabetical':
+          statusText = 'Алфавитная';
+          break;
+        case 'reverse':
+          statusText = 'Обратная';
+          break;
+        case 'color':
+          statusText = 'По цветам';
+          break;
+        default:
+          statusText = 'Алфавитная';
+      }
+      
+      statusElement.innerHTML = `Сортировка: <span class="status-text">${statusText}</span>`;
+    }
+
+    // Функция для сортировки ролей
+    function sortRoles(rolesToSort, sortType) {
+      const sortedRoles = [...rolesToSort];
+      
+      switch(sortType) {
+        case 'alphabetical':
+          // Сортировка по алфавиту (A-Z)
+          return sortedRoles.sort((a, b) => a.name.localeCompare(b.name));
+          
+        case 'reverse':
+          // Сортировка в обратном порядке (Z-A)
+          return sortedRoles.sort((a, b) => b.name.localeCompare(a.name));
+          
+        case 'color':
+          // Сортировка по цвету (сначала красные, затем синие, зеленые и т.д.)
+          return sortedRoles.sort((a, b) => {
+            // Преобразуем HEX цвет в числовое значение для сравнения
+            const colorA = parseInt(a.color.replace('#', ''), 16);
+            const colorB = parseInt(b.color.replace('#', ''), 16);
+            return colorA - colorB;
+          });
+          
+        default:
+          return sortedRoles;
+      }
+    }
+
+    function displayRoles(rolesToDisplay) {
       const rolesList = document.getElementById('roles-list');
       const noResults = document.getElementById('no-results');
       const resultsCount = document.querySelector('#results-count span');
       
       rolesList.innerHTML = '';
-      resultsCount.textContent = filteredRoles.length;
+      resultsCount.textContent = rolesToDisplay.length;
       
-      if (filteredRoles.length === 0) {
+      if (rolesToDisplay.length === 0) {
         noResults.style.display = 'block';
         return;
       }
       
       noResults.style.display = 'none';
       
-      filteredRoles.forEach(role => {
+      rolesToDisplay.forEach(role => {
         const roleCard = document.createElement('div');
         roleCard.className = 'role-card-detailed';
         roleCard.innerHTML = `
@@ -557,16 +751,19 @@
     function filterRoles() {
       const searchTerm = document.getElementById('role-search').value.toLowerCase();
       const selectedCategory = document.getElementById('category-select').value;
+      const sortType = document.getElementById('sort-select').value;
       
       // Обновляем отображение текущей категории
       updateCurrentCategory(selectedCategory);
       
       let filteredRoles = roles;
       
+      // Фильтрация по категории
       if (selectedCategory !== 'all') {
         filteredRoles = filteredRoles.filter(role => role.category === selectedCategory);
       }
       
+      // Фильтрация по поисковому запросу
       if (searchTerm) {
         filteredRoles = filteredRoles.filter(role => 
           role.name.toLowerCase().includes(searchTerm) || 
@@ -574,7 +771,29 @@
         );
       }
       
-      displayRoles(filteredRoles);
+      // Сохраняем отфильтрованные роли для сортировки
+      currentFilteredRoles = filteredRoles;
+      
+      // Применяем сортировку
+      const sortedRoles = sortRoles(currentFilteredRoles, sortType);
+      
+      // Обновляем статус сортировки
+      updateSortStatus(sortType);
+      
+      // Отображаем роли
+      displayRoles(sortedRoles);
+    }
+
+    function applySorting() {
+      const sortType = document.getElementById('sort-select').value;
+      
+      if (currentFilteredRoles.length === 0) {
+        currentFilteredRoles = roles;
+      }
+      
+      const sortedRoles = sortRoles(currentFilteredRoles, sortType);
+      updateSortStatus(sortType);
+      displayRoles(sortedRoles);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -584,22 +803,46 @@
       }
       
       populateCategories();
-      updateCurrentCategory('all'); // Устанавливаем начальную категорию
-      displayRoles(roles);
+      updateCurrentCategory('all');
+      updateSortStatus('alphabetical');
+      currentFilteredRoles = roles;
       
+      // Сначала фильтруем, затем сортируем
+      const sortedRoles = sortRoles(roles, 'alphabetical');
+      displayRoles(sortedRoles);
+      
+      // Обработчики для фильтрации
       document.getElementById('role-search').addEventListener('input', filterRoles);
       document.getElementById('category-select').addEventListener('change', filterRoles);
       
+      // Обработчики для сортировки
+      document.getElementById('sort-select').addEventListener('change', applySorting);
+      
+      // Кнопка очистки поиска
       document.getElementById('clear-search').addEventListener('click', function() {
         document.getElementById('role-search').value = '';
         filterRoles();
       });
       
+      // Кнопка сброса фильтров
       document.getElementById('reset-filters').addEventListener('click', function() {
         document.getElementById('role-search').value = '';
         document.getElementById('category-select').value = 'all';
         updateCurrentCategory('all');
         filterRoles();
+      });
+      
+      // Кнопка сброса сортировки
+      document.getElementById('reset-sort').addEventListener('click', function() {
+        document.getElementById('sort-select').value = 'alphabetical';
+        updateSortStatus('alphabetical');
+        
+        if (currentFilteredRoles.length === 0) {
+          currentFilteredRoles = roles;
+        }
+        
+        const sortedRoles = sortRoles(currentFilteredRoles, 'alphabetical');
+        displayRoles(sortedRoles);
       });
     });
   </script>
