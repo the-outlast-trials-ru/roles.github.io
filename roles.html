@@ -876,14 +876,10 @@
     // Переменная для хранения текущих отфильтрованных ролей
     let currentFilteredRoles = [];
     
-    // Функция для анимации появления карточек ролей
-    function animateRoleCards() {
-      const roleCards = document.querySelectorAll('.role-card-detailed');
-      roleCards.forEach((card, index) => {
-        setTimeout(() => {
-          card.classList.add('animated');
-        }, index * 100);
-      });
+    // Если roles не загрузился из файла, создаем пустой массив
+    if (typeof roles === 'undefined') {
+      console.error('roles.js не загружен!');
+      window.roles = [];
     }
 
     // Функция для обновления отображения текущей категории
@@ -922,17 +918,14 @@
       switch(sortType) {
         case 'alphabetical':
           return sortedRoles.sort((a, b) => a.name.localeCompare(b.name));
-          
         case 'reverse':
           return sortedRoles.sort((a, b) => b.name.localeCompare(a.name));
-          
         case 'color':
           return sortedRoles.sort((a, b) => {
             const colorA = parseInt(a.color.replace('#', ''), 16);
             const colorB = parseInt(b.color.replace('#', ''), 16);
             return colorA - colorB;
           });
-          
         default:
           return sortedRoles;
       }
@@ -968,19 +961,18 @@
         `;
         rolesList.appendChild(roleCard);
       });
-      
-      // Запуск анимации карточек
-      setTimeout(animateRoleCards, 100);
     }
 
     function populateCategories() {
       const categorySelect = document.getElementById('category-select');
       const categories = [...new Set(roles.map(r => r.category))];
       
+      // Очищаем все опции кроме первой
       while (categorySelect.options.length > 1) {
         categorySelect.remove(1);
       }
       
+      // Добавляем категории
       categories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
@@ -998,10 +990,12 @@
       
       let filteredRoles = roles;
       
+      // Фильтрация по категории
       if (selectedCategory !== 'all') {
         filteredRoles = filteredRoles.filter(role => role.category === selectedCategory);
       }
       
+      // Фильтрация по поиску
       if (searchTerm) {
         filteredRoles = filteredRoles.filter(role => 
           role.name.toLowerCase().includes(searchTerm) || 
@@ -1027,43 +1021,11 @@
       displayRoles(sortedRoles);
     }
 
+    // Запускаем при загрузке страницы
     document.addEventListener('DOMContentLoaded', function() {
-      // Запуск анимации заголовков
-      setTimeout(() => {
-        const pageTitle = document.querySelector('.page-title');
-        const pageDesc = document.querySelector('.page-description');
-        const currentCategory = document.querySelector('.current-category');
-        const sortPanel = document.querySelector('.sort-panel');
-        const rolesContainer = document.querySelector('.roles-container');
-        
-        if (pageTitle) {
-          pageTitle.style.opacity = '1';
-          pageTitle.style.transform = 'translateY(0)';
-        }
-        
-        if (pageDesc) {
-          pageDesc.style.opacity = '1';
-          pageDesc.style.transform = 'translateY(0)';
-        }
-        
-        if (currentCategory) {
-          currentCategory.style.opacity = '1';
-          currentCategory.style.transform = 'translateY(0)';
-        }
-        
-        if (sortPanel) {
-          sortPanel.style.opacity = '1';
-          sortPanel.style.transform = 'translateY(0)';
-        }
-        
-        if (rolesContainer) {
-          rolesContainer.style.opacity = '1';
-          rolesContainer.style.transform = 'translateY(0)';
-        }
-      }, 100);
-      
       if (!roles || roles.length === 0) {
         document.getElementById('no-results').style.display = 'block';
+        document.querySelector('#results-count span').textContent = '0';
         return;
       }
       
@@ -1075,20 +1037,16 @@
       const sortedRoles = sortRoles(roles, 'alphabetical');
       displayRoles(sortedRoles);
       
-      // Обработчики для фильтрации
+      // Обработчики событий
       document.getElementById('role-search').addEventListener('input', filterRoles);
       document.getElementById('category-select').addEventListener('change', filterRoles);
-      
-      // Обработчики для сортировки
       document.getElementById('sort-select').addEventListener('change', applySorting);
       
-      // Кнопка очистки поиска
       document.getElementById('clear-search').addEventListener('click', function() {
         document.getElementById('role-search').value = '';
         filterRoles();
       });
       
-      // Кнопка сброса фильтров
       document.getElementById('reset-filters').addEventListener('click', function() {
         document.getElementById('role-search').value = '';
         document.getElementById('category-select').value = 'all';
@@ -1096,7 +1054,6 @@
         filterRoles();
       });
       
-      // Кнопка сброса сортировки
       document.getElementById('reset-sort').addEventListener('click', function() {
         document.getElementById('sort-select').value = 'alphabetical';
         updateSortStatus('alphabetical');
@@ -1108,46 +1065,7 @@
         const sortedRoles = sortRoles(currentFilteredRoles, 'alphabetical');
         displayRoles(sortedRoles);
       });
-      
-      // Мобильное меню
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const navMenu = document.getElementById('nav-menu');
-      
-      if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-          navMenu.classList.toggle('active');
-          const icon = this.querySelector('i');
-          if (navMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-          } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-          }
-        });
-        
-        // Закрытие меню при клике на ссылку
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-          link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-          });
-        });
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', function(event) {
-          if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-            navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-          }
-        });
-      }
     });
   </script>
-</body>
-</html>
 
 
