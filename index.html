@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>The Outlast Trials RU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -21,15 +22,18 @@
       flex-direction: column;
     }
 
-    /* Навбар */
+    /* Навбар - адаптивный */
     .navbar {
       background-color: #1a1a2e;
-      padding: 15px 30px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #ff2a2a;
       box-shadow: 0 4px 12px rgba(255, 42, 42, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .nav-left {
@@ -40,17 +44,17 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
 
     .logo-img {
-      height: 50px;
+      height: 45px;
       width: auto;
       border-radius: 8px;
     }
 
     .site-name {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       color: #ff2a2a;
       text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
@@ -63,19 +67,19 @@
     .nav-menu {
       display: flex;
       list-style: none;
-      gap: 30px;
+      gap: 15px;
     }
 
     .nav-menu li a {
       color: #f0f0f0;
       text-decoration: none;
-      font-size: 18px;
-      padding: 8px 15px;
+      font-size: 16px;
+      padding: 8px 12px;
       border-radius: 5px;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .nav-menu li a:hover {
@@ -89,22 +93,34 @@
       color: white;
     }
 
-    /* Основной контент - растягиваем */
+    /* Мобильное меню */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #f0f0f0;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Основной контент - адаптивный */
     .content {
       max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
+      margin: 20px auto;
+      padding: 0 15px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
 
-    /* Секция с приветствием - увеличенная */
+    /* Секция с приветствием - адаптивная */
     .welcome-section {
       background-color: #1a1a2e;
-      border-radius: 15px;
-      padding: 60px 40px;
-      margin-bottom: 30px;
+      border-radius: 12px;
+      padding: 40px 20px;
+      margin-bottom: 25px;
       border: 1px solid #2a2a3e;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       text-align: center;
@@ -112,65 +128,75 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 400px;
+      min-height: 350px;
     }
 
     .welcome-title {
       color: #f0f0f0;
-      font-size: 56px;
+      font-size: 42px;
       margin-bottom: 15px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       font-weight: 700;
       text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .roles-title {
       color: #ff2a2a;
-      font-size: 48px;
+      font-size: 36px;
       text-shadow: 0 0 15px rgba(255, 42, 42, 0.4);
       font-weight: bold;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
     }
 
     .description-text {
       color: #d0d0d0;
-      font-size: 22px;
+      font-size: 18px;
       line-height: 1.6;
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 18px;
       background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
+      border-radius: 8px;
       border-left: 4px solid #ff2a2a;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease 0.4s, transform 1s ease 0.4s;
     }
 
-    /* Панель соцсетей - внизу страницы */
+    /* Панель соцсетей - адаптивная */
     .social-panel {
       background-color: #141422;
       border-radius: 10px;
-      padding: 20px;
+      padding: 20px 15px;
       border: 2px solid #2a2a3e;
       text-align: center;
-      margin-top: auto; /* Прижимаем к низу */
+      margin-top: auto;
       margin-bottom: 20px;
     }
 
     .social-panel-title {
       color: #f0f0f0;
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .social-icons-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 35px;
+      gap: 25px;
       margin-bottom: 20px;
     }
 
@@ -180,7 +206,7 @@
       align-items: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      width: 90px;
+      width: 80px;
     }
 
     .social-icon-link:hover {
@@ -188,13 +214,13 @@
     }
 
     .social-icon-container {
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
     }
@@ -204,13 +230,13 @@
     }
 
     .social-icon-container i {
-      font-size: 35px;
+      font-size: 30px;
       color: white;
     }
 
     .social-name {
       color: #f0f0f0;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       margin-top: 3px;
     }
@@ -226,8 +252,8 @@
       background-color: #ff2a2a;
       color: white;
       border: none;
-      padding: 15px 40px;
-      font-size: 18px;
+      padding: 14px 30px;
+      font-size: 16px;
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
@@ -263,6 +289,126 @@
     .telegram-bg {
       background: linear-gradient(135deg, #0088cc, #006699);
     }
+
+    /* Адаптивность для мобильных */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 15px;
+        flex-wrap: wrap;
+      }
+      
+      .logo-img {
+        height: 40px;
+      }
+      
+      .site-name {
+        font-size: 18px;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #1a1a2e;
+        flex-direction: column;
+        padding: 15px;
+        border-top: 1px solid #2a2a3e;
+        border-bottom: 2px solid #ff2a2a;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .nav-menu li {
+        width: 100%;
+      }
+      
+      .nav-menu li a {
+        justify-content: center;
+        padding: 12px;
+        font-size: 18px;
+      }
+      
+      .welcome-section {
+        padding: 30px 15px;
+        min-height: 300px;
+      }
+      
+      .welcome-title {
+        font-size: 32px;
+      }
+      
+      .roles-title {
+        font-size: 28px;
+      }
+      
+      .description-text {
+        font-size: 16px;
+        padding: 15px;
+      }
+      
+      .social-icons-row {
+        gap: 20px;
+      }
+      
+      .social-icon-link {
+        width: 70px;
+      }
+      
+      .social-icon-container {
+        width: 55px;
+        height: 55px;
+      }
+      
+      .social-icon-container i {
+        font-size: 25px;
+      }
+      
+      .social-name {
+        font-size: 12px;
+      }
+      
+      .join-button-large {
+        padding: 12px 25px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .welcome-title {
+        font-size: 28px;
+      }
+      
+      .roles-title {
+        font-size: 24px;
+      }
+      
+      .social-icons-row {
+        gap: 15px;
+      }
+      
+      .social-icon-link {
+        width: 65px;
+      }
+      
+      .social-icon-container {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .social-icon-container i {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -274,8 +420,11 @@
         <span class="site-name">The Outlast Trials RU</span>
       </div>
     </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="nav-right">
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
         <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
@@ -285,7 +434,7 @@
   </nav>
 
   <main class="content">
-    <!-- Добро пожаловать и Справочник ролей - УВЕЛИЧЕННЫЕ -->
+    <!-- Добро пожаловать и Справочник ролей -->
     <section class="welcome-section">
       <h1 class="welcome-title">Добро пожаловать!</h1>
       <h2 class="roles-title">Справочник ролей</h2>
@@ -294,7 +443,7 @@
       </p>
     </section>
 
-    <!-- Панель соцсетей - ПРИЖАТА К НИЗУ -->
+    <!-- Панель соцсетей -->
     <div class="social-panel">
       <h3 class="social-panel-title"><i class="fas fa-users"></i> Присоединяйтесь к нашему сообществу</h3>
       
@@ -342,55 +491,80 @@
   </main>
 
   <script>
-    // Простая анимация при загрузке
+    // Анимация при загрузке
     document.addEventListener('DOMContentLoaded', function() {
       const welcomeTitle = document.querySelector('.welcome-title');
       const rolesTitle = document.querySelector('.roles-title');
       const description = document.querySelector('.description-text');
       const socialIcons = document.querySelectorAll('.social-icon-link');
       
-      // Анимация заголовков
+      // Запуск анимации заголовков
       setTimeout(() => {
         welcomeTitle.style.opacity = '1';
         welcomeTitle.style.transform = 'translateY(0)';
-      }, 300);
+      }, 100);
       
       setTimeout(() => {
         rolesTitle.style.opacity = '1';
         rolesTitle.style.transform = 'translateY(0)';
-      }, 500);
+      }, 300);
       
       setTimeout(() => {
         description.style.opacity = '1';
         description.style.transform = 'translateY(0)';
-      }, 700);
+      }, 500);
       
       // Последовательная анимация иконок соцсетей
       socialIcons.forEach((icon, index) => {
         setTimeout(() => {
           icon.style.opacity = '1';
           icon.style.transform = 'translateY(0)';
-        }, 900 + (index * 100));
+        }, 700 + (index * 100));
       });
       
       // Изначальные стили для анимации
-      welcomeTitle.style.opacity = '0';
-      welcomeTitle.style.transform = 'translateY(-30px)';
-      welcomeTitle.style.transition = 'opacity 1s ease, transform 1s ease';
-      
-      rolesTitle.style.opacity = '0';
-      rolesTitle.style.transform = 'translateY(-30px)';
-      rolesTitle.style.transition = 'opacity 1s ease, transform 1s ease';
-      
-      description.style.opacity = '0';
-      description.style.transform = 'translateY(30px)';
-      description.style.transition = 'opacity 1s ease, transform 1s ease';
-      
       socialIcons.forEach(icon => {
         icon.style.opacity = '0';
         icon.style.transform = 'translateY(20px)';
         icon.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       });
+      
+      // Мобильное меню
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          });
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', function(event) {
+          if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+          }
+        });
+      }
     });
   </script>
 </body>
