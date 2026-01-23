@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Управление ролями</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ff2a2a;
+        }
+
+        .header h1 {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .header p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        .panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .panels {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background-color: rgba(30, 31, 34, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            border: 2px solid rgba(255, 107, 107, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel h2 i {
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(40, 41, 45, 0.8);
+            border: 1px solid rgba(255, 107, 107, 0.5);
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+        }
+
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-input {
+            flex: 1;
+        }
+
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: #da2b2b;
+        }
+
+        .gradient-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            background: linear-gradient(135deg, #da2b2b 0%, #a52222 100%);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #5865F2, #4752c4);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2ed573, #1dd1a1);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff3838, #c23636);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .roles-list {
+            background-color: rgba(40, 41, 45, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .role-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: rgba(30, 31, 34, 0.9);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .role-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .role-info {
+            flex: 1;
+        }
+
+        .role-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .role-category {
+            font-size: 0.9rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            border: 1px solid;
+        }
+        
+        /* Стили для категорий в админ-панели */
+        .role-category.модерация {
+            background-color: #2633c2;
+            color: #b3b8f9;
+            border-color: #b3b8f9;
+        }
+        
+        .role-category.кастомные-роли {
+            background-color: #d1d2e0;
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+        
+        .role-category.администрация {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border-color: rgba(255, 107, 107, 0.5);
+        }
+        
+        .role-category.достижения {
+            background-color: rgba(51, 232, 53, 0.2);
+            color: #33e835;
+            border-color: rgba(51, 232, 53, 0.5);
+        }
+        
+        .role-category.особые {
+            background-color: rgba(255, 215, 42, 0.2);
+            color: #ffd32a;
+            border-color: rgba(255, 215, 42, 0.5);
+        }
+        
+        .role-category.другое {
+            background-color: rgba(136, 136, 136, 0.2);
+            color: #cccccc;
+            border-color: rgba(136, 136, 136, 0.5);
+        }
+
+        .role-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #cccccc;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .action-btn:hover {
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+
+        .code-output {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border: 2px solid #333;
+        }
+
+        .code-output pre {
+            color: #f8f8f2;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #2ed573;
+        }
+
+        .notification.error {
+            background-color: #ff4757;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .color-help {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-help-btn {
+            padding: 5px 10px;
+            background-color: rgba(40, 41, 45, 0.8);
+            border: 1px solid rgba(255, 107, 107, 0.5);
+            border-radius: 4px;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-help-btn:hover {
+            background-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .predefined-gradients {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .gradient-option {
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .gradient-option:hover {
+            transform: scale(1.05);
+        }
+
+        .gradient-option.selected {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .load-data-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(40, 41, 45, 0.5);
+            border-radius: 8px;
+            border: 1px dashed rgba(255, 107, 107, 0.3);
+        }
+
+        .info-text {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(30, 31, 34, 0.8);
+            border-radius: 6px;
+        }
+
+        .info-text code {
+            color: #ff6b6b;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        /* Стили для предпросмотра категорий в форме */
+        .category-preview {
+            width: 100%;
+            height: 40px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cogs"></i> Админ-панель управления ролями</h1>
+            <p>Создавайте, редактируйте и управляйте ролями для Discord сервера</p>
+        </div>
+
+        <!-- Секция загрузки данных -->
+        <div class="load-data-section">
+            <h3><i class="fas fa-download"></i> Загрузка ролей из roles.js</h3>
+            <p class="info-text">
+                Админ-панель автоматически загрузит роли из файла <code>roles.js</code>.
+                Убедитесь, что файл находится в той же папке, что и эта админ-панель.
+            </p>
+            <div class="buttons">
+                <button class="btn btn-primary" id="load-roles">
+                    <i class="fas fa-sync-alt"></i> Загрузить роли из roles.js
+                </button>
+                <button class="btn btn-danger" id="clear-all-roles">
+                    <i class="fas fa-trash"></i> Очистить все роли
+                </button>
+            </div>
+        </div>
+
+        <div class="panels">
+            <!-- Панель добавления/редактирования роли -->
+            <div class="panel">
+                <h2><i class="fas fa-plus-circle"></i> Добавить / Редактировать роль</h2>
+                
+                <div class="form-group">
+                    <label for="role-name">Название роли:</label>
+                    <input type="text" id="role-name" placeholder="Например: Легенда">
+                </div>
+
+                <div class="form-group">
+                    <label for="role-description">Описание роли:</label>
+                    <textarea id="role-description" placeholder="За что выдается роль..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="role-category">Категория:</label>
+                    <select id="role-category">
+                        <option value="Достижения">Достижения</option>
+                        <option value="Администрация">Администрация</option>
+                        <option value="Модерация">Модерация</option>
+                        <option value="Кастомные роли">Кастомные роли</option>
+                        <option value="Особые">Особые</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                    <div id="category-preview" class="category-preview">
+                        Предпросмотр категории
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="role-color">Цвет роли (HEX):</label>
+                    <div class="color-picker">
+                        <input type="text" id="role-color" class="color-input" value="#da2b2b" placeholder="#da2b2b">
+                        <div class="color-preview" id="color-preview"></div>
+                    </div>
+                    <div class="color-help">
+                        <button class="color-help-btn" data-color="#da2b2b">Красный</button>
+                        <button class="color-help-btn" data-color="#0c4897">Синий</button>
+                        <button class="color-help-btn" data-color="#2ed573">Зеленый</button>
+                        <button class="color-help-btn" data-color="#ffd32a">Желтый</button>
+                        <button class="color-help-btn" data-color="#8A2BE2">Фиолетовый</button>
+                        <button class="color-help-btn" data-color="#ff66cc">Розовый</button>
+                        <button class="color-help-btn" data-color="#33ffff">Голубой</button>
+                        <button class="color-help-btn" data-color="#996633">Коричневый</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="role-gradient">Градиент:</label>
+                    <select id="role-gradient" class="category-select">
+                        <option value="red">Красный</option>
+                        <option value="orange">Оранжевый</option>
+                        <option value="yellow">Желтый</option>
+                        <option value="green">Зеленый</option>
+                        <option value="blue">Синий</option>
+                        <option value="purple">Фиолетовый</option>
+                        <option value="pink">Розовый</option>
+                        <option value="cyan">Голубой</option>
+                        <option value="brown">Коричневый</option>
+                        <option value="black">Черный</option>
+                        <option value="white">Белый</option>
+                        <option value="lime">Лаймовый</option>
+                        <option value="indigo">Индиго</option>
+                        <option value="teal">Бирюзовый</option>
+                        <option value="magenta">Пурпурный</option>
+                        <option value="gold">Золотой</option>
+                        <option value="silver">Серебряный</option>
+                        <option value="coral">Коралловый</option>
+                        <option value="lavender">Лавандовый</option>
+                        <option value="turquoise">Бирюзовый светлый</option>
+                        <option value="maroon">Бордовый</option>
+                        <option value="olive">Оливковый</option>
+                        <option value="navy">Темно-синий</option>
+                    </select>
+                    <div class="gradient-preview" id="gradient-preview"></div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-primary" id="save-role">
+                        <i class="fas fa-save"></i> Сохранить роль
+                    </button>
+                    <button class="btn btn-secondary" id="clear-form">
+                        <i class="fas fa-times"></i> Очистить форму
+                    </button>
+                </div>
+
+                <input type="hidden" id="editing-index" value="-1">
+            </div>
+
+            <!-- Панель списка ролей -->
+            <div class="panel">
+                <h2><i class="fas fa-list"></i> Список ролей (<span id="roles-count">0</span>)</h2>
+                <div id="roles-list-container" class="roles-list">
+                    <div class="empty-state" id="empty-roles">
+                        <i class="fas fa-users-slash"></i>
+                        <h3>Роли отсутствуют</h3>
+                        <p>Загрузите роли из файла или добавьте новую</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель генерации кода -->
+        <div class="panel">
+            <h2><i class="fas fa-code"></i> Генерация кода для roles.js</h2>
+            <p style="margin-bottom: 15px; color: #cccccc;">
+                Скопируйте сгенерированный код и вставьте его в файл <strong>roles.js</strong>, 
+                затем обновите страницу <strong>roles.html</strong> для отображения изменений.
+            </p>
+            
+            <div class="code-output">
+                <pre id="generated-code">const roles = [
+  // Роли будут отображены здесь
+];</pre>
+            </div>
+            
+            <div class="code-controls">
+                <button class="btn btn-success" id="generate-code">
+                    <i class="fas fa-sync-alt"></i> Сгенерировать код
+                </button>
+                <button class="btn btn-secondary" id="copy-code">
+                    <i class="fas fa-copy"></i> Скопировать код
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notification" class="notification"></div>
+
+    <script src="roles.js"></script>
+
+    <script>
+        // Градиенты для каждого типа
+        const gradients = {
+            red: "linear-gradient(135deg, #ff3333 0%, #cc0000 100%)",
+            orange: "linear-gradient(135deg, #ff9933 0%, #cc6600 100%)",
+            yellow: "linear-gradient(135deg, #ffff33 0%, #cccc00 100%)",
+            green: "linear-gradient(135deg, #33cc33 0%, #009900 100%)",
+            blue: "linear-gradient(135deg, #3366ff 0%, #0033cc 100%)",
+            purple: "linear-gradient(135deg, #9933ff 0%, #6600cc 100%)",
+            brown: "linear-gradient(135deg, #996633 0%, #663300 100%)",
+            black: "linear-gradient(135deg, #333333 0%, #000000 100%)",
+            white: "linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%)",
+            pink: "linear-gradient(135deg, #ff66cc 0%, #cc3399 100%)",
+            cyan: "linear-gradient(135deg, #33ffff 0%, #00cccc 100%)",
+            lime: "linear-gradient(135deg, #99ff33 0%, #66cc00 100%)",
+            indigo: "linear-gradient(135deg, #6666ff 0%, #3333cc 100%)",
+            teal: "linear-gradient(135deg, #33cccc 0%, #009999 100%)",
+            magenta: "linear-gradient(135deg, #ff33cc 0%, #cc0099 100%)",
+            gold: "linear-gradient(135deg, #ffcc00 0%, #cc9900 100%)",
+            silver: "linear-gradient(135deg, #cccccc 0%, #999999 100%)",
+            coral: "linear-gradient(135deg, #ff6666 0%, #cc3333 100%)",
+            lavender: "linear-gradient(135deg, #cc99ff 0%, #9966cc 100%)",
+            turquoise: "linear-gradient(135deg, #33ffcc 0%, #00cc99 100%)",
+            maroon: "linear-gradient(135deg, #990000 0%, #660000 100%)",
+            olive: "linear-gradient(135deg, #999933 0%, #666600 100%)",
+            navy: "linear-gradient(135deg, #000066 0%, #000033 100%)"
+        };
+
+        // Цвета для каждого типа градиента (для предпросмотра)
+        const gradientColors = {
+            red: "#da2b2b",
+            orange: "#ff9933",
+            yellow: "#ffff33",
+            green: "#33cc33",
+            blue: "#3366ff",
+            purple: "#9933ff",
+            brown: "#996633",
+            black: "#333333",
+            white: "#ffffff",
+            pink: "#ff66cc",
+            cyan: "#33ffff",
+            lime: "#99ff33",
+            indigo: "#6666ff",
+            teal: "#33cccc",
+            magenta: "#ff33cc",
+            gold: "#ffcc00",
+            silver: "#cccccc",
+            coral: "#ff6666",
+            lavender: "#cc99ff",
+            turquoise: "#33ffcc",
+            maroon: "#990000",
+            olive: "#999933",
+            navy: "#000066"
+        };
+
+        // Стили для категорий
+        const categoryStyles = {
+            "Модерация": {
+                backgroundColor: "#2633c2",
+                color: "#b3b8f9",
+                borderColor: "#b3b8f9"
+            },
+            "Кастомные роли": {
+                backgroundColor: "#d1d2e0",
+                color: "#ffffff",
+                borderColor: "#ffffff"
+            },
+            "Администрация": {
+                backgroundColor: "rgba(255, 107, 107, 0.2)",
+                color: "#ff6b6b",
+                borderColor: "rgba(255, 107, 107, 0.5)"
+            },
+            "Достижения": {
+                backgroundColor: "rgba(51, 232, 53, 0.2)",
+                color: "#33e835",
+                borderColor: "rgba(51, 232, 53, 0.5)"
+            },
+            "Особые": {
+                backgroundColor: "rgba(255, 215, 42, 0.2)",
+                color: "#ffd32a",
+                borderColor: "rgba(255, 215, 42, 0.5)"
+            },
+            "Другое": {
+                backgroundColor: "rgba(136, 136, 136, 0.2)",
+                color: "#cccccc",
+                borderColor: "rgba(136, 136, 136, 0.5)"
+            }
+        };
+
+        // Основная переменная для хранения ролей (инициализируем пустым массивом)
+        let adminRoles = [];
+
+        // DOM элементы
+        let roleNameInput, roleDescInput, roleCategorySelect, roleColorInput;
+        let roleGradientSelect, colorPreview, gradientPreview, rolesListContainer;
+        let emptyRolesDiv, generatedCode, editingIndexInput, notification, rolesCountSpan;
+        let categoryPreview;
+        
+        let editingIndex = -1;
+
+        // Функция для инициализации DOM элементов
+        function initDOMElements() {
+            roleNameInput = document.getElementById('role-name');
+            roleDescInput = document.getElementById('role-description');
+            roleCategorySelect = document.getElementById('role-category');
+            roleColorInput = document.getElementById('role-color');
+            roleGradientSelect = document.getElementById('role-gradient');
+            colorPreview = document.getElementById('color-preview');
+            gradientPreview = document.getElementById('gradient-preview');
+            rolesListContainer = document.getElementById('roles-list-container');
+            emptyRolesDiv = document.getElementById('empty-roles');
+            generatedCode = document.getElementById('generated-code');
+            editingIndexInput = document.getElementById('editing-index');
+            notification = document.getElementById('notification');
+            rolesCountSpan = document.getElementById('roles-count');
+            categoryPreview = document.getElementById('category-preview');
+        }
+
+        // Функция для показа уведомлений
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Функция для обновления предпросмотра цвета
+        function updateColorPreview() {
+            if (colorPreview) {
+                colorPreview.style.backgroundColor = roleColorInput.value;
+            }
+        }
+
+        // Функция для обновления предпросмотра градиента
+        function updateGradientPreview() {
+            if (gradientPreview && roleGradientSelect) {
+                const gradientType = roleGradientSelect.value;
+                const gradient = gradients[gradientType];
+                gradientPreview.style.background = gradient;
+                
+                // Устанавливаем цвет из градиента
+                if (gradientColors[gradientType] && roleColorInput) {
+                    roleColorInput.value = gradientColors[gradientType];
+                    updateColorPreview();
+                }
+            }
+        }
+
+        // Функция для обновления предпросмотра категории
+        function updateCategoryPreview() {
+            if (categoryPreview && roleCategorySelect) {
+                const category = roleCategorySelect.value;
+                const styles = categoryStyles[category] || categoryStyles["Другое"];
+                
+                categoryPreview.textContent = category;
+                categoryPreview.style.backgroundColor = styles.backgroundColor;
+                categoryPreview.style.color = styles.color;
+                categoryPreview.style.borderColor = styles.borderColor;
+            }
+        }
+
+        // Функция для получения градиента на основе типа
+        function getGradientByType(gradientType) {
+            return gradients[gradientType] || gradients.red;
+        }
+
+        // Функция для определения типа градиента на основе значения
+        function getGradientType(gradientValue) {
+            for (const [type, gradient] of Object.entries(gradients)) {
+                if (gradient === gradientValue) {
+                    return type;
+                }
+            }
+            return 'red'; // По умолчанию
+        }
+
+        // Функция для обновления счетчика ролей
+        function updateRolesCount() {
+            if (rolesCountSpan) {
+                rolesCountSpan.textContent = adminRoles.length;
+            }
+        }
+
+        // Функция для отображения списка ролей
+        function renderRolesList() {
+            if (!rolesListContainer || !emptyRolesDiv) return;
+            
+            if (adminRoles.length === 0) {
+                emptyRolesDiv.style.display = 'block';
+                rolesListContainer.innerHTML = '';
+                rolesListContainer.appendChild(emptyRolesDiv);
+                updateRolesCount();
+                return;
+            }
+            
+            emptyRolesDiv.style.display = 'none';
+            
+            let html = '';
+            adminRoles.forEach((role, index) => {
+                // Создаем CSS класс для категории (заменяем пробелы на дефисы и приводим к нижнему регистру)
+                const categoryClass = role.category.toLowerCase().replace(/\s+/g, '-');
+                
+                html += `
+                    <div class="role-item">
+                        <div class="role-info">
+                            <div class="role-name" style="color: ${role.color}">${role.name}</div>
+                            <span class="role-category ${categoryClass}">${role.category}</span>
+                        </div>
+                        <div class="role-actions">
+                            <button class="action-btn edit-role" data-index="${index}" title="Редактировать">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-role" data-index="${index}" title="Удалить">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            rolesListContainer.innerHTML = html;
+            updateRolesCount();
+            
+            // Добавляем обработчики для кнопок редактирования и удаления
+            document.querySelectorAll('.edit-role').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    editRole(index);
+                });
+            });
+            
+            document.querySelectorAll('.delete-role').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    deleteRole(index);
+                });
+            });
+        }
+
+        // Функция для редактирования роли
+        function editRole(index) {
+            const role = adminRoles[index];
+            
+            roleNameInput.value = role.name;
+            roleDescInput.value = role.description;
+            roleCategorySelect.value = role.category;
+            roleColorInput.value = role.color;
+            
+            // Определяем тип градиента
+            const gradientType = getGradientType(role.gradient);
+            roleGradientSelect.value = gradientType;
+            
+            editingIndexInput.value = index;
+            editingIndex = index;
+            
+            updateColorPreview();
+            updateGradientPreview();
+            updateCategoryPreview();
+            
+            showNotification(`Редактирование роли: ${role.name}`, 'success');
+        }
+
+        // Функция для удаления роли
+        function deleteRole(index) {
+            if (confirm(`Вы уверены, что хотите удалить роль "${adminRoles[index].name}"?`)) {
+                const deletedRole = adminRoles.splice(index, 1)[0];
+                renderRolesList();
+                generateCode();
+                showNotification(`Роль "${deletedRole.name}" удалена`, 'success');
+            }
+        }
+
+        // Функция для сохранения роли
+        function saveRole() {
+            const name = roleNameInput.value.trim();
+            const description = roleDescInput.value.trim();
+            const category = roleCategorySelect.value;
+            const color = roleColorInput.value.trim();
+            const gradientType = roleGradientSelect.value;
+            const gradient = getGradientByType(gradientType);
+            
+            // Валидация
+            if (!name) {
+                showNotification('Введите название роли', 'error');
+                roleNameInput.focus();
+                return;
+            }
+            
+            if (!description) {
+                showNotification('Введите описание роли', 'error');
+                roleDescInput.focus();
+                return;
+            }
+            
+            if (!color.match(/^#[0-9A-F]{6}$/i)) {
+                showNotification('Введите корректный HEX-цвет (например, #da2b2b)', 'error');
+                roleColorInput.focus();
+                return;
+            }
+            
+            const role = {
+                name,
+                description,
+                category,
+                color,
+                gradient
+            };
+            
+            if (editingIndex >= 0) {
+                // Редактирование существующей роли
+                adminRoles[editingIndex] = role;
+                showNotification(`Роль "${name}" обновлена`, 'success');
+                editingIndex = -1;
+                editingIndexInput.value = '-1';
+            } else {
+                // Добавление новой роли
+                adminRoles.push(role);
+                showNotification(`Роль "${name}" добавлена`, 'success');
+            }
+            
+            // Очистка формы
+            clearForm();
+            
+            // Обновление интерфейса
+            renderRolesList();
+            generateCode();
+        }
+
+        // Функция для очистки формы
+        function clearForm() {
+            roleNameInput.value = '';
+            roleDescInput.value = '';
+            roleCategorySelect.value = 'Достижения';
+            roleColorInput.value = '#da2b2b';
+            roleGradientSelect.value = 'red';
+            editingIndexInput.value = '-1';
+            editingIndex = -1;
+            
+            updateColorPreview();
+            updateGradientPreview();
+            updateCategoryPreview();
+        }
+
+        // Функция для генерации кода
+        function generateCode() {
+            if (!generatedCode) return;
+            
+            if (adminRoles.length === 0) {
+                generatedCode.textContent = `const roles = [
+  // Роли отсутствуют - добавьте их через админ-панель
+];`;
+                return;
+            }
+            
+            let code = 'const roles = [\n';
+            
+            adminRoles.forEach((role, index) => {
+                const isLast = index === adminRoles.length - 1;
+                code += `  {\n`;
+                code += `    "name": "${role.name}",\n`;
+                code += `    "description": "${role.description}",\n`;
+                code += `    "category": "${role.category}",\n`;
+                code += `    "color": "${role.color}",\n`;
+                code += `    "gradient": "${role.gradient}"\n`;
+                code += `  }${isLast ? '' : ','}\n`;
+            });
+            
+            code += '];';
+            
+            generatedCode.textContent = code;
+        }
+
+        // Функция для копирования кода в буфер обмена
+        function copyCodeToClipboard() {
+            const codeText = generatedCode.textContent;
+            
+            navigator.clipboard.writeText(codeText)
+                .then(() => {
+                    showNotification('Код скопирован в буфер обмена!', 'success');
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования: ', err);
+                    showNotification('Не удалось скопировать код', 'error');
+                });
+        }
+
+        // Функция для загрузки ролей из roles.js
+        function loadRolesFromFile() {
+            try {
+                // Проверяем, определен ли глобальный массив roles из файла roles.js
+                if (typeof roles !== 'undefined' && Array.isArray(roles)) {
+                    // Копируем роли из глобального массива в наш локальный массив
+                    adminRoles = JSON.parse(JSON.stringify(roles));
+                    renderRolesList();
+                    generateCode();
+                    showNotification(`Загружено ${adminRoles.length} ролей из roles.js`, 'success');
+                } else {
+                    showNotification('Массив roles не найден. Убедитесь, что файл roles.js подключен.', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки ролей:', error);
+                showNotification('Ошибка загрузки ролей: ' + error.message, 'error');
+            }
+        }
+
+        // Функция для очистки всех ролей
+        function clearAllRoles() {
+            if (adminRoles.length === 0) {
+                showNotification('Список ролей уже пуст', 'info');
+                return;
+            }
+            
+            if (confirm(`Вы уверены, что хотите удалить все ${adminRoles.length} ролей?`)) {
+                adminRoles = [];
+                renderRolesList();
+                generateCode();
+                showNotification('Все роли удалены', 'success');
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем DOM элементы
+            initDOMElements();
+            
+            // Инициализируем предпросмотр
+            updateColorPreview();
+            updateGradientPreview();
+            updateCategoryPreview();
+            
+            // Автоматически загружаем роли из файла при загрузке страницы
+            setTimeout(loadRolesFromFile, 100);
+            
+            // Обработчики событий для формы
+            document.getElementById('save-role').addEventListener('click', saveRole);
+            document.getElementById('clear-form').addEventListener('click', clearForm);
+            
+            // Обработчики для генерации и копирования кода
+            document.getElementById('generate-code').addEventListener('click', generateCode);
+            document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
+            
+            // Обработчики для загрузки и очистки ролей
+            document.getElementById('load-roles').addEventListener('click', loadRolesFromFile);
+            document.getElementById('clear-all-roles').addEventListener('click', clearAllRoles);
+            
+            // Обработчики для обновления предпросмотра
+            if (roleColorInput) {
+                roleColorInput.addEventListener('input', updateColorPreview);
+            }
+            
+            if (roleGradientSelect) {
+                roleGradientSelect.addEventListener('change', updateGradientPreview);
+            }
+            
+            if (roleCategorySelect) {
+                roleCategorySelect.addEventListener('change', updateCategoryPreview);
+            }
+            
+            // Обработчики для быстрого выбора цвета
+            document.querySelectorAll('.color-help-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const color = this.getAttribute('data-color');
+                    roleColorInput.value = color;
+                    updateColorPreview();
+                    
+                    // Подбираем подходящий градиент
+                    for (const [gradientType, gradientColor] of Object.entries(gradientColors)) {
+                        if (gradientColor.toLowerCase() === color.toLowerCase()) {
+                            roleGradientSelect.value = gradientType;
+                            updateGradientPreview();
+                            break;
+                        }
+                    }
+                });
+            });
+            
+            // Сохранение по нажатию Ctrl+Enter
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    saveRole();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
