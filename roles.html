@@ -959,8 +959,8 @@
         roleCard.className = 'role-card-detailed';
         roleCard.innerHTML = `
           <div class="role-header">
-            <span class="role-dot-large" style="background:${role.color}"></span>
-            <div class="role-title">${role.name}</div>
+            <span class="role-dot-large" style="background:${role.gradient}"></span>
+            <div class="role-title" style="color:${role.color}">${role.name}</div>
             <span class="role-category">${role.category}</span>
           </div>
           <div class="role-description-detailed">
@@ -1150,5 +1150,6 @@
   </script>
 </body>
 </html>
+
 
 
