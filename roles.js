@@ -33,5 +33,12 @@ const roles = [
     "category": "Модерация",
     "color": "#6666ff",
     "gradient": "linear-gradient(135deg, #6666ff 0%, #3333cc 100%)"
+  },
+  {
+    "name": "gdfgdf",
+    "description": "gdfgdfg",
+    "category": "Достижения",
+    "color": "#99ff33",
+    "gradient": "linear-gradient(135deg, #99ff33 0%, #66cc00 100%)"
   }
 ];
