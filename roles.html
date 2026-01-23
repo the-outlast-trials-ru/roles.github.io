@@ -552,14 +552,49 @@
     }
 
     .role-category {
-      background-color: rgba(255, 107, 107, 0.2);
-      color: #ff6b6b;
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 0.8rem;
       font-weight: bold;
       border: 1px solid rgba(255, 107, 107, 0.3);
       white-space: nowrap;
+    }
+    
+    /* Стили для категорий */
+    .role-category.модерация {
+      background-color: #2633c2;
+      color: #b3b8f9;
+      border-color: #b3b8f9;
+    }
+    
+    .role-category.кастомные-роли {
+      background-color: #d1d2e0;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+    
+    .role-category.администрация {
+      background-color: rgba(255, 107, 107, 0.2);
+      color: #ff6b6b;
+      border-color: rgba(255, 107, 107, 0.5);
+    }
+    
+    .role-category.достижения {
+      background-color: rgba(51, 232, 53, 0.2);
+      color: #33e835;
+      border-color: rgba(51, 232, 53, 0.5);
+    }
+    
+    .role-category.особые {
+      background-color: rgba(255, 215, 42, 0.2);
+      color: #ffd32a;
+      border-color: rgba(255, 215, 42, 0.5);
+    }
+    
+    .role-category.другое {
+      background-color: rgba(136, 136, 136, 0.2);
+      color: #cccccc;
+      border-color: rgba(136, 136, 136, 0.5);
     }
 
     .role-description-detailed {
@@ -957,11 +992,15 @@
       rolesToDisplay.forEach(role => {
         const roleCard = document.createElement('div');
         roleCard.className = 'role-card-detailed';
+        
+        // Создаем CSS класс для категории (заменяем пробелы на дефисы и приводим к нижнему регистру)
+        const categoryClass = role.category.toLowerCase().replace(/\s+/g, '-');
+        
         roleCard.innerHTML = `
           <div class="role-header">
             <span class="role-dot-large" style="background:${role.gradient}"></span>
             <div class="role-title" style="color:${role.color}">${role.name}</div>
-            <span class="role-category">${role.category}</span>
+            <span class="role-category ${categoryClass}">${role.category}</span>
           </div>
           <div class="role-description-detailed">
             ${role.description}
