@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Справочник ролей - The Outlast Trials RU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -556,45 +555,57 @@
       border-radius: 12px;
       font-size: 0.8rem;
       font-weight: bold;
-      border: 1px solid rgba(255, 107, 107, 0.3);
+      border: 1px solid;
       white-space: nowrap;
     }
     
-    /* Стили для категорий */
-    .role-category.ивент роли {
-      background-color: #2633c2;
-      color: #b3b8f9;
-      border-color: #b3b8f9;
+    /* Стили для категорий - ЯРКИЕ ЦВЕТА (совпадают с adminka.html) */
+    .role-category.основные-роли {
+      background-color: #4a6bff;
+      color: #ffffff;
+      border-color: #2a4bff;
     }
     
     .role-category.кастомные-роли {
-      background-color: #d1d2e0;
+      background-color: #ffffff;
+      color: #333333;
+      border-color: #cccccc;
+    }
+    
+    .role-category.администрация-и-модерация {
+      background-color: #ff4a4a;
       color: #ffffff;
-      border-color: #ffffff;
+      border-color: #ff2a2a;
     }
     
-    .role-category.администрация и модерация {
-      background-color: rgba(255, 107, 107, 0.2);
-      color: #ff6b6b;
-      border-color: rgba(255, 107, 107, 0.5);
+    .role-category.администрация {
+      background-color: #ff4a4a;
+      color: #ffffff;
+      border-color: #ff2a2a;
     }
     
-    .role-category.основные роли {
-      background-color: rgba(51, 232, 53, 0.2);
-      color: #33e835;
-      border-color: rgba(51, 232, 53, 0.5);
+    .role-category.ивент-роли {
+      background-color: #33e835;
+      color: #ffffff;
+      border-color: #1ac81c;
     }
     
-    .role-category.платные роли {
-      background-color: rgba(255, 215, 42, 0.2);
-      color: #ffd32a;
-      border-color: rgba(255, 215, 42, 0.5);
+    .role-category.платные-роли {
+      background-color: #ffd32a;
+      color: #333333;
+      border-color: #ffc400;
+    }
+    
+    .role-category.достижения {
+      background-color: #8A2BE2;
+      color: #ffffff;
+      border-color: #7a1bd2;
     }
     
     .role-category.другое {
-      background-color: rgba(136, 136, 136, 0.2);
-      color: #cccccc;
-      border-color: rgba(136, 136, 136, 0.5);
+      background-color: #999999;
+      color: #ffffff;
+      border-color: #777777;
     }
 
     .role-description-detailed {
@@ -821,7 +832,7 @@
         <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html" class="active"><i class="fas fa-users"></i> Справочник ролей</a></li>
         <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
-        <li><a href="#"><i class="fas fa-user"></i> Админ-панель</a></li>
+        <li><a href="adminka.html"><i class="fas fa-user"></i> Админ-панель</a></li>
       </ul>
     </div>
   </nav>
@@ -912,6 +923,15 @@
     // Переменная для хранения текущих отфильтрованных ролей
     let currentFilteredRoles = [];
     
+    // Функция для создания корректного CSS класса из категории
+    function createCategoryClass(category) {
+      // Заменяем пробелы на дефисы, приводим к нижнему регистру
+      // Убираем все символы кроме букв, цифр и дефисов
+      return category.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-zа-яё0-9-]/g, '');
+    }
+
     // Функция для анимации появления карточек ролей
     function animateRoleCards() {
       const roleCards = document.querySelectorAll('.role-card-detailed');
@@ -993,8 +1013,8 @@
         const roleCard = document.createElement('div');
         roleCard.className = 'role-card-detailed';
         
-        // Создаем CSS класс для категории (заменяем пробелы на дефисы и приводим к нижнему регистру)
-        const categoryClass = role.category.toLowerCase().replace(/\s+/g, '-');
+        // Используем ту же функцию для создания CSS класса, что и в adminka.html
+        const categoryClass = createCategoryClass(role.category);
         
         roleCard.innerHTML = `
           <div class="role-header">
@@ -1189,5 +1209,3 @@
   </script>
 </body>
 </html>
-
-
