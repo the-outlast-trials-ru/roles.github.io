@@ -1,16 +1,16 @@
 const roles = [
   {
-    "name": "Гемофилик",
-    "description": "За ........",
-    "category": "Кастомные роли",
-    "color": "#0c4897",
-    "gradient": "linear-gradient(135deg, #FF00FF, #8A2BE2)"
+    "name": "Легенда",
+    "description": "йцаыпявпвып",
+    "category": "Основные роли",
+    "color": "#ffff33",
+    "gradient": "linear-gradient(135deg, #ffff33 0%, #cccc00 100%)"
   },
   {
-    "name": "666",
-    "description": "ыВАавпявпф",
-    "category": "Особые",
-    "color": "#ffcc00",
-    "gradient": "linear-gradient(135deg, #ffcc00 0%, #cc9900 100%)"
+    "name": "Реагент",
+    "description": "фцуафыааафукефа",
+    "category": "Ивент роли",
+    "color": "#ff9933",
+    "gradient": "linear-gradient(135deg, #ff9933 0%, #cc6600 100%)"
   }
 ];
