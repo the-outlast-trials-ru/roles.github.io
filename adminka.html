@@ -228,43 +228,56 @@
             border-radius: 12px;
             display: inline-block;
             border: 1px solid;
+            font-weight: bold;
         }
         
-        /* Стили для категорий в админ-панели */
-        .role-category.основные роли {
-            background-color: #2633c2;
-            color: #b3b8f9;
-            border-color: #b3b8f9;
+        /* Стили для категорий в админ-панели - ЯРКИЕ ЦВЕТА */
+        .role-category.основные-роли {
+            background-color: #4a6bff;
+            color: #ffffff;
+            border-color: #2a4bff;
         }
         
         .role-category.кастомные-роли {
-            background-color: #d1d2e0;
+            background-color: #ffffff;
+            color: #333333;
+            border-color: #cccccc;
+        }
+        
+        .role-category.администрация-и-модерация {
+            background-color: #ff4a4a;
             color: #ffffff;
-            border-color: #ffffff;
+            border-color: #ff2a2a;
         }
         
-        .role-category.администрация и модерация {
-            background-color: #d1d2e0;
+        .role-category.администрация {
+            background-color: #ff4a4a;
             color: #ffffff;
-            border-color: #ffffff;
+            border-color: #ff2a2a;
         }
         
-        .role-category.Ивент роли {
-            background-color: rgba(51, 232, 53, 0.2);
-            color: #33e835;
-            border-color: rgba(51, 232, 53, 0.5);
+        .role-category.ивент-роли {
+            background-color: #33e835;
+            color: #ffffff;
+            border-color: #1ac81c;
         }
         
-        .role-category.платные роли {
-            background-color: rgba(255, 215, 42, 0.2);
-            color: #ffd32a;
-            border-color: rgba(255, 215, 42, 0.5);
+        .role-category.платные-роли {
+            background-color: #ffd32a;
+            color: #333333;
+            border-color: #ffc400;
+        }
+        
+        .role-category.достижения {
+            background-color: #8A2BE2;
+            color: #ffffff;
+            border-color: #7a1bd2;
         }
         
         .role-category.другое {
-            background-color: rgba(136, 136, 136, 0.2);
-            color: #cccccc;
-            border-color: rgba(136, 136, 136, 0.5);
+            background-color: #999999;
+            color: #ffffff;
+            border-color: #777777;
         }
 
         .role-actions {
@@ -488,6 +501,7 @@
                         <option value="Ивент роли">Ивент роли</option>
                         <option value="Кастомные роли">Кастомные роли</option>
                         <option value="Платные роли">Платные роли</option>
+                        <option value="Достижения">Достижения</option>
                         <option value="Другое">Другое</option>
                     </select>
                     <div id="category-preview" class="category-preview">
@@ -653,37 +667,47 @@
             navy: "#000066"
         };
 
-        // Стили для категорий
+        // Стили для категорий - ЯРКИЕ ЦВЕТА
         const categoryStyles = {
             "Основные роли": {
-                backgroundColor: "#2633c2",
-                color: "#b3b8f9",
-                borderColor: "#b3b8f9"
+                backgroundColor: "#4a6bff",
+                color: "#ffffff",
+                borderColor: "#2a4bff"
             },
             "Кастомные роли": {
-                backgroundColor: "#d1d2e0",
-                color: "#ffffff",
-                borderColor: "#ffffff"
+                backgroundColor: "#ffffff",
+                color: "#333333",
+                borderColor: "#cccccc"
             },
             "Администрация и модерация": {
-                backgroundColor: "rgba(255, 107, 107, 0.2)",
-                color: "#ff6b6b",
-                borderColor: "rgba(255, 107, 107, 0.5)"
+                backgroundColor: "#ff4a4a",
+                color: "#ffffff",
+                borderColor: "#ff2a2a"
+            },
+            "Администрация": {
+                backgroundColor: "#ff4a4a",
+                color: "#ffffff",
+                borderColor: "#ff2a2a"
             },
             "Ивент роли": {
-                backgroundColor: "rgba(51, 232, 53, 0.2)",
-                color: "#33e835",
-                borderColor: "rgba(51, 232, 53, 0.5)"
+                backgroundColor: "#33e835",
+                color: "#ffffff",
+                borderColor: "#1ac81c"
             },
             "Платные роли": {
-                backgroundColor: "rgba(255, 215, 42, 0.2)",
-                color: "#ffd32a",
-                borderColor: "rgba(255, 215, 42, 0.5)"
+                backgroundColor: "#ffd32a",
+                color: "#333333",
+                borderColor: "#ffc400"
+            },
+            "Достижения": {
+                backgroundColor: "#8A2BE2",
+                color: "#ffffff",
+                borderColor: "#7a1bd2"
             },
             "Другое": {
-                backgroundColor: "rgba(136, 136, 136, 0.2)",
-                color: "#cccccc",
-                borderColor: "rgba(136, 136, 136, 0.5)"
+                backgroundColor: "#999999",
+                color: "#ffffff",
+                borderColor: "#777777"
             }
         };
 
@@ -799,8 +823,10 @@
             
             let html = '';
             adminRoles.forEach((role, index) => {
-                // Создаем CSS класс для категории (заменяем пробелы на дефисы и приводим к нижнему регистру)
-                const categoryClass = role.category.toLowerCase().replace(/\s+/g, '-');
+                // Создаем CSS класс для категории - заменяем пробелы на дефисы
+                const categoryClass = role.category.toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^a-zа-яё0-9-]/g, '');
                 
                 html += `
                     <div class="role-item">
@@ -932,7 +958,7 @@
         function clearForm() {
             roleNameInput.value = '';
             roleDescInput.value = '';
-            roleCategorySelect.value = 'Достижения';
+            roleCategorySelect.value = 'Основные роли';
             roleColorInput.value = '#da2b2b';
             roleGradientSelect.value = 'red';
             editingIndexInput.value = '-1';
