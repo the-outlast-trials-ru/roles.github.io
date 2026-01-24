@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <title>Справочник ролей - The Outlast Trials RU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Подключаем шрифт Rubik -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 380; /* Rubik Light weight */
     }
 
     body {
@@ -19,6 +22,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-weight: 380;
     }
 
     /* Навбар - адаптивный */
@@ -54,7 +58,7 @@
 
     .site-name {
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для логотипа */
       color: #ff2a2a;
       text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
     }
@@ -79,6 +83,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      font-weight: 400;
     }
 
     .nav-menu li a:hover {
@@ -141,6 +146,7 @@
       opacity: 0;
       transform: translateY(-30px);
       transition: opacity 1s ease, transform 1s ease;
+      font-weight: 500; /* Немного жирнее для заголовка */
     }
 
     @keyframes pulse {
@@ -169,6 +175,7 @@
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
+      font-weight: 380;
     }
 
     /* Панель фильтров - исправлена */
@@ -224,6 +231,7 @@
       font-size: 0.9rem;
       transition: all 0.3s ease;
       box-sizing: border-box;
+      font-weight: 380;
     }
 
     .search-input:focus {
@@ -276,6 +284,7 @@
       white-space: nowrap;
       height: 100%;
       align-items: center;
+      font-weight: 400;
     }
 
     .category-select {
@@ -289,6 +298,7 @@
       font-size: 0.85rem;
       cursor: pointer;
       box-sizing: border-box;
+      font-weight: 380;
     }
 
     /* Кнопки действий - исправлено */
@@ -309,7 +319,7 @@
       border: none;
       border-radius: 6px;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для кнопок */
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -336,6 +346,7 @@
       border: 1px solid rgba(255, 107, 107, 0.3);
       box-sizing: border-box;
       white-space: nowrap;
+      font-weight: 380;
     }
 
     /* Отображение текущей категории */
@@ -357,13 +368,13 @@
     .current-category-text {
       color: #ffffff;
       font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для заголовка категории */
       margin: 0;
     }
 
     .current-category-text .category-name {
       color: #ff6b6b;
-      font-weight: bold;
+      font-weight: 500;
     }
 
     /* Панель сортировки - исправлено расстояние */
@@ -403,7 +414,7 @@
     .sort-label {
       color: #f0f0f0;
       font-size: 0.9rem;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для labels */
       display: flex;
       align-items: center;
       gap: 8px;
@@ -426,6 +437,7 @@
       cursor: pointer;
       box-sizing: border-box;
       transition: all 0.3s ease;
+      font-weight: 380;
     }
 
     .sort-select:focus {
@@ -451,11 +463,12 @@
       padding: 8px 15px;
       border-radius: 4px;
       border: 1px solid rgba(88, 101, 242, 0.3);
+      font-weight: 380;
     }
 
     .sort-status .status-text {
       color: #5865F2;
-      font-weight: bold;
+      font-weight: 500;
     }
 
     .sort-reset-btn {
@@ -466,7 +479,7 @@
       border: none;
       border-radius: 6px;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для кнопок */
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -546,7 +559,7 @@
     .role-title {
       font-size: 1.2rem;
       color: #ffffff;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для названий ролей */
       flex: 1;
     }
 
@@ -554,7 +567,7 @@
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 0.8rem;
-      font-weight: bold;
+      font-weight: 500; /* Немного жирнее для категорий */
       border: 1px solid;
       white-space: nowrap;
     }
@@ -616,6 +629,7 @@
       padding: 12px;
       border-radius: 6px;
       border-left: 3px solid rgba(255, 107, 107, 0.5);
+      font-weight: 380;
     }
 
     /* Сообщение "ничего не найдено" */
@@ -639,11 +653,13 @@
       color: #ffffff;
       font-size: 1.5rem;
       margin-bottom: 10px;
+      font-weight: 500;
     }
 
     .no-results p {
       color: #cccccc;
       font-size: 1rem;
+      font-weight: 380;
     }
 
     /* Адаптивность */
