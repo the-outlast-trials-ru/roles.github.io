@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель - Управление ролями</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем шрифт Rubik -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 380; /* Rubik Light weight */
         }
 
         body {
@@ -18,6 +21,7 @@
             color: #f0f0f0;
             min-height: 100vh;
             padding: 20px;
+            font-weight: 380;
         }
 
         .container {
@@ -37,11 +41,13 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            font-weight: 500; /* Немного жирнее для заголовка */
         }
 
         .header p {
             color: #cccccc;
             font-size: 1.1rem;
+            font-weight: 380;
         }
 
         .panels {
@@ -72,6 +78,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 500; /* Немного жирнее для подзаголовков */
         }
 
         .panel h2 i {
@@ -86,7 +93,7 @@
             display: block;
             margin-bottom: 8px;
             color: #f0f0f0;
-            font-weight: 500;
+            font-weight: 400; /* Немного жирнее для labels */
         }
 
         input[type="text"],
@@ -100,6 +107,7 @@
             color: white;
             font-size: 1rem;
             transition: all 0.3s ease;
+            font-weight: 380;
         }
 
         textarea {
@@ -153,7 +161,7 @@
             border: none;
             border-radius: 6px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 500; /* Немного жирнее для кнопок */
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -217,7 +225,7 @@
         }
 
         .role-name {
-            font-weight: bold;
+            font-weight: 500; /* Немного жирнее для названий ролей */
             font-size: 1.1rem;
             margin-bottom: 5px;
         }
@@ -228,7 +236,7 @@
             border-radius: 12px;
             display: inline-block;
             border: 1px solid;
-            font-weight: bold;
+            font-weight: 500; /* Немного жирнее для категорий */
         }
         
         /* Стили для категорий в админ-панели - ЯРКИЕ ЦВЕТА */
@@ -308,7 +316,7 @@
             margin-top: 20px;
             max-height: 400px;
             overflow-y: auto;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', monospace; /* Оставляем моноширинный для кода */
             font-size: 0.9rem;
             line-height: 1.5;
             border: 2px solid #333;
@@ -333,7 +341,7 @@
             padding: 15px 20px;
             border-radius: 6px;
             color: white;
-            font-weight: bold;
+            font-weight: 500;
             z-index: 1000;
             opacity: 0;
             transform: translateX(100px);
@@ -368,6 +376,11 @@
         .empty-state h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .empty-state p {
+            font-weight: 380;
         }
 
         .color-help {
@@ -386,6 +399,7 @@
             font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 380;
         }
 
         .color-help-btn:hover {
@@ -431,6 +445,7 @@
             padding: 10px;
             background-color: rgba(30, 31, 34, 0.8);
             border-radius: 6px;
+            font-weight: 380;
         }
 
         .info-text code {
@@ -438,6 +453,7 @@
             background-color: rgba(0, 0, 0, 0.3);
             padding: 2px 5px;
             border-radius: 3px;
+            font-family: 'Courier New', monospace;
         }
         
         /* Стили для предпросмотра категорий в форме */
@@ -449,7 +465,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 500;
             border: 2px solid rgba(255, 255, 255, 0.2);
         }
     </style>
@@ -522,7 +538,7 @@
                         <button class="color-help-btn" data-color="#ffd32a">Желтый</button>
                         <button class="color-help-btn" data-color="#8A2BE2">Фиолетовый</button>
                         <button class="color-help-btn" data-color="#ff66cc">Розовый</button>
-                        <button class="color-help-btn" data-color="#33ffff">Голубой</button>
+                        <button class="color-help-btn" data-color="#33ffff">Голубый</button>
                         <button class="color-help-btn" data-color="#996633">Коричневый</button>
                     </div>
                 </div>
