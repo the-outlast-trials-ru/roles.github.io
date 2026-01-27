@@ -10,7 +10,7 @@ const roles = [
     "name": "Егерь",
     "description": "за ...........",
     "category": "🎉 Ивент роли",
-    "color": "#8A2BE2",
-    "gradient": "linear-gradient(135deg, #ff3333 0%, #cc0000 100%)"
+    "color": "#9933ff",
+    "gradient": "linear-gradient(135deg, #9933ff 0%, #6600cc 100%)"
   }
 ];
