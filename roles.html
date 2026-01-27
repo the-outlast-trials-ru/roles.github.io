@@ -178,7 +178,6 @@
 ease, transform 1s 
 ease;
     font-size: 5rem;
-    color: #252dfa;
     text-shadow: 0 0 15px #252dfa, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
     margin-bottom: 40px;
     }
@@ -342,7 +341,7 @@ ease;
     }
 
     .reset-btn {
-      padding: 0 15px;
+      padding: 0 8px;
       height: 40px;
       background: linear-gradient(135deg, #ff6b6b, #ff4757);
       color: white;
@@ -902,7 +901,7 @@ ease;
   <main class="content">
     <section class="page-header">
       <h1 class="page-title">
-        <i class="fas fa-book"></i> Справочник ролей
+        Справочник ролей
       </h1>
       <p class="page-description">
         В этом разделе вы можете ознакомиться со всеми ролями нашего сервера Discord.<br>
@@ -1062,7 +1061,7 @@ ease;
       const resultsCount = document.querySelector('#results-count span');
       
       rolesList.innerHTML = '';
-      resultsCount.textContent = rolesToDisplay.length;
+      resultsCount.textContent = ' ' + rolesToDisplay.length;
       
       if (rolesToDisplay.length === 0) {
         noResults.style.display = 'block';
@@ -1271,5 +1270,6 @@ ease;
   </script>
 </body>
 </html>
+
 
 
