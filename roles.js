@@ -250,7 +250,7 @@ const roles = [
     "category": "🎭 Кастомные роли",
     "color": "#ffffff",
     "gradient": "linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%)"
-  }",
+  },
     "category": "🎭 Кастомные роли",
     "color": "#333333",
     "gradient": "linear-gradient(135deg, #333333 0%, #000000 100%)"
