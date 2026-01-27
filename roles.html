@@ -166,32 +166,21 @@
     }
 
     .page-title {
-      font-size: 2.8rem;
-      color: #ff6b6b;
-      text-shadow: 
-        0 0 10px #ff6b6b,
-        2px 2px 0 #fff,
-        -2px 2px 0 #fff,
-        2px -2px 0 #fff,
-        -2px -2px 0 #fff;
-      margin-bottom: 15px;
-      animation: pulse 2s infinite;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(-30px);
-      transition: opacity 1s ease, transform 1s ease;
-      font-weight: 500; /* Немного жирнее для заголовка */
-    }
-
-    @keyframes pulse {
-      0% { text-shadow: 0 0 10px #ff6b6b, 2px 2px 0 #fff, -2px 2px 0 #fff, 2px -2px 0 #fff, -2px -2px 0 #fff; }
-      50% { text-shadow: 0 0 15px #ff6b6b, 2px 2px 0 #fff, -2px 2px 0 #fff, 2px -2px 0 #fff, -2px -2px 0 #fff; }
-      100% { text-shadow: 0 0 10px #ff6b6b, 2px 2px 0 #fff, -2px 2px 0 #fff, 2px -2px 0 #fff, -2px -2px 0 #fff; }
+  color: #f0f0f0;
+    font-size: 42px;
+    margin-bottom: 15px;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 1s 
+ease, transform 1s 
+ease;
+    font-size: 5rem;
+    color: #252dfa;
+    text-shadow: 0 0 15px #252dfa, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+    margin-bottom: 40px;
     }
 
     .page-title i {
@@ -906,8 +895,6 @@
       <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html" class="active"><i class="fas fa-users"></i> Справочник ролей</a></li>
-        <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
-        <li><a href="adminka.html"><i class="fas fa-user"></i> Админ-панель</a></li>
       </ul>
     </div>
   </nav>
@@ -1284,4 +1271,5 @@
   </script>
 </body>
 </html>
+
 
