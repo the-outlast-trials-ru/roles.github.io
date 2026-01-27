@@ -1061,7 +1061,8 @@ ease;
       const resultsCount = document.querySelector('#results-count span');
       
       rolesList.innerHTML = '';
-      resultsCount.textContent = ' ' + rolesToDisplay.length.toString();
+      resultsCount.textContent = rolesToDisplay.length;
+      resultsCount.style.marginLeft = '5px';
       
       if (rolesToDisplay.length === 0) {
         noResults.style.display = 'block';
@@ -1270,6 +1271,7 @@ ease;
   </script>
 </body>
 </html>
+
 
 
 
