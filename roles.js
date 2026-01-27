@@ -40,5 +40,12 @@ const roles = [
     "category": "🎭 Кастомные роли",
     "color": "#333333",
     "gradient": "linear-gradient(135deg, #333333 0%, #000000 100%)"
+  },
+  {
+    "name": "Реагент",
+    "description": "За ..........",
+    "category": "👥 Основные роли",
+    "color": "#ff9933",
+    "gradient": "linear-gradient(135deg, #ff9933 0%, #cc6600 100%)"
   }
 ];
