@@ -189,6 +189,5 @@ const roles = [
     "gradient": "linear-gradient(135deg, #cccccc 0%, #999999 100%)"
   }
 ];
-];
 
 
