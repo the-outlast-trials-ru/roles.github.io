@@ -247,9 +247,7 @@ body {
 /* Адаптивность */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
     padding: 15px;
-    gap: 15px;
   }
   
   .nav-menu {
