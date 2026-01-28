@@ -29,7 +29,7 @@ const roles = [
   },
   {
     "name": "Гемофилик",
-    "description": "Данную роль можно получить следующим образом: Нужно быть подписанным на тгк <a href=\"https://t.me/+SlROwVI_pM8zYmYy\">The Outlast Trials RU</a>",
+    "description": "Данную роль можно получить следующим образом: Нужно быть подписанным на тгк <a target=\"_blank\" href=\"https://t.me/+SlROwVI_pM8zYmYy\">The Outlast Trials RU</a>",
     "category": "✨ Бонусные роли",
     "color": "#ffffff",
     "gradient": "linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%)"
