@@ -1092,10 +1092,11 @@ ease;
             <div class="role-title" style="color:${role.color}">${role.name}</div>
             <span class="role-category ${categoryClass}">${role.category}</span>
           </div>
-          <div class="role-description-detailed">
-            ${role.description}
-          </div>
         `;
+        const desc = document.createElement('div');
+        desc.className = 'role-description-detailed';
+        desc.innerHTML = role.description;
+        
         rolesList.appendChild(roleCard);
       });
       
@@ -1279,6 +1280,7 @@ ease;
   </script>
 </body>
 </html>
+
 
 
 
