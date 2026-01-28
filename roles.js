@@ -1191,7 +1191,7 @@ const roles = [
   },
   {
     "name": "Wernicke",
-    "description": "Данную роль можно получить, подписавшись и лайкнув 3 последних видеоролика данного TikTok аккаунта: <a target="_blank" href="https://www.tiktok.com/@psychozz6">@psychozz6</a>",
+    "description": "Данную роль можно получить, подписавшись и лайкнув 3 последних видеоролика данного TikTok аккаунта: <a target=\"_blank\" href=\"https://www.tiktok.com/@psychozz6\">@psychozz6</a>",
     "category": "✨ Бонусные роли",
     "color": "#990000",
     "gradient": "linear-gradient(135deg, #990000 0%, #660000 100%)"
