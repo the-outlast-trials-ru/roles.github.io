@@ -1,24 +1,50 @@
-// maintenance-mode.js
-// Добавьте этот файл в корень сайта
-
+// maintenance-mode.js - ЕДИНЫЙ ДЛЯ ВСЕХ УСТРОЙСТВ
 (function() {
-    // Проверяем режим обслуживания
-    if (localStorage.getItem('maintenance_mode') === 'active') {
-        showMaintenanceScreen();
+    'use strict';
+    
+    // Функция проверки статуса с сервера
+    function checkMaintenanceStatus() {
+        // Используем fetch для получения статуса
+        fetch('set-maintenance.php?action=check&t=' + Date.now())
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.maintenance) {
+                    // Режим обслуживания включен на сервере
+                    showMaintenanceScreen();
+                }
+                // Если выключен - ничего не делаем
+            })
+            .catch(error => {
+                console.log('Не удалось проверить статус:', error);
+                // При ошибке соединения можно проверить localStorage как запасной вариант
+                if (localStorage.getItem('maintenance_mode') === 'active') {
+                    showMaintenanceScreen();
+                }
+            });
     }
     
+    // Проверяем статус при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Первая проверка через 500мс (после загрузки страницы)
+        setTimeout(checkMaintenanceStatus, 500);
+        
+        // Проверяем каждые 10 секунд
+        setInterval(checkMaintenanceStatus, 10000);
+    });
+    
+    // Функция показа экрана ошибки (ваш существующий код)
     function showMaintenanceScreen() {
         // Если экран уже показан - выходим
-        if (document.getElementById('maintenance-screen')) {
+        if (document.getElementById('maintenance-overlay')) {
             return;
         }
         
-        // Создаем экран ошибки
-        const screen = document.createElement('div');
-        screen.id = 'maintenance-screen';
-        screen.innerHTML = `
+        // Создаем экран ошибки (ваш дизайн)
+        const overlay = document.createElement('div');
+        overlay.id = 'maintenance-overlay';
+        overlay.innerHTML = `
             <style>
-                #maintenance-screen {
+                #maintenance-overlay {
                     position: fixed;
                     top: 0;
                     left: 0;
@@ -31,6 +57,7 @@
                     align-items: center;
                     justify-content: center;
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    padding: 20px;
                 }
                 
                 .error-container {
@@ -118,8 +145,14 @@
                 </div>
                 
                 <div class="error-buttons">
-                    <button class="error-btn reload" onclick="location.reload()">🔄 Перезагрузить страницу</button>
+                    <button class="error-btn reload" onclick="location.reload()">
+                        🔄 Перезагрузить страницу
+                    </button>
+                    <button class="error-btn" onclick="checkStatusNow()">
+                        📡 Проверить статус
+                    </button>
                 </div>
+                
                 <div style="margin-top: 30px; color: #666; font-size: 0.9em;">
                     Автоматическая проверка через: <span id="countdown">30</span> сек
                 </div>
@@ -127,7 +160,7 @@
         `;
         
         // Добавляем на страницу
-        document.body.appendChild(screen);
+        document.body.appendChild(overlay);
         
         // Блокируем прокрутку
         document.body.style.overflow = 'hidden';
@@ -140,16 +173,16 @@
         let seconds = 30;
         const countdownEl = document.getElementById('countdown');
         
+        if (!countdownEl) return;
+        
         const timer = setInterval(() => {
-            if (!document.getElementById('maintenance-screen')) {
+            if (!document.getElementById('maintenance-overlay')) {
                 clearInterval(timer);
                 return;
             }
             
             seconds--;
-            if (countdownEl) {
-                countdownEl.textContent = seconds;
-            }
+            countdownEl.textContent = seconds;
             
             if (seconds <= 0) {
                 clearInterval(timer);
@@ -159,10 +192,7 @@
     }
     
     // Функция для кнопки "Проверить статус"
-    window.checkMaintenanceStatus = function() {
-        // Удаляем режим обслуживания и перезагружаем
-        localStorage.removeItem('maintenance_mode');
+    window.checkStatusNow = function() {
         location.reload();
     };
-
 })();
