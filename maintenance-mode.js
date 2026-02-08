@@ -119,9 +119,7 @@
                 
                 <div class="error-buttons">
                     <button class="error-btn reload" onclick="location.reload()">🔄 Перезагрузить страницу</button>
-                    <button class="error-btn" onclick="checkMaintenanceStatus()">📡 Проверить статус</button>
                 </div>
-                
                 <div style="margin-top: 30px; color: #666; font-size: 0.9em;">
                     Автоматическая проверка через: <span id="countdown">30</span> сек
                 </div>
@@ -166,4 +164,5 @@
         localStorage.removeItem('maintenance_mode');
         location.reload();
     };
+
 })();
