@@ -1148,325 +1148,284 @@
             }
         }
 
-        // ===========================================
-        // ФУНКЦИИ ДЛЯ РЕЖИМА ОБСЛУЖИВАНИЯ (ФАЙЛОВАЯ СИСТЕМА)
-        // ===========================================
-        
-        // Функция для загрузки статуса режима обслуживания ИЗ ФАЙЛА
-        function loadMaintenanceStatus() {
-            fetch('maintenance.txt?t=' + Date.now())
-            .then(response => {
-                if (!response.ok) {
-                    // Файла нет - режим выключен
-                    if (maintenanceToggle) {
-                        maintenanceToggle.checked = false;
-                    }
-                    if (maintenanceStatusText) {
-                        maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Файл maintenance.txt не найден</small>';
-                    }
-                    return;
-                }
-                return response.text();
-            })
-            .then(status => {
-                if (status !== undefined) {
-                    const isActive = status.trim() === '1';
-                    
-                    if (maintenanceToggle) {
-                        maintenanceToggle.checked = isActive;
-                    }
-                    
-                    if (maintenanceStatusText) {
-                        if (isActive) {
-                            maintenanceStatusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span style="color: #ff3333;">Режим обслуживания АКТИВЕН</span><br><small style="color: #ff9999;">Все пользователи видят экран ошибки</small>';
-                        } else {
-                            maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Все пользователи имеют доступ к сайту</small>';
-                        }
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка загрузки статуса:', error);
-                if (maintenanceStatusText) {
-                    maintenanceStatusText.innerHTML = '<i class="fas fa-question-circle"></i> <span style="color: #ff9800;">Статус неизвестен</span><br><small style="color: #aaa;">Не удалось проверить файл</small>';
-                }
-            });
-            
-            // Загружаем журнал действий
-            loadMaintenanceLog();
+// ===========================================
+// ФУНКЦИИ ДЛЯ РЕЖИМА ОБСЛУЖИВАНИЯ (ФАЙЛОВАЯ СИСТЕМА)
+// ===========================================
+
+// Функция для загрузки статуса режима обслуживания ИЗ ФАЙЛА
+function loadMaintenanceStatus() {
+    fetch('maintenance.txt?t=' + Date.now())
+    .then(response => {
+        if (!response.ok) {
+            // Файла нет - режим выключен
+            if (maintenanceToggle) {
+                maintenanceToggle.checked = false;
+            }
+            if (maintenanceStatusText) {
+                maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Файл maintenance.txt не найден</small>';
+            }
+            return;
         }
-        
-        // Функция для управления режимом обслуживания
-        function applyMaintenanceChanges() {
-            const isActive = maintenanceToggle.checked;
+        return response.text();
+    })
+    .then(status => {
+        if (status !== undefined) {
+            const isActive = status.trim() === '1';
             
-            if (isActive) {
-                // ВКЛЮЧЕНИЕ РЕЖИМА
-                const instruction = `🔧 ВКЛЮЧЕНИЕ РЕЖИМА ОБСЛУЖИВАНИЯ ДЛЯ ВСЕХ УСТРОЙСТВ
-                
-Для включения режима на ВСЕХ устройствах (ПК и телефонах):
-
-ШАГ 1: Создайте файл maintenance.txt
-ШАГ 2: Добавьте в него цифру 1
-ШАГ 3: Загрузите файл в КОРЕНЬ сайта (туда же где index.html)
-
-ИЛИ попросите администратора хостинга сделать это.
-
-✅ После этого ВСЕ пользователи увидят ошибку "ОШИБКА СОЕДИНЕНИЯ!".
-
-СОВЕТ: Скачайте готовый файл ниже и загрузите его на хостинг.`;
-
-                alert(instruction);
-                addLogEntry('Показана инструкция для включения режима обслуживания');
-                
-                // Предлагаем скачать файл с "1"
-                if (confirm('Скачать готовый файл maintenance.txt с цифрой 1?')) {
-                    downloadMaintenanceFile('1');
-                }
-                
-                showNotification('📋 Инструкция показана. Создайте файл maintenance.txt с цифрой 1 в корне сайта.', 'success');
-                
-            } else {
-                // ВЫКЛЮЧЕНИЕ РЕЖИМА
-                const instruction = `🔧 ВЫКЛЮЧЕНИЕ РЕЖИМА ОБСЛУЖИВАНИЯ
-                
-Для выключения режима на всех устройствах:
-
-1. Удалите файл maintenance.txt с хостинга
-   ИЛИ
-2. Измените цифру 1 на 0 в файле maintenance.txt
-3. Сохраните и загрузите обратно
-
-✅ После этого сайт снова станет доступен для всех.`;
-
-                alert(instruction);
-                addLogEntry('Показана инструкция для выключения режима обслуживания');
-                
-                // Предлагаем скачать файл с "0"
-                if (confirm('Скачать файл maintenance.txt с цифрой 0 (выключить режим)?')) {
-                    downloadMaintenanceFile('0');
-                }
-                
-                showNotification('📋 Инструкция показана. Удалите или измените файл maintenance.txt.', 'success');
+            if (maintenanceToggle) {
+                maintenanceToggle.checked = isActive;
             }
             
-            // Обновляем статус в админке
-            loadMaintenanceStatus();
-        }
-        
-        // Функция для скачивания файла maintenance.txt
-        function downloadMaintenanceFile(content) {
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'maintenance.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            addLogEntry(`Скачан файл maintenance.txt с цифрой ${content}`);
-        }
-        
-        // Функция для предпросмотра экрана ошибки
-        function testMaintenancePreview() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: #0a0a0a;
-                color: #fff;
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            `;
-            
-            modal.innerHTML = `
-                <div style="max-width: 700px; background: #1a1a1a; padding: 40px; border-radius: 10px; border: 2px solid #ff3333; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);">
-                    <div style="color: #ff3333; font-size: 2.5em; margin-bottom: 20px; text-transform: uppercase;">ОШИБКА СОЕДИНЕНИЯ!</div>
-                    <div style="color: #ff6666; font-size: 1.5em; margin-bottom: 30px;">Сервер временно не доступен</div>
-                    <div style="color: #ccc; line-height: 1.6; margin-bottom: 30px; font-size: 1.1em;">
-                        К сожалению возникла непредвиденная ошибка.<br>
-                        Попробуйте повторить операцию. Если ошибка повторится,<br>
-                        попробуйте перезагрузить страницу или обратитесь к администратору.
-                    </div>
-                    <div style="background: #222; padding: 15px; border-radius: 5px; font-family: monospace; color: #ff8888; font-size: 1.2em; margin: 20px 0; border-left: 4px solid #ff3333;">
-                        ERR_CONNECTION_RESET x0000003456
-                    </div>
-                    <div style="margin-top: 30px;">
-                        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em;">
-                            <i class="fas fa-times"></i> Закрыть предпросмотр
-                        </button>
-                    </div>
-                    <div style="margin-top: 30px; color: #666; font-size: 0.9em;">
-                        Это только предпросмотр. Для реального включения создайте файл maintenance.txt с цифрой 1
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            addLogEntry('Открыт предпросмотр экрана ошибки');
-        }
-        
-        // Функция для добавления записи в журнал
-        function addLogEntry(message) {
-            if (!logEntries) return;
-            
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
-            
-            const logEntry = document.createElement('div');
-            logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
-            logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${message}`;
-            
-            logEntries.insertBefore(logEntry, logEntries.firstChild);
-            
-            if (logEntries.children.length > 10) {
-                logEntries.removeChild(logEntries.lastChild);
+            if (maintenanceStatusText) {
+                if (isActive) {
+                    maintenanceStatusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span style="color: #ff3333;">Режим обслуживания АКТИВЕН</span><br><small style="color: #ff9999;">Все пользователи видят экран ошибки</small>';
+                } else {
+                    maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Все пользователи имеют доступ к сайту</small>';
+                }
             }
-            
-            saveLogToStorage(message);
         }
-        
-        // Функция для сохранения лога
-        function saveLogToStorage(message) {
-            const now = new Date();
-            const logItem = {
-                time: now.toISOString(),
-                message: message
-            };
-            
-            let logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
-            logs.unshift(logItem);
-            
-            if (logs.length > 50) {
-                logs = logs.slice(0, 50);
-            }
-            
-            localStorage.setItem('maintenance_logs', JSON.stringify(logs));
+    })
+    .catch(error => {
+        console.error('Ошибка загрузки статуса:', error);
+        if (maintenanceStatusText) {
+            maintenanceStatusText.innerHTML = '<i class="fas fa-question-circle"></i> <span style="color: #ff9800;">Статус неизвестен</span><br><small style="color: #aaa;">Не удалось проверить файл</small>';
         }
-        
-        // Функция для загрузки лога
-        function loadMaintenanceLog() {
-            if (!logEntries) return;
-            
-            const logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
-            logEntries.innerHTML = '';
-            
-            if (logs.length === 0) {
-                logEntries.innerHTML = '<div style="color: #666; font-style: italic;">Журнал действий пуст</div>';
-                return;
-            }
-            
-            logs.forEach(log => {
-                const date = new Date(log.time);
-                const timeString = date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
-                
-                const logEntry = document.createElement('div');
-                logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
-                logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${log.message}`;
-                logEntries.appendChild(logEntry);
-            });
-        }
+    });
+    
+    // Загружаем журнал действий
+    loadMaintenanceLog();
+}
 
-        // ===========================================
-        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-        // ===========================================
+// Функция для управления режимом обслуживания
+function applyMaintenanceChanges() {
+    const isActive = maintenanceToggle.checked;
+    
+    if (isActive) {
+        // ВКЛЮЧЕНИЕ РЕЖИМА
+        const instruction = `🎯 ДЛЯ ВКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // Инициализируем DOM элементы
-            initDOMElements();
-            
-            // Инициализируем предпросмотр
+1. Откройте файл maintenance.txt в корне сайта
+2. Измените цифру 0 на 1
+3. Сохраните файл
+4. Готово! Все пользователи увидят ошибку.
+
+📁 Файл находится здесь: вашсайт.ru/maintenance.txt
+
+📱 На телефоне: попросите администратора изменить файл.`;
+
+        alert(instruction);
+        addLogEntry('Запрошено включение режима обслуживания');
+        
+        // Обновляем статус через 5 секунд (после того как пользователь изменит файл)
+        setTimeout(loadMaintenanceStatus, 5000);
+        
+        showNotification('📝 Измените файл maintenance.txt: замените 0 на 1', 'success');
+        
+    } else {
+        // ВЫКЛЮЧЕНИЕ РЕЖИМА
+        const instruction = `🎯 ДЛЯ ВЫКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
+        
+1. Откройте файл maintenance.txt
+2. Измените цифру 1 на 0
+3. Сохраните файл
+4. Сайт снова доступен!`;
+
+        alert(instruction);
+        addLogEntry('Запрошено выключение режима обслуживания');
+        
+        // Обновляем статус через 5 секунд
+        setTimeout(loadMaintenanceStatus, 5000);
+        
+        showNotification('📝 Измените файл maintenance.txt: замените 1 на 0', 'success');
+    }
+}
+
+// Функция для предпросмотра экрана ошибки
+function testMaintenancePreview() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0a0a0a;
+        color: #fff;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    `;
+    
+    modal.innerHTML = `
+        <div style="max-width: 700px; background: #1a1a1a; padding: 40px; border-radius: 10px; border: 2px solid #ff3333; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);">
+            <div style="color: #ff3333; font-size: 2.5em; margin-bottom: 20px; text-transform: uppercase;">ОШИБКА СОЕДИНЕНИЯ!</div>
+            <div style="color: #ff6666; font-size: 1.5em; margin-bottom: 30px;">Сервер временно не доступен</div>
+            <div style="color: #ccc; line-height: 1.6; margin-bottom: 30px; font-size: 1.1em;">
+                К сожалению возникла непредвиденная ошибка.<br>
+                Попробуйте повторить операцию. Если ошибка повторится,<br>
+                попробуйте перезагрузить страницу или обратитесь к администратору.
+            </div>
+            <div style="background: #222; padding: 15px; border-radius: 5px; font-family: monospace; color: #ff8888; font-size: 1.2em; margin: 20px 0; border-left: 4px solid #ff3333;">
+                ERR_CONNECTION_RESET x0000003456
+            </div>
+            <div style="margin-top: 30px;">
+                <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em;">
+                    <i class="fas fa-times"></i> Закрыть предпросмотр
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    addLogEntry('Открыт предпросмотр экрана ошибки');
+}
+
+// Функция для добавления записи в журнал
+function addLogEntry(message) {
+    if (!logEntries) return;
+    
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+    
+    const logEntry = document.createElement('div');
+    logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
+    logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${message}`;
+    
+    logEntries.insertBefore(logEntry, logEntries.firstChild);
+    
+    if (logEntries.children.length > 10) {
+        logEntries.removeChild(logEntries.lastChild);
+    }
+    
+    saveLogToStorage(message);
+}
+
+// Функция для сохранения лога
+function saveLogToStorage(message) {
+    const now = new Date();
+    const logItem = {
+        time: now.toISOString(),
+        message: message
+    };
+    
+    let logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
+    logs.unshift(logItem);
+    
+    if (logs.length > 50) {
+        logs = logs.slice(0, 50);
+    }
+    
+    localStorage.setItem('maintenance_logs', JSON.stringify(logs));
+}
+
+// Функция для загрузки лога
+function loadMaintenanceLog() {
+    if (!logEntries) return;
+    
+    const logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
+    logEntries.innerHTML = '';
+    
+    if (logs.length === 0) {
+        logEntries.innerHTML = '<div style="color: #666; font-style: italic;">Журнал действий пуст</div>';
+        return;
+    }
+    
+    logs.forEach(log => {
+        const date = new Date(log.time);
+        const timeString = date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+        
+        const logEntry = document.createElement('div');
+        logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
+        logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${log.message}`;
+        logEntries.appendChild(logEntry);
+    });
+}
+
+// ===========================================
+// ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+// ===========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализируем DOM элементы
+    initDOMElements();
+    
+    // Инициализируем предпросмотр
+    updateColorPreview();
+    updateGradientPreview();
+    updateCategoryPreview();
+    
+    // Автоматически загружаем роли из файла при загрузке страницы
+    setTimeout(loadRolesFromFile, 100);
+    
+    // Загружаем статус режима обслуживания
+    loadMaintenanceStatus();
+    
+    // Обработчики событий для формы ролей
+    document.getElementById('save-role').addEventListener('click', saveRole);
+    document.getElementById('clear-form').addEventListener('click', clearForm);
+    
+    // Обработчики для генерации и копирования кода
+    document.getElementById('generate-code').addEventListener('click', generateCode);
+    document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
+    
+    // Обработчики для загрузки и очистки ролей
+    document.getElementById('load-roles').addEventListener('click', loadRolesFromFile);
+    document.getElementById('clear-all-roles').addEventListener('click', clearAllRoles);
+    
+    // Обработчики для обновления предпросмотра
+    if (roleColorInput) {
+        roleColorInput.addEventListener('input', updateColorPreview);
+    }
+    
+    if (roleGradientSelect) {
+        roleGradientSelect.addEventListener('change', updateGradientPreview);
+    }
+    
+    if (roleCategorySelect) {
+        roleCategorySelect.addEventListener('change', updateCategoryPreview);
+    }
+    
+    // Обработчики для быстрого выбора цвета
+    document.querySelectorAll('.color-help-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const color = this.getAttribute('data-color');
+            roleColorInput.value = color;
             updateColorPreview();
-            updateGradientPreview();
-            updateCategoryPreview();
             
-            // Автоматически загружаем роли из файла при загрузке страницы
-            setTimeout(loadRolesFromFile, 100);
-            
-            // Загружаем статус режима обслуживания
-            loadMaintenanceStatus();
-            
-            // Обработчики событий для формы ролей
-            document.getElementById('save-role').addEventListener('click', saveRole);
-            document.getElementById('clear-form').addEventListener('click', clearForm);
-            
-            // Обработчики для генерации и копирования кода
-            document.getElementById('generate-code').addEventListener('click', generateCode);
-            document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
-            
-            // Обработчики для загрузки и очистки ролей
-            document.getElementById('load-roles').addEventListener('click', loadRolesFromFile);
-            document.getElementById('clear-all-roles').addEventListener('click', clearAllRoles);
-            
-            // Обработчики для обновления предпросмотра
-            if (roleColorInput) {
-                roleColorInput.addEventListener('input', updateColorPreview);
-            }
-            
-            if (roleGradientSelect) {
-                roleGradientSelect.addEventListener('change', updateGradientPreview);
-            }
-            
-            if (roleCategorySelect) {
-                roleCategorySelect.addEventListener('change', updateCategoryPreview);
-            }
-            
-            // Обработчики для быстрого выбора цвета
-            document.querySelectorAll('.color-help-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const color = this.getAttribute('data-color');
-                    roleColorInput.value = color;
-                    updateColorPreview();
-                    
-                    // Подбираем подходящий градиент
-                    for (const [gradientType, gradientColor] of Object.entries(gradientColors)) {
-                        if (gradientColor.toLowerCase() === color.toLowerCase()) {
-                            roleGradientSelect.value = gradientType;
-                            updateGradientPreview();
-                            break;
-                        }
-                    }
-                });
-            });
-            
-            // Обработчики для режима обслуживания
-            if (applyMaintenanceBtn) {
-                applyMaintenanceBtn.addEventListener('click', applyMaintenanceChanges);
-            }
-            
-            if (testMaintenanceBtn) {
-                testMaintenanceBtn.addEventListener('click', testMaintenancePreview);
-            }
-            
-            if (downloadFileBtn) {
-                downloadFileBtn.addEventListener('click', function() {
-                    const isActive = maintenanceToggle.checked;
-                    const content = isActive ? '1' : '0';
-                    downloadMaintenanceFile(content);
-                    showNotification(`Файл maintenance.txt с цифрой ${content} скачан`, 'success');
-                });
-            }
-            
-            // Сохранение по нажатию Ctrl+Enter
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'Enter') {
-                    saveRole();
+            // Подбираем подходящий градиент
+            for (const [gradientType, gradientColor] of Object.entries(gradientColors)) {
+                if (gradientColor.toLowerCase() === color.toLowerCase()) {
+                    roleGradientSelect.value = gradientType;
+                    updateGradientPreview();
+                    break;
                 }
-            });
-            
-            // Добавляем начальную запись в лог
-            setTimeout(() => {
-                addLogEntry('Админ-панель загружена');
-            }, 500);
+            }
         });
+    });
+    
+    // Обработчики для режима обслуживания
+    if (applyMaintenanceBtn) {
+        applyMaintenanceBtn.addEventListener('click', applyMaintenanceChanges);
+    }
+    
+    if (testMaintenanceBtn) {
+        testMaintenanceBtn.addEventListener('click', testMaintenancePreview);
+    }
+    
+    // Сохранение по нажатию Ctrl+Enter
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            saveRole();
+        }
+    });
+    
+    // Добавляем начальную запись в лог
+    setTimeout(() => {
+        addLogEntry('Админ-панель загружена');
+    }, 500);
+});
     </script>
 </body>
 </html>
