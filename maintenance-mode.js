@@ -81,7 +81,7 @@
             </style>
             <div class="error-container">
                 <div class="error-title">ОШИБКА СОЕДИНЕНИЯ!</div>
-                <div class="error-subtitle">Сервер временно не доступен</div>
+                <div class="error-subtitle">Не удалось установить соединение с сервером</div>
                 <div class="error-message">
                     К сожалению возникла непредвиденная ошибка.<br>
                     Попробуйте повторить операцию. Если ошибка повторится,<br>
@@ -106,3 +106,4 @@
         setInterval(checkMaintenance, 10000);
     });
 })();
+
