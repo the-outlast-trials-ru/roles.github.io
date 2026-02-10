@@ -1273,6 +1273,7 @@ const roles = [
     "color": "#99ff33",
     "gradient": "linear-gradient(135deg, #99ff33 0%, #66cc00 100%)"
   },
+  {
     "name": "Сезон 5",
     "description": "За ...................................",
     "category": "🎉 Ивент роли",
