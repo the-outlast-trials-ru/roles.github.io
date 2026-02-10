@@ -993,12 +993,13 @@
             });
         }
 
-        // Функция для редактирования роли
+        // В функции editRole() добавьте заполнение поля details
         function editRole(index) {
             const role = adminRoles[index];
             
             roleNameInput.value = role.name;
             roleDescInput.value = role.description;
+            document.getElementById('role-details').value = role.details || ''; // Новое поле
             roleCategorySelect.value = role.category;
             roleColorInput.value = role.color;
             
@@ -1025,7 +1026,7 @@
             }
         }
 
-        // Функция для сохранения роли
+        // Добавьте в функцию saveRole() обработку поля details
         function saveRole() {
             const name = roleNameInput.value.trim();
             const description = roleDescInput.value.trim();
@@ -1033,6 +1034,7 @@
             const color = roleColorInput.value.trim();
             const gradientType = roleGradientSelect.value;
             const gradient = getGradientByType(gradientType);
+            const details = document.getElementById('role-details').value.trim(); // Новое поле
             
             if (!name) {
                 showNotification('Введите название роли', 'error');
@@ -1057,7 +1059,8 @@
                 description,
                 category,
                 color,
-                gradient
+                gradient,
+                details // Добавляем поле details
             };
             
             if (editingIndex >= 0) {
@@ -1075,10 +1078,11 @@
             generateCode();
         }
 
-        // Функция для очистки формы
+        // В функции clearForm() добавьте очистку поля details
         function clearForm() {
             roleNameInput.value = '';
             roleDescInput.value = '';
+            document.getElementById('role-details').value = ''; // Новое поле
             roleCategorySelect.value = '🛡️ Администрация';
             roleColorInput.value = '#da2b2b';
             roleGradientSelect.value = 'red';
@@ -1090,14 +1094,14 @@
             updateCategoryPreview();
         }
 
-        // Функция для генерации кода
+        // Обновите функцию generateCode() чтобы включить поле details
         function generateCode() {
             if (!generatedCode) return;
             
             if (adminRoles.length === 0) {
                 generatedCode.textContent = `const roles = [
-  // Роли отсутствуют - добавьте их через админ-панель
-];`;
+          // Роли отсутствуют - добавьте их через админ-панель
+        ];`;
                 return;
             }
             
@@ -1110,7 +1114,8 @@
                 code += `    "description": "${role.description}",\n`;
                 code += `    "category": "${role.category}",\n`;
                 code += `    "color": "${role.color}",\n`;
-                code += `    "gradient": "${role.gradient}"\n`;
+                code += `    "gradient": "${role.gradient}",\n`;
+                code += `    "details": "${role.details ? role.details.replace(/"/g, '\\"').replace(/\n/g, '\\n') : ''}"\n`;
                 code += `  }${isLast ? '' : ','}\n`;
             });
             
@@ -1148,6 +1153,32 @@
                 console.error('Ошибка загрузки ролей:', error);
                 showNotification('Ошибка загрузки ролей: ' + error.message, 'error');
             }
+        }
+
+        // Добавьте функцию для отображения доступных изображений
+        function loadAvailableImages() {
+            const imagesContainer = document.getElementById('available-images');
+            if (!imagesContainer) return;
+            
+            // Здесь можно загрузить список изображений из папки
+            // Примерный список (замените на реальные названия файлов)
+            const imageExamples = ['achievement.png', 'event.png', 'vip.png', 'custom.png'];
+            
+            imagesContainer.innerHTML = '';
+            imageExamples.forEach(img => {
+                const imgBtn = document.createElement('button');
+                imgBtn.className = 'color-help-btn';
+                imgBtn.textContent = img;
+                imgBtn.title = `Вставить: <img src="${img}">`;
+                imgBtn.addEventListener('click', function() {
+                    const detailsTextarea = document.getElementById('role-details');
+                    const currentValue = detailsTextarea.value;
+                    const insertText = `<img src="${img}">`;
+                    detailsTextarea.value = currentValue + insertText;
+                    detailsTextarea.focus();
+                });
+                imagesContainer.appendChild(imgBtn);
+            });
         }
 
         // Функция для очистки всех ролей
@@ -1375,6 +1406,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Автоматически загружаем роли из файла при загрузке страницы
     setTimeout(loadRolesFromFile, 100);
+
+    loadAvailableImages();
     
     // Загружаем статус режима обслуживания
     loadMaintenanceStatus();
