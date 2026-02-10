@@ -579,6 +579,86 @@ ease;
       background-color: rgba(40, 41, 45, 0.95);
     }
 
+    <!-- Добавьте этот стиль в секцию <style> -->
+    .role-card-detailed .more-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        background-color: rgba(30, 31, 34, 0.7);
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+    
+    .role-card-detailed .more-content.expanded {
+        max-height: 500px;
+        padding: 15px;
+    }
+    
+    .more-content-inner {
+        color: #cccccc;
+        line-height: 1.5;
+        font-size: 0.9rem;
+        font-weight: 380;
+    }
+    
+    .more-content-inner img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin: 10px 0;
+        border: 2px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .more-btn {
+        background: none;
+        border: none;
+        color: #ff6b6b;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-left: auto;
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .more-btn:hover {
+        background-color: rgba(255, 107, 107, 0.1);
+    }
+    
+    .more-btn i {
+        transition: transform 0.3s ease;
+    }
+    
+    .more-btn.expanded i {
+        transform: rotate(180deg);
+    }
+    
+    .role-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .role-header-main {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .role-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
     .role-header {
       display: flex;
       align-items: center;
@@ -1072,45 +1152,79 @@ ease;
     }
 
     function displayRoles(rolesToDisplay) {
-      const rolesList = document.getElementById('roles-list');
-      const noResults = document.getElementById('no-results');
-      const resultsCount = document.querySelector('#results-count span');
-      
-      rolesList.innerHTML = '';
-      resultsCount.textContent = rolesToDisplay.length;
-      resultsCount.style.marginLeft = '5px';
-      
-      if (rolesToDisplay.length === 0) {
-        noResults.style.display = 'block';
-        return;
-      }
-      
-      noResults.style.display = 'none';
-      
-      rolesToDisplay.forEach(role => {
-        const roleCard = document.createElement('div');
-        roleCard.className = 'role-card-detailed';
+        const rolesList = document.getElementById('roles-list');
+        const noResults = document.getElementById('no-results');
+        const resultsCount = document.querySelector('#results-count span');
         
-        // Используем ту же функцию для создания CSS класса, что и в adminka.html
-        const categoryClass = createCategoryClass(role.category);
+        rolesList.innerHTML = '';
+        resultsCount.textContent = rolesToDisplay.length;
+        resultsCount.style.marginLeft = '5px';
         
-        roleCard.innerHTML = `
-          <div class="role-header">
-            <span class="role-dot-large" style="background:${role.gradient}"></span>
-            <div class="role-title" style="color:${role.color}">${role.name}</div>
-            <span class="role-category ${categoryClass}">${role.category}</span>
-          </div>
-        `;
-        const desc = document.createElement('div');
-        desc.className = 'role-description-detailed';
-        desc.innerHTML = role.description;
-        roleCard.appendChild(desc);
+        if (rolesToDisplay.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
         
-        rolesList.appendChild(roleCard);
-      });
-      
-      // Запуск анимации карточек
-      setTimeout(animateRoleCards, 100);
+        noResults.style.display = 'none';
+        
+        rolesToDisplay.forEach(role => {
+            const roleCard = document.createElement('div');
+            roleCard.className = 'role-card-detailed';
+            
+            const categoryClass = createCategoryClass(role.category);
+            
+            roleCard.innerHTML = `
+                <div class="role-header">
+                    <div class="role-header-main">
+                        <span class="role-dot-large" style="background:${role.gradient}"></span>
+                        <div class="role-title" style="color:${role.color}">${role.name}</div>
+                        <span class="role-category ${categoryClass}">${role.category}</span>
+                    </div>
+                    ${role.details ? `<button class="more-btn" data-expanded="false">
+                        <span>Подробнее</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>` : ''}
+                </div>
+            `;
+            
+            // Создаем описание роли
+            const desc = document.createElement('div');
+            desc.className = 'role-description-detailed';
+            desc.innerHTML = role.description;
+            roleCard.appendChild(desc);
+            
+            // Добавляем блок с дополнительной информацией если она есть
+            if (role.details) {
+                const moreContent = document.createElement('div');
+                moreContent.className = 'more-content';
+                moreContent.innerHTML = `<div class="more-content-inner">${role.details}</div>`;
+                roleCard.appendChild(moreContent);
+                
+                // Добавляем обработчик для кнопки "Подробнее"
+                const moreBtn = roleCard.querySelector('.more-btn');
+                
+                moreBtn.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('data-expanded') === 'true';
+                    
+                    if (isExpanded) {
+                        this.setAttribute('data-expanded', 'false');
+                        this.classList.remove('expanded');
+                        moreContent.classList.remove('expanded');
+                        this.innerHTML = '<span>Подробнее</span><i class="fas fa-chevron-down"></i>';
+                    } else {
+                        this.setAttribute('data-expanded', 'true');
+                        this.classList.add('expanded');
+                        moreContent.classList.add('expanded');
+                        this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+                    }
+                });
+            }
+            
+            rolesList.appendChild(roleCard);
+        });
+        
+        // Запуск анимации карточек
+        setTimeout(animateRoleCards, 100);
     }
 
     function populateCategories() {
@@ -1290,4 +1404,5 @@ ease;
   <script src="maintenance-mode.js"></script>
 </body>
 </html>
+
 
