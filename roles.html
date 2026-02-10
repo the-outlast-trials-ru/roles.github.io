@@ -632,6 +632,30 @@ ease;
     .more-content-inner p {
         margin-bottom: 10px;
     }
+
+    .more-content-inner a.image-link {
+        display: inline-block;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+    
+    .more-content-inner a.image-link:hover {
+        transform: scale(1.02);
+    }
+    
+    .more-content-inner a.image-link img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin: 10px 0;
+        border: 2px solid rgba(255, 107, 107, 0.3);
+        cursor: pointer;
+    }
+    
+    .more-content-inner a.image-link:hover img {
+        border-color: #ff6b6b;
+        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    }
     
     .more-btn {
         background: none;
@@ -1221,7 +1245,21 @@ ease;
             if (role.details) {
                 const moreContent = document.createElement('div');
                 moreContent.className = 'more-content';
-                moreContent.innerHTML = `<div class="more-content-inner">${role.details}</div>`;
+                
+                // Обрабатываем HTML чтобы изображения открывались в новой вкладке
+                let processedDetails = role.details;
+                
+                // Обертываем изображения в ссылки
+                processedDetails = processedDetails.replace(
+                    /<img\s+([^>]*?)src="([^"]+)"([^>]*?)>/gi,
+                    (match, beforeSrc, src, afterSrc) => {
+                        return `<a href="${src}" target="_blank" rel="noopener noreferrer" class="image-link">
+                            <img ${beforeSrc} src="${src}" ${afterSrc} style="cursor: pointer;">
+                        </a>`;
+                    }
+                );
+                
+                moreContent.innerHTML = `<div class="more-content-inner">${processedDetails}</div>`;
                 roleCard.appendChild(moreContent);
                 
                 // Добавляем обработчик для кнопки "Подробнее"
@@ -1249,6 +1287,19 @@ ease;
         
         // Запуск анимации карточек
         setTimeout(animateRoleCards, 100);
+        
+        // Добавляем обработчики для изображений (на всякий случай)
+        setTimeout(() => {
+            document.querySelectorAll('.more-content-inner img').forEach(img => {
+                if (!img.parentElement.classList.contains('image-link')) {
+                    img.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.open(this.src, '_blank');
+                    });
+                    img.style.cursor = 'pointer';
+                }
+            });
+        }, 150);
     }
 
     function populateCategories() {
@@ -1428,6 +1479,7 @@ ease;
   <script src="maintenance-mode.js"></script>
 </body>
 </html>
+
 
 
 
