@@ -579,19 +579,24 @@ ease;
       background-color: rgba(40, 41, 45, 0.95);
     }
 
-    <!-- Добавьте этот стиль в секцию <style> -->
     .role-card-detailed .more-content {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.5s ease;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         background-color: rgba(30, 31, 34, 0.7);
         border-radius: 6px;
-        margin-top: 10px;
+        margin-top: 0;
+        opacity: 0;
     }
     
     .role-card-detailed .more-content.expanded {
-        max-height: 500px;
+        max-height: 1000px;
         padding: 15px;
+        margin-top: 10px;
+        opacity: 1;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease 0.2s,
+                    margin-top 0.3s ease;
     }
     
     .more-content-inner {
@@ -599,6 +604,15 @@ ease;
         line-height: 1.5;
         font-size: 0.9rem;
         font-weight: 380;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .more-content.expanded .more-content-inner {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
     }
     
     .more-content-inner img {
@@ -607,6 +621,16 @@ ease;
         border-radius: 6px;
         margin: 10px 0;
         border: 2px solid rgba(255, 107, 107, 0.3);
+    }
+    
+    .more-content-inner ul,
+    .more-content-inner ol {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .more-content-inner p {
+        margin-bottom: 10px;
     }
     
     .more-btn {
@@ -1404,5 +1428,6 @@ ease;
   <script src="maintenance-mode.js"></script>
 </body>
 </html>
+
 
 
