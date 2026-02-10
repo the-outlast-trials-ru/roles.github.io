@@ -1277,8 +1277,8 @@ const roles = [
     "name": "ваыыва",
     "description": "ывавыа",
     "category": "🛡️ Администрация",
-    "color": "#8A2BE2",
-    "gradient": "linear-gradient(135deg, #ff3333 0%, #cc0000 100%)",
-    "details": "ывавыаываыа"
+    "color": "#ff66cc",
+    "gradient": "linear-gradient(135deg, #ff66cc 0%, #cc3399 100%)",
+    "details": "ывавыаываыа\n<img src=\"screenshots/season5.1.1.png\">\ndsfdsfdsf"
   }
 ];
