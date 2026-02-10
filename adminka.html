@@ -529,6 +529,26 @@
                     <textarea id="role-description" placeholder="За что выдается роль..."></textarea>
                 </div>
 
+                <!-- Вставьте этот код в админ-панель в секции формы добавления/редактирования роли -->
+                <div class="form-group">
+                    <label for="role-details">
+                        Подробнее (HTML): 
+                        <small style="color: #999; font-weight: normal;">
+                            Можно оставить пустым. Для изображений: &lt;img src="название.jpg"&gt;
+                        </small>
+                    </label>
+                    <textarea id="role-details" placeholder="Дополнительная информация, HTML-разметка, изображения..."></textarea>
+                    <div class="info-text" style="margin-top: 10px; font-size: 0.9rem;">
+                        <p><strong>Доступные изображения в папке:</strong></p>
+                        <div id="available-images" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
+                            <!-- Список изображений будет загружен динамически -->
+                        </div>
+                        <p style="margin-top: 10px;">
+                            Для вставки изображения введите: <code>&lt;img src="название.jpg"&gt;</code><br>
+                            Пример: <code>&lt;img src="achievement.png"&gt;</code>
+                        </p>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="role-category">Категория:</label>
                     <select id="role-category">
