@@ -87,7 +87,7 @@
                     Попробуйте повторить операцию. Если ошибка повторится,<br>
                     попробуйте перезагрузить страницу или обратитесь к администратору.
                 </div>
-                <div class="error-code">ERR_CONNECTION_RESET x0000003456</div>
+                <div class="error-code">ERR_CONNECTION_RESET </div>
                 <div style="margin-top: 30px;">
                     <button onclick="location.reload()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em; margin: 0 10px;">
                         🔄 Перезагрузить
@@ -106,4 +106,5 @@
         setInterval(checkMaintenance, 10000);
     });
 })();
+
 
