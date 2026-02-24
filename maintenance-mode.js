@@ -78,24 +78,30 @@
                     margin: 20px 0;
                     border-left: 4px solid #ff3333;
                 }
-            </style>
-            <div class="error-container">
-                <div class="error-title">ОШИБКА СОЕДИНЕНИЯ!</div>
-                <div class="error-subtitle">Не удалось установить соединение с сервером</div>
-                <div class="error-message">
-                    К сожалению возникла непредвиденная ошибка.<br>
-                    Попробуйте повторить операцию. Если ошибка повторится,<br>
-                    попробуйте перезагрузить страницу или обратитесь к администратору.
+                </style>
+                <div class="error-container">
+                    <div class="error-title" style="display:flex; align-items:center; justify-content:center; gap:10px; font-weight:900;">
+                        <img src="screenshots/Ошибка.png" alt="!" style="width:36px; height:auto;">
+                        ОШИБКА СОЕДИНЕНИЯ!
+                    </div>
+                
+                    <div class="error-subtitle">Не удалось установить соединение с сервером</div>
+                
+                    <div class="error-message">
+                        К сожалению возникла непредвиденная ошибка.<br>
+                        Попробуйте повторить операцию. Если ошибка повторится,<br>
+                        попробуйте перезагрузить страницу или обратитесь к администратору.
+                    </div>
+                
+                    <div class="error-code">ERR_CONNECTION_RESET</div>
+                
+                    <div style="margin-top: 30px;">
+                        <button onclick="location.reload()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em; margin: 0 10px;">
+                            🔄 Перезагрузить
+                        </button>
+                    </div>
                 </div>
-                <div class="error-code">ERR_CONNECTION_RESET </div>
-                <div style="margin-top: 30px;">
-                    <button onclick="location.reload()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em; margin: 0 10px;">
-                        🔄 Перезагрузить
-                    </button>
-                </div>
-            </div>
-        `;
-        
+                `;
         document.body.appendChild(overlay);
         document.body.style.overflow = 'hidden';
     }
@@ -106,5 +112,6 @@
         setInterval(checkMaintenance, 10000);
     });
 })();
+
 
 
