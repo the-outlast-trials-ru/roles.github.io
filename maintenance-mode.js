@@ -81,7 +81,7 @@
                 </style>
                 <div class="error-container">
                     <div class="error-title" style="display:flex; align-items:center; justify-content:center; gap:10px; font-weight:900;">
-                        <img src="screenshots/Ошибка.png" alt="!" style="width:70px; height:auto;">
+                        <img src="screenshots/Ошибка.png" alt="!" style="width:60px; height:auto;">
                         ОШИБКА СОЕДИНЕНИЯ!
                     </div>
                 
@@ -112,6 +112,7 @@
         setInterval(checkMaintenance, 10000);
     });
 })();
+
 
 
 
