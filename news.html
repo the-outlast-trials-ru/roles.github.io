@@ -1130,7 +1130,16 @@
         
         const categoryClass = item.category || 'regular';
         const categoryName = getCategoryName(item.category);
-        const formattedDate = formatDate(item.date); 
+        const formattedDate = formatDate(item.date);
+        
+        // Обработка изображения
+        let imageHtml = '';
+        if (item.image) {
+          imageHtml = `<img src="screenshots/${item.image}" class="news-image" alt="${item.title}" onerror="this.style.display='none'">`;
+        } else {
+          imageHtml = `<div class="news-image-placeholder"><i class="fas fa-newspaper"></i></div>`;
+        }
+        
         // Форматируем контент с сохранением переносов строк
         let formattedContent = item.content
           .replace(/\\n/g, '\n')
