@@ -408,7 +408,7 @@
       font-weight: 500;
     }
 
-    /* Панель сортировки */
+    /* Панель сортировки для ролей */
     .sort-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -683,7 +683,6 @@
     .more-btn, .members-btn {
       background: none;
       border: none;
-      color: #ff6b6b;
       cursor: pointer;
       font-size: 0.9rem;
       display: flex;
@@ -694,6 +693,10 @@
       transition: all 0.3s ease;
       font-weight: 500;
       white-space: nowrap;
+    }
+
+    .more-btn {
+      color: #ff6b6b;
       background-color: rgba(255, 107, 107, 0.1);
       border: 1px solid rgba(255, 107, 107, 0.3);
     }
@@ -701,7 +704,7 @@
     .members-btn {
       color: #5865F2;
       background-color: rgba(88, 101, 242, 0.1);
-      border-color: rgba(88, 101, 242, 0.3);
+      border: 1px solid rgba(88, 101, 242, 0.3);
     }
 
     .more-btn:hover {
@@ -785,6 +788,39 @@
       margin-bottom: 10px;
     }
 
+    /* Панель сортировки участников */
+    .members-sort-panel {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: rgba(20, 21, 24, 0.8);
+      border-radius: 6px;
+      flex-wrap: wrap;
+    }
+
+    .members-sort-label {
+      color: #f0f0f0;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 400;
+    }
+
+    .members-sort-select {
+      padding: 8px 12px;
+      background-color: rgba(40, 41, 45, 0.8);
+      border: 1px solid rgba(88, 101, 242, 0.5);
+      border-radius: 6px;
+      color: white;
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex: 1;
+      min-width: 200px;
+    }
+
     /* Список участников */
     .members-list {
       color: #cccccc;
@@ -814,59 +850,54 @@
       font-weight: 500;
     }
 
-    .members-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
+    /* Таблица участников */
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
     }
 
-    .member-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      background-color: rgba(40, 41, 45, 0.8);
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .member-item:hover {
-      background-color: rgba(88, 101, 242, 0.1);
-      border-color: rgba(88, 101, 242, 0.3);
-      transform: translateX(5px);
-    }
-
-    .member-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #5865F2, #4752c4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
+    .members-table th {
+      text-align: left;
+      padding: 12px 10px;
+      background-color: rgba(88, 101, 242, 0.2);
+      color: #5865F2;
       font-weight: 600;
-      color: white;
-      text-transform: uppercase;
-      flex-shrink: 0;
+      font-size: 0.9rem;
+      border-bottom: 2px solid rgba(88, 101, 242, 0.3);
+    }
+
+    .members-table th:first-child {
+      border-radius: 6px 0 0 6px;
+    }
+
+    .members-table th:last-child {
+      border-radius: 0 6px 6px 0;
+    }
+
+    .members-table td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+    }
+
+    .members-table tr:hover td {
+      background-color: rgba(88, 101, 242, 0.1);
     }
 
     .member-name {
-      font-size: 0.95rem;
       color: #ffffff;
       font-weight: 400;
-      word-break: break-word;
     }
 
-    .member-status {
-      font-size: 0.7rem;
+    .member-nickname {
+      color: #ff6b6b;
+      font-size: 0.85rem;
+    }
+
+    .member-roles {
+      text-align: right;
+      font-weight: 500;
       color: #2ed573;
-      margin-left: auto;
-    }
-
-    .member-status i {
-      font-size: 0.5rem;
     }
 
     .no-members {
@@ -1066,11 +1097,27 @@
       
       .role-actions {
         width: 100%;
-        justify-content: flex-end;
+        flex-direction: column;
+        gap: 5px;
       }
       
-      .members-grid {
-        grid-template-columns: 1fr;
+      .more-btn, .members-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .members-table th {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+      }
+      
+      .members-table td {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+      }
+      
+      .member-nickname {
+        font-size: 0.75rem;
       }
     }
 
@@ -1090,7 +1137,8 @@
       
       .search-input,
       .category-select,
-      .sort-select {
+      .sort-select,
+      .members-sort-select {
         font-size: 0.8rem;
       }
       .search-input {
@@ -1108,14 +1156,9 @@
         font-size: 0.8rem;
       }
       
-      .role-actions {
-        flex-direction: column;
-        gap: 5px;
-      }
-      
-      .more-btn, .members-btn {
-        width: 100%;
-        justify-content: center;
+      .members-table {
+        display: block;
+        overflow-x: auto;
       }
     }
   </style>
@@ -1195,12 +1238,12 @@
       </p>
     </div>
 
-    <!-- Панель сортировки -->
+    <!-- Панель сортировки для ролей -->
     <section class="sort-panel">
       <div class="sort-container">
         <div class="sort-order">
           <label for="sort-select" class="sort-label">
-            <i class="fas fa-sort-amount-down"></i> Сортировать:
+            <i class="fas fa-sort-amount-down"></i> Сортировать роли:
           </label>
           <select id="sort-select" class="sort-select">
             <option value="alphabetical">В алфавитном порядке</option>
@@ -1231,54 +1274,16 @@
   </main>
 
   <script src="roles.js"></script>
-  <script>
-    // Данные участников (в реальном проекте должны загружаться с сервера)
-    const membersData = {
-      // Ключ - название роли, значение - массив участников
-      "Администратор": [
-        { name: "Alex", avatar: "A" },
-        { name: "Mike", avatar: "M" }
-      ],
-      "Модератор": [
-        { name: "John", avatar: "J" },
-        { name: "Sarah", avatar: "S" },
-        { name: "David", avatar: "D" }
-      ],
-      "Легенда": [
-        { name: "Robert", avatar: "R" },
-        { name: "Elena", avatar: "E" },
-        { name: "Max", avatar: "M" },
-        { name: "Anna", avatar: "A" }
-      ],
-      "Хранитель": [
-        { name: "Peter", avatar: "P" },
-        { name: "Julia", avatar: "J" }
-      ],
-      "Ивент-мейкер": [
-        { name: "Tom", avatar: "T" }
-      ],
-      "VIP": [
-        { name: "Chris", avatar: "C" },
-        { name: "Nina", avatar: "N" },
-        { name: "Paul", avatar: "P" },
-        { name: "Maria", avatar: "M" },
-        { name: "George", avatar: "G" }
-      ],
-      "Участник": [
-        { name: "Alice", avatar: "A" },
-        { name: "Bob", avatar: "B" },
-        { name: "Charlie", avatar: "C" },
-        { name: "Diana", avatar: "D" },
-        { name: "Eve", avatar: "E" },
-        { name: "Frank", avatar: "F" },
-        { name: "Grace", avatar: "G" },
-        { name: "Henry", avatar: "H" }
-      ]
-    };
+  <script src="members.js"></script>
+  <script src="maintenance-mode.js"></script>
 
+  <script>
     // Переменная для хранения текущих отфильтрованных ролей
     let currentFilteredRoles = [];
     
+    // Переменная для хранения текущей сортировки участников для каждой роли
+    const membersSortState = {};
+
     // Функция для создания корректного CSS класса из категории
     function createCategoryClass(category) {
       return category.toLowerCase()
@@ -1303,7 +1308,7 @@
       categoryText.innerHTML = `Категория: <span class="category-name">${categoryName}</span>`;
     }
 
-    // Функция для обновления статуса сортировки
+    // Функция для обновления статуса сортировки ролей
     function updateSortStatus(sortType) {
       const statusElement = document.getElementById('sort-status');
       let statusText = '';
@@ -1345,31 +1350,82 @@
       }
     }
 
+    // Функция для сортировки участников
+    function sortMembers(membersToSort, sortType, roleName) {
+      if (!membersToSort || membersToSort.length === 0) return [];
+      
+      const sortedMembers = [...membersToSort];
+      
+      switch(sortType) {
+        case 'name-asc':
+          return sortedMembers.sort((a, b) => a.name.localeCompare(b.name));
+        case 'name-desc':
+          return sortedMembers.sort((a, b) => b.name.localeCompare(a.name));
+        case 'roles-asc':
+          return sortedMembers.sort((a, b) => a.roles - b.roles);
+        case 'roles-desc':
+          return sortedMembers.sort((a, b) => b.roles - a.roles);
+        default:
+          return sortedMembers;
+      }
+    }
+
     // Функция для отображения списка участников
-    function renderMembersList(roleName, members) {
+    function renderMembersList(roleName, members, sortType = 'name-asc') {
       if (!members || members.length === 0) {
         return '<div class="no-members">Участников с этой ролью пока нет</div>';
       }
       
+      const sortedMembers = sortMembers(members, sortType, roleName);
+      
       let membersHtml = `
         <div class="members-list-header">
-          <h3>Участники с ролью "${roleName}"</h3>
+          <h3>Список участников с ролью "${roleName}"</h3>
           <span class="members-count">${members.length}</span>
         </div>
-        <div class="members-grid">
+        <div class="members-sort-panel">
+          <span class="members-sort-label">
+            <i class="fas fa-sort"></i> Сортировать:
+          </span>
+          <select class="members-sort-select" data-role="${roleName}">
+            <option value="name-asc" ${sortType === 'name-asc' ? 'selected' : ''}>По имени (А-Я)</option>
+            <option value="name-desc" ${sortType === 'name-desc' ? 'selected' : ''}>По имени (Я-А)</option>
+            <option value="roles-asc" ${sortType === 'roles-asc' ? 'selected' : ''}>По кол-ву ролей (возр.)</option>
+            <option value="roles-desc" ${sortType === 'roles-desc' ? 'selected' : ''}>По кол-ву ролей (убыв.)</option>
+          </select>
+        </div>
+        <table class="members-table">
+          <thead>
+            <tr>
+              <th>Имя (никнейм) участника</th>
+              <th>Количество ролей</th>
+            </tr>
+          </thead>
+          <tbody>
       `;
       
-      members.forEach(member => {
+      sortedMembers.forEach(member => {
         membersHtml += `
-          <div class="member-item">
-            <div class="member-avatar">${member.avatar}</div>
-            <span class="member-name">${member.name}</span>
-            <span class="member-status"><i class="fas fa-circle"></i></span>
-          </div>
+          <tr>
+            <td>
+              <div class="member-name">${member.name}</div>
+              <div class="member-nickname">@${member.nickname}</div>
+            </td>
+            <td class="member-roles">${member.roles}</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 0; border-bottom: 1px dashed rgba(255,255,255,0.1);">
+              <div style="height: 1px; background: linear-gradient(90deg, transparent, #5865F2, transparent); margin: 0;"></div>
+            </td>
+          </tr>
         `;
       });
       
-      membersHtml += '</div>';
+      membersHtml += `
+          </tbody>
+        </table>
+      `;
+      
       return membersHtml;
     }
 
@@ -1393,7 +1449,12 @@
         roleCard.className = 'role-card-detailed';
         
         const categoryClass = createCategoryClass(role.category);
-        const members = membersData[role.name] || [];
+        const members = (typeof membersData !== 'undefined' && membersData[role.name]) || [];
+        
+        // Инициализируем состояние сортировки для этой роли
+        if (!membersSortState[role.name]) {
+          membersSortState[role.name] = 'name-asc';
+        }
         
         // Создаем карточку с двумя кнопками
         let buttonsHtml = '';
@@ -1472,7 +1533,7 @@
           membersBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            membersBlock.innerHTML = renderMembersList(role.name, members);
+            membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
             
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
@@ -1484,6 +1545,16 @@
               this.classList.add('expanded');
               membersBlock.classList.add('expanded');
               this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+            }
+            
+            // Добавляем обработчик для селекта сортировки
+            const sortSelect = membersBlock.querySelector('.members-sort-select');
+            if (sortSelect) {
+              sortSelect.addEventListener('change', function() {
+                const newSortType = this.value;
+                membersSortState[role.name] = newSortType;
+                membersBlock.innerHTML = renderMembersList(role.name, members, newSortType);
+              });
             }
           });
         }
@@ -1677,7 +1748,6 @@
         });
       }
     });
-  </script>   
-  <script src="maintenance-mode.js"></script>
+  </script>
 </body>
 </html>
