@@ -24,4 +24,4 @@ const membersData = {
     { name: "RusianAkcher", nickname: "rusianachker", roles: 2 },
     { name: "w3ferens", nickname: "w3ferens", roles: 9 }
   ]
-}
+};
