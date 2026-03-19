@@ -681,9 +681,8 @@
       border-color: #ff6b6b;
     }
 
-    /* Контент новости и панель оценок (скрыты по умолчанию) */
-    .news-content-detailed,
-    .rating-panel {
+    /* Контент новости (скрыт по умолчанию) */
+    .news-content-detailed {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -691,39 +690,22 @@
       border-radius: 6px;
       margin-top: 0;
       opacity: 0;
-    }
-
-    .news-content-detailed.expanded,
-    .rating-panel.expanded {
-      max-height: none;
-      opacity: 1;
-      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                  opacity 0.3s ease 0.2s;
-    }
-
-    .news-content-detailed.expanded {
-      padding: 15px;
-      margin-top: 10px;
-    }
-
-    .rating-panel.expanded {
-      padding: 10px 15px;
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 20px;
-      border: 1px solid rgba(255, 107, 107, 0.2);
-      align-self: flex-end;
-    }
-
-    .news-content-detailed {
       color: #cccccc;
       line-height: 1.6;
       font-size: 1rem;
       font-weight: 380;
       white-space: pre-wrap;
       word-wrap: break-word;
+    }
+
+    .news-content-detailed.expanded {
+      max-height: none;
+      padding: 15px;
+      margin-top: 10px;
+      opacity: 1;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                  opacity 0.3s ease 0.2s,
+                  margin-top 0.3s ease;
     }
 
     .news-content-detailed ul, 
@@ -737,72 +719,6 @@
 
     .news-content-detailed p {
       margin-bottom: 10px;
-    }
-
-    /* Панель оценок */
-    .rating-panel {
-      display: none;
-    }
-
-    .rating-panel.expanded {
-      display: flex;
-    }
-
-    .rating-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: none;
-      border: none;
-      color: #cccccc;
-      cursor: pointer;
-      padding: 5px 15px;
-      border-radius: 30px;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-      font-weight: 500;
-    }
-
-    .rating-btn i {
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-    }
-
-    .rating-btn.like:hover {
-      color: #2ed573;
-      background-color: rgba(46, 213, 115, 0.1);
-    }
-
-    .rating-btn.like.active {
-      color: #2ed573;
-    }
-
-    .rating-btn.like.active i {
-      transform: scale(1.1);
-    }
-
-    .rating-btn.dislike:hover {
-      color: #ff4757;
-      background-color: rgba(255, 71, 87, 0.1);
-    }
-
-    .rating-btn.dislike.active {
-      color: #ff4757;
-    }
-
-    .rating-btn.dislike.active i {
-      transform: scale(1.1);
-    }
-
-    .rating-count {
-      font-weight: 600;
-      margin-left: 2px;
-    }
-
-    .rating-divider {
-      width: 1px;
-      height: 25px;
-      background-color: rgba(255, 255, 255, 0.1);
     }
 
     /* Сообщение "ничего не найдено" и "нет новостей" */
@@ -1003,11 +919,6 @@
         width: 100%;
         justify-content: center;
       }
-      
-      .rating-panel.expanded {
-        width: 100%;
-        justify-content: center;
-      }
     }
 
     @media (max-width: 480px) {
@@ -1051,16 +962,6 @@
       .news-category-badge {
         font-size: 0.75rem;
         padding: 4px 12px;
-      }
-      
-      .rating-panel.expanded {
-        flex-direction: column;
-        gap: 10px;
-        border-radius: 15px;
-      }
-      
-      .rating-divider {
-        display: none;
       }
     }
   </style>
@@ -1187,9 +1088,6 @@
     // Переменная для хранения текущих отфильтрованных новостей
     let currentFilteredNews = [];
     
-    // Объект для хранения оценок новостей (сохраняется в localStorage)
-    let newsRatings = JSON.parse(localStorage.getItem('newsRatings')) || {};
-    
     // Функция для форматирования даты
     function formatDate(dateString) {
       const options = { 
@@ -1269,55 +1167,6 @@
       }
     }
 
-    // Функция для обработки оценки новости
-    function handleRating(newsId, ratingType) {
-      if (!newsRatings[newsId]) {
-        newsRatings[newsId] = { likes: 0, dislikes: 0, userVote: null };
-      }
-      
-      const currentVote = newsRatings[newsId].userVote;
-      
-      // Если пользователь уже поставил такую же оценку - отменяем её
-      if (currentVote === ratingType) {
-        newsRatings[newsId][ratingType + 's']--;
-        newsRatings[newsId].userVote = null;
-      } 
-      // Если пользователь ставит противоположную оценку
-      else if (currentVote && currentVote !== ratingType) {
-        newsRatings[newsId][currentVote + 's']--;
-        newsRatings[newsId][ratingType + 's']++;
-        newsRatings[newsId].userVote = ratingType;
-      } 
-      // Если пользователь еще не голосовал
-      else {
-        newsRatings[newsId][ratingType + 's']++;
-        newsRatings[newsId].userVote = ratingType;
-      }
-      
-      // Сохраняем в localStorage
-      localStorage.setItem('newsRatings', JSON.stringify(newsRatings));
-      
-      // Обновляем отображение текущей новости
-      updateNewsRating(newsId);
-    }
-
-    // Функция для обновления отображения оценки конкретной новости
-    function updateNewsRating(newsId) {
-      const likeBtn = document.querySelector(`.rating-btn.like[data-news-id="${newsId}"]`);
-      const dislikeBtn = document.querySelector(`.rating-btn.dislike[data-news-id="${newsId}"]`);
-      
-      if (!likeBtn || !dislikeBtn) return;
-      
-      const rating = newsRatings[newsId] || { likes: 0, dislikes: 0, userVote: null };
-      
-      likeBtn.querySelector('.rating-count').textContent = rating.likes;
-      dislikeBtn.querySelector('.rating-count').textContent = rating.dislikes;
-      
-      // Обновляем активный класс
-      likeBtn.classList.toggle('active', rating.userVote === 'like');
-      dislikeBtn.classList.toggle('active', rating.userVote === 'dislike');
-    }
-
     function displayNews(newsToDisplay) {
       const newsList = document.getElementById('news-list');
       const emptyNews = document.getElementById('empty-news');
@@ -1343,21 +1192,13 @@
       emptyNews.style.display = 'none';
       noResults.style.display = 'none';
       
-      newsToDisplay.forEach((item, index) => {
+      newsToDisplay.forEach(item => {
         const newsCard = document.createElement('div');
         newsCard.className = 'news-card-detailed';
         
         const categoryClass = item.category || 'regular';
         const categoryName = getCategoryName(item.category);
         const formattedDate = formatDate(item.date);
-        
-        // Создаем уникальный ID для новости
-        const newsId = `news_${index}_${Date.now()}`;
-        
-        // Инициализируем рейтинг для новости, если его нет
-        if (!newsRatings[newsId]) {
-          newsRatings[newsId] = { likes: 0, dislikes: 0, userVote: null };
-        }
         
         // Форматируем контент с сохранением переносов строк
         let formattedContent = item.content
@@ -1366,7 +1207,7 @@
           .replace(/- /g, '• ')
           .replace(/• /g, '<span style="margin-left: 20px; display: inline-block;">• </span>');
         
-        // Создаем карточку с кнопкой "Подробнее" и панелью оценок (изначально скрытой)
+        // Создаем карточку с кнопкой "Подробнее" (без панели оценок)
         newsCard.innerHTML = `
           <div class="news-header">
             <span class="news-category-badge ${categoryClass}">${categoryName}</span>
@@ -1380,17 +1221,6 @@
             </button>
           </div>
           <div class="news-content-detailed">${formattedContent}</div>
-          <div class="rating-panel">
-            <button class="rating-btn like" data-news-id="${newsId}">
-              <i class="fas fa-thumbs-up"></i>
-              <span class="rating-count">${newsRatings[newsId].likes}</span>
-            </button>
-            <span class="rating-divider"></span>
-            <button class="rating-btn dislike" data-news-id="${newsId}">
-              <i class="fas fa-thumbs-down"></i>
-              <span class="rating-count">${newsRatings[newsId].dislikes}</span>
-            </button>
-          </div>
         `;
         
         newsList.appendChild(newsCard);
@@ -1398,7 +1228,6 @@
         // Добавляем обработчик для кнопки "Подробнее"
         const moreBtn = newsCard.querySelector('.more-btn');
         const contentBlock = newsCard.querySelector('.news-content-detailed');
-        const ratingBlock = newsCard.querySelector('.rating-panel');
         
         moreBtn.addEventListener('click', function() {
           const isExpanded = this.getAttribute('data-expanded') === 'true';
@@ -1407,23 +1236,14 @@
             this.setAttribute('data-expanded', 'false');
             this.classList.remove('expanded');
             contentBlock.classList.remove('expanded');
-            ratingBlock.classList.remove('expanded');
             this.innerHTML = '<span>Подробнее</span><i class="fas fa-chevron-down"></i>';
           } else {
             this.setAttribute('data-expanded', 'true');
             this.classList.add('expanded');
             contentBlock.classList.add('expanded');
-            ratingBlock.classList.add('expanded');
             this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
           }
         });
-        
-        // Добавляем обработчики для кнопок оценок
-        const likeBtn = newsCard.querySelector('.rating-btn.like');
-        const dislikeBtn = newsCard.querySelector('.rating-btn.dislike');
-        
-        likeBtn.addEventListener('click', () => handleRating(newsId, 'like'));
-        dislikeBtn.addEventListener('click', () => handleRating(newsId, 'dislike'));
       });
       
       // Запуск анимации карточек
