@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="logo.png" sizes="any">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админ-панель - Управление ролями</title>
+    <title>Админ-панель - Управление ролями и новостями</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -48,6 +48,54 @@
             color: #cccccc;
             font-size: 1.1rem;
             font-weight: 380;
+        }
+
+        /* Табы */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background-color: rgba(30, 31, 34, 0.6);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 8px 8px 0 0;
+            color: #cccccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab i {
+            color: #ff6b6b;
+        }
+
+        .tab.active {
+            background-color: rgba(255, 107, 107, 0.2);
+            border-color: #ff6b6b;
+            color: white;
+            border-bottom: 2px solid #ff6b6b;
+            margin-bottom: -2px;
+        }
+
+        .tab:hover {
+            background-color: rgba(255, 107, 107, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .panels {
@@ -150,6 +198,83 @@
             background: linear-gradient(135deg, #da2b2b 0%, #a52222 100%);
         }
 
+        .news-preview {
+            width: 100%;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .news-preview-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .news-preview-content {
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .news-preview-content.hotfix {
+            background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+        }
+
+        .news-preview-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .news-preview-category {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .news-picker-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .news-picker-option {
+            flex: 1;
+            min-width: 150px;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .news-picker-option.selected {
+            border-color: #ff6b6b;
+            transform: scale(1.02);
+        }
+
+        .news-picker-option img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-picker-option span {
+            display: block;
+            padding: 8px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
         .buttons {
             display: flex;
             gap: 15px;
@@ -191,21 +316,26 @@
             color: white;
         }
 
+        .btn-info {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .roles-list {
+        .roles-list, .news-list {
             background-color: rgba(40, 41, 45, 0.8);
             border-radius: 8px;
             padding: 15px;
-            max-height: 400px;
+            max-height: 600px;
             overflow-y: auto;
             margin-top: 20px;
         }
 
-        .role-item {
+        .role-item, .news-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -216,86 +346,51 @@
             border-left: 4px solid #ff6b6b;
         }
 
-        .role-item:last-child {
-            margin-bottom: 0;
+        .news-item {
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .role-info {
-            flex: 1;
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
         }
 
-        .role-name {
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .role-category {
-            font-size: 0.9rem;
-            padding: 3px 8px;
-            border-radius: 12px;
-            display: inline-block;
-            border: 1px solid;
+        .news-category-badge {
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 500;
         }
-        
-        .role-category.администрация-и-модерация {
-            background-color: #C62828;
-            color: #ffffff;
-            border-color: #a51c1c;
-        }
-        
-        .role-category.кастомные-роли {
-            background-color: #9C27B0;
-            color: #ffffff;
-            border-color: #7b1fa2;
-        }
-        
-        .role-category.ивент-роли {
-            background-color: #FF9800;
-            color: #ffffff;
-            border-color: #f57c00;
-        }
-        
-        .role-category.достижения {
-            background-color: #FFD700;
-            color: #333333;
-            border-color: #ffca28;
-        }
-        
-        .role-category.основные-роли {
-            background-color: #4CAF50;
-            color: #ffffff;
-            border-color: #388e3c;
-        }
-        
-        .role-category.бонусные-роли {
-            background-color: #03A9F4;
-            color: #ffffff;
-            border-color: #0288d1;
-        }
-        
-        .role-category.платные-vip-роли {
-            background-color: #00E5FF;
-            color: #333333;
-            border-color: #00bcd4;
-        }
-        
-        .role-category.другое {
-            background-color: #999999;
-            color: #ffffff;
-            border-color: #777777;
-        }
-        
-        .role-category.community {
-            background-color: #5DADE2;
-            color: #ffffff;
-            border-color: #3498db;
+
+        .news-category-badge.major {
+            background: #1e3c72;
+            color: white;
         }
 
-        .role-actions {
+        .news-category-badge.regular {
+            background: #2a5298;
+            color: white;
+        }
+
+        .news-category-badge.hotfix {
+            background: #4a4a4a;
+            color: white;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .news-actions {
             display: flex;
             gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: flex-end;
         }
 
         .action-btn {
@@ -493,228 +588,357 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-cogs"></i> Админ-панель управления ролями</h1>
-            <p>Создавайте, редактируйте и управляйте ролями для Discord сервера</p>
+            <h1><i class="fas fa-cogs"></i> Админ-панель управления</h1>
+            <p>Управление ролями и новостями Discord сервера</p>
         </div>
 
-        <!-- Секция загрузки данных -->
-        <div class="load-data-section">
-            <h3><i class="fas fa-download"></i> Загрузка ролей из roles.js</h3>
-            <p class="info-text">
-                Админ-панель автоматически загрузит роли из файла <code>roles.js</code>.
-                Убедитесь, что файл находится в той же папке, что и эта админ-панель.
-            </p>
-            <div class="buttons">
-                <button class="btn btn-primary" id="load-roles">
-                    <i class="fas fa-sync-alt"></i> Загрузить роли из roles.js
-                </button>
-                <button class="btn btn-danger" id="clear-all-roles">
-                    <i class="fas fa-trash"></i> Очистить все роли
-                </button>
+        <!-- Табы -->
+        <div class="tabs">
+            <div class="tab active" data-tab="roles">
+                <i class="fas fa-users"></i> Роли
+            </div>
+            <div class="tab" data-tab="news">
+                <i class="fas fa-newspaper"></i> Новости
+            </div>
+            <div class="tab" data-tab="maintenance">
+                <i class="fas fa-tools"></i> Обслуживание
             </div>
         </div>
 
-        <div class="panels">
-            <!-- Панель добавления/редактирования роли -->
-            <div class="panel">
-                <h2><i class="fas fa-plus-circle"></i> Добавить / Редактировать роль</h2>
-                
-                <div class="form-group">
-                    <label for="role-name">Название роли:</label>
-                    <input type="text" id="role-name" placeholder="Например: Легенда">
-                </div>
-
-                <div class="form-group">
-                    <label for="role-description">Описание роли:</label>
-                    <textarea id="role-description" placeholder="За что выдается роль..."></textarea>
-                </div>
-
-                <!-- Вставьте этот код в админ-панель в секции формы добавления/редактирования роли -->
-                <div class="form-group">
-                    <label for="role-details">
-                        Подробнее (HTML): 
-                        <small style="color: #999; font-weight: normal;">
-                            Можно оставить пустым. Для изображений: &lt;img src="название.jpg"&gt;
-                        </small>
-                    </label>
-                    <textarea id="role-details" placeholder="Дополнительная информация, HTML-разметка, изображения..."></textarea>
-                    <div class="info-text" style="margin-top: 10px; font-size: 0.9rem;">
-                        <p><strong>Доступные изображения в папке:</strong></p>
-                        <div id="available-images" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
-                            <!-- Список изображений будет загружен динамически -->
-                        </div>
-                        <p style="margin-top: 10px;">
-                            Для вставки изображения введите: <code>&lt;img src="название.jpg"&gt;</code><br>
-                            Пример: <code>&lt;img src="achievement.png"&gt;</code>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="role-category">Категория:</label>
-                    <select id="role-category">
-                        <option value="🛡️ Администрация">🛡️ Администрация</option>
-                        <option value="🎉 Ивент роли">🎉 Ивент роли</option>
-                        <option value="🎭 Кастомные роли">🎭 Кастомные роли</option>
-                        <option value="🏆 Достижения">🏆 Достижения</option>
-                        <option value="👥 Основные роли">👥 Основные роли</option>
-                        <option value="✨ Бонусные роли">✨ Бонусные роли</option>
-                        <option value="💎 Платные / VIP роли">💎 Платные / VIP роли</option>
-                        <option value="🌍 Community">🌍 Community</option>
-                        <option value="Другое">Другое</option>
-                    </select>
-                    <div id="category-preview" class="category-preview">
-                        Предпросмотр категории
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="role-color">Цвет роли (HEX):</label>
-                    <div class="color-picker">
-                        <input type="text" id="role-color" class="color-input" value="#da2b2b" placeholder="#da2b2b">
-                        <div class="color-preview" id="color-preview"></div>
-                    </div>
-                    <div class="color-help">
-                        <button class="color-help-btn" data-color="#da2b2b">Красный</button>
-                        <button class="color-help-btn" data-color="#0c4897">Синий</button>
-                        <button class="color-help-btn" data-color="#2ed573">Зеленый</button>
-                        <button class="color-help-btn" data-color="#ffd32a">Желтый</button>
-                        <button class="color-help-btn" data-color="#8A2BE2">Фиолетовый</button>
-                        <button class="color-help-btn" data-color="#ff66cc">Розовый</button>
-                        <button class="color-help-btn" data-color="#33ffff">Голубой</button>
-                        <button class="color-help-btn" data-color="#996633">Коричневый</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="role-gradient">Градиент:</label>
-                    <select id="role-gradient" class="category-select">
-                        <option value="red">Красный</option>
-                        <option value="orange">Оранжевый</option>
-                        <option value="yellow">Желтый</option>
-                        <option value="green">Зеленый</option>
-                        <option value="blue">Синий</option>
-                        <option value="purple">Фиолетовый</option>
-                        <option value="pink">Розовый</option>
-                        <option value="cyan">Голубой</option>
-                        <option value="brown">Коричневый</option>
-                        <option value="black">Черный</option>
-                        <option value="white">Белый</option>
-                        <option value="lime">Лаймовый</option>
-                        <option value="indigo">Индиго</option>
-                        <option value="teal">Бирюзовый</option>
-                        <option value="magenta">Пурпурный</option>
-                        <option value="gold">Золотой</option>
-                        <option value="silver">Серебряный</option>
-                        <option value="coral">Коралловый</option>
-                        <option value="lavender">Лавандовый</option>
-                        <option value="turquoise">Бирюзовый светлый</option>
-                        <option value="maroon">Бордовый</option>
-                        <option value="olive">Оливковый</option>
-                        <option value="navy">Темно-синий</option>
-                    </select>
-                    <div class="gradient-preview" id="gradient-preview"></div>
-                </div>
-
+        <!-- Вкладка Роли -->
+        <div class="tab-content active" id="tab-roles">
+            <!-- Секция загрузки данных -->
+            <div class="load-data-section">
+                <h3><i class="fas fa-download"></i> Загрузка ролей из roles.js</h3>
+                <p class="info-text">
+                    Админ-панель автоматически загрузит роли из файла <code>roles.js</code>.
+                    Убедитесь, что файл находится в той же папке, что и эта админ-панель.
+                </p>
                 <div class="buttons">
-                    <button class="btn btn-primary" id="save-role">
-                        <i class="fas fa-save"></i> Сохранить роль
+                    <button class="btn btn-primary" id="load-roles">
+                        <i class="fas fa-sync-alt"></i> Загрузить роли из roles.js
                     </button>
-                    <button class="btn btn-secondary" id="clear-form">
-                        <i class="fas fa-times"></i> Очистить форму
+                    <button class="btn btn-danger" id="clear-all-roles">
+                        <i class="fas fa-trash"></i> Очистить все роли
                     </button>
                 </div>
-
-                <input type="hidden" id="editing-index" value="-1">
             </div>
 
-            <!-- Панель списка ролей -->
-            <div class="panel">
-                <h2><i class="fas fa-list"></i> Список ролей (<span id="roles-count">0</span>)</h2>
-                <div id="roles-list-container" class="roles-list">
-                    <div class="empty-state" id="empty-roles">
-                        <i class="fas fa-users-slash"></i>
-                        <h3>Роли отсутствуют</h3>
-                        <p>Загрузите роли из файла или добавьте новую</p>
+            <div class="panels">
+                <!-- Панель добавления/редактирования роли -->
+                <div class="panel">
+                    <h2><i class="fas fa-plus-circle"></i> Добавить / Редактировать роль</h2>
+                    
+                    <div class="form-group">
+                        <label for="role-name">Название роли:</label>
+                        <input type="text" id="role-name" placeholder="Например: Легенда">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role-description">Описание роли:</label>
+                        <textarea id="role-description" placeholder="За что выдается роль..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role-details">
+                            Подробнее (HTML): 
+                            <small style="color: #999; font-weight: normal;">
+                                Можно оставить пустым. Для изображений: &lt;img src="название.jpg"&gt;
+                            </small>
+                        </label>
+                        <textarea id="role-details" placeholder="Дополнительная информация, HTML-разметка, изображения..."></textarea>
+                        <div class="info-text" style="margin-top: 10px; font-size: 0.9rem;">
+                            <p><strong>Доступные изображения в папке:</strong></p>
+                            <div id="available-images" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
+                                <!-- Список изображений будет загружен динамически -->
+                            </div>
+                            <p style="margin-top: 10px;">
+                                Для вставки изображения введите: <code>&lt;img src="название.jpg"&gt;</code><br>
+                                Пример: <code>&lt;img src="achievement.png"&gt;</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role-category">Категория:</label>
+                        <select id="role-category">
+                            <option value="🛡️ Администрация">🛡️ Администрация</option>
+                            <option value="🎉 Ивент роли">🎉 Ивент роли</option>
+                            <option value="🎭 Кастомные роли">🎭 Кастомные роли</option>
+                            <option value="🏆 Достижения">🏆 Достижения</option>
+                            <option value="👥 Основные роли">👥 Основные роли</option>
+                            <option value="✨ Бонусные роли">✨ Бонусные роли</option>
+                            <option value="💎 Платные / VIP роли">💎 Платные / VIP роли</option>
+                            <option value="🌍 Community">🌍 Community</option>
+                            <option value="Другое">Другое</option>
+                        </select>
+                        <div id="category-preview" class="category-preview">
+                            Предпросмотр категории
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role-color">Цвет роли (HEX):</label>
+                        <div class="color-picker">
+                            <input type="text" id="role-color" class="color-input" value="#da2b2b" placeholder="#da2b2b">
+                            <div class="color-preview" id="color-preview"></div>
+                        </div>
+                        <div class="color-help">
+                            <button class="color-help-btn" data-color="#da2b2b">Красный</button>
+                            <button class="color-help-btn" data-color="#0c4897">Синий</button>
+                            <button class="color-help-btn" data-color="#2ed573">Зеленый</button>
+                            <button class="color-help-btn" data-color="#ffd32a">Желтый</button>
+                            <button class="color-help-btn" data-color="#8A2BE2">Фиолетовый</button>
+                            <button class="color-help-btn" data-color="#ff66cc">Розовый</button>
+                            <button class="color-help-btn" data-color="#33ffff">Голубой</button>
+                            <button class="color-help-btn" data-color="#996633">Коричневый</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role-gradient">Градиент:</label>
+                        <select id="role-gradient" class="category-select">
+                            <option value="red">Красный</option>
+                            <option value="orange">Оранжевый</option>
+                            <option value="yellow">Желтый</option>
+                            <option value="green">Зеленый</option>
+                            <option value="blue">Синий</option>
+                            <option value="purple">Фиолетовый</option>
+                            <option value="pink">Розовый</option>
+                            <option value="cyan">Голубой</option>
+                            <option value="brown">Коричневый</option>
+                            <option value="black">Черный</option>
+                            <option value="white">Белый</option>
+                            <option value="lime">Лаймовый</option>
+                            <option value="indigo">Индиго</option>
+                            <option value="teal">Бирюзовый</option>
+                            <option value="magenta">Пурпурный</option>
+                            <option value="gold">Золотой</option>
+                            <option value="silver">Серебряный</option>
+                            <option value="coral">Коралловый</option>
+                            <option value="lavender">Лавандовый</option>
+                            <option value="turquoise">Бирюзовый светлый</option>
+                            <option value="maroon">Бордовый</option>
+                            <option value="olive">Оливковый</option>
+                            <option value="navy">Темно-синий</option>
+                        </select>
+                        <div class="gradient-preview" id="gradient-preview"></div>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-primary" id="save-role">
+                            <i class="fas fa-save"></i> Сохранить роль
+                        </button>
+                        <button class="btn btn-secondary" id="clear-form">
+                            <i class="fas fa-times"></i> Очистить форму
+                        </button>
+                    </div>
+
+                    <input type="hidden" id="editing-index" value="-1">
+                </div>
+
+                <!-- Панель списка ролей -->
+                <div class="panel">
+                    <h2><i class="fas fa-list"></i> Список ролей (<span id="roles-count">0</span>)</h2>
+                    <div id="roles-list-container" class="roles-list">
+                        <div class="empty-state" id="empty-roles">
+                            <i class="fas fa-users-slash"></i>
+                            <h3>Роли отсутствуют</h3>
+                            <p>Загрузите роли из файла или добавьте новую</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Панель генерации кода -->
-        <div class="panel">
-            <h2><i class="fas fa-code"></i> Генерация кода для roles.js</h2>
-            <p style="margin-bottom: 15px; color: #cccccc;">
-                Скопируйте сгенерированный код и вставьте его в файл <strong>roles.js</strong>, 
-                затем обновите страницу <strong>roles.html</strong> для отображения изменений.
-            </p>
-            
-            <div class="code-output">
-                <pre id="generated-code">const roles = [
+            <!-- Панель генерации кода -->
+            <div class="panel">
+                <h2><i class="fas fa-code"></i> Генерация кода для roles.js</h2>
+                <p style="margin-bottom: 15px; color: #cccccc;">
+                    Скопируйте сгенерированный код и вставьте его в файл <strong>roles.js</strong>, 
+                    затем обновите страницу <strong>roles.html</strong> для отображения изменений.
+                </p>
+                
+                <div class="code-output">
+                    <pre id="generated-code">const roles = [
   // Роли будут отображены здесь
 ];</pre>
-            </div>
-            
-            <div class="code-controls">
-                <button class="btn btn-success" id="generate-code">
-                    <i class="fas fa-sync-alt"></i> Сгенерировать код
-                </button>
-                <button class="btn btn-secondary" id="copy-code">
-                    <i class="fas fa-copy"></i> Скопировать код
-                </button>
+                </div>
+                
+                <div class="code-controls">
+                    <button class="btn btn-success" id="generate-code">
+                        <i class="fas fa-sync-alt"></i> Сгенерировать код
+                    </button>
+                    <button class="btn btn-secondary" id="copy-code">
+                        <i class="fas fa-copy"></i> Скопировать код
+                    </button>
+                </div>
             </div>
         </div>
-        
-        <!-- ПАНЕЛЬ РЕЖИМА ОБСЛУЖИВАНИЯ -->
-        <div class="panel" style="margin-top: 30px; border-color: #ff3333;">
-            <h2><i class="fas fa-tools"></i> Режим обслуживания сайта</h2>
-            
-            <div style="background: rgba(255, 51, 51, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ff3333;">
-                <p style="color: #ff9999; margin-bottom: 10px;">
-                    <i class="fas fa-exclamation-triangle"></i> Управление режимом обслуживания через файл maintenance.txt
+
+        <!-- Вкладка Новости -->
+        <div class="tab-content" id="tab-news">
+            <!-- Секция загрузки новостей -->
+            <div class="load-data-section">
+                <h3><i class="fas fa-download"></i> Загрузка новостей из news.js</h3>
+                <p class="info-text">
+                    Админ-панель автоматически загрузит новости из файла <code>news.js</code>.
                 </p>
-                <p style="color: #cccccc; font-size: 0.9em;">
-                    Система проверяет файл <code>maintenance.txt</code> в корне сайта.<br>
-                    Если файл содержит цифру <code>1</code> - все пользователи видят ошибку.<br>
-                    Если файл содержит <code>0</code> или отсутствует - сайт работает нормально.
-                </p>
+                <div class="buttons">
+                    <button class="btn btn-primary" id="load-news">
+                        <i class="fas fa-sync-alt"></i> Загрузить новости из news.js
+                    </button>
+                    <button class="btn btn-danger" id="clear-all-news">
+                        <i class="fas fa-trash"></i> Очистить все новости
+                    </button>
+                </div>
             </div>
-            
-            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px; padding: 15px; background: rgba(40, 41, 45, 0.8); border-radius: 8px;">
-                <div style="flex: 1;">
-                    <h3 style="color: #fff; margin-bottom: 5px;">Статус режима обслуживания</h3>
-                    <p id="maintenance-status-text" style="color: #4CAF50;">
-                        <i class="fas fa-check-circle"></i> Загрузка статуса...
+
+            <div class="panels">
+                <!-- Панель добавления/редактирования новости -->
+                <div class="panel">
+                    <h2><i class="fas fa-plus-circle"></i> Добавить / Редактировать новость</h2>
+                    
+                    <div class="form-group">
+                        <label for="news-title">Заголовок новости:</label>
+                        <input type="text" id="news-title" placeholder="Например: New Update | Advent of Bogomolova">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="news-content">Текст новости (поддерживает HTML):</label>
+                        <textarea id="news-content" placeholder="Подробное описание новости..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="news-category">Категория:</label>
+                        <select id="news-category" class="news-category-select">
+                            <option value="major" data-color="blue">🔥 Крупное обновление</option>
+                            <option value="regular" data-color="blue">📰 Обычное обновление</option>
+                            <option value="hotfix" data-color="gray">🔧 Hotfix Patch Note</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Выберите изображение для новости:</label>
+                        <div class="news-picker-options" id="news-image-options">
+                            <!-- Опции будут загружены динамически -->
+                        </div>
+                        <input type="hidden" id="news-image" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Предпросмотр новости:</label>
+                        <div class="news-preview" id="news-preview">
+                            <img id="news-preview-img" class="news-preview-image" src="" alt="Preview">
+                            <div id="news-preview-content" class="news-preview-content">
+                                <div class="news-preview-category" id="news-preview-category">Крупное обновление</div>
+                                <div class="news-preview-title" id="news-preview-title">Заголовок новости</div>
+                                <div id="news-preview-text">Текст новости будет отображаться здесь...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-primary" id="save-news">
+                            <i class="fas fa-save"></i> Сохранить новость
+                        </button>
+                        <button class="btn btn-secondary" id="clear-news-form">
+                            <i class="fas fa-times"></i> Очистить форму
+                        </button>
+                    </div>
+
+                    <input type="hidden" id="news-editing-index" value="-1">
+                </div>
+
+                <!-- Панель списка новостей -->
+                <div class="panel">
+                    <h2><i class="fas fa-list"></i> Список новостей (<span id="news-count">0</span>)</h2>
+                    <div id="news-list-container" class="news-list">
+                        <div class="empty-state" id="empty-news">
+                            <i class="fas fa-newspaper"></i>
+                            <h3>Новости отсутствуют</h3>
+                            <p>Добавьте первую новость</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель генерации кода новостей -->
+            <div class="panel">
+                <h2><i class="fas fa-code"></i> Генерация кода для news.js</h2>
+                <p style="margin-bottom: 15px; color: #cccccc;">
+                    Скопируйте сгенерированный код и вставьте его в файл <strong>news.js</strong>.
+                </p>
+                
+                <div class="code-output">
+                    <pre id="generated-news-code">const news = [
+  // Новости будут отображены здесь
+];</pre>
+                </div>
+                
+                <div class="code-controls">
+                    <button class="btn btn-success" id="generate-news-code">
+                        <i class="fas fa-sync-alt"></i> Сгенерировать код
+                    </button>
+                    <button class="btn btn-secondary" id="copy-news-code">
+                        <i class="fas fa-copy"></i> Скопировать код
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка Режим обслуживания -->
+        <div class="tab-content" id="tab-maintenance">
+            <div class="panel" style="border-color: #ff3333;">
+                <h2><i class="fas fa-tools"></i> Режим обслуживания сайта</h2>
+                
+                <div style="background: rgba(255, 51, 51, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ff3333;">
+                    <p style="color: #ff9999; margin-bottom: 10px;">
+                        <i class="fas fa-exclamation-triangle"></i> Управление режимом обслуживания через файл maintenance.txt
+                    </p>
+                    <p style="color: #cccccc; font-size: 0.9em;">
+                        Система проверяет файл <code>maintenance.txt</code> в корне сайта.<br>
+                        Если файл содержит цифру <code>1</code> - все пользователи видят ошибку.<br>
+                        Если файл содержит <code>0</code> или отсутствует - сайт работает нормально.
                     </p>
                 </div>
                 
-                <label class="maintenance-switch">
-                    <input type="checkbox" id="maintenance-toggle">
-                    <span class="maintenance-slider"></span>
-                </label>
-            </div>
-            
-            <div style="background: rgba(30, 31, 34, 0.9); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="color: #ff6b6b; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Как это работает:</h4>
-                <ul style="color: #cccccc; padding-left: 20px; line-height: 1.6;">
-                    <li><strong>Включить:</strong> Создайте файл maintenance.txt с цифрой 1 в корне сайта</li>
-                    <li><strong>Выключить:</strong> Удалите файл или измените цифру на 0</li>
-                    <li><strong>Проверка:</strong> Все устройства проверяют этот файл каждые 10 секунд</li>
-                    <li><strong>Экран ошибки:</strong> Пользователи видят сообщение "ОШИБКА СОЕДИНЕНИЯ!"</li>
-                </ul>
-            </div>
-            
-            <div class="buttons">
-                <button class="btn btn-danger" id="apply-maintenance" style="background: linear-gradient(135deg, #ff3333, #cc0000);">
-                    <i class="fas fa-power-off"></i> Управление режимом
-                </button>
-                <button class="btn btn-secondary" id="test-maintenance">
-                    <i class="fas fa-eye"></i> Предпросмотр ошибки
-                </button>
-            </div>
-            
-            <div id="maintenance-log" style="margin-top: 20px; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 6px; max-height: 100px; overflow-y: auto; font-size: 0.9em; color: #aaa;">
-                <div>Журнал действий:</div>
-                <div id="log-entries"></div>
+                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px; padding: 15px; background: rgba(40, 41, 45, 0.8); border-radius: 8px;">
+                    <div style="flex: 1;">
+                        <h3 style="color: #fff; margin-bottom: 5px;">Статус режима обслуживания</h3>
+                        <p id="maintenance-status-text" style="color: #4CAF50;">
+                            <i class="fas fa-check-circle"></i> Загрузка статуса...
+                        </p>
+                    </div>
+                    
+                    <label class="maintenance-switch">
+                        <input type="checkbox" id="maintenance-toggle">
+                        <span class="maintenance-slider"></span>
+                    </label>
+                </div>
+                
+                <div style="background: rgba(30, 31, 34, 0.9); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #ff6b6b; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Как это работает:</h4>
+                    <ul style="color: #cccccc; padding-left: 20px; line-height: 1.6;">
+                        <li><strong>Включить:</strong> Создайте файл maintenance.txt с цифрой 1 в корне сайта</li>
+                        <li><strong>Выключить:</strong> Удалите файл или измените цифру на 0</li>
+                        <li><strong>Проверка:</strong> Все устройства проверяют этот файл каждые 10 секунд</li>
+                        <li><strong>Экран ошибки:</strong> Пользователи видят сообщение "ОШИБКА СОЕДИНЕНИЯ!"</li>
+                    </ul>
+                </div>
+                
+                <div class="buttons">
+                    <button class="btn btn-danger" id="apply-maintenance" style="background: linear-gradient(135deg, #ff3333, #cc0000);">
+                        <i class="fas fa-power-off"></i> Управление режимом
+                    </button>
+                    <button class="btn btn-secondary" id="test-maintenance">
+                        <i class="fas fa-eye"></i> Предпросмотр ошибки
+                    </button>
+                </div>
+                
+                <div id="maintenance-log" style="margin-top: 20px; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 6px; max-height: 100px; overflow-y: auto; font-size: 0.9em; color: #aaa;">
+                    <div>Журнал действий:</div>
+                    <div id="log-entries"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -723,6 +947,7 @@
     <div id="notification" class="notification"></div>
 
     <script src="roles.js"></script>
+    <script src="news.js"></script>
 
     <script>
         // Градиенты для каждого типа
@@ -779,7 +1004,7 @@
             navy: "#000066"
         };
 
-        // Стили для категорий
+        // Стили для категорий ролей
         const categoryStyles = {
             "🛡️ Администрация": {
                 backgroundColor: "#C62828",
@@ -828,23 +1053,58 @@
             }
         };
 
-        // Основная переменная для хранения ролей
-        let adminRoles = [];
+        // Стили для категорий новостей
+        const newsCategoryStyles = {
+            major: {
+                background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
+                badge: "🔥 Крупное обновление",
+                color: "blue"
+            },
+            regular: {
+                background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
+                badge: "📰 Обычное обновление",
+                color: "blue"
+            },
+            hotfix: {
+                background: "linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%)",
+                badge: "🔧 Hotfix Patch Note",
+                color: "gray"
+            }
+        };
 
-        // DOM элементы
+        // Доступные изображения для новостей
+        const newsImages = {
+            major: ['major1.png', 'major2.jpg', 'update_big.jpg'],
+            regular: ['regular1.png', 'regular2.jpg', 'update_normal.jpg'],
+            hotfix: ['hotfix.png', 'patch_note.jpg']
+        };
+
+        // Основные переменные для хранения данных
+        let adminRoles = [];
+        let adminNews = [];
+
+        // DOM элементы для ролей
         let roleNameInput, roleDescInput, roleCategorySelect, roleColorInput;
         let roleGradientSelect, colorPreview, gradientPreview, rolesListContainer;
-        let emptyRolesDiv, generatedCode, editingIndexInput, notification, rolesCountSpan;
+        let emptyRolesDiv, generatedCode, notification, rolesCountSpan;
         let categoryPreview;
+        
+        // DOM элементы для новостей
+        let newsTitleInput, newsContentInput, newsCategorySelect, newsImageInput;
+        let newsPreviewImg, newsPreviewContent, newsPreviewCategory, newsPreviewTitle, newsPreviewText;
+        let newsListContainer, emptyNewsDiv, generatedNewsCode, newsCountSpan;
+        let newsEditingIndexInput;
         
         // DOM элементы для режима обслуживания
         let maintenanceToggle, maintenanceStatusText, applyMaintenanceBtn, testMaintenanceBtn, logEntries;
-        let downloadFileBtn;
         
+        // Переменные состояния
         let editingIndex = -1;
+        let newsEditingIndex = -1;
 
         // Функция для инициализации DOM элементов
         function initDOMElements() {
+            // Элементы ролей
             roleNameInput = document.getElementById('role-name');
             roleDescInput = document.getElementById('role-description');
             roleCategorySelect = document.getElementById('role-category');
@@ -860,12 +1120,27 @@
             rolesCountSpan = document.getElementById('roles-count');
             categoryPreview = document.getElementById('category-preview');
             
+            // Элементы новостей
+            newsTitleInput = document.getElementById('news-title');
+            newsContentInput = document.getElementById('news-content');
+            newsCategorySelect = document.getElementById('news-category');
+            newsImageInput = document.getElementById('news-image');
+            newsPreviewImg = document.getElementById('news-preview-img');
+            newsPreviewContent = document.getElementById('news-preview-content');
+            newsPreviewCategory = document.getElementById('news-preview-category');
+            newsPreviewTitle = document.getElementById('news-preview-title');
+            newsPreviewText = document.getElementById('news-preview-text');
+            newsListContainer = document.getElementById('news-list-container');
+            emptyNewsDiv = document.getElementById('empty-news');
+            generatedNewsCode = document.getElementById('generated-news-code');
+            newsCountSpan = document.getElementById('news-count');
+            newsEditingIndexInput = document.getElementById('news-editing-index');
+            
             // Элементы режима обслуживания
             maintenanceToggle = document.getElementById('maintenance-toggle');
             maintenanceStatusText = document.getElementById('maintenance-status-text');
             applyMaintenanceBtn = document.getElementById('apply-maintenance');
             testMaintenanceBtn = document.getElementById('test-maintenance');
-            downloadFileBtn = document.getElementById('download-file');
             logEntries = document.getElementById('log-entries');
         }
 
@@ -878,6 +1153,30 @@
                 notification.classList.remove('show');
             }, 3000);
         }
+
+        // Функция для переключения табов
+        function initTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(`tab-${tabId}`).classList.add('active');
+                    
+                    addLogEntry(`Переключение на вкладку: ${tabId}`);
+                });
+            });
+        }
+
+        // ===========================================
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С РОЛЯМИ
+        // ===========================================
 
         // Функция для обновления предпросмотра цвета
         function updateColorPreview() {
@@ -955,8 +1254,6 @@
                     .replace(/\s+/g, '-')
                     .replace(/[^a-zа-яё0-9-]/g, '');
                 
-                categoryClass = categoryClass.replace(/[^a-zа-яё0-9-]/g, '');
-                
                 html += `
                     <div class="role-item">
                         <div class="role-info">
@@ -993,13 +1290,12 @@
             });
         }
 
-        // В функции editRole() добавьте заполнение поля details
         function editRole(index) {
             const role = adminRoles[index];
             
             roleNameInput.value = role.name;
             roleDescInput.value = role.description;
-            document.getElementById('role-details').value = role.details || ''; // Новое поле
+            document.getElementById('role-details').value = role.details || '';
             roleCategorySelect.value = role.category;
             roleColorInput.value = role.color;
             
@@ -1016,17 +1312,16 @@
             showNotification(`Редактирование роли: ${role.name}`, 'success');
         }
 
-        // Функция для удаления роли
         function deleteRole(index) {
             if (confirm(`Вы уверены, что хотите удалить роль "${adminRoles[index].name}"?`)) {
                 const deletedRole = adminRoles.splice(index, 1)[0];
                 renderRolesList();
                 generateCode();
                 showNotification(`Роль "${deletedRole.name}" удалена`, 'success');
+                addLogEntry(`Удалена роль: ${deletedRole.name}`);
             }
         }
 
-        // Добавьте в функцию saveRole() обработку поля details
         function saveRole() {
             const name = roleNameInput.value.trim();
             const description = roleDescInput.value.trim();
@@ -1034,7 +1329,7 @@
             const color = roleColorInput.value.trim();
             const gradientType = roleGradientSelect.value;
             const gradient = getGradientByType(gradientType);
-            const details = document.getElementById('role-details').value.trim(); // Новое поле
+            const details = document.getElementById('role-details').value.trim();
             
             if (!name) {
                 showNotification('Введите название роли', 'error');
@@ -1060,17 +1355,19 @@
                 category,
                 color,
                 gradient,
-                details // Добавляем поле details
+                details
             };
             
             if (editingIndex >= 0) {
                 adminRoles[editingIndex] = role;
                 showNotification(`Роль "${name}" обновлена`, 'success');
+                addLogEntry(`Обновлена роль: ${name}`);
                 editingIndex = -1;
                 editingIndexInput.value = '-1';
             } else {
                 adminRoles.push(role);
                 showNotification(`Роль "${name}" добавлена`, 'success');
+                addLogEntry(`Добавлена роль: ${name}`);
             }
             
             clearForm();
@@ -1078,11 +1375,10 @@
             generateCode();
         }
 
-        // В функции clearForm() добавьте очистку поля details
         function clearForm() {
             roleNameInput.value = '';
             roleDescInput.value = '';
-            document.getElementById('role-details').value = ''; // Новое поле
+            document.getElementById('role-details').value = '';
             roleCategorySelect.value = '🛡️ Администрация';
             roleColorInput.value = '#da2b2b';
             roleGradientSelect.value = 'red';
@@ -1094,7 +1390,6 @@
             updateCategoryPreview();
         }
 
-        // Обновите функцию generateCode() чтобы включить поле details
         function generateCode() {
             if (!generatedCode) return;
             
@@ -1124,13 +1419,13 @@
             generatedCode.textContent = code;
         }
 
-        // Функция для копирования кода в буфер обмена
         function copyCodeToClipboard() {
             const codeText = generatedCode.textContent;
             
             navigator.clipboard.writeText(codeText)
                 .then(() => {
                     showNotification('Код скопирован в буфер обмена!', 'success');
+                    addLogEntry('Код ролей скопирован');
                 })
                 .catch(err => {
                     console.error('Ошибка копирования: ', err);
@@ -1138,7 +1433,6 @@
                 });
         }
 
-        // Функция для загрузки ролей из roles.js
         function loadRolesFromFile() {
             try {
                 if (typeof roles !== 'undefined' && Array.isArray(roles)) {
@@ -1146,6 +1440,7 @@
                     renderRolesList();
                     generateCode();
                     showNotification(`Загружено ${adminRoles.length} ролей из roles.js`, 'success');
+                    addLogEntry(`Загружено ${adminRoles.length} ролей`);
                 } else {
                     showNotification('Массив roles не найден. Убедитесь, что файл roles.js подключен.', 'error');
                 }
@@ -1155,14 +1450,11 @@
             }
         }
 
-        // Добавьте функцию для отображения доступных изображений
         function loadAvailableImages() {
             const imagesContainer = document.getElementById('available-images');
             if (!imagesContainer) return;
             
-            // Здесь можно загрузить список изображений из папки
-            // Примерный список (замените на реальные названия файлов)
-            const imageExamples = ['achievement.png', 'event.png', 'vip.png', 'custom.png'];
+            const imageExamples = ['achievement.png', 'event.png', 'vip.png', 'custom.png', 'role1.jpg', 'role2.jpg'];
             
             imagesContainer.innerHTML = '';
             imageExamples.forEach(img => {
@@ -1174,14 +1466,13 @@
                     const detailsTextarea = document.getElementById('role-details');
                     const currentValue = detailsTextarea.value;
                     const insertText = `<img src="${img}">`;
-                    detailsTextarea.value = currentValue + insertText;
+                    detailsTextarea.value = currentValue + (currentValue ? '\n' : '') + insertText;
                     detailsTextarea.focus();
                 });
                 imagesContainer.appendChild(imgBtn);
             });
         }
 
-        // Функция для очистки всех ролей
         function clearAllRoles() {
             if (adminRoles.length === 0) {
                 showNotification('Список ролей уже пуст', 'info');
@@ -1193,299 +1484,630 @@
                 renderRolesList();
                 generateCode();
                 showNotification('Все роли удалены', 'success');
+                addLogEntry('Все роли удалены');
             }
         }
 
-// ===========================================
-// ФУНКЦИИ ДЛЯ РЕЖИМА ОБСЛУЖИВАНИЯ (ФАЙЛОВАЯ СИСТЕМА)
-// ===========================================
+        // ===========================================
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С НОВОСТЯМИ
+        // ===========================================
 
-// Функция для загрузки статуса режима обслуживания ИЗ ФАЙЛА
-function loadMaintenanceStatus() {
-    fetch('maintenance.txt?t=' + Date.now())
-    .then(response => {
-        if (!response.ok) {
-            // Файла нет - режим выключен
-            if (maintenanceToggle) {
-                maintenanceToggle.checked = false;
-            }
-            if (maintenanceStatusText) {
-                maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Файл maintenance.txt не найден</small>';
-            }
-            return;
+        function initNewsImageOptions() {
+            const optionsContainer = document.getElementById('news-image-options');
+            if (!optionsContainer) return;
+            
+            // Создаем опции для каждой категории
+            const categories = [
+                { id: 'major', name: 'Крупное обновление', images: ['major1.png', 'major2.jpg', 'update_big.jpg', 'event1.jpg'] },
+                { id: 'regular', name: 'Обычное обновление', images: ['regular1.png', 'regular2.jpg', 'update_normal.jpg', 'news1.jpg'] },
+                { id: 'hotfix', name: 'Hotfix Patch Note', images: ['hotfix.png', 'patch_note.jpg', 'fix1.jpg'] }
+            ];
+            
+            optionsContainer.innerHTML = '';
+            
+            categories.forEach(category => {
+                category.images.forEach(img => {
+                    const option = document.createElement('div');
+                    option.className = 'news-picker-option';
+                    option.setAttribute('data-category', category.id);
+                    option.setAttribute('data-image', img);
+                    
+                    option.innerHTML = `
+                        <img src="screenshots/${img}" onerror="this.src='https://via.placeholder.com/150x100?text=${img}'">
+                        <span>${img}</span>
+                    `;
+                    
+                    option.addEventListener('click', function() {
+                        document.querySelectorAll('.news-picker-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        
+                        const image = this.getAttribute('data-image');
+                        newsImageInput.value = image;
+                        updateNewsPreview();
+                    });
+                    
+                    optionsContainer.appendChild(option);
+                });
+            });
         }
-        return response.text();
-    })
-    .then(status => {
-        if (status !== undefined) {
-            const isActive = status.trim() === '1';
+
+        function updateNewsPreview() {
+            if (!newsPreviewContent || !newsPreviewCategory || !newsPreviewTitle || !newsPreviewText) return;
             
-            if (maintenanceToggle) {
-                maintenanceToggle.checked = isActive;
+            const category = newsCategorySelect.value;
+            const title = newsTitleInput.value || 'Заголовок новости';
+            const content = newsContentInput.value || 'Текст новости будет отображаться здесь...';
+            const image = newsImageInput.value;
+            
+            const style = newsCategoryStyles[category] || newsCategoryStyles.regular;
+            
+            // Обновляем фон
+            newsPreviewContent.className = 'news-preview-content';
+            if (category === 'hotfix') {
+                newsPreviewContent.classList.add('hotfix');
+            }
+            newsPreviewContent.style.background = style.background;
+            
+            // Обновляем текст
+            newsPreviewCategory.textContent = style.badge;
+            newsPreviewTitle.textContent = title;
+            newsPreviewText.innerHTML = content;
+            
+            // Обновляем изображение
+            if (image) {
+                newsPreviewImg.src = `screenshots/${image}`;
+                newsPreviewImg.style.display = 'block';
+                newsPreviewImg.onerror = function() {
+                    this.style.display = 'none';
+                };
+            } else {
+                newsPreviewImg.style.display = 'none';
+            }
+        }
+
+        function updateNewsCount() {
+            if (newsCountSpan) {
+                newsCountSpan.textContent = adminNews.length;
+            }
+        }
+
+        function renderNewsList() {
+            if (!newsListContainer || !emptyNewsDiv) return;
+            
+            if (adminNews.length === 0) {
+                emptyNewsDiv.style.display = 'block';
+                newsListContainer.innerHTML = '';
+                newsListContainer.appendChild(emptyNewsDiv);
+                updateNewsCount();
+                return;
             }
             
-            if (maintenanceStatusText) {
-                if (isActive) {
-                    maintenanceStatusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span style="color: #ff3333;">Режим обслуживания АКТИВЕН</span><br><small style="color: #ff9999;">Все пользователи видят экран ошибки</small>';
+            emptyNewsDiv.style.display = 'none';
+            
+            let html = '';
+            adminNews.forEach((news, index) => {
+                const date = new Date(news.date || Date.now());
+                const formattedDate = date.toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                const categoryClass = news.category || 'regular';
+                const categoryName = newsCategoryStyles[categoryClass]?.badge || 'Новость';
+                
+                html += `
+                    <div class="news-item">
+                        <div class="news-header">
+                            <span class="news-category-badge ${categoryClass}">${categoryName}</span>
+                            <span class="news-date">${formattedDate}</span>
+                        </div>
+                        <div style="width: 100%;">
+                            <h3 style="color: white; margin-bottom: 10px;">${news.title}</h3>
+                            <div style="color: #cccccc; max-height: 100px; overflow: hidden; margin-bottom: 10px;">
+                                ${news.content.substring(0, 150)}...
+                            </div>
+                        </div>
+                        <div class="news-actions">
+                            <button class="action-btn edit-news" data-index="${index}" title="Редактировать">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-news" data-index="${index}" title="Удалить">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            newsListContainer.innerHTML = html;
+            updateNewsCount();
+            
+            document.querySelectorAll('.edit-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    editNews(index);
+                });
+            });
+            
+            document.querySelectorAll('.delete-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    deleteNews(index);
+                });
+            });
+        }
+
+        function editNews(index) {
+            const news = adminNews[index];
+            
+            newsTitleInput.value = news.title || '';
+            newsContentInput.value = news.content || '';
+            newsCategorySelect.value = news.category || 'regular';
+            newsImageInput.value = news.image || '';
+            
+            // Выделяем соответствующее изображение
+            document.querySelectorAll('.news-picker-option').forEach(opt => {
+                if (opt.getAttribute('data-image') === news.image) {
+                    opt.classList.add('selected');
                 } else {
-                    maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Все пользователи имеют доступ к сайту</small>';
+                    opt.classList.remove('selected');
                 }
+            });
+            
+            newsEditingIndexInput.value = index;
+            newsEditingIndex = index;
+            
+            updateNewsPreview();
+            showNotification(`Редактирование новости: ${news.title}`, 'success');
+        }
+
+        function deleteNews(index) {
+            if (confirm(`Вы уверены, что хотите удалить новость "${adminNews[index].title}"?`)) {
+                const deletedNews = adminNews.splice(index, 1)[0];
+                renderNewsList();
+                generateNewsCode();
+                showNotification(`Новость "${deletedNews.title}" удалена`, 'success');
+                addLogEntry(`Удалена новость: ${deletedNews.title}`);
             }
         }
-    })
-    .catch(error => {
-        console.error('Ошибка загрузки статуса:', error);
-        if (maintenanceStatusText) {
-            maintenanceStatusText.innerHTML = '<i class="fas fa-question-circle"></i> <span style="color: #ff9800;">Статус неизвестен</span><br><small style="color: #aaa;">Не удалось проверить файл</small>';
-        }
-    });
-    
-    // Загружаем журнал действий
-    loadMaintenanceLog();
-}
 
-// Функция для управления режимом обслуживания
-function applyMaintenanceChanges() {
-    const isActive = maintenanceToggle.checked;
-    
-    if (isActive) {
-        // ВКЛЮЧЕНИЕ РЕЖИМА
-        const instruction = `🎯 ДЛЯ ВКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
-        
+        function saveNews() {
+            const title = newsTitleInput.value.trim();
+            const content = newsContentInput.value.trim();
+            const category = newsCategorySelect.value;
+            const image = newsImageInput.value;
+            
+            if (!title) {
+                showNotification('Введите заголовок новости', 'error');
+                newsTitleInput.focus();
+                return;
+            }
+            
+            if (!content) {
+                showNotification('Введите текст новости', 'error');
+                newsContentInput.focus();
+                return;
+            }
+            
+            const news = {
+                title,
+                content,
+                category,
+                image,
+                date: new Date().toISOString()
+            };
+            
+            if (newsEditingIndex >= 0) {
+                adminNews[newsEditingIndex] = news;
+                showNotification(`Новость "${title}" обновлена`, 'success');
+                addLogEntry(`Обновлена новость: ${title}`);
+                newsEditingIndex = -1;
+                newsEditingIndexInput.value = '-1';
+            } else {
+                adminNews.unshift(news); // Добавляем в начало, чтобы новые были сверху
+                showNotification(`Новость "${title}" добавлена`, 'success');
+                addLogEntry(`Добавлена новость: ${title}`);
+            }
+            
+            clearNewsForm();
+            renderNewsList();
+            generateNewsCode();
+        }
+
+        function clearNewsForm() {
+            newsTitleInput.value = '';
+            newsContentInput.value = '';
+            newsCategorySelect.value = 'major';
+            newsImageInput.value = '';
+            
+            document.querySelectorAll('.news-picker-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            newsEditingIndexInput.value = '-1';
+            newsEditingIndex = -1;
+            
+            updateNewsPreview();
+        }
+
+        function generateNewsCode() {
+            if (!generatedNewsCode) return;
+            
+            if (adminNews.length === 0) {
+                generatedNewsCode.textContent = `const news = [
+          // Новости отсутствуют - добавьте их через админ-панель
+        ];`;
+                return;
+            }
+            
+            let code = 'const news = [\n';
+            
+            adminNews.forEach((newsItem, index) => {
+                const isLast = index === adminNews.length - 1;
+                code += `  {\n`;
+                code += `    "title": "${newsItem.title.replace(/"/g, '\\"')}",\n`;
+                code += `    "content": "${newsItem.content.replace(/"/g, '\\"').replace(/\n/g, '\\n')}",\n`;
+                code += `    "category": "${newsItem.category}",\n`;
+                code += `    "image": "${newsItem.image || ''}",\n`;
+                code += `    "date": "${newsItem.date || new Date().toISOString()}"\n`;
+                code += `  }${isLast ? '' : ','}\n`;
+            });
+            
+            code += '];';
+            
+            generatedNewsCode.textContent = code;
+        }
+
+        function copyNewsCodeToClipboard() {
+            const codeText = generatedNewsCode.textContent;
+            
+            navigator.clipboard.writeText(codeText)
+                .then(() => {
+                    showNotification('Код новостей скопирован в буфер обмена!', 'success');
+                    addLogEntry('Код новостей скопирован');
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования: ', err);
+                    showNotification('Не удалось скопировать код', 'error');
+                });
+        }
+
+        function loadNewsFromFile() {
+            try {
+                if (typeof news !== 'undefined' && Array.isArray(news)) {
+                    adminNews = JSON.parse(JSON.stringify(news));
+                    renderNewsList();
+                    generateNewsCode();
+                    showNotification(`Загружено ${adminNews.length} новостей из news.js`, 'success');
+                    addLogEntry(`Загружено ${adminNews.length} новостей`);
+                } else {
+                    showNotification('Массив news не найден. Убедитесь, что файл news.js подключен.', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки новостей:', error);
+                showNotification('Ошибка загрузки новостей: ' + error.message, 'error');
+            }
+        }
+
+        function clearAllNews() {
+            if (adminNews.length === 0) {
+                showNotification('Список новостей уже пуст', 'info');
+                return;
+            }
+            
+            if (confirm(`Вы уверены, что хотите удалить все ${adminNews.length} новостей?`)) {
+                adminNews = [];
+                renderNewsList();
+                generateNewsCode();
+                showNotification('Все новости удалены', 'success');
+                addLogEntry('Все новости удалены');
+            }
+        }
+
+        // ===========================================
+        // ФУНКЦИИ ДЛЯ РЕЖИМА ОБСЛУЖИВАНИЯ
+        // ===========================================
+
+        function loadMaintenanceStatus() {
+            fetch('maintenance.txt?t=' + Date.now())
+            .then(response => {
+                if (!response.ok) {
+                    if (maintenanceToggle) {
+                        maintenanceToggle.checked = false;
+                    }
+                    if (maintenanceStatusText) {
+                        maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Файл maintenance.txt не найден</small>';
+                    }
+                    return;
+                }
+                return response.text();
+            })
+            .then(status => {
+                if (status !== undefined) {
+                    const isActive = status.trim() === '1';
+                    
+                    if (maintenanceToggle) {
+                        maintenanceToggle.checked = isActive;
+                    }
+                    
+                    if (maintenanceStatusText) {
+                        if (isActive) {
+                            maintenanceStatusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span style="color: #ff3333;">Режим обслуживания АКТИВЕН</span><br><small style="color: #ff9999;">Все пользователи видят экран ошибки</small>';
+                        } else {
+                            maintenanceStatusText.innerHTML = '<i class="fas fa-check-circle"></i> <span style="color: #4CAF50;">Сайт работает нормально</span><br><small style="color: #aaa;">Все пользователи имеют доступ к сайту</small>';
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки статуса:', error);
+                if (maintenanceStatusText) {
+                    maintenanceStatusText.innerHTML = '<i class="fas fa-question-circle"></i> <span style="color: #ff9800;">Статус неизвестен</span><br><small style="color: #aaa;">Не удалось проверить файл</small>';
+                }
+            });
+            
+            loadMaintenanceLog();
+        }
+
+        function applyMaintenanceChanges() {
+            const isActive = maintenanceToggle.checked;
+            
+            if (isActive) {
+                const instruction = `🎯 ДЛЯ ВКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
+                
 1. Откройте файл maintenance.txt в корне сайта
 2. Измените цифру 0 на 1
 3. Сохраните файл
 4. Готово! Все пользователи увидят ошибку.
 
-📁 Файл находится здесь: вашсайт.ru/maintenance.txt
+📁 Файл находится здесь: вашсайт.ru/maintenance.txt`;
 
-📱 На телефоне: попросите администратора изменить файл.`;
-
-        alert(instruction);
-        addLogEntry('Запрошено включение режима обслуживания');
-        
-        // Обновляем статус через 5 секунд (после того как пользователь изменит файл)
-        setTimeout(loadMaintenanceStatus, 5000);
-        
-        showNotification('📝 Измените файл maintenance.txt: замените 0 на 1', 'success');
-        
-    } else {
-        // ВЫКЛЮЧЕНИЕ РЕЖИМА
-        const instruction = `🎯 ДЛЯ ВЫКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
-        
+                alert(instruction);
+                addLogEntry('Запрошено включение режима обслуживания');
+                setTimeout(loadMaintenanceStatus, 5000);
+                showNotification('📝 Измените файл maintenance.txt: замените 0 на 1', 'success');
+            } else {
+                const instruction = `🎯 ДЛЯ ВЫКЛЮЧЕНИЯ РЕЖИМА ОБСЛУЖИВАНИЯ:
+                
 1. Откройте файл maintenance.txt
 2. Измените цифру 1 на 0
 3. Сохраните файл
 4. Сайт снова доступен!`;
 
-        alert(instruction);
-        addLogEntry('Запрошено выключение режима обслуживания');
-        
-        // Обновляем статус через 5 секунд
-        setTimeout(loadMaintenanceStatus, 5000);
-        
-        showNotification('📝 Измените файл maintenance.txt: замените 1 на 0', 'success');
-    }
-}
-
-// Функция для предпросмотра экрана ошибки
-function testMaintenancePreview() {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a0a0a;
-        color: #fff;
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    `;
-    
-    modal.innerHTML = `
-        <div style="max-width: 700px; background: #1a1a1a; padding: 40px; border-radius: 10px; border: 2px solid #ff3333; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);">
-            
-            <div style="display:flex; align-items:center; justify-content:center; gap:12px; color:#ff3333; font-size:2.5em; margin-bottom:20px; text-transform:uppercase; font-weight:900;">
-                <img src="screenshots/Ошибка.png" alt="!" style="width:42px; height:auto;">
-                ОШИБКА СОЕДИНЕНИЯ!
-            </div>
-    
-            <div style="color: #ff6666; font-size: 1.5em; margin-bottom: 30px;">
-                Не удалось установить соединение с сервером
-            </div>
-    
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 30px; font-size: 1.1em;">
-                К сожалению возникла непредвиденная ошибка.<br>
-                Попробуйте повторить операцию. Если ошибка повторится,<br>
-                попробуйте перезагрузить страницу или обратитесь к администратору.
-            </div>
-    
-            <div style="background: #222; padding: 15px; border-radius: 5px; font-family: monospace; color: #ff8888; font-size: 1.2em; margin: 20px 0; border-left: 4px solid #ff3333;">
-                ERR_CONNECTION_RESET
-            </div>
-    
-            <div style="margin-top: 30px;">
-                <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em;">
-                    <i class="fas fa-times"></i> Закрыть предпросмотр
-                </button>
-            </div>
-        </div>
-    `;
-        
-    document.body.appendChild(modal);
-    addLogEntry('Открыт предпросмотр экрана ошибки');
-}
-
-// Функция для добавления записи в журнал
-function addLogEntry(message) {
-    if (!logEntries) return;
-    
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
-    
-    const logEntry = document.createElement('div');
-    logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
-    logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${message}`;
-    
-    logEntries.insertBefore(logEntry, logEntries.firstChild);
-    
-    if (logEntries.children.length > 10) {
-        logEntries.removeChild(logEntries.lastChild);
-    }
-    
-    saveLogToStorage(message);
-}
-
-// Функция для сохранения лога
-function saveLogToStorage(message) {
-    const now = new Date();
-    const logItem = {
-        time: now.toISOString(),
-        message: message
-    };
-    
-    let logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
-    logs.unshift(logItem);
-    
-    if (logs.length > 50) {
-        logs = logs.slice(0, 50);
-    }
-    
-    localStorage.setItem('maintenance_logs', JSON.stringify(logs));
-}
-
-// Функция для загрузки лога
-function loadMaintenanceLog() {
-    if (!logEntries) return;
-    
-    const logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
-    logEntries.innerHTML = '';
-    
-    if (logs.length === 0) {
-        logEntries.innerHTML = '<div style="color: #666; font-style: italic;">Журнал действий пуст</div>';
-        return;
-    }
-    
-    logs.forEach(log => {
-        const date = new Date(log.time);
-        const timeString = date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
-        
-        const logEntry = document.createElement('div');
-        logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
-        logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${log.message}`;
-        logEntries.appendChild(logEntry);
-    });
-}
-
-// ===========================================
-// ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-// ===========================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализируем DOM элементы
-    initDOMElements();
-    
-    // Инициализируем предпросмотр
-    updateColorPreview();
-    updateGradientPreview();
-    updateCategoryPreview();
-    
-    // Автоматически загружаем роли из файла при загрузке страницы
-    setTimeout(loadRolesFromFile, 100);
-
-    loadAvailableImages();
-    
-    // Загружаем статус режима обслуживания
-    loadMaintenanceStatus();
-    
-    // Обработчики событий для формы ролей
-    document.getElementById('save-role').addEventListener('click', saveRole);
-    document.getElementById('clear-form').addEventListener('click', clearForm);
-    
-    // Обработчики для генерации и копирования кода
-    document.getElementById('generate-code').addEventListener('click', generateCode);
-    document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
-    
-    // Обработчики для загрузки и очистки ролей
-    document.getElementById('load-roles').addEventListener('click', loadRolesFromFile);
-    document.getElementById('clear-all-roles').addEventListener('click', clearAllRoles);
-    
-    // Обработчики для обновления предпросмотра
-    if (roleColorInput) {
-        roleColorInput.addEventListener('input', updateColorPreview);
-    }
-    
-    if (roleGradientSelect) {
-        roleGradientSelect.addEventListener('change', updateGradientPreview);
-    }
-    
-    if (roleCategorySelect) {
-        roleCategorySelect.addEventListener('change', updateCategoryPreview);
-    }
-    
-    // Обработчики для быстрого выбора цвета
-    document.querySelectorAll('.color-help-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const color = this.getAttribute('data-color');
-            roleColorInput.value = color;
-            updateColorPreview();
-            
-            // Подбираем подходящий градиент
-            for (const [gradientType, gradientColor] of Object.entries(gradientColors)) {
-                if (gradientColor.toLowerCase() === color.toLowerCase()) {
-                    roleGradientSelect.value = gradientType;
-                    updateGradientPreview();
-                    break;
-                }
+                alert(instruction);
+                addLogEntry('Запрошено выключение режима обслуживания');
+                setTimeout(loadMaintenanceStatus, 5000);
+                showNotification('📝 Измените файл maintenance.txt: замените 1 на 0', 'success');
             }
-        });
-    });
-    
-    // Обработчики для режима обслуживания
-    if (applyMaintenanceBtn) {
-        applyMaintenanceBtn.addEventListener('click', applyMaintenanceChanges);
-    }
-    
-    if (testMaintenanceBtn) {
-        testMaintenanceBtn.addEventListener('click', testMaintenancePreview);
-    }
-    
-    // Сохранение по нажатию Ctrl+Enter
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.key === 'Enter') {
-            saveRole();
         }
-    });
-    
-    // Добавляем начальную запись в лог
-    setTimeout(() => {
-        addLogEntry('Админ-панель загружена');
-    }, 500);
-});
+
+        function testMaintenancePreview() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #0a0a0a;
+                color: #fff;
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            `;
+            
+            modal.innerHTML = `
+                <div style="max-width: 700px; background: #1a1a1a; padding: 40px; border-radius: 10px; border: 2px solid #ff3333; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);">
+                    
+                    <div style="display:flex; align-items:center; justify-content:center; gap:12px; color:#ff3333; font-size:2.5em; margin-bottom:20px; text-transform:uppercase; font-weight:900;">
+                        <img src="screenshots/Ошибка.png" alt="!" style="width:42px; height:auto;" onerror="this.style.display='none'">
+                        ОШИБКА СОЕДИНЕНИЯ!
+                    </div>
+            
+                    <div style="color: #ff6666; font-size: 1.5em; margin-bottom: 30px;">
+                        Не удалось установить соединение с сервером
+                    </div>
+            
+                    <div style="color: #ccc; line-height: 1.6; margin-bottom: 30px; font-size: 1.1em;">
+                        К сожалению возникла непредвиденная ошибка.<br>
+                        Попробуйте повторить операцию. Если ошибка повторится,<br>
+                        попробуйте перезагрузить страницу или обратитесь к администратору.
+                    </div>
+            
+                    <div style="background: #222; padding: 15px; border-radius: 5px; font-family: monospace; color: #ff8888; font-size: 1.2em; margin: 20px 0; border-left: 4px solid #ff3333;">
+                        ERR_CONNECTION_RESET
+                    </div>
+            
+                    <div style="margin-top: 30px;">
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff3333; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 1em;">
+                            <i class="fas fa-times"></i> Закрыть предпросмотр
+                        </button>
+                    </div>
+                </div>
+            `;
+                
+            document.body.appendChild(modal);
+            addLogEntry('Открыт предпросмотр экрана ошибки');
+        }
+
+        function addLogEntry(message) {
+            if (!logEntries) return;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+            
+            const logEntry = document.createElement('div');
+            logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
+            logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${message}`;
+            
+            logEntries.insertBefore(logEntry, logEntries.firstChild);
+            
+            if (logEntries.children.length > 10) {
+                logEntries.removeChild(logEntries.lastChild);
+            }
+            
+            saveLogToStorage(message);
+        }
+
+        function saveLogToStorage(message) {
+            const now = new Date();
+            const logItem = {
+                time: now.toISOString(),
+                message: message
+            };
+            
+            let logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
+            logs.unshift(logItem);
+            
+            if (logs.length > 50) {
+                logs = logs.slice(0, 50);
+            }
+            
+            localStorage.setItem('maintenance_logs', JSON.stringify(logs));
+        }
+
+        function loadMaintenanceLog() {
+            if (!logEntries) return;
+            
+            const logs = JSON.parse(localStorage.getItem('maintenance_logs') || '[]');
+            logEntries.innerHTML = '';
+            
+            if (logs.length === 0) {
+                logEntries.innerHTML = '<div style="color: #666; font-style: italic;">Журнал действий пуст</div>';
+                return;
+            }
+            
+            logs.forEach(log => {
+                const date = new Date(log.time);
+                const timeString = date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+                
+                const logEntry = document.createElement('div');
+                logEntry.style.cssText = 'padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85em;';
+                logEntry.innerHTML = `<span style="color: #4cc9f0;">[${timeString}]</span> ${log.message}`;
+                logEntries.appendChild(logEntry);
+            });
+        }
+
+        // ===========================================
+        // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+        // ===========================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем DOM элементы
+            initDOMElements();
+            
+            // Инициализируем табы
+            initTabs();
+            
+            // Инициализируем предпросмотр для ролей
+            updateColorPreview();
+            updateGradientPreview();
+            updateCategoryPreview();
+            
+            // Инициализируем опции изображений для новостей
+            initNewsImageOptions();
+            
+            // Автоматически загружаем роли и новости
+            setTimeout(loadRolesFromFile, 100);
+            setTimeout(loadNewsFromFile, 200);
+            
+            loadAvailableImages();
+            
+            // Загружаем статус режима обслуживания
+            loadMaintenanceStatus();
+            
+            // Обработчики событий для формы ролей
+            document.getElementById('save-role').addEventListener('click', saveRole);
+            document.getElementById('clear-form').addEventListener('click', clearForm);
+            
+            // Обработчики для генерации и копирования кода ролей
+            document.getElementById('generate-code').addEventListener('click', generateCode);
+            document.getElementById('copy-code').addEventListener('click', copyCodeToClipboard);
+            
+            // Обработчики для загрузки и очистки ролей
+            document.getElementById('load-roles').addEventListener('click', loadRolesFromFile);
+            document.getElementById('clear-all-roles').addEventListener('click', clearAllRoles);
+            
+            // Обработчики для формы новостей
+            document.getElementById('save-news').addEventListener('click', saveNews);
+            document.getElementById('clear-news-form').addEventListener('click', clearNewsForm);
+            document.getElementById('generate-news-code').addEventListener('click', generateNewsCode);
+            document.getElementById('copy-news-code').addEventListener('click', copyNewsCodeToClipboard);
+            document.getElementById('load-news').addEventListener('click', loadNewsFromFile);
+            document.getElementById('clear-all-news').addEventListener('click', clearAllNews);
+            
+            // Обработчики для обновления предпросмотра новостей
+            if (newsTitleInput) {
+                newsTitleInput.addEventListener('input', updateNewsPreview);
+            }
+            if (newsContentInput) {
+                newsContentInput.addEventListener('input', updateNewsPreview);
+            }
+            if (newsCategorySelect) {
+                newsCategorySelect.addEventListener('change', updateNewsPreview);
+            }
+            
+            // Обработчики для обновления предпросмотра ролей
+            if (roleColorInput) {
+                roleColorInput.addEventListener('input', updateColorPreview);
+            }
+            
+            if (roleGradientSelect) {
+                roleGradientSelect.addEventListener('change', updateGradientPreview);
+            }
+            
+            if (roleCategorySelect) {
+                roleCategorySelect.addEventListener('change', updateCategoryPreview);
+            }
+            
+            // Обработчики для быстрого выбора цвета
+            document.querySelectorAll('.color-help-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const color = this.getAttribute('data-color');
+                    roleColorInput.value = color;
+                    updateColorPreview();
+                    
+                    for (const [gradientType, gradientColor] of Object.entries(gradientColors)) {
+                        if (gradientColor.toLowerCase() === color.toLowerCase()) {
+                            roleGradientSelect.value = gradientType;
+                            updateGradientPreview();
+                            break;
+                        }
+                    }
+                });
+            });
+            
+            // Обработчики для режима обслуживания
+            if (applyMaintenanceBtn) {
+                applyMaintenanceBtn.addEventListener('click', applyMaintenanceChanges);
+            }
+            
+            if (testMaintenanceBtn) {
+                testMaintenanceBtn.addEventListener('click', testMaintenancePreview);
+            }
+            
+            // Сохранение по нажатию Ctrl+Enter
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    const activeTab = document.querySelector('.tab.active');
+                    if (activeTab && activeTab.getAttribute('data-tab') === 'roles') {
+                        saveRole();
+                    } else if (activeTab && activeTab.getAttribute('data-tab') === 'news') {
+                        saveNews();
+                    }
+                }
+            });
+            
+            // Добавляем начальную запись в лог
+            setTimeout(() => {
+                addLogEntry('Админ-панель загружена');
+            }, 500);
+        });
     </script>
 </body>
 </html>
