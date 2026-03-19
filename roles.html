@@ -785,17 +785,13 @@
       display: block;
     }
 
-    /* Класс для красной подписи под скриншотом */
-    .role-content-inner .screenshot-caption,
-    .role-content-inner p.screenshot-caption {
-      color: #ff6b6b !important;
-      font-weight: 700 !important;
-      text-align: center !important;
-      margin-top: 5px !important;
-      margin-bottom: 15px !important;
-      font-size: 0.95rem !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.5px !important;
+    /* ИЗМЕНЕНО: теперь просто жирный шрифт и по центру */
+    .role-content-inner .screenshot-caption {
+      font-weight: 700;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
     }
 
     .role-content-inner p {
@@ -1573,26 +1569,8 @@
           moreBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            // Обработка HTML для details - добавляем класс screenshot-caption к определенным параграфам
-            let processedDetails = role.details;
-            
-            // Добавляем класс ко всем параграфам, которые содержат "Рисунок", "Пример скриншота" или текст в квадратных скобках
-            processedDetails = processedDetails.replace(
-              /<p>(Рисунок\s+\d+\..*?)<\/p>/gi,
-              '<p class="screenshot-caption">$1</p>'
-            );
-            
-            processedDetails = processedDetails.replace(
-              /<p>(Пример\s+скриншота.*?)<\/p>/gi,
-              '<p class="screenshot-caption">$1</p>'
-            );
-            
-            processedDetails = processedDetails.replace(
-              /<p>(\[.*?\]\.?.*?)<\/p>/gi,
-              '<p class="screenshot-caption">$1</p>'
-            );
-            
-            detailsBlock.innerHTML = `<div class="role-content-inner">${processedDetails}</div>`;
+            // Просто передаем details без изменений
+            detailsBlock.innerHTML = `<div class="role-content-inner">${role.details}</div>`;
             
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
