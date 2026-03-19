@@ -630,32 +630,6 @@
       line-height: 1.3;
     }
 
-    .news-image {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 2px solid rgba(255, 107, 107, 0.3);
-    }
-
-    .news-image-placeholder {
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      border: 2px solid rgba(255, 107, 107, 0.3);
-    }
-
-    .news-image-placeholder i {
-      font-size: 3rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-
     /* Заголовок карточки с кнопкой */
     .news-card-header {
       display: flex;
@@ -1226,14 +1200,6 @@
         const categoryName = getCategoryName(item.category);
         const formattedDate = formatDate(item.date);
         
-        // Обработка изображения
-        let imageHtml = '';
-        if (item.image) {
-          imageHtml = `<img src="screenshots/${item.image}" class="news-image" alt="${item.title}" onerror="this.style.display='none'">`;
-        } else {
-          imageHtml = `<div class="news-image-placeholder"><i class="fas fa-newspaper"></i></div>`;
-        }
-        
         // Форматируем контент с сохранением переносов строк
         let formattedContent = item.content
           .replace(/\\n/g, '\n')
@@ -1241,9 +1207,8 @@
           .replace(/- /g, '• ')
           .replace(/• /g, '<span style="margin-left: 20px; display: inline-block;">• </span>');
         
-        // Создаем карточку с кнопкой "Подробнее"
+        // Создаем карточку с кнопкой "Подробнее" (без изображения)
         newsCard.innerHTML = `
-          ${imageHtml}
           <div class="news-header">
             <span class="news-category-badge ${categoryClass}">${categoryName}</span>
             <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
