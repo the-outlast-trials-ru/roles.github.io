@@ -239,6 +239,23 @@
             color: white;
         }
 
+        .news-preview-text {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .news-preview-text ul {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+
+        .news-preview-text li {
+            margin-bottom: 5px;
+        }
+
         .news-picker-options {
             display: flex;
             gap: 20px;
@@ -832,7 +849,7 @@
                             <div id="news-preview-content" class="news-preview-content">
                                 <div class="news-preview-category" id="news-preview-category">Крупное обновление</div>
                                 <div class="news-preview-title" id="news-preview-title">Заголовок новости</div>
-                                <div id="news-preview-text">Текст новости будет отображаться здесь...</div>
+                                <div id="news-preview-text" class="news-preview-text">Текст новости будет отображаться здесь...</div>
                             </div>
                         </div>
                     </div>
@@ -1553,7 +1570,20 @@
             // Обновляем текст
             newsPreviewCategory.textContent = style.badge;
             newsPreviewTitle.textContent = title;
-            newsPreviewText.innerHTML = content;
+            
+            // Сохраняем переносы строк и форматирование списков
+            let formattedContent = content
+                .replace(/\\n/g, '\n') // Экранированные переносы
+                .replace(/\n/g, '<br>') // Заменяем переносы строк на <br>
+                .replace(/- /g, '• ') // Заменяем дефисы на маркеры списка
+                .replace(/• /g, '<span style="display: inline-block; margin-left: 20px;">• </span>'); // Добавляем отступ для маркеров
+            
+            // Дополнительная обработка для списков
+            formattedContent = formattedContent
+                .replace(/<br>• /g, '<br><span style="display: inline-block; margin-left: 20px;">• </span>')
+                .replace(/<br>\d+\. /g, '<br><span style="display: inline-block; margin-left: 20px;">$&</span>');
+            
+            newsPreviewText.innerHTML = formattedContent;
             
             // Обновляем изображение
             if (image) {
@@ -1598,6 +1628,10 @@
                 const categoryClass = news.category || 'regular';
                 const categoryName = newsCategoryStyles[categoryClass]?.badge || 'Новость';
                 
+                // Форматируем контент для предпросмотра в списке
+                let previewContent = news.content.substring(0, 150);
+                previewContent = previewContent.replace(/\n/g, ' '); // Убираем переносы для предпросмотра
+                
                 html += `
                     <div class="news-item">
                         <div class="news-header">
@@ -1607,7 +1641,7 @@
                         <div style="width: 100%;">
                             <h3 style="color: white; margin-bottom: 10px;">${news.title}</h3>
                             <div style="color: #cccccc; max-height: 100px; overflow: hidden; margin-bottom: 10px;">
-                                ${news.content.substring(0, 150)}...
+                                ${previewContent}...
                             </div>
                         </div>
                         <div class="news-actions">
