@@ -308,7 +308,6 @@
       
       .mobile-menu-btn {
         display: block;
-        margin-left: 3em;
       }
       
       .nav-menu {
@@ -429,6 +428,7 @@
       <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
       </ul>
     </div>
   </nav>
@@ -565,6 +565,19 @@
           }
         });
       }
+      
+      // Подсветка активной вкладки
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.nav-menu a');
+      
+      navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
     });
   </script>
   <script src="maintenance-mode.js"></script>
