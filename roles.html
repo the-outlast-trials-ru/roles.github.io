@@ -1107,10 +1107,27 @@
         background-attachment: scroll;
       }
       
+      /* ИСПРАВЛЕНО: кружок и название на одной строке */
       .role-header-main {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
         width: 100%;
+      }
+      
+      .role-dot-large {
+        margin-right: 5px;
+      }
+      
+      .role-title {
+        flex: 1;
+        min-width: 150px;
+      }
+      
+      .role-category {
+        width: auto;
+        margin-top: 0;
+        margin-left: auto;
       }
       
       .role-actions {
@@ -1139,13 +1156,6 @@
       
       .member-nickname {
         font-size: 0.8rem;
-      }
-      
-      /* Категории ролей на мобилках занимают всю ширину */
-      .role-category {
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
       }
     }
 
@@ -1188,6 +1198,11 @@
       .members-table td {
         padding: 8px 5px;
         font-size: 0.8rem;
+      }
+      
+      .role-title {
+        min-width: 120px;
+        font-size: 1rem;
       }
     }
   </style>
