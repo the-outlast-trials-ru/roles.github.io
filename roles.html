@@ -770,21 +770,40 @@
       font-weight: 380;
     }
 
-    .role-content-detailed img {
+    .role-content-inner {
+      color: #cccccc;
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .role-content-inner img {
       max-width: 100%;
       height: auto;
       border-radius: 6px;
       margin: 10px 0;
       border: 2px solid rgba(255, 107, 107, 0.3);
+      display: block;
     }
 
-    .role-content-detailed ul,
-    .role-content-detailed ol {
-      margin-left: 20px;
+    /* НОВЫЙ СТИЛЬ: красная жирная надпись по центру под скриншотом */
+    .role-content-inner .screenshot-caption {
+      color: #ff6b6b;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .role-content-inner p {
       margin-bottom: 10px;
     }
 
-    .role-content-detailed p {
+    .role-content-inner ul,
+    .role-content-inner ol {
+      margin-left: 20px;
       margin-bottom: 10px;
     }
 
@@ -1553,17 +1572,8 @@
           moreBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            // Обработка HTML для details
-            let processedDetails = role.details.replace(
-              /<img\s+([^>]*?)src="([^"]+)"([^>]*?)>/gi,
-              (match, beforeSrc, src, afterSrc) => {
-                return `<a href="${src}" target="_blank" rel="noopener noreferrer" class="image-link">
-                  <img ${beforeSrc} src="${src}" ${afterSrc} style="cursor: pointer;">
-                </a>`;
-              }
-            );
-            
-            detailsBlock.innerHTML = `<div class="role-content-inner">${processedDetails}</div>`;
+            // Обработка HTML для details (просто передаем как есть)
+            detailsBlock.innerHTML = `<div class="role-content-inner">${role.details}</div>`;
             
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
