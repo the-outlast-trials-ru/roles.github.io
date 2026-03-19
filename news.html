@@ -408,7 +408,7 @@
       font-weight: 500;
     }
 
-    /* Панель сортировки */
+    /* Панель сортировки - ИСПРАВЛЕНО: только по дате */
     .sort-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -434,7 +434,7 @@
       min-height: 50px;
     }
 
-    /* Сортировка по порядку */
+    /* Сортировка по дате */
     .sort-order {
       display: flex;
       align-items: center;
@@ -470,6 +470,11 @@
       box-sizing: border-box;
       transition: all 0.3s ease;
       font-weight: 380;
+    }
+
+    .sort-select option {
+      background-color: #2a2a3a;
+      color: white;
     }
 
     .sort-select:focus {
@@ -998,17 +1003,16 @@
       </p>
     </div>
 
-    <!-- Панель сортировки -->
+    <!-- Панель сортировки - ИСПРАВЛЕНО: только по дате -->
     <section class="sort-panel">
       <div class="sort-container">
         <div class="sort-order">
           <label for="sort-select" class="sort-label">
-            <i class="fas fa-sort-amount-down"></i> Сортировать:
+            <i class="fas fa-sort-amount-down"></i> Сортировать по дате:
           </label>
           <select id="sort-select" class="sort-select">
             <option value="newest">Сначала новые</option>
             <option value="oldest">Сначала старые</option>
-            <option value="alphabetical">По алфавиту</option>
           </select>
         </div>
 
@@ -1100,9 +1104,6 @@
         case 'oldest':
           statusText = 'Сначала старые';
           break;
-        case 'alphabetical':
-          statusText = 'По алфавиту';
-          break;
         default:
           statusText = 'Сначала новые';
       }
@@ -1110,7 +1111,7 @@
       statusElement.innerHTML = `Сортировка: <span class="status-text">${statusText}</span>`;
     }
 
-    // Функция для сортировки новостей
+    // Функция для сортировки новостей (ТОЛЬКО ПО ДАТЕ)
     function sortNews(newsToSort, sortType) {
       const sortedNews = [...newsToSort];
       
@@ -1121,11 +1122,8 @@
         case 'oldest':
           return sortedNews.sort((a, b) => new Date(a.date) - new Date(b.date));
           
-        case 'alphabetical':
-          return sortedNews.sort((a, b) => a.title.localeCompare(b.title));
-          
         default:
-          return sortedNews;
+          return sortedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
       }
     }
 
