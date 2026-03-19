@@ -14,7 +14,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 380; /* Rubik Light weight */
+      font-weight: 380;
     }
 
     body {
@@ -73,7 +73,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px); /* Размытие фона за навбаром */
+      backdrop-filter: blur(10px);
     }
 
     .nav-left {
@@ -95,7 +95,7 @@
 
     .site-name {
       font-size: 20px;
-      font-weight: 500; /* Немного жирнее для логотипа */
+      font-weight: 500;
       color: #ff2a2a;
       text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
     }
@@ -167,20 +167,18 @@
     }
 
     .page-title {
-  color: #f0f0f0;
-    font-size: 42px;
-    margin-bottom: 15px;
-    letter-spacing: 1.2px;
-    font-weight: 700;
-    text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(-30px);
-    transition: opacity 1s 
-ease, transform 1s 
-ease;
-    font-size: 5rem;
-    text-shadow: 0 0 15px #252dfa, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
-    margin-bottom: 40px;
+      color: #f0f0f0;
+      font-size: 42px;
+      margin-bottom: 15px;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: opacity 1s ease, transform 1s ease;
+      font-size: 5rem;
+      text-shadow: 0 0 15px #252dfa, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+      margin-bottom: 40px;
     }
 
     .page-title i {
@@ -207,7 +205,7 @@ ease;
       font-weight: 380;
     }
 
-    /* Панель фильтров - исправлена */
+    /* Панель фильтров */
     .filter-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -333,7 +331,7 @@ ease;
       min-width: 0;
     }
 
-    /* Кнопки действий - исправлено */
+    /* Кнопки действий */
     .filter-actions {
       display: flex;
       align-items: center;
@@ -351,7 +349,7 @@ ease;
       border: none;
       border-radius: 6px;
       font-size: 0.85rem;
-      font-weight: 500; /* Немного жирнее для кнопок */
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -401,7 +399,7 @@ ease;
     .current-category-text {
       color: #ffffff;
       font-size: 1.2rem;
-      font-weight: 500; /* Немного жирнее для заголовка категории */
+      font-weight: 500;
       margin: 0;
     }
 
@@ -410,7 +408,7 @@ ease;
       font-weight: 500;
     }
 
-    /* Панель сортировки - исправлено расстояние */
+    /* Панель сортировки */
     .sort-panel {
       background-color: rgba(30, 31, 34, 0.9);
       border-radius: 8px;
@@ -436,7 +434,6 @@ ease;
       min-height: 50px;
     }
 
-    /* Сортировка по порядку */
     .sort-order {
       display: flex;
       align-items: center;
@@ -448,7 +445,7 @@ ease;
     .sort-label {
       color: #f0f0f0;
       font-size: 0.9rem;
-      font-weight: 500; /* Немного жирнее для labels */
+      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -480,7 +477,6 @@ ease;
       box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.2);
     }
 
-    /* Информация о сортировке - исправлено расстояние */
     .sort-info {
       display: flex;
       align-items: center;
@@ -514,7 +510,7 @@ ease;
       border: none;
       border-radius: 6px;
       font-size: 0.85rem;
-      font-weight: 500; /* Немного жирнее для кнопок */
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -554,12 +550,12 @@ ease;
     .role-card-detailed {
       background-color: rgba(40, 41, 45, 0.9);
       border-radius: 8px;
-      padding: 15px;
+      padding: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 15px;
       opacity: 0;
       transform: translateY(20px);
       backdrop-filter: blur(5px);
@@ -579,172 +575,43 @@ ease;
       background-color: rgba(40, 41, 45, 0.95);
     }
 
-    .role-card-detailed .more-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: rgba(30, 31, 34, 0.7);
-        border-radius: 6px;
-        margin-top: 0;
-        opacity: 0;
-    }
-    
-    .role-card-detailed .more-content.expanded {
-        max-height: none;
-        padding: 15px;
-        margin-top: 10px;
-        opacity: 1;
-        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                    opacity 0.3s ease 0.2s,
-                    margin-top 0.3s ease;
-    }
-    
-    .more-content-inner {
-        color: #cccccc;
-        line-height: 1.5;
-        font-size: 0.9rem;
-        font-weight: 380;
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    
-    .more-content.expanded .more-content-inner {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.1s;
-    }
-    
-    .more-content-inner img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 6px;
-        margin: 10px 0;
-        border: 2px solid rgba(255, 107, 107, 0.3);
-    }
-    
-    .more-content-inner ul,
-    .more-content-inner ol {
-        margin-left: 20px;
-        margin-bottom: 10px;
-    }
-    
-    .more-content-inner p {
-        margin-bottom: 10px;
-    }
-
-    .more-content-inner a.image-link {
-        display: inline-block;
-        text-decoration: none;
-        transition: transform 0.3s ease;
-    }
-    
-    .more-content-inner a.image-link:hover {
-        transform: scale(1.02);
-    }
-    
-    .more-content-inner a.image-link img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 6px;
-        margin: 10px 0;
-        border: 2px solid rgba(255, 107, 107, 0.3);
-        cursor: pointer;
-    }
-    
-    .more-content-inner a.image-link:hover img {
-        border-color: #ff6b6b;
-        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    }
-
-    /* В стилях для more-content-inner добавьте классы */
-    .more-content-inner .center-text {
-        text-align: center;
-        margin: 15px 0;
-        font-weight: 500;
-        color: #ff6b6b;
-    }
-    
-    .more-content-inner .center-text.large {
-        font-size: 1.1rem;
-    }
-    
-    .more-content-inner .center-text.small {
-        font-size: 0.9rem;
-        color: #cccccc;
-    }
-    
-    .more-btn {
-        background: none;
-        border: none;
-        color: #ff6b6b;
-        cursor: pointer;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin-left: auto;
-        padding: 5px 10px;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-    }
-    
-    .more-btn:hover {
-        background-color: rgba(255, 107, 107, 0.1);
-    }
-    
-    .more-btn i {
-        transition: transform 0.3s ease;
-    }
-    
-    .more-btn.expanded i {
-        transform: rotate(180deg);
-    }
-    
-    .role-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 8px;
-        flex-wrap: wrap;
-    }
-    
-    .role-header-main {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex: 1;
-        min-width: 0;
-        flex-wrap: wrap;
-    }
-    
-    .role-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
+    /* Заголовок роли */
     .role-header {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .role-header-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .role-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .role-dot-large {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
     }
 
     .role-title {
       font-size: 1.2rem;
       color: #ffffff;
-      font-weight: 500; /* Немного жирнее для названий ролей */
+      font-weight: 500;
       flex: 1;
     }
 
@@ -752,66 +619,264 @@ ease;
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 0.8rem;
-      font-weight: 500; /* Немного жирнее для категорий */
+      font-weight: 500;
       border: 1px solid;
       white-space: nowrap;
     }
-    
-    /* Стили для категорий - ЯРКИЕ ЦВЕТА (совпадают с adminka.html) */
+
+    /* Стили для категорий */
     .role-category.-администрация {
-        background-color: #C62828;
-        color: #ffffff;
-        border-color: #a51c1c;
-    }
-    
-    .role-category.-кастомные-роли {
-        background-color: #9C27B0;
-        color: #ffffff;
-        border-color: #7b1fa2;
-    }
-    
-    .role-category.-ивент-роли {
-        background-color: #FF9800;
-        color: #ffffff;
-        border-color: #f57c00;
-    }
-    
-    .role-category.-достижения {
-        background-color: #FFD700;
-        color: #333333;
-        border-color: #ffca28;
-    }
-    
-    .role-category.-основные-роли {
-        background-color: #4CAF50;
-        color: #ffffff;
-        border-color: #388e3c;
-    }
-    
-    .role-category.-бонусные-роли {
-        background-color: #03A9F4;
-        color: #ffffff;
-        border-color: #0288d1;
-    }
-    
-    .role-category.-платные--vip-роли {
-        background-color: #00E5FF;
-        color: #333333;
-        border-color: #00bcd4;
-    }
-    
-    .role-category.-community {
-        background-color: #5DADE2;
-        color: #ffffff;
-        border-color: #3498db;
-    }
-    
-    .role-category.-другое {
-        background-color: #999999;
-        color: #ffffff;
-        border-color: #777777;
+      background-color: #C62828;
+      color: #ffffff;
+      border-color: #a51c1c;
     }
 
+    .role-category.-кастомные-роли {
+      background-color: #9C27B0;
+      color: #ffffff;
+      border-color: #7b1fa2;
+    }
+
+    .role-category.-ивент-роли {
+      background-color: #FF9800;
+      color: #ffffff;
+      border-color: #f57c00;
+    }
+
+    .role-category.-достижения {
+      background-color: #FFD700;
+      color: #333333;
+      border-color: #ffca28;
+    }
+
+    .role-category.-основные-роли {
+      background-color: #4CAF50;
+      color: #ffffff;
+      border-color: #388e3c;
+    }
+
+    .role-category.-бонусные-роли {
+      background-color: #03A9F4;
+      color: #ffffff;
+      border-color: #0288d1;
+    }
+
+    .role-category.-платные--vip-роли {
+      background-color: #00E5FF;
+      color: #333333;
+      border-color: #00bcd4;
+    }
+
+    .role-category.-community {
+      background-color: #5DADE2;
+      color: #ffffff;
+      border-color: #3498db;
+    }
+
+    .role-category.-другое {
+      background-color: #999999;
+      color: #ffffff;
+      border-color: #777777;
+    }
+
+    /* Кнопки действий */
+    .more-btn, .members-btn {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 15px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      white-space: nowrap;
+      background-color: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .members-btn {
+      color: #5865F2;
+      background-color: rgba(88, 101, 242, 0.1);
+      border-color: rgba(88, 101, 242, 0.3);
+    }
+
+    .more-btn:hover {
+      background-color: rgba(255, 107, 107, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .members-btn:hover {
+      background-color: rgba(88, 101, 242, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .more-btn i, .members-btn i {
+      transition: transform 0.3s ease;
+      font-size: 0.8rem;
+    }
+
+    .more-btn.expanded i {
+      transform: rotate(180deg);
+    }
+
+    .members-btn.expanded i {
+      transform: rotate(180deg);
+    }
+
+    .more-btn.expanded {
+      background-color: rgba(255, 107, 107, 0.2);
+      border-color: #ff6b6b;
+    }
+
+    .members-btn.expanded {
+      background-color: rgba(88, 101, 242, 0.2);
+      border-color: #5865F2;
+    }
+
+    /* Контент роли (скрыт по умолчанию) */
+    .role-content-detailed,
+    .members-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: rgba(30, 31, 34, 0.7);
+      border-radius: 6px;
+      margin-top: 0;
+      opacity: 0;
+    }
+
+    .role-content-detailed.expanded,
+    .members-list.expanded {
+      max-height: none;
+      padding: 15px;
+      margin-top: 10px;
+      opacity: 1;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                  opacity 0.3s ease 0.2s,
+                  margin-top 0.3s ease;
+    }
+
+    .role-content-detailed {
+      color: #cccccc;
+      line-height: 1.5;
+      font-size: 0.9rem;
+      font-weight: 380;
+    }
+
+    .role-content-detailed img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 10px 0;
+      border: 2px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .role-content-detailed ul,
+    .role-content-detailed ol {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .role-content-detailed p {
+      margin-bottom: 10px;
+    }
+
+    /* Список участников */
+    .members-list {
+      color: #cccccc;
+    }
+
+    .members-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .members-list-header h3 {
+      color: #5865F2;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .members-count {
+      background-color: rgba(88, 101, 242, 0.2);
+      color: #5865F2;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background-color: rgba(40, 41, 45, 0.8);
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .member-item:hover {
+      background-color: rgba(88, 101, 242, 0.1);
+      border-color: rgba(88, 101, 242, 0.3);
+      transform: translateX(5px);
+    }
+
+    .member-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .member-name {
+      font-size: 0.95rem;
+      color: #ffffff;
+      font-weight: 400;
+      word-break: break-word;
+    }
+
+    .member-status {
+      font-size: 0.7rem;
+      color: #2ed573;
+      margin-left: auto;
+    }
+
+    .member-status i {
+      font-size: 0.5rem;
+    }
+
+    .no-members {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Описание роли */
     .role-description-detailed {
       color: #cccccc;
       line-height: 1.5;
@@ -978,7 +1043,7 @@ ease;
       }
       
       .role-card-detailed {
-        padding: 12px;
+        padding: 15px;
       }
       
       .role-title {
@@ -990,9 +1055,22 @@ ease;
         padding: 10px;
       }
       
-      /* На мобильных фиксируем фон только если картинка большая */
       .bg-image {
         background-attachment: scroll;
+      }
+      
+      .role-header-main {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .role-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      
+      .members-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1029,6 +1107,16 @@ ease;
       .sort-status {
         font-size: 0.8rem;
       }
+      
+      .role-actions {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .more-btn, .members-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -1054,6 +1142,7 @@ ease;
       <ul class="nav-menu" id="nav-menu">
         <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
         <li><a href="roles.html" class="active"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
       </ul>
     </div>
   </nav>
@@ -1136,20 +1225,62 @@ ease;
       <div id="no-results" class="no-results" style="display: none;">
         <i class="fas fa-search fa-3x"></i>
         <h3>Роли не найдены</h3>
-        <p>Попробуйте изменить параметры поиска или выбрать другую категорие</p>
+        <p>Попробуйте изменить параметры поиска или выбрать другую категорию</p>
       </div>
     </section>
   </main>
 
   <script src="roles.js"></script>
   <script>
+    // Данные участников (в реальном проекте должны загружаться с сервера)
+    const membersData = {
+      // Ключ - название роли, значение - массив участников
+      "Администратор": [
+        { name: "Alex", avatar: "A" },
+        { name: "Mike", avatar: "M" }
+      ],
+      "Модератор": [
+        { name: "John", avatar: "J" },
+        { name: "Sarah", avatar: "S" },
+        { name: "David", avatar: "D" }
+      ],
+      "Легенда": [
+        { name: "Robert", avatar: "R" },
+        { name: "Elena", avatar: "E" },
+        { name: "Max", avatar: "M" },
+        { name: "Anna", avatar: "A" }
+      ],
+      "Хранитель": [
+        { name: "Peter", avatar: "P" },
+        { name: "Julia", avatar: "J" }
+      ],
+      "Ивент-мейкер": [
+        { name: "Tom", avatar: "T" }
+      ],
+      "VIP": [
+        { name: "Chris", avatar: "C" },
+        { name: "Nina", avatar: "N" },
+        { name: "Paul", avatar: "P" },
+        { name: "Maria", avatar: "M" },
+        { name: "George", avatar: "G" }
+      ],
+      "Участник": [
+        { name: "Alice", avatar: "A" },
+        { name: "Bob", avatar: "B" },
+        { name: "Charlie", avatar: "C" },
+        { name: "Diana", avatar: "D" },
+        { name: "Eve", avatar: "E" },
+        { name: "Frank", avatar: "F" },
+        { name: "Grace", avatar: "G" },
+        { name: "Henry", avatar: "H" }
+      ]
+    };
+
     // Переменная для хранения текущих отфильтрованных ролей
     let currentFilteredRoles = [];
     
     // Функция для создания корректного CSS класса из категории
     function createCategoryClass(category) {
-      // Заменяем пробелы на дефисы, приводим к нижнему регистру
-      // Убираем все символы кроме букв, цифр и дефисов
       return category.toLowerCase()
         .replace(/\s+/g, '-')
         .replace(/[^a-zа-яё0-9-]/g, '');
@@ -1201,123 +1332,178 @@ ease;
       switch(sortType) {
         case 'alphabetical':
           return sortedRoles.sort((a, b) => a.name.localeCompare(b.name));
-          
         case 'reverse':
           return sortedRoles.sort((a, b) => b.name.localeCompare(a.name));
-          
         case 'color':
           return sortedRoles.sort((a, b) => {
             const colorA = parseInt(a.color.replace('#', ''), 16);
             const colorB = parseInt(b.color.replace('#', ''), 16);
             return colorA - colorB;
           });
-          
         default:
           return sortedRoles;
       }
     }
 
+    // Функция для отображения списка участников
+    function renderMembersList(roleName, members) {
+      if (!members || members.length === 0) {
+        return '<div class="no-members">Участников с этой ролью пока нет</div>';
+      }
+      
+      let membersHtml = `
+        <div class="members-list-header">
+          <h3>Участники с ролью "${roleName}"</h3>
+          <span class="members-count">${members.length}</span>
+        </div>
+        <div class="members-grid">
+      `;
+      
+      members.forEach(member => {
+        membersHtml += `
+          <div class="member-item">
+            <div class="member-avatar">${member.avatar}</div>
+            <span class="member-name">${member.name}</span>
+            <span class="member-status"><i class="fas fa-circle"></i></span>
+          </div>
+        `;
+      });
+      
+      membersHtml += '</div>';
+      return membersHtml;
+    }
+
     function displayRoles(rolesToDisplay) {
-        const rolesList = document.getElementById('roles-list');
-        const noResults = document.getElementById('no-results');
-        const resultsCount = document.querySelector('#results-count span');
+      const rolesList = document.getElementById('roles-list');
+      const noResults = document.getElementById('no-results');
+      const resultsCount = document.querySelector('#results-count span');
+      
+      rolesList.innerHTML = '';
+      resultsCount.textContent = rolesToDisplay.length;
+      
+      if (rolesToDisplay.length === 0) {
+        noResults.style.display = 'block';
+        return;
+      }
+      
+      noResults.style.display = 'none';
+      
+      rolesToDisplay.forEach(role => {
+        const roleCard = document.createElement('div');
+        roleCard.className = 'role-card-detailed';
         
-        rolesList.innerHTML = '';
-        resultsCount.textContent = rolesToDisplay.length;
-        resultsCount.style.marginLeft = '5px';
+        const categoryClass = createCategoryClass(role.category);
+        const members = membersData[role.name] || [];
         
-        if (rolesToDisplay.length === 0) {
-            noResults.style.display = 'block';
-            return;
+        // Создаем карточку с двумя кнопками
+        let buttonsHtml = '';
+        
+        if (role.details) {
+          buttonsHtml += `
+            <button class="more-btn" data-expanded="false" data-type="details">
+              <span>Подробнее</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          `;
         }
         
-        noResults.style.display = 'none';
+        buttonsHtml += `
+          <button class="members-btn" data-expanded="false" data-type="members">
+            <span>Участники</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        `;
         
-        rolesToDisplay.forEach(role => {
-            const roleCard = document.createElement('div');
-            roleCard.className = 'role-card-detailed';
+        roleCard.innerHTML = `
+          <div class="role-header">
+            <div class="role-header-main">
+              <span class="role-dot-large" style="background:${role.gradient}"></span>
+              <div class="role-title" style="color:${role.color}">${role.name}</div>
+              <span class="role-category ${categoryClass}">${role.category}</span>
+            </div>
+            <div class="role-actions">
+              ${buttonsHtml}
+            </div>
+          </div>
+          <div class="role-description-detailed">${role.description}</div>
+          ${role.details ? '<div class="role-content-detailed"></div>' : ''}
+          <div class="members-list"></div>
+        `;
+        
+        rolesList.appendChild(roleCard);
+        
+        // Добавляем обработчики для кнопок
+        const moreBtn = roleCard.querySelector('.more-btn');
+        const membersBtn = roleCard.querySelector('.members-btn');
+        const detailsBlock = roleCard.querySelector('.role-content-detailed');
+        const membersBlock = roleCard.querySelector('.members-list');
+        
+        if (moreBtn && detailsBlock) {
+          moreBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            const categoryClass = createCategoryClass(role.category);
+            // Обработка HTML для details
+            let processedDetails = role.details.replace(
+              /<img\s+([^>]*?)src="([^"]+)"([^>]*?)>/gi,
+              (match, beforeSrc, src, afterSrc) => {
+                return `<a href="${src}" target="_blank" rel="noopener noreferrer" class="image-link">
+                  <img ${beforeSrc} src="${src}" ${afterSrc} style="cursor: pointer;">
+                </a>`;
+              }
+            );
             
-            roleCard.innerHTML = `
-                <div class="role-header">
-                    <div class="role-header-main">
-                        <span class="role-dot-large" style="background:${role.gradient}"></span>
-                        <div class="role-title" style="color:${role.color}">${role.name}</div>
-                        <span class="role-category ${categoryClass}">${role.category}</span>
-                    </div>
-                    ${role.details ? `<button class="more-btn" data-expanded="false">
-                        <span>Подробнее</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>` : ''}
-                </div>
-            `;
+            detailsBlock.innerHTML = `<div class="role-content-inner">${processedDetails}</div>`;
             
-            // Создаем описание роли
-            const desc = document.createElement('div');
-            desc.className = 'role-description-detailed';
-            desc.innerHTML = role.description;
-            roleCard.appendChild(desc);
-            
-            // Добавляем блок с дополнительной информацией если она есть
-            if (role.details) {
-                const moreContent = document.createElement('div');
-                moreContent.className = 'more-content';
-                
-                // Обрабатываем HTML чтобы изображения открывались в новой вкладке
-                let processedDetails = role.details;
-                
-                // Обертываем изображения в ссылки
-                processedDetails = processedDetails.replace(
-                    /<img\s+([^>]*?)src="([^"]+)"([^>]*?)>/gi,
-                    (match, beforeSrc, src, afterSrc) => {
-                        return `<a href="${src}" target="_blank" rel="noopener noreferrer" class="image-link">
-                            <img ${beforeSrc} src="${src}" ${afterSrc} style="cursor: pointer;">
-                        </a>`;
-                    }
-                );
-                
-                moreContent.innerHTML = `<div class="more-content-inner">${processedDetails}</div>`;
-                roleCard.appendChild(moreContent);
-                
-                // Добавляем обработчик для кнопки "Подробнее"
-                const moreBtn = roleCard.querySelector('.more-btn');
-                
-                moreBtn.addEventListener('click', function() {
-                    const isExpanded = this.getAttribute('data-expanded') === 'true';
-                    
-                    if (isExpanded) {
-                        this.setAttribute('data-expanded', 'false');
-                        this.classList.remove('expanded');
-                        moreContent.classList.remove('expanded');
-                        this.innerHTML = '<span>Подробнее</span><i class="fas fa-chevron-down"></i>';
-                    } else {
-                        this.setAttribute('data-expanded', 'true');
-                        this.classList.add('expanded');
-                        moreContent.classList.add('expanded');
-                        this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
-                    }
-                });
+            if (isExpanded) {
+              this.setAttribute('data-expanded', 'false');
+              this.classList.remove('expanded');
+              detailsBlock.classList.remove('expanded');
+              this.innerHTML = '<span>Подробнее</span><i class="fas fa-chevron-down"></i>';
+            } else {
+              this.setAttribute('data-expanded', 'true');
+              this.classList.add('expanded');
+              detailsBlock.classList.add('expanded');
+              this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
             }
+          });
+        }
+        
+        if (membersBtn && membersBlock) {
+          membersBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            rolesList.appendChild(roleCard);
-        });
-        
-        // Запуск анимации карточек
-        setTimeout(animateRoleCards, 100);
-        
-        // Добавляем обработчики для изображений (на всякий случай)
-        setTimeout(() => {
-            document.querySelectorAll('.more-content-inner img').forEach(img => {
-                if (!img.parentElement.classList.contains('image-link')) {
-                    img.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        window.open(this.src, '_blank');
-                    });
-                    img.style.cursor = 'pointer';
-                }
+            membersBlock.innerHTML = renderMembersList(role.name, members);
+            
+            if (isExpanded) {
+              this.setAttribute('data-expanded', 'false');
+              this.classList.remove('expanded');
+              membersBlock.classList.remove('expanded');
+              this.innerHTML = '<span>Участники</span><i class="fas fa-chevron-down"></i>';
+            } else {
+              this.setAttribute('data-expanded', 'true');
+              this.classList.add('expanded');
+              membersBlock.classList.add('expanded');
+              this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+            }
+          });
+        }
+      });
+      
+      // Запуск анимации карточек
+      setTimeout(animateRoleCards, 100);
+      
+      // Добавляем обработчики для изображений
+      setTimeout(() => {
+        document.querySelectorAll('.role-content-inner img').forEach(img => {
+          if (!img.parentElement.classList.contains('image-link')) {
+            img.addEventListener('click', function(e) {
+              e.preventDefault();
+              window.open(this.src, '_blank');
             });
-        }, 150);
+            img.style.cursor = 'pointer';
+          }
+        });
+      }, 150);
     }
 
     function populateCategories() {
@@ -1473,7 +1659,6 @@ ease;
           }
         });
         
-        // Закрытие меню при клике на ссылку
         const navLinks = document.querySelectorAll('.nav-menu a');
         navLinks.forEach(link => {
           link.addEventListener('click', function() {
@@ -1483,7 +1668,6 @@ ease;
           });
         });
         
-        // Закрытие меню при клике вне его
         document.addEventListener('click', function(event) {
           if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
             navMenu.classList.remove('active');
@@ -1497,14 +1681,3 @@ ease;
   <script src="maintenance-mode.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
