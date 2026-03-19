@@ -815,7 +815,6 @@
       
       .mobile-menu-btn {
         display: block;
-        margin-left: 2em;
       }
       
       .nav-menu {
@@ -1084,6 +1083,8 @@
   </main>
 
   <script src="news.js"></script>
+  <script src="maintenance-mode.js"></script>
+
   <script>
     // Переменная для хранения текущих отфильтрованных новостей
     let currentFilteredNews = [];
@@ -1371,7 +1372,7 @@
         displayNews(sortedNews);
       });
       
-      // Мобильное меню
+      // Мобильное меню - ИСПРАВЛЕНО
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
       const navMenu = document.getElementById('nav-menu');
       
@@ -1393,8 +1394,10 @@
         navLinks.forEach(link => {
           link.addEventListener('click', function() {
             navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            if (mobileMenuBtn.querySelector('i')) {
+              mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+              mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            }
           });
         });
         
@@ -1402,13 +1405,14 @@
         document.addEventListener('click', function(event) {
           if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
             navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            if (mobileMenuBtn.querySelector('i')) {
+              mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+              mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            }
           }
         });
       }
     });
   </script>   
-  <script src="maintenance-mode.js"></script>
 </body>
 </html>
