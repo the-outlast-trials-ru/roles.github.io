@@ -785,16 +785,17 @@
       display: block;
     }
 
-    /* НОВЫЙ СТИЛЬ: красная жирная надпись по центру под скриншотом */
-    .role-content-inner .screenshot-caption {
-      color: #ff6b6b;
-      font-weight: 700;
-      text-align: center;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    /* Класс для красной подписи под скриншотом */
+    .role-content-inner .screenshot-caption,
+    .role-content-inner p.screenshot-caption {
+      color: #ff6b6b !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      margin-top: 5px !important;
+      margin-bottom: 15px !important;
+      font-size: 0.95rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
     }
 
     .role-content-inner p {
@@ -1126,7 +1127,7 @@
         background-attachment: scroll;
       }
       
-      /* ИСПРАВЛЕНО: кружок и название на одной строке */
+      /* Исправлено: кружок и название на одной строке */
       .role-header-main {
         flex-direction: row;
         align-items: center;
@@ -1572,8 +1573,26 @@
           moreBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
             
-            // Обработка HTML для details (просто передаем как есть)
-            detailsBlock.innerHTML = `<div class="role-content-inner">${role.details}</div>`;
+            // Обработка HTML для details - добавляем класс screenshot-caption к определенным параграфам
+            let processedDetails = role.details;
+            
+            // Добавляем класс ко всем параграфам, которые содержат "Рисунок", "Пример скриншота" или текст в квадратных скобках
+            processedDetails = processedDetails.replace(
+              /<p>(Рисунок\s+\d+\..*?)<\/p>/gi,
+              '<p class="screenshot-caption">$1</p>'
+            );
+            
+            processedDetails = processedDetails.replace(
+              /<p>(Пример\s+скриншота.*?)<\/p>/gi,
+              '<p class="screenshot-caption">$1</p>'
+            );
+            
+            processedDetails = processedDetails.replace(
+              /<p>(\[.*?\]\.?.*?)<\/p>/gi,
+              '<p class="screenshot-caption">$1</p>'
+            );
+            
+            detailsBlock.innerHTML = `<div class="role-content-inner">${processedDetails}</div>`;
             
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
