@@ -21,5 +21,17 @@ const membersData = {
     { name: "OZICHokTTV", nickname: "oz1ch", roles: 17 },
     { name: "RusianAkcher", nickname: "rusianachker", roles: 2 },
     { name: "w3ferens", nickname: "w3ferens", roles: 9 }
-  ]
-};
+  ],
+  "Администрация": [
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
+    { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
+    { name: "berryholls", nickname: "berryholls", roles: 7 },
+    { name: "Хендрик Истерман", nickname: "rrrr6772", roles: 6 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "Lina of Darkness", nickname: "vasilinalev", roles: 6 },
+    { name: "MilissaMckee", nickname: "milissamckee", roles: 26 }
+  ],
+ "Зам": [
+    { name: "✭", nickname: "cult_of_nightmare", roles: 13 }
+  ],
+   };
