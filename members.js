@@ -15,12 +15,24 @@ const membersData = {
     { name: "Olivka", nickname: "olivka6666", roles: 9 }
   ],
   "[100+]🔪": [
-    { name: "?CвЯтoЙ¿", nickname: "reaject", roles: 9 },
+    { name: "?CвЯтoЙ¿", nickname: "reaject", roles: 9},
     { name: "Ветер", nickname: "lesnitskiy", roles: 6 },
     { name: "шейх", nickname: "oleg05952", roles: 4 },
     { name: "OZICHokTTV", nickname: "oz1ch", roles: 17 },
     { name: "RusianAkcher", nickname: "rusianachker", roles: 2 },
     { name: "w3ferens", nickname: "w3ferens", roles: 9 }
+  ],
+  "[500+]🔪": [
+    { name: "Тёма Крымский", nickname: "krustalno_poxyu", roles: 11  },
+    { name: "Flaer1x", nickname: "02384", roles: 11 },
+    { name: "oTeTs", nickname: "die_doteks", roles: 11 },
+    { name: "OZICHokTTV", nickname: "oz1ch", roles: 17 },
+    { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 },
+  ],
+ "[2500+]🔪": [
+    { name: "✭", nickname: "cult_of_nightmare", roles: 13  },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
+    { name: "HelenKever", nickname: "helenkever", roles: 15 },
   ],
   "Администрация": [
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
