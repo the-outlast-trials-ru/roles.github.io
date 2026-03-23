@@ -177,7 +177,7 @@ const membersData = {
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
 ],
-   "Богомол": [
+   "300. Завет Нового Иезекиля": [
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
