@@ -95,7 +95,7 @@ const membersData = {
     { name: "Lexy", nickname: "lexy_s", roles: 11 },
     { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
     { name: "Lina of Darkness", nickname: "vasilinalev", roles: 6 },
-    { name: "LizaKuz", nickname: "lizakuz", roles: 4 },
+    { name: "LizaKuz", nickname: "lizakuz", roles: 4 }
   ],
   "Season 5 🥇": [
     { name: "?Святой¿", nickname: "reajeact", roles: 9 },
@@ -176,5 +176,16 @@ const membersData = {
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
+],
+   "Богомол": [
+    { name: "♡", nickname: "bez_negativa_", roles: 16 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
+    { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
+    { name: "Grief", nickname: "griefgd", roles: 18 },
+    { name: "Isaac", nickname: "isaacgreene", roles: 6 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
+    { name: "otebites", nickname: "afflictedl", roles: 21 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 11 }
 ],
 };
