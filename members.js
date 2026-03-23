@@ -145,7 +145,7 @@ const membersData = {
     { name: "RedBull", nickname: "redbull2436", roles: 11 },
     { name: "Sano", nickname: "justanya.", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 }
-],
+  ],
   "Знаток Пожарной Опасности": [
     { name: ".P.S.I.X.", nickname: "romanbryansk", roles: 11 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
@@ -159,7 +159,7 @@ const membersData = {
     { name: "RedBull", nickname: "redbull2436", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
-],
+  ],
   "Богомол": [
     { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 6 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
@@ -176,7 +176,7 @@ const membersData = {
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
-],
+  ],
    "300. Завет Нового Иезекиля": [
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
@@ -187,5 +187,15 @@ const membersData = {
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 }
-],
+  ],
+    "295. Изгнанные в лес": [
+    { name: "✭", nickname: "cult_of_nightmare", roles: 13  },
+    { name: "HelenKever", nickname: "helenkever", roles: 15 },
+    { name: "PY", nickname: "py4090", roles: 7 },
+    { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
+  ],
+    "275. Еретик": [
+    { name: "꒒ꍏꋪꀤꀘ_꒒ꂦ꒒", nickname: "larik_lol", roles: 11  },
+    { name: "Гарлик Бравлик", nickname: "mr.garlik", roles: 8 }
+  ],
 };
