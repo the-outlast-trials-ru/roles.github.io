@@ -587,6 +587,7 @@
       gap: 10px;
     }
 
+    /* Стили для категорий новостей с бортиками */
     .news-category-badge {
       padding: 6px 15px;
       border-radius: 25px;
@@ -595,24 +596,31 @@
       display: inline-block;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      border: 1px solid;
     }
 
     .news-category-badge.major {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
-      border: 1px solid #4a6fa5;
+      border-color: #4a6fa5;
     }
 
     .news-category-badge.regular {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
-      border: 1px solid #4a6fa5;
+      border-color: #4a6fa5;
     }
 
     .news-category-badge.hotfix {
       background: linear-gradient(135deg, #4a4a4a, #2d2d2d);
       color: white;
-      border: 1px solid #666;
+      border-color: #666;
+    }
+
+    .news-category-badge.news {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      border-color: #5dade2;
     }
 
     .news-date {
@@ -1025,6 +1033,7 @@
             <option value="major">🔥 Крупное обновление</option>
             <option value="regular">📰 Обычное обновление</option>
             <option value="hotfix">🔧 Hotfix Patch Note</option>
+            <option value="news">📢 Новости</option>
           </select>
         </div>
 
@@ -1108,7 +1117,8 @@
       const categories = {
         'major': '🔥 Крупное обновление',
         'regular': '📰 Обычное обновление',
-        'hotfix': '🔧 Hotfix Patch Note'
+        'hotfix': '🔧 Hotfix Patch Note',
+        'news': '📢 Новости'
       };
       return categories[category] || '📰 Новость';
     }
@@ -1210,7 +1220,7 @@
           .replace(/- /g, '• ')
           .replace(/• /g, '<span style="margin-left: 20px; display: inline-block;">• </span>');
         
-        // Создаем карточку с кнопкой "Подробнее" (без панели оценок)
+        // Создаем карточку с кнопкой "Подробнее"
         newsCard.innerHTML = `
           <div class="news-header">
             <span class="news-category-badge ${categoryClass}">${categoryName}</span>
@@ -1374,7 +1384,7 @@
         displayNews(sortedNews);
       });
       
-      // Мобильное меню - ИСПРАВЛЕНО
+      // Мобильное меню
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
       const navMenu = document.getElementById('nav-menu');
       
