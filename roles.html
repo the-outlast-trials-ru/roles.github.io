@@ -789,7 +789,7 @@
     .members-table td:last-child { text-align: center; font-weight: 600; color: #2ed573; }
     .members-table tr:hover td { background-color: rgba(88, 101, 242, 0.1); }
 
-    /* Стили для лаврового венка */
+    /* Стили для лаврового венка с картинкой */
     .member-name-wrapper {
       display: flex;
       align-items: center;
@@ -801,95 +801,49 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      font-size: 1.1rem;
+      width: 32px;
+      height: 32px;
+      background-image: url('screenshots/венок.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .laurel-wreath span {
+      font-size: 0.85rem;
       font-weight: 800;
       position: relative;
-      background: linear-gradient(135deg, #2a5a2a, #3a7a3a);
-      box-shadow: 0 0 0 2px #ffd700, 0 0 0 4px #2a5a2a;
+      z-index: 2;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
     }
 
-    /* Лавровые листья вокруг */
-    .laurel-wreath::before {
-      content: "🏆";
-      position: absolute;
-      font-size: 0.7rem;
-      left: -12px;
-      top: -4px;
-      opacity: 0.8;
+    .laurel-wreath.gold span {
+      color: #ffd700;
     }
 
-    .laurel-wreath::after {
-      content: "🏆";
-      position: absolute;
-      font-size: 0.7rem;
-      right: -12px;
-      top: -4px;
-      opacity: 0.8;
+    .laurel-wreath.silver span {
+      color: #c0c0c0;
     }
 
-    .laurel-wreath.gold {
-      background: linear-gradient(135deg, #ffd700, #ffb347);
-      box-shadow: 0 0 0 2px #ffcc00, 0 0 0 4px #b8860b;
-      color: #4a2c00;
+    .laurel-wreath.bronze span {
+      color: #cd7f32;
     }
 
-    .laurel-wreath.gold::before,
-    .laurel-wreath.gold::after {
-      content: "🌿";
-      font-size: 0.8rem;
-      filter: drop-shadow(0 0 2px gold);
-    }
-
-    .laurel-wreath.silver {
-      background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
-      box-shadow: 0 0 0 2px #b0b0b0, 0 0 0 4px #6a6a6a;
-      color: #2a2a2a;
-    }
-
-    .laurel-wreath.silver::before,
-    .laurel-wreath.silver::after {
-      content: "🌿";
-      font-size: 0.8rem;
-      filter: drop-shadow(0 0 2px silver);
-    }
-
-    .laurel-wreath.bronze {
-      background: linear-gradient(135deg, #cd7f32, #b87333);
-      box-shadow: 0 0 0 2px #cd7f32, 0 0 0 4px #8b5a2b;
-      color: #2c1a0a;
-    }
-
-    .laurel-wreath.bronze::before,
-    .laurel-wreath.bronze::after {
-      content: "🌿";
-      font-size: 0.8rem;
-      filter: drop-shadow(0 0 2px #cd7f32);
-    }
-
-    .laurel-wreath.white {
-      background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
-      box-shadow: 0 0 0 2px #e0e0e0, 0 0 0 4px #a0a0a0;
-      color: #4a4a4a;
-    }
-
-    .laurel-wreath.white::before,
-    .laurel-wreath.white::after {
-      content: "🌿";
-      font-size: 0.8rem;
-      filter: drop-shadow(0 0 2px white);
+    .laurel-wreath.white span {
+      color: #ffffff;
     }
 
     .member-name {
       font-weight: 500;
+      font-size: 1rem;
     }
 
-    .member-name.gold-name { color: #ffd700 !important; text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
-    .member-name.silver-name { color: #c0c0c0 !important; text-shadow: 0 0 4px rgba(192, 192, 192, 0.5); }
-    .member-name.bronze-name { color: #cd7f32 !important; text-shadow: 0 0 4px rgba(205, 127, 50, 0.5); }
-    .member-name.white-name { color: #ffffff !important; text-shadow: 0 0 3px rgba(255, 255, 255, 0.5); }
+    .member-name.gold-name { color: #ffd700 !important; text-shadow: 0 0 3px rgba(255, 215, 0, 0.5); }
+    .member-name.silver-name { color: #c0c0c0 !important; text-shadow: 0 0 2px rgba(192, 192, 192, 0.5); }
+    .member-name.bronze-name { color: #cd7f32 !important; text-shadow: 0 0 2px rgba(205, 127, 50, 0.5); }
+    .member-name.white-name { color: #ffffff !important; text-shadow: 0 0 2px rgba(255, 255, 255, 0.5); }
 
     .member-nickname {
       color: #ff6b6b;
@@ -981,8 +935,8 @@
       .members-table { display: block; overflow-x: auto; white-space: nowrap; }
       .members-table th, .members-table td { padding: 10px 8px; font-size: 0.85rem; }
       .member-nickname { font-size: 0.8rem; }
-      .laurel-wreath { min-width: 40px; height: 40px; font-size: 0.9rem; }
-      .laurel-wreath::before, .laurel-wreath::after { display: none; }
+      .laurel-wreath { width: 28px; height: 28px; }
+      .laurel-wreath span { font-size: 0.75rem; }
       .member-name-wrapper { gap: 8px; }
     }
 
@@ -996,7 +950,8 @@
       .results-count, .sort-status { font-size: 0.8rem; }
       .members-table th, .members-table td { padding: 8px 5px; font-size: 0.8rem; }
       .role-title { min-width: 120px; font-size: 1rem; }
-      .laurel-wreath { min-width: 36px; height: 36px; font-size: 0.8rem; }
+      .laurel-wreath { width: 26px; height: 26px; }
+      .laurel-wreath span { font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -1155,7 +1110,6 @@
       if (!membersToSort || membersToSort.length === 0) return [];
       const sortedMembers = [...membersToSort];
       
-      // Сначала сортируем по месту (place), затем по выбранному типу сортировки
       switch(sortType) {
         case 'name-asc':
           return sortedMembers.sort((a, b) => {
@@ -1236,7 +1190,7 @@
         if (wreathClass) {
           nameHtml = `
             <div class="member-name-wrapper">
-              <div class="laurel-wreath ${wreathClass}">${member.place}</div>
+              <div class="laurel-wreath ${wreathClass}"><span>${member.place}</span></div>
               <span class="member-name ${nameClass}">${member.name}</span>
             </div>
           `;
@@ -1251,7 +1205,7 @@
               <div class="member-nickname">${member.nickname}</div>
             </td>
             <td class="member-roles" style="vertical-align: middle;">${member.roles}</td>
-           </tr>
+          </tr>
         `;
         
         if (index < sortedMembers.length - 1) {
@@ -1407,7 +1361,7 @@
         const elements = ['.page-title', '.page-description', '.current-category', '.sort-panel', '.roles-container'];
         elements.forEach(sel => {
           const el = document.querySelector(sel);
-          if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0);'; }
+          if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }
         });
       }, 100);
       
