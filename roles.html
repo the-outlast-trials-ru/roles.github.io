@@ -789,11 +789,11 @@
     .members-table td:last-child { text-align: center; font-weight: 600; color: #2ed573; }
     .members-table tr:hover td { background-color: rgba(88, 101, 242, 0.1); }
 
-    /* Стили для лаврового венка с картинкой */
+    /* Стили для лаврового венка - УВЕЛИЧЕННЫЙ РАЗМЕР */
     .member-name-wrapper {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
@@ -801,8 +801,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       background-image: url('screenshots/венок.png');
       background-size: contain;
       background-repeat: no-repeat;
@@ -812,27 +812,31 @@
     }
 
     .laurel-wreath span {
-      font-size: 0.85rem;
+      font-size: 1.1rem;
       font-weight: 800;
       position: relative;
       z-index: 2;
-      text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     }
 
     .laurel-wreath.gold span {
       color: #ffd700;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     }
 
     .laurel-wreath.silver span {
       color: #c0c0c0;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     }
 
     .laurel-wreath.bronze span {
       color: #cd7f32;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     }
 
     .laurel-wreath.white span {
       color: #ffffff;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     }
 
     .member-name {
@@ -897,6 +901,7 @@
     .no-results h3 { color: #ffffff; font-size: 1.5rem; margin-bottom: 10px; font-weight: 500; }
     .no-results p { color: #cccccc; font-size: 1rem; }
 
+    /* Адаптивность */
     @media (max-width: 992px) {
       .sort-container { flex-direction: column; align-items: stretch; gap: 12px; }
       .search-box, .category-filter, .filter-actions, .sort-order, .sort-info { min-width: 100%; }
@@ -935,9 +940,16 @@
       .members-table { display: block; overflow-x: auto; white-space: nowrap; }
       .members-table th, .members-table td { padding: 10px 8px; font-size: 0.85rem; }
       .member-nickname { font-size: 0.8rem; }
-      .laurel-wreath { width: 28px; height: 28px; }
-      .laurel-wreath span { font-size: 0.75rem; }
-      .member-name-wrapper { gap: 8px; }
+      .laurel-wreath {
+        width: 38px;
+        height: 38px;
+      }
+      .laurel-wreath span {
+        font-size: 0.95rem;
+      }
+      .member-name-wrapper {
+        gap: 12px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -950,8 +962,16 @@
       .results-count, .sort-status { font-size: 0.8rem; }
       .members-table th, .members-table td { padding: 8px 5px; font-size: 0.8rem; }
       .role-title { min-width: 120px; font-size: 1rem; }
-      .laurel-wreath { width: 26px; height: 26px; }
-      .laurel-wreath span { font-size: 0.7rem; }
+      .laurel-wreath {
+        width: 34px;
+        height: 34px;
+      }
+      .laurel-wreath span {
+        font-size: 0.85rem;
+      }
+      .member-name-wrapper {
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -1177,8 +1197,7 @@
         </div>
         <table class="members-table">
           <thead>
-            <tr><th>Имя (никнейм) участника</th><th>Общее кол-во ролей</th></tr>
-          </thead>
+            <tr><th>Имя (никнейм) участника</th><th>Общее кол-во ролей</th>              </thead>
           <tbody>
       `;
       
@@ -1203,9 +1222,9 @@
             <td style="vertical-align: middle;">
               ${nameHtml}
               <div class="member-nickname">${member.nickname}</div>
-            </td>
+             </td>
             <td class="member-roles" style="vertical-align: middle;">${member.roles}</td>
-          </tr>
+           </tr>
         `;
         
         if (index < sortedMembers.length - 1) {
