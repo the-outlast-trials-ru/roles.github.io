@@ -189,14 +189,17 @@ const membersData = {
     { name: "otebites", nickname: "afflictedl", roles: 21 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 }
   ],
-    "295. Изгнанные в лес": [
+  "295. Изгнанные в лес": [
     { name: "✭", nickname: "cult_of_nightmare", roles: 13  },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
     { name: "PY", nickname: "py4090", roles: 7 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
   ],
-    "275. Еретик": [
+  "275. Еретик": [
     { name: "꒒ꍏꋪꀤꀘ_꒒ꂦ꒒", nickname: "larik_lol", roles: 11  },
     { name: "Гарлик Бравлик", nickname: "mr.garlik", roles: 8 }
+  ],
+  "Scavenger": [
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29, place: 1 }
   ],
 };
