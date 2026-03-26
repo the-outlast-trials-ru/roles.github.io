@@ -12,7 +12,7 @@ const membersData = {
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "Divine", nickname: "_divine9_", roles: 12 },
     { name: "Isaac", nickname: "isaacgreene", roles: 6 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "Olivka", nickname: "olivka6666", roles: 9 }
   ],
   "[100+]🔪": [
@@ -40,7 +40,7 @@ const membersData = {
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "berryholls", nickname: "berryholls", roles: 7 },
     { name: "Хендрик Истерман", nickname: "rrrr6772", roles: 6 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "Lina of Darkness", nickname: "vasilinalev", roles: 6 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 }
   ],
@@ -94,7 +94,7 @@ const membersData = {
     { name: "Kaza4ok", nickname: "kaza4ok5393", roles: 5 },
     { name: "Ksenia", nickname: "kseniia20018232", roles: 4 },
     { name: "Lexy", nickname: "lexy_s", roles: 11 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "Lina of Darkness", nickname: "vasilinalev", roles: 6 },
     { name: "LizaKuz", nickname: "lizakuz", roles: 4 }
   ],
@@ -120,7 +120,7 @@ const membersData = {
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
     { name: "Judge", nickname: "timich0717", roles: 7 },
     { name: "KindaHomeless", nickname: "aguga.ga.ga.ga", roles: 7 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "Olivka", nickname: "olivka6666", roles: 9 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
@@ -139,7 +139,7 @@ const membersData = {
     { name: "Frokli", nickname: "frokli_", roles: 3 },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
     { name: "Lexy", nickname: "lexy_s", roles: 11 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 },
@@ -154,7 +154,7 @@ const membersData = {
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "Grief", nickname: "griefgd", roles: 18 },
     { name: "Lexy", nickname: "lexy_s", roles: 11 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
     { name: "RedBull", nickname: "redbull2436", roles: 11 },
@@ -169,7 +169,7 @@ const membersData = {
     { name: "DEATHPROOF", nickname: "deathpr0of", roles: 7 },
     { name: "fuxx", nickname: "ayebassota", roles: 8 },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "Novistador", nickname: "werner063745", roles: 0 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
@@ -184,7 +184,7 @@ const membersData = {
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "Grief", nickname: "griefgd", roles: 18 },
     { name: "Isaac", nickname: "isaacgreene", roles: 6 },
-    { name: "lili | Trial Administration", nickname: "lili____", roles: 22 },
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 },
     { name: "otebites", nickname: "afflictedl", roles: 21 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 11 }
@@ -201,6 +201,7 @@ const membersData = {
   ],
   "Scavenger": [
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30, place: 1 },
-    { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 2 }
+    { name: "lili | Trial Administration", nickname: "lili____", roles: 23, place: 2 },
+    { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 3 },
   ],
 };
