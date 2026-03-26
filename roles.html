@@ -668,6 +668,7 @@
       padding: 15px;
       margin-top: 10px;
       opacity: 1;
+      width: 16em;
     }
 
     .role-content-detailed {
@@ -1252,7 +1253,7 @@
       let membersHtml = `
         <div class="members-list-header">
           <h3>Список участников с ролью "${roleName}"</h3>
-          <span class="members-count">${members.length}</span>
+          <span class="members-count">Общее кол-во участников: ${members.length}</span>
         </div>
         <div class="members-sort-panel">
           <span class="members-sort-label"><i class="fas fa-sort"></i> Сортировать:</span>
@@ -1267,7 +1268,7 @@
         <div class="members-table-wrapper" style="overflow-x: auto;">
           <table class="members-table">
             <thead>
-              <tr><th>Имя (никнейм) участника</th><th>Общее кол-во ролей</th>               </thead>
+              <tr><<th style="font-weight: bold;">Имя (никнейм)<br>участника</th><th>Общее кол-во ролей</th>               </thead>
             <tbody>
         `;
       
