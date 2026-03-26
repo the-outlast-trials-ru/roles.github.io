@@ -203,6 +203,6 @@ const membersData = {
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30, place: 1 },
     { name: "lili | Trial Administration", nickname: "lili____", roles: 23, place: 2 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 3 },
-    { name: "баха", nickname: "igrovoytenko", roles: 23, place: 4 }
+    { name: "баха", nickname: "igrovoytenko", roles: 4, place: 4 }
   ],
 };
