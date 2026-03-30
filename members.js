@@ -207,6 +207,7 @@ const membersData = {
     { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 5 }
   ],
   "Season 6 🥇": [
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 }
+    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 },
+    { name: "✭", nickname: "cult_of_nightmare", roles: 13, place: 2 }
   ],
 };
