@@ -4,7 +4,7 @@ const membersData = {
     { name: "berryholls", nickname: "berryholls", roles: 7 },
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "CL Support", nickname: "miuuu0905", roles: 2 },
-    { name: "✭", nickname: "cult_of_nightmare", roles: 13 },
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15 },
     { name: "Source", nickname: "warlordxdd", roles: 3 }
   ],
   "[1000+]🔪": [
@@ -31,7 +31,7 @@ const membersData = {
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 },
   ],
  "[2500+]🔪": [
-    { name: "✭", nickname: "cult_of_nightmare", roles: 13  },
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15  },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
   ],
@@ -45,7 +45,7 @@ const membersData = {
     { name: "MilissaMckee", nickname: "milissamckee", roles: 26 }
   ],
  "Зам": [
-    { name: "✭", nickname: "cult_of_nightmare", roles: 13 }
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15 }
   ],
  "Главный админ": [
     { name: "Jerry", nickname: "sociopath_jerry", roles: 6 }
@@ -190,7 +190,7 @@ const membersData = {
     { name: "Pardus OO", nickname: "p4rdus", roles: 14 }
   ],
   "295. Изгнанные в лес": [
-    { name: "✭", nickname: "cult_of_nightmare", roles: 13  },
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15  },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
     { name: "PY", nickname: "py4090", roles: 7 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
@@ -208,6 +208,6 @@ const membersData = {
   ],
   "Season 6 🥇": [
     { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 },
-    { name: "✭", nickname: "cult_of_nightmare", roles: 13, place: 2 }
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15, place: 2 }
   ],
 };
