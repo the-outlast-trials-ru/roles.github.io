@@ -32,11 +32,11 @@ const membersData = {
   ],
  "[2500+]🔪": [
     { name: "✭", nickname: "cult_of_nightmare", roles: 15  },
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
   ],
   "Администрация": [
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "berryholls", nickname: "berryholls", roles: 7 },
     { name: "Хендрик Истерман", nickname: "rrrr6772", roles: 6 },
@@ -70,7 +70,7 @@ const membersData = {
     { name: "Катейка", nickname: "kateykameow", roles: 2 },
     { name: "Кизючка <3", nickname: "kiz.uka", roles: 7 },
     { name: "Лалочка", nickname: "lal04ka", roles: 5 },
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "робо няня", nickname: "sssakura1", roles: 2 },
     { name: "Ada Borsch", nickname: "adaborchtsch", roles: 2 },
     { name: "Albazinka", nickname: "albazinka", roles: 4 },
@@ -105,7 +105,7 @@ const membersData = {
     { name: "Гарлик Бравлик", nickname: "mr.garlik", roles: 8 },
     { name: "Койл вас в попку", nickname: "xochustudiumvmoskve", roles: 5 },
     { name: "Леон Мем Кеннеди", nickname: "leonkennedy.", roles: 14 },
-    { name: "Майор Том | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Том | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Суетолог", nickname: "fedo_ra", roles: 9 },
     { name: "Тёма Крымский", nickname: "krustalno_poxyu", roles: 11 },
     { name: "шейх", nickname: "oleg05952", roles: 4 },
@@ -128,11 +128,11 @@ const membersData = {
     { name: "OZICHokTTV(Даня)", nickname: "oz1ch", roles: 17 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 14 },
     { name: "pollux", nickname: "itspollux", roles: 11 },
-    { name: "sh1nell", nickname: "sh1nell", roles: 10 },
+    { name: "sh1nell", nickname: "sh1nell", roles: 12 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
 ],
   "Обратный отсчёт": [
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 29 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Мужские яйца?", nickname: "21_3002", roles: 10 },
     { name: "Divine", nickname: "_divine9_", roles: 12 },
     { name: "EugenKontra", nickname: "eugenkontra", roles: 16 },
@@ -149,7 +149,7 @@ const membersData = {
   ],
   "Знаток Пожарной Опасности": [
     { name: ".P.S.I.X.", nickname: "romanbryansk", roles: 11 },
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 3 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "ЮРА🕷👁🐑", nickname: "gagarin_tuk", roles: 18 },
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "Grief", nickname: "griefgd", roles: 18 },
@@ -164,7 +164,7 @@ const membersData = {
   "Богомол": [
     { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 6 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Суетолог", nickname: "fedo_ra", roles: 9 },
     { name: "DEATHPROOF", nickname: "deathpr0of", roles: 7 },
     { name: "fuxx", nickname: "ayebassota", roles: 8 },
@@ -180,7 +180,7 @@ const membersData = {
   ],
    "300. Завет Нового Иезекиля": [
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Despectr | Trial Administration", nickname: "despectr", roles: 18 },
     { name: "Grief", nickname: "griefgd", roles: 18 },
     { name: "Isaac", nickname: "isaacgreene", roles: 6 },
@@ -200,7 +200,7 @@ const membersData = {
     { name: "Гарлик Бравлик", nickname: "mr.garlik", roles: 8 }
   ],
   "Scavenger": [
-    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 30, place: 1 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31, place: 1 },
     { name: "lili | Trial Administration", nickname: "lili____", roles: 23, place: 2 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 3 },
     { name: "баха", nickname: "igrovoytenko", roles: 4, place: 4 },
@@ -208,6 +208,8 @@ const membersData = {
   ],
   "Season 6 🥇": [
     { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 },
-    { name: "✭", nickname: "cult_of_nightmare", roles: 15, place: 2 }
+    { name: "✭", nickname: "cult_of_nightmare", roles: 15, place: 2 },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31, place: 3 },
+    { name: "sh1nell", nickname: "sh1nell", roles: 12, place: 4  },
   ],
 };
