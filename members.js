@@ -162,7 +162,7 @@ const membersData = {
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
   ],
   "Богомол": [
-    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 6 },
+    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 8 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Суетолог", nickname: "fedo_ra", roles: 9 },
@@ -211,5 +211,6 @@ const membersData = {
     { name: "✭", nickname: "cult_of_nightmare", roles: 15, place: 2 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31, place: 3 },
     { name: "sh1nell", nickname: "sh1nell", roles: 12, place: 4  },
+    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 8, place: 5 },
   ],
 };
