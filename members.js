@@ -215,9 +215,9 @@ const membersData = {
   ],
   "Легенда": [
   { name: "! 𝐚𝐝𝐚𝐦_𝐜𝐨𝐧𝐨𝐫", nickname: "conoroff", roles: 4 },
-  { name: "☭", nickname: "itz_miny", roles: 3  },
+  { name: "☭", nickname: "itz_miny", roles: 3 },
   { name: "꒒ꍏꋪꀤꀘ_꒒ꂦ꒒", nickname: "larik_lol", roles: 12 },
-  { name: "$ectarian", nickname: "secta148"roles: 13 },
+  { name: "$ectarian", nickname: "secta148", roles: 13 },
   { name: "11asK", nickname: "deq91", roles: 3 },
   { name: "Булочка", nickname: "buka_899", roles: 5 },
   { name: "вотфо шнеле шнеле", nickname: "govno059", roles: 5 },
