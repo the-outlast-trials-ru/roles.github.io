@@ -248,6 +248,7 @@ body {
 @media (max-width: 768px) {
   body {
     background-image: url('bg-outlast-mobile.jpg');
+    background-position-y: 65px;
   }
   
   .navbar {
