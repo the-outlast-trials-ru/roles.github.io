@@ -55,6 +55,50 @@
       background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.75) 100%);
     }
 
+    /* Стили для модального окна просмотра изображения */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .image-modal.active {
+      display: flex;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .image-modal-close:hover {
+      color: #ff6b6b;
+      transform: scale(1.1);
+    }
+
     .navbar {
       background-color: rgba(26, 26, 46, 0.9);
       padding: 15px 20px;
@@ -689,6 +733,12 @@
       margin: 10px 0;
       border: 2px solid rgba(255, 107, 107, 0.3);
       display: block;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .role-content-inner img:hover {
+      transform: scale(1.02);
     }
 
     .role-content-inner .screenshot-caption {
@@ -809,7 +859,6 @@
       background-position: center;
       position: relative;
       flex-shrink: 0;
-      background-size: 60px;
     }
 
     .laurel-wreath span {
@@ -912,6 +961,13 @@
     }
 
     @media (max-width: 768px) {
+      /* Отдельный фон для мобильных устройств */
+      .bg-image {
+        background-image: url('bg-outlast-mobile.jpg');
+        background-position: center top;
+        background-attachment: scroll;
+      }
+      
       .navbar { padding: 12px 15px; flex-wrap: wrap; }
       .logo-img { height: 40px; }
       .site-name { font-size: 18px; }
@@ -931,7 +987,6 @@
       .role-card-detailed { padding: 15px; }
       .role-title { font-size: 1.1rem; }
       .role-description-detailed { font-size: 0.85rem; padding: 10px; }
-      .bg-image { background-attachment: scroll; }
       .role-header-main { flex-direction: row; align-items: center; flex-wrap: wrap; width: 100%; }
       .role-dot-large { margin-right: 5px; }
       .role-title { flex: 1; min-width: 150px; }
@@ -940,8 +995,6 @@
       .more-btn, .members-btn { width: 100%; justify-content: center; }
       
       /* Исправления для мобильных устройств - список участников */
-      .role-content-detailed.expanded, .members-list.expanded { width: 16em; margin: 0 auto; }
-      
       .members-table {
         display: block;
         width: 100%;
@@ -1048,6 +1101,12 @@
   </style>
 </head>
 <body>
+  <!-- Модальное окно для просмотра изображений -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+    <img id="modalImage" src="" alt="Полноэкранный просмотр">
+  </div>
+
   <div class="main-background">
     <div class="bg-image"></div>
     <div class="bg-overlay"></div>
@@ -1141,6 +1200,22 @@
   <script src="maintenance-mode.js"></script>
 
   <script>
+    // Функция для открытия изображения в полноэкранном режиме
+    function openImageModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imageSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Функция для закрытия модального окна
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     let currentFilteredRoles = [];
     const membersSortState = {};
 
@@ -1270,7 +1345,7 @@
         <div class="members-table-wrapper" style="overflow-x: auto;">
           <table class="members-table">
             <thead>
-              <tr><<th style="font-weight: bold;">Имя (никнейм)<br>участника</th><th>Общее кол-во ролей</th>               </thead>
+              <tr><th style="font-weight: bold;">Имя (никнейм)<br>участника</th><th>Общее кол-во ролей</th>               </thead>
             <tbody>
         `;
       
@@ -1295,7 +1370,7 @@
             <td style="vertical-align: middle;">
               ${nameHtml}
               <div class="member-nickname">${member.nickname}</div>
-              </td>
+               </td>
             <td class="member-roles" style="vertical-align: middle;">${member.roles}</td>
            </tr>
         `;
@@ -1370,14 +1445,29 @@
             } else {
               this.setAttribute('data-expanded', 'true');
               this.classList.add('expanded');
-              detailsBlock.innerHTML = `<div class="role-content-inner">${role.details}</div>`;
+              const detailsInner = `<div class="role-content-inner">${role.details}</div>`;
+              detailsBlock.innerHTML = detailsInner;
               detailsBlock.classList.add('expanded');
               this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+              
+              // Добавляем обработчик для открытия изображений в полноэкранном режиме
+              setTimeout(() => {
+                const images = detailsBlock.querySelectorAll('.role-content-inner img');
+                images.forEach(img => {
+                  img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openImageModal(this.src);
+                  });
+                });
+              }, 50);
             }
           });
         }
         
         if (membersBtn && membersBlock) {
+          // Сохраняем обработчик отдельно, чтобы он не перезаписывался
+          let sortSelectListenerAdded = false;
+          
           membersBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
             membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
@@ -1391,12 +1481,26 @@
               this.classList.add('expanded');
               membersBlock.classList.add('expanded');
               this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
-              const sortSelect = membersBlock.querySelector('.members-sort-select');
-              if (sortSelect) {
-                sortSelect.addEventListener('change', function() {
-                  membersSortState[role.name] = this.value;
-                  membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                });
+              
+              // Добавляем обработчик для селекта сортировки (только один раз)
+              if (!sortSelectListenerAdded) {
+                const sortSelect = membersBlock.querySelector('.members-sort-select');
+                if (sortSelect) {
+                  sortSelect.addEventListener('change', function() {
+                    membersSortState[role.name] = this.value;
+                    membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+                    // Перепривязываем обработчик после обновления
+                    const newSortSelect = membersBlock.querySelector('.members-sort-select');
+                    if (newSortSelect && newSortSelect !== sortSelect) {
+                      const newValue = newSortSelect.value;
+                      newSortSelect.addEventListener('change', function() {
+                        membersSortState[role.name] = this.value;
+                        membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+                      });
+                    }
+                  });
+                  sortSelectListenerAdded = true;
+                }
               }
             }
           });
@@ -1405,10 +1509,14 @@
       
       setTimeout(animateRoleCards, 100);
       setTimeout(() => {
+        // Добавляем обработчики для всех изображений, которые уже есть на странице
         document.querySelectorAll('.role-content-inner img').forEach(img => {
-          if (!img.parentElement.classList.contains('image-link')) {
-            img.addEventListener('click', () => window.open(img.src, '_blank'));
-            img.style.cursor = 'pointer';
+          if (!img.hasAttribute('data-modal-attached')) {
+            img.setAttribute('data-modal-attached', 'true');
+            img.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openImageModal(this.src);
+            });
           }
         });
       }, 150);
@@ -1500,6 +1608,13 @@
           }
         });
       }
+      
+      // Закрытие модального окна по Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeImageModal();
+        }
+      });
     });
   </script>
 </body>
