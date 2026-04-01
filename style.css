@@ -246,13 +246,8 @@ body {
 
 /* Адаптивность */
 @media (max-width: 768px) {
-  .bg-image {
+  body {
     background-image: url('bg-outlast-mobile.jpg');
-    background-position: center top;
-    background-attachment: scroll;
-    background-position-y: 65px;
-    width: 100%;
-    height: 100%;
   }
   
   .navbar {
