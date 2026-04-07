@@ -106,7 +106,7 @@ const membersData = {
     { name: "Койл вас в попку", nickname: "xochustudiumvmoskve", roles: 5 },
     { name: "Леон Мем Кеннеди", nickname: "leonkennedy.", roles: 14 },
     { name: "Майор Том | Trial Administration", nickname: "sweetbowne", roles: 31 },
-    { name: "Суетолог", nickname: "fedo_ra", roles: 9 },
+    { name: "Суетолог", nickname: "fedo_ra", roles: 10 },
     { name: "Тёма Крымский", nickname: "krustalno_poxyu", roles: 11 },
     { name: "шейх", nickname: "oleg05952", roles: 4 },
     { name: "blixdsm", nickname: "drslvqx", roles: 3 },
@@ -165,7 +165,7 @@ const membersData = {
     { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 8 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
-    { name: "Суетолог", nickname: "fedo_ra", roles: 9 },
+    { name: "Суетолог", nickname: "fedo_ra", roles: 10 },
     { name: "DEATHPROOF", nickname: "deathpr0of", roles: 7 },
     { name: "fuxx", nickname: "ayebassota", roles: 8 },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
@@ -204,7 +204,10 @@ const membersData = {
     { name: "lili | Trial Administration", nickname: "lili____", roles: 24, place: 2 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 3 },
     { name: "баха", nickname: "igrovoytenko", roles: 4, place: 4 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 5 }
+    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 5 },
+    { name: "Richard Trager", nickname: "mekodike", roles: 8 },
+    { name: "otebites", nickname: "afflictedl", roles: 22 },
+    { name: "Суетолог", nickname: "fedo_ra", roles: 10 },
   ],
   "Season 6 🥇": [
     { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 },
@@ -267,7 +270,6 @@ const membersData = {
   { name: "Spartak_CSKA", nickname: "spartak0456", roles: 4 },
   { name: "tosprov", nickname: "tosprov", roles: 6 },
   { name: "Vladoser", nickname: "mrvladoser", roles: 7 },
-  { name: "Richard Trager", nickname: "mekodike", roles: 8 },
   { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
 ],
 };
