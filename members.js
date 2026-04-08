@@ -348,7 +348,7 @@ const membersData = {
     { name: "Pliush_ka", nickname: "pliush_ka", roles: 3 },
     { name: "RedBull", nickname: "redbull2436", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23 },
-    { name: "Ysach Borodach", nickname: "ysach Borodach", roles: 4 },
+    { name: "Ysach Borodach", nickname: "ysach_borodach", roles: 4 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
    ],
   "Winter Kills": [
@@ -358,7 +358,7 @@ const membersData = {
     { name: "баха", nickname: "igrovoytenko", roles: 4  },
     { name: "илюшк", nickname: "apostol.ilushk", roles: 7 },
     { name: "Кизючка <3", nickname: "kiz.uka", roles: 7 },
-    { name: "Кошечка Mitake, nickname: "karmamitake", roles: 8 },
+    { name: "Кошечка Mitake", nickname: "karmamitake", roles: 8 },
     { name: "Леон Мем Кеннеди", nickname: "leonkennedy.", roles: 14 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "самец", nickname: "fog13i", roles: 11 },
