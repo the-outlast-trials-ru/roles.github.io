@@ -355,7 +355,7 @@ const membersData = {
     { name: ".P.S.I.X.", nickname: "romanbryansk", roles: 11 },
     { name: "|𝐌𝐨𝐨𝐧|", nickname: ".moon_1x", roles: 11 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
-    { name: "баха", nickname: "igrovoytenko", roles: 4,  },
+    { name: "баха", nickname: "igrovoytenko", roles: 4  },
     { name: "илюшк", nickname: "apostol.ilushk", roles: 7 },
     { name: "Кизючка <3", nickname: "kiz.uka", roles: 7 },
     { name: "Кошечка Mitake, nickname: "karmamitake", roles: 8 },
