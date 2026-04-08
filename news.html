@@ -5,7 +5,6 @@
   <title>Новости сайта - The Outlast Trials RU</title>
   <link rel="icon" href="logo.png" sizes="any">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Подключаем шрифт Rubik -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -26,6 +25,50 @@
       font-weight: 380;
     }
 
+    /* Модальное окно для просмотра изображений */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .image-modal.active {
+      display: flex;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .image-modal-close:hover {
+      color: #ff6b6b;
+      transform: scale(1.1);
+    }
+
     /* Основной контейнер с фоновым изображением */
     .main-background {
       position: fixed;
@@ -42,7 +85,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('bg-outlast3.jpg');
+      background-image: url('bg-outlast1.jpg');
       background-size: cover;
       background-position: center 50px;
       background-repeat: no-repeat;
@@ -587,7 +630,6 @@
       gap: 10px;
     }
 
-    /* Стили для категорий новостей с бортиками */
     .news-category-badge {
       padding: 6px 15px;
       border-radius: 25px;
@@ -717,6 +759,22 @@
                   margin-top 0.3s ease;
     }
 
+    /* Стили для изображений в новостях */
+    .news-content-detailed img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 2px solid rgba(255, 107, 107, 0.3);
+      display: block;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .news-content-detailed img:hover {
+      transform: scale(1.02);
+    }
+
     .news-content-detailed ul, 
     .news-content-detailed ol {
       margin: 10px 0 10px 25px;
@@ -809,15 +867,6 @@
     }
 
     @media (max-width: 768px) {
-      .bg-image {
-        background-image: url('bg-outlast-mobile.jpg');
-        background-position: center top;
-        background-attachment: scroll;
-        background-position-y: 65px;
-        width: 100%;
-        height: 100%;
-      }
-      
       .navbar {
         padding: 12px 15px;
         flex-wrap: wrap;
@@ -985,13 +1034,17 @@
   </style>
 </head>
 <body>
-  <!-- Фоновое изображение -->
+  <!-- Модальное окно для просмотра изображений -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+    <img id="modalImage" src="" alt="Полноэкранный просмотр">
+  </div>
+
   <div class="main-background">
     <div class="bg-image"></div>
     <div class="bg-overlay"></div>
   </div>
 
-  <!-- Навбар -->
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo">
@@ -1106,6 +1159,22 @@
   <script src="maintenance-mode.js"></script>
 
   <script>
+    // Функция для открытия изображения в полноэкранном режиме
+    function openImageModal(imageSrc) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = imageSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Функция для закрытия модального окна
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     // Переменная для хранения текущих отфильтрованных новостей
     let currentFilteredNews = [];
     
@@ -1264,12 +1333,40 @@
             this.classList.add('expanded');
             contentBlock.classList.add('expanded');
             this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+            
+            // Добавляем обработчики для изображений после раскрытия контента
+            setTimeout(() => {
+              const images = contentBlock.querySelectorAll('img');
+              images.forEach(img => {
+                if (!img.hasAttribute('data-modal-attached')) {
+                  img.setAttribute('data-modal-attached', 'true');
+                  img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openImageModal(this.src);
+                  });
+                }
+              });
+            }, 50);
           }
         });
       });
       
       // Запуск анимации карточек
       setTimeout(animateNewsCards, 100);
+      
+      // Добавляем обработчики для уже видимых изображений
+      setTimeout(() => {
+        const allImages = document.querySelectorAll('.news-content-detailed img');
+        allImages.forEach(img => {
+          if (!img.hasAttribute('data-modal-attached')) {
+            img.setAttribute('data-modal-attached', 'true');
+            img.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openImageModal(this.src);
+            });
+          }
+        });
+      }, 150);
     }
 
     function filterNews() {
@@ -1437,6 +1534,13 @@
           }
         });
       }
+      
+      // Закрытие модального окна по Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeImageModal();
+        }
+      });
     });
   </script>   
 </body>
