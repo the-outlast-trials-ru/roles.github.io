@@ -272,4 +272,18 @@ const membersData = {
   { name: "Vladoser", nickname: "mrvladoser", roles: 7 },
   { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
 ],
+"Ностофоб": [
+    { name: ".P.S.I.X.", nickname: "romanbryansk", roles: 11 },
+    { name: "꒒ꍏꋪꀤꀘ_꒒ꂦ꒒", nickname: "larik_lol", roles: 12  },
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
+    { name: "Prezent", nickname: "prezentt", roles: 5 },
+    { name: "Sano", nickname: "justanya.", roles: 11 },
+    { name: "Sapienti sat", nickname: "sapientisat.", roles: 23 },
+    { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
+ ],  
+"Prime Time": [
+    { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
+    { name: "Sapienti sat", nickname: "sapientisat.", roles: 23 },
+    { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
+ ],    
 };
