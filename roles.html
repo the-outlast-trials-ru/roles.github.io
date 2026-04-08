@@ -747,6 +747,55 @@
     .role-content-inner p { margin-bottom: 10px; }
     .role-content-inner ul, .role-content-inner ol { margin-left: 20px; margin-bottom: 10px; }
 
+    /* Стили для таймера */
+    .role-timer {
+      background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 152, 0, 0.4));
+      border: 1px solid #ff9800;
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .role-timer-message {
+      color: #ff9800;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .role-timer-countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .timer-item {
+      text-align: center;
+      min-width: 60px;
+    }
+
+    .timer-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ff9800;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      min-width: 55px;
+    }
+
+    .timer-label {
+      font-size: 0.7rem;
+      color: #ccc;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
     /* Стили для участников */
     .members-sort-panel {
       display: flex;
@@ -1065,6 +1114,25 @@
         align-items: flex-start;
         gap: 8px;
       }
+
+      /* Таймер на мобильных */
+      .role-timer-countdown {
+        gap: 8px;
+      }
+      
+      .timer-item {
+        min-width: 50px;
+      }
+      
+      .timer-value {
+        font-size: 1rem;
+        min-width: 45px;
+        padding: 4px 8px;
+      }
+      
+      .timer-label {
+        font-size: 0.6rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1094,6 +1162,24 @@
       
       .members-table td:first-child {
         min-width: 180px;
+      }
+
+      .role-timer-countdown {
+        gap: 5px;
+      }
+      
+      .timer-item {
+        min-width: 42px;
+      }
+      
+      .timer-value {
+        font-size: 0.9rem;
+        min-width: 38px;
+        padding: 3px 6px;
+      }
+      
+      .timer-label {
+        font-size: 0.55rem;
       }
     }
   </style>
@@ -1216,6 +1302,39 @@
 
     let currentFilteredRoles = [];
     const membersSortState = {};
+
+    // Функция для обновления таймеров
+    function updateTimers() {
+      document.querySelectorAll('.role-timer').forEach(timerElement => {
+        const endDateStr = timerElement.getAttribute('data-end-date');
+        if (!endDateStr) return;
+        
+        const endDate = new Date(endDateStr);
+        const now = new Date();
+        const diff = endDate - now;
+        
+        if (diff <= 0) {
+          // Таймер истек - удаляем его
+          timerElement.style.display = 'none';
+          return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        const daysSpan = timerElement.querySelector('.timer-days');
+        const hoursSpan = timerElement.querySelector('.timer-hours');
+        const minutesSpan = timerElement.querySelector('.timer-minutes');
+        const secondsSpan = timerElement.querySelector('.timer-seconds');
+        
+        if (daysSpan) daysSpan.textContent = String(days).padStart(2, '0');
+        if (hoursSpan) hoursSpan.textContent = String(hours).padStart(2, '0');
+        if (minutesSpan) minutesSpan.textContent = String(minutes).padStart(2, '0');
+        if (secondsSpan) secondsSpan.textContent = String(seconds).padStart(2, '0');
+      });
+    }
 
     function createCategoryClass(category) {
       return category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-zа-яё0-9-]/g, '');
@@ -1378,7 +1497,7 @@
         }
       });
       
-      membersHtml += `</tbody></table></div>`;
+      membersHtml += `</tbody><tr></div>`;
       return membersHtml;
     }
 
@@ -1424,6 +1543,35 @@
           ${role.details ? '<div class="role-content-detailed"></div>' : ''}
           <div class="members-list"></div>
         `;
+        
+        // Добавляем таймер, если он есть у роли
+        if (role.timer && role.timer.enabled && role.timer.endDate) {
+          const timerHtml = `
+            <div class="role-timer" data-end-date="${role.timer.endDate}">
+              <div class="role-timer-message">${role.timer.message || 'ДО КОНЦА ПОЛУЧЕНИЯ РОЛИ ОСТАЛОСЬ:'}</div>
+              <div class="role-timer-countdown">
+                <div class="timer-item">
+                  <span class="timer-value timer-days">00</span>
+                  <div class="timer-label">Дней</div>
+                </div>
+                <div class="timer-item">
+                  <span class="timer-value timer-hours">00</span>
+                  <div class="timer-label">Часов</div>
+                </div>
+                <div class="timer-item">
+                  <span class="timer-value timer-minutes">00</span>
+                  <div class="timer-label">Минут</div>
+                </div>
+                <div class="timer-item">
+                  <span class="timer-value timer-seconds">00</span>
+                  <div class="timer-label">Секунд</div>
+                </div>
+              </div>
+            </div>
+          `;
+          const descriptionDiv = roleCard.querySelector('.role-description-detailed');
+          descriptionDiv.insertAdjacentHTML('afterend', timerHtml);
+        }
         
         rolesList.appendChild(roleCard);
         
@@ -1505,6 +1653,11 @@
         }
       });
       
+      // Запускаем таймеры после отображения всех карточек
+      setTimeout(() => {
+        updateTimers();
+      }, 100);
+      
       setTimeout(animateRoleCards, 100);
       setTimeout(() => {
         // Добавляем обработчики для всех изображений, которые уже есть на странице
@@ -1519,6 +1672,9 @@
         });
       }, 150);
     }
+
+    // Запускаем обновление таймеров каждую секунду
+    setInterval(updateTimers, 1000);
 
     function populateCategories() {
       const categorySelect = document.getElementById('category-select');
