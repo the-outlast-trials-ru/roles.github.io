@@ -400,6 +400,6 @@ const membersData = {
     { name: "crøssfade 𒉭", nickname: ".interactive.", roles: 11 },
     { name: "kendzni.", nickname: "kendzni.", roles: 6 },
     { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
-    { name: "Suraluve", nickname: "suraluve", roles: 13 },
+    { name: "Suraluve", nickname: "suraluve", roles: 14 },
    ],
 };
