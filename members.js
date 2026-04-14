@@ -125,7 +125,7 @@ const membersData = {
     { name: "otebites", nickname: "afflictedl", roles: 22 },
     { name: "oTeTs", nickname: "die_doteks", roles: 10 },
     { name: "OZICHokTTV(Даня)", nickname: "oz1ch", roles: 17 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
     { name: "pollux", nickname: "itspollux", roles: 11 },
     { name: "sh1nell", nickname: "sh1nell", roles: 12 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
@@ -141,7 +141,7 @@ const membersData = {
     { name: "lili | Trial Administration", nickname: "lili____", roles: 24 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 27 },
     { name: "otebites", nickname: "afflictedl", roles: 22 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
     { name: "RedBull", nickname: "redbull2436", roles: 11 },
     { name: "Sano", nickname: "justanya.", roles: 11 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23 }
@@ -161,7 +161,7 @@ const membersData = {
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
   ],
   "Богомол": [
-    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 8 },
+    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 10 },
     { name: "♡", nickname: "bez_negativa_", roles: 16 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31 },
     { name: "Суетолог", nickname: "fedo_ra", roles: 10 },
@@ -173,7 +173,7 @@ const membersData = {
     { name: "Novistador", nickname: "werner063745", roles: 0 },
     { name: "otebites", nickname: "afflictedl", roles: 22 },
     { name: "OZICHokTTV(Даня)", nickname: "oz1ch", roles: 17 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 22 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
   ],
@@ -186,7 +186,7 @@ const membersData = {
     { name: "lili | Trial Administration", nickname: "lili____", roles: 24 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 27 },
     { name: "otebites", nickname: "afflictedl", roles: 22 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14 }
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 }
   ],
   "295. Изгнанные в лес": [
     { name: "✭", nickname: "cult_of_nightmare", roles: 15  },
@@ -203,18 +203,18 @@ const membersData = {
     { name: "lili | Trial Administration", nickname: "lili____", roles: 24, place: 2 },
     { name: "Sapienti sat", nickname: "sapientisat.", roles: 23, place: 3 },
     { name: "баха", nickname: "igrovoytenko", roles: 4, place: 4 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 5 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16, place: 5 },
     { name: "Richard Trager", nickname: "mekodike", roles: 8 },
     { name: "otebites", nickname: "afflictedl", roles: 22 },
     { name: "Суетолог", nickname: "fedo_ra", roles: 10 },
     { name: "MilissaMckee", nickname: "milissamckee", roles: 27 }
   ],
   "Season 6 🥇": [
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14, place: 1 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16, place: 1 },
     { name: "✭", nickname: "cult_of_nightmare", roles: 15, place: 2 },
     { name: "Майор Гом | Trial Administration", nickname: "sweetbowne", roles: 31, place: 3 },
     { name: "sh1nell", nickname: "sh1nell", roles: 12, place: 4  },
-    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 8, place: 5 },
+    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 10, place: 5 },
     { name: "lili | Trial Administration", nickname: "lili____", roles: 24 },
     { name: "otebites", nickname: "afflictedl", roles: 22 }
    ],
@@ -380,7 +380,7 @@ const membersData = {
     { name: "Nightly", nickname: "xnightly113", roles: 4 },
     { name: "otebites", nickname: "afflictedl", roles: 22 },
     { name: "OZICHokTTV(Даня)", nickname: "oz1ch", roles: 17 },
-    { name: "Pardus OO", nickname: "p4rdus", roles: 14 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
     { name: "parenec", nickname: "parenec", roles: 10 },
     { name: "RuZZn", nickname: "ruzzn", roles: 11 },
     { name: "rYOGURT [Дана]", nickname: "d1stort1on93", roles: 6 },
@@ -394,5 +394,12 @@ const membersData = {
     { name: "W1nche$t3r", nickname: "w1nchesst3r", roles: 4 },
     { name: "w3ferens", nickname: "w3ferens", roles: 9 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
+   ],
+  "Коллекционер": [
+    { name: "~Gde_Starosta~(?)", nickname: "kostya_peep", roles: 10 },
+    { name: "crøssfade 𒉭", nickname: ".interactive.", roles: 11 },
+    { name: "kendzni.", nickname: "kendzni.", roles: 6 },
+    { name: "Pardus OO", nickname: "p4rdus", roles: 16 },
+    { name: "Suraluve", nickname: "suraluve", roles: 13 },
    ],
 };
