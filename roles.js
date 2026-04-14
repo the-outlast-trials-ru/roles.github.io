@@ -1328,5 +1328,13 @@ const roles = [
       "endDate": "2026-04-09T01:59:59",
       "message": "⏳ ДО КОНЦА ПОЛУЧЕНИЯ РОЛИ ОСТАЛОСЬ:"
     }
-  }
+  },
+  {
+    "name": "Коллекционер",
+    "description": "Данная роль выдается за покупку всех VIP ролей",
+    "category": "💎 Платные / VIP роли",
+    "color": "#ffcc00",
+    "gradient": "linear-gradient(135deg, #ffcc00 0%, #cc9900 100%)",
+    "details": ""
+  },
 ];
