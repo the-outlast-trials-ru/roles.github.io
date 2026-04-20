@@ -41,7 +41,7 @@ const membersData = {
     { name: "MilissaMckee", nickname: "milissamckee", roles: 27 }
   ],
  "Зам": [
-
+    { name: "berryholls", nickname: "berryholls", roles: 8 }
   ],
  "Главный админ": [
     { name: "Jerry", nickname: "sociopath_jerry", roles: 6 },
