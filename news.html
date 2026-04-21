@@ -1629,13 +1629,16 @@
       // Проходим по существующему массиву news
       for (let i = 0; i < news.length; i++) {
         const item = news[i];
-        const newsId = i; // Используем индекс как ID
+        // СОЗДАЕМ ID на основе индекса или заголовка
+        const newsId = i; // или item.title
+        
+        // ДОБАВЛЯЕМ ID В ОБЪЕКТ НОВОСТИ
+        news[i].id = newsId;
         
         const newsRef = doc(db, 'news', newsId.toString());
         const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
         
         try {
-          // Загружаем основной документ новости
           const newsDoc = await getDoc(newsRef);
           
           if (newsDoc.exists()) {
@@ -1643,30 +1646,30 @@
             news[i].likes = data.likes || 0;
             news[i].dislikes = data.dislikes || 0;
           } else {
-            // Создаем документ для новой новости
             await setDoc(newsRef, {
               likes: 0,
               dislikes: 0,
-              createdAt: new Date().toISOString(),
-              lastUpdated: new Date().toISOString()
+              createdAt: new Date().toISOString()
             });
             news[i].likes = 0;
             news[i].dislikes = 0;
           }
           
-          // Загружаем голос пользователя
           const userVoteDoc = await getDoc(userVoteRef);
           news[i].userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
           
-          // Добавляем ID к объекту новости (чтобы потом использовать в displayNews)
-          news[i].id = newsId;
+          console.log(`Новость ${newsId} загружена:`, {
+            likes: news[i].likes,
+            dislikes: news[i].dislikes,
+            userVote: news[i].userVote,
+            id: news[i].id
+          });
           
         } catch (error) {
           console.error('Ошибка загрузки голосов для новости', newsId, error);
           news[i].likes = 0;
           news[i].dislikes = 0;
           news[i].userVote = null;
-          news[i].id = newsId;
         }
       }
       
@@ -1675,11 +1678,16 @@
     
     // Инициализация
     async function initNews() {
-      await loadVotesFromFirestore(); // Загружаем голоса в существующий массив news
-      displayNews(news); // Отображаем новости с голосами
+      console.log('До загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
+      
+      await loadVotesFromFirestore(); // Здесь добавляются ID
+      
+      console.log('После загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
+      
+      displayNews(news); // Теперь у каждой новости есть id
     }
     
-    // Запускаем при загрузке страницы
+    // Запускаем
     initNews();
 
     function filterNews() {
