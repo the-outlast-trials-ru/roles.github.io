@@ -187,7 +187,6 @@ const membersData = {
     { name: "Pardus OO", nickname: "p4rdus", roles: 16 }
   ],
   "295. Изгнанные в лес": [
-    { name: "✭", nickname: "cult_of_nightmare", roles: 15  },
     { name: "HelenKever", nickname: "helenkever", roles: 15 },
     { name: "PY", nickname: "py4090", roles: 7 },
     { name: "佐野万次郎", nickname: "lojkunchi", roles: 24 }
