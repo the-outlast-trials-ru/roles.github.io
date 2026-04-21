@@ -1629,8 +1629,7 @@
       // Проходим по существующему массиву news
       for (let i = 0; i < news.length; i++) {
         const item = news[i];
-        const newsId = item.id;
-        if (!newsId) continue;
+        const newsId = i; // Используем индекс как ID
         
         const newsRef = doc(db, 'news', newsId.toString());
         const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
@@ -1659,11 +1658,15 @@
           const userVoteDoc = await getDoc(userVoteRef);
           news[i].userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
           
+          // Добавляем ID к объекту новости (чтобы потом использовать в displayNews)
+          news[i].id = newsId;
+          
         } catch (error) {
           console.error('Ошибка загрузки голосов для новости', newsId, error);
           news[i].likes = 0;
           news[i].dislikes = 0;
           news[i].userVote = null;
+          news[i].id = newsId;
         }
       }
       
