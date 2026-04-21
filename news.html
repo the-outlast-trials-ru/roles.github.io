@@ -842,6 +842,59 @@
       font-style: italic;
     }
 
+    /* Стили для кнопок лайков/дизлайков */
+    .news-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .vote-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    .vote-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .vote-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .like-btn.active {
+      background: rgba(40, 167, 69, 0.2);
+      border-color: #28a745;
+      color: #28a745;
+    }
+    
+    .dislike-btn.active {
+      background: rgba(220, 53, 69, 0.2);
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+    
+    .vote-btn i {
+      font-size: 16px;
+    }
+    
+    .vote-btn span {
+      font-weight: 500;
+    }
+
     /* Адаптивность */
     @media (max-width: 992px) {
       .sort-container {
@@ -1183,6 +1236,30 @@
   <script src="news.js"></script>
   <script src="maintenance-mode.js"></script>
 
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwnCrLwtLJ6iaHjTBMyLRCHvuRlKqziCM",
+      authDomain: "the-outlast-trials-ru.firebaseapp.com",
+      projectId: "the-outlast-trials-ru",
+      storageBucket: "the-outlast-trials-ru.firebasestorage.app",
+      messagingSenderId: "842074198989",
+      appId: "1:842074198989:web:8266b4b1e1a8dbd5a1aa84",
+      measurementId: "G-T10LF86WYQ"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>  
+
   <script>
     // Функция для открытия изображения в полноэкранном режиме
     function openImageModal(imageSrc) {
@@ -1283,6 +1360,27 @@
       }
     }
 
+    // Импортируем необходимые модули Firebase для Firestore
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, runTransaction } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+    
+    // Инициализируем Firestore
+    const db = getFirestore(app);
+    
+    // Глобальный объект для хранения ID пользователя (сессия)
+    let currentUserId = null;
+    
+    // Получаем или создаем ID пользователя для сессии
+    function getCurrentUserId() {
+      if (!currentUserId) {
+        currentUserId = localStorage.getItem('news_user_id');
+        if (!currentUserId) {
+          currentUserId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+          localStorage.setItem('news_user_id', currentUserId);
+        }
+      }
+      return currentUserId;
+    }
+    
     function displayNews(newsToDisplay) {
       const newsList = document.getElementById('news-list');
       const emptyNews = document.getElementById('empty-news');
@@ -1292,7 +1390,6 @@
       newsList.innerHTML = '';
       resultsCount.textContent = newsToDisplay.length;
       
-      // Проверяем, есть ли вообще новости
       if (typeof news === 'undefined' || news.length === 0) {
         emptyNews.style.display = 'block';
         noResults.style.display = 'none';
@@ -1316,14 +1413,17 @@
         const categoryName = getCategoryName(item.category);
         const formattedDate = formatDate(item.date);
         
-        // Форматируем контент с сохранением переносов строк
+        // Инициализируем поля для Firestore
+        if (item.likes === undefined) item.likes = 0;
+        if (item.dislikes === undefined) item.dislikes = 0;
+        if (item.userVote === undefined) item.userVote = null;
+        
         let formattedContent = item.content
           .replace(/\\n/g, '\n')
           .replace(/\n/g, '<br>')
           .replace(/- /g, '• ')
           .replace(/• /g, '<span style="margin-left: 20px; display: inline-block;">• </span>');
         
-        // Создаем карточку с кнопкой "Подробнее"
         newsCard.innerHTML = `
           <div class="news-header">
             <span class="news-category-badge ${categoryClass}">${categoryName}</span>
@@ -1337,11 +1437,21 @@
             </button>
           </div>
           <div class="news-content-detailed">${formattedContent}</div>
+          <div class="news-actions">
+            <button class="vote-btn like-btn ${item.userVote === 'like' ? 'active' : ''}" data-vote="like">
+              <i class="fas fa-thumbs-up"></i>
+              <span class="like-count">${item.likes}</span>
+            </button>
+            <button class="vote-btn dislike-btn ${item.userVote === 'dislike' ? 'active' : ''}" data-vote="dislike">
+              <i class="fas fa-thumbs-down"></i>
+              <span class="dislike-count">${item.dislikes}</span>
+            </button>
+          </div>
         `;
         
         newsList.appendChild(newsCard);
         
-        // Добавляем обработчик для кнопки "Подробнее"
+        // Обработчик для кнопки "Подробнее"
         const moreBtn = newsCard.querySelector('.more-btn');
         const contentBlock = newsCard.querySelector('.news-content-detailed');
         
@@ -1359,7 +1469,6 @@
             contentBlock.classList.add('expanded');
             this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
             
-            // Добавляем обработчики для изображений после раскрытия контента
             setTimeout(() => {
               const images = contentBlock.querySelectorAll('img');
               images.forEach(img => {
@@ -1374,12 +1483,133 @@
             }, 50);
           }
         });
+        
+        // Обработчики для кнопок лайков/дизлайков
+        const likeBtn = newsCard.querySelector('.like-btn');
+        const dislikeBtn = newsCard.querySelector('.dislike-btn');
+        const likeCountSpan = newsCard.querySelector('.like-count');
+        const dislikeCountSpan = newsCard.querySelector('.dislike-count');
+        
+        async function handleVote(voteType) {
+          const newsId = item.id;
+          if (!newsId) {
+            console.error('Нет ID новости');
+            return;
+          }
+          
+          const userId = getCurrentUserId();
+          const newsRef = doc(db, 'news', newsId.toString());
+          const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
+          
+          try {
+            // Используем transaction для атомарного обновления в Firestore
+            await runTransaction(db, async (transaction) => {
+              const newsDoc = await transaction.get(newsRef);
+              
+              let currentLikes = 0;
+              let currentDislikes = 0;
+              let currentVote = null;
+              
+              if (newsDoc.exists()) {
+                const data = newsDoc.data();
+                currentLikes = data.likes || 0;
+                currentDislikes = data.dislikes || 0;
+              }
+              
+              // Получаем текущий голос пользователя
+              const userVoteDoc = await transaction.get(userVoteRef);
+              if (userVoteDoc.exists()) {
+                currentVote = userVoteDoc.data().vote;
+              }
+              
+              let newLikes = currentLikes;
+              let newDislikes = currentDislikes;
+              
+              // Отменяем предыдущий голос
+              if (currentVote === 'like') {
+                newLikes--;
+              } else if (currentVote === 'dislike') {
+                newDislikes--;
+              }
+              
+              // Если голосуем за тот же тип - просто отменяем
+              if (currentVote === voteType) {
+                // Удаляем голос пользователя
+                transaction.delete(userVoteRef);
+                transaction.update(newsRef, {
+                  likes: newLikes,
+                  dislikes: newDislikes,
+                  lastUpdated: new Date().toISOString()
+                });
+              } else {
+                // Добавляем новый голос
+                if (voteType === 'like') {
+                  newLikes++;
+                } else {
+                  newDislikes++;
+                }
+                
+                // Сохраняем голос пользователя в подколлекцию
+                transaction.set(userVoteRef, {
+                  vote: voteType,
+                  timestamp: new Date().toISOString(),
+                  userId: userId
+                });
+                
+                // Обновляем счетчики в основном документе
+                transaction.set(newsRef, {
+                  likes: newLikes,
+                  dislikes: newDislikes,
+                  lastUpdated: new Date().toISOString()
+                }, { merge: true });
+              }
+            });
+            
+            // Получаем обновленные данные
+            const updatedDoc = await getDoc(newsRef);
+            if (updatedDoc.exists()) {
+              const data = updatedDoc.data();
+              item.likes = data.likes || 0;
+              item.dislikes = data.dislikes || 0;
+              
+              // Проверяем голос пользователя
+              const userVoteDoc = await getDoc(userVoteRef);
+              item.userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
+              
+              // Обновляем отображение
+              likeCountSpan.textContent = item.likes;
+              dislikeCountSpan.textContent = item.dislikes;
+              
+              if (item.userVote === 'like') {
+                likeBtn.classList.add('active');
+                dislikeBtn.classList.remove('active');
+              } else if (item.userVote === 'dislike') {
+                dislikeBtn.classList.add('active');
+                likeBtn.classList.remove('active');
+              } else {
+                likeBtn.classList.remove('active');
+                dislikeBtn.classList.remove('active');
+              }
+            }
+          } catch (error) {
+            console.error('Ошибка при сохранении голоса:', error);
+            alert('Не удалось сохранить голос. Попробуйте позже.');
+          }
+        }
+        
+        likeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          handleVote('like');
+        });
+        
+        dislikeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          handleVote('dislike');
+        });
       });
       
-      // Запуск анимации карточек
       setTimeout(animateNewsCards, 100);
       
-      // Добавляем обработчики для уже видимых изображений
       setTimeout(() => {
         const allImages = document.querySelectorAll('.news-content-detailed img');
         allImages.forEach(img => {
@@ -1393,6 +1623,63 @@
         });
       }, 150);
     }
+    
+    // Функция загрузки голосов из Firestore
+    async function loadVotesFromFirestore(newsArray) {
+      const userId = getCurrentUserId();
+      
+      for (const item of newsArray) {
+        const newsId = item.id;
+        if (!newsId) continue;
+        
+        const newsRef = doc(db, 'news', newsId.toString());
+        const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
+        
+        try {
+          // Загружаем основной документ новости
+          const newsDoc = await getDoc(newsRef);
+          
+          if (newsDoc.exists()) {
+            const data = newsDoc.data();
+            item.likes = data.likes || 0;
+            item.dislikes = data.dislikes || 0;
+          } else {
+            // Создаем документ для новой новости
+            await setDoc(newsRef, {
+              likes: 0,
+              dislikes: 0,
+              createdAt: new Date().toISOString(),
+              lastUpdated: new Date().toISOString()
+            });
+            item.likes = 0;
+            item.dislikes = 0;
+          }
+          
+          // Загружаем голос пользователя
+          const userVoteDoc = await getDoc(userVoteRef);
+          item.userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
+          
+        } catch (error) {
+          console.error('Ошибка загрузки голосов для новости', newsId, error);
+          item.likes = 0;
+          item.dislikes = 0;
+          item.userVote = null;
+        }
+      }
+      
+      return newsArray;
+    }
+    
+    // Инициализация
+    async function initNews() {
+      // Загружаем голоса из Firestore
+      const newsWithVotes = await loadVotesFromFirestore(news);
+      // Отображаем новости
+      displayNews(newsWithVotes);
+    }
+    
+    // Запускаем при загрузке страницы
+    initNews();
 
     function filterNews() {
       const searchTerm = document.getElementById('news-search').value.toLowerCase();
