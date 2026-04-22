@@ -1391,27 +1391,19 @@
     }
 
     function sortMembers(membersToSort, sortType) {
-      if (!Array.isArray(membersToSort)) return [];
-    
       return [...membersToSort].sort((a, b) => {
-        const aPlace = a.place ?? Infinity;
-        const bPlace = b.place ?? Infinity;
-    
-        // сначала сортируем по place
-        if (aPlace !== bPlace) return aPlace - bPlace;
-    
         switch (sortType) {
           case 'name-asc':
-            return (a.name || '').localeCompare(b.name || '');
+            return a.name.localeCompare(b.name);
     
           case 'name-desc':
-            return (b.name || '').localeCompare(a.name || '');
+            return b.name.localeCompare(a.name);
     
           case 'roles-asc':
-            return (Number(a.roles) || 0) - (Number(b.roles) || 0);
+            return a.roles - b.roles;
     
           case 'roles-desc':
-            return (Number(b.roles) || 0) - (Number(a.roles) || 0);
+            return b.roles - a.roles;
     
           default:
             return 0;
@@ -1425,7 +1417,7 @@
       }
 
       const sortedMembers = sortMembers(members, sortType);
-      console.log(members);
+      console.log(sortType, sortedMembers.map(m => m.name));
       
       let membersHtml = `
         <div class="members-list-header">
