@@ -1489,122 +1489,200 @@
         const dislikeCountSpan = newsCard.querySelector('.dislike-count');
         
         async function handleVote(voteType) {
-          const newsId = item.id;
-          if (newsId == null) {
-            console.error('Нет ID новости');
-            return;
-          }
-          
-          const userId = getCurrentUserId();
-          const newsRef = doc(db, 'news', newsId.toString());
-          const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
-          
-          try {
-            // Используем transaction для атомарного обновления в Firestore
-            await runTransaction(db, async (transaction) => {
-              const newsDoc = await transaction.get(newsRef);
-              
-              let currentLikes = 0;
-              let currentDislikes = 0;
-              let currentVote = null;
-              
-              if (newsDoc.exists()) {
-                const data = newsDoc.data();
-                currentLikes = data.likes || 0;
-                currentDislikes = data.dislikes || 0;
-              }
-              
-              // Получаем текущий голос пользователя
-              const userVoteDoc = await transaction.get(userVoteRef);
-              if (userVoteDoc.exists()) {
-                currentVote = userVoteDoc.data().vote;
-              }
-              
-              let newLikes = currentLikes;
-              let newDislikes = currentDislikes;
-              
-              // Отменяем предыдущий голос
-              if (currentVote === 'like') {
+            const newsId = item.id;
+            if (newsId == null) {
+                console.error('Нет ID новости');
+                return;
+            }
+            
+            const userId = getCurrentUserId();
+            const newsRef = doc(db, 'news', newsId.toString());
+            const userVoteRef = doc(db, 'news', newsId.toString(), 'votes', userId);
+            
+            // Сохраняем состояние ДО изменения (для отката)
+            const previousState = {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                userVote: item.userVote,
+                likeActive: likeBtn.classList.contains('active'),
+                dislikeActive: dislikeBtn.classList.contains('active')
+            };
+            
+            // Вычисляем новое состояние (оптимистичное)
+            let newLikes = item.likes;
+            let newDislikes = item.dislikes;
+            let newUserVote = null;
+            
+            // Отменяем предыдущий голос
+            if (item.userVote === 'like') {
                 newLikes--;
-              } else if (currentVote === 'dislike') {
+            } else if (item.userVote === 'dislike') {
                 newDislikes--;
-              }
-              
-              // Если голосуем за тот же тип - просто отменяем
-              if (currentVote === voteType) {
-                // Удаляем голос пользователя
-                transaction.delete(userVoteRef);
-                transaction.update(newsRef, {
-                  likes: newLikes,
-                  dislikes: newDislikes,
-                  lastUpdated: new Date().toISOString()
-                });
-              } else {
+            }
+            
+            // Если голосуем за тот же тип - просто отменяем
+            if (item.userVote === voteType) {
+                newUserVote = null;
+            } else {
                 // Добавляем новый голос
                 if (voteType === 'like') {
-                  newLikes++;
+                    newLikes++;
                 } else {
-                  newDislikes++;
+                    newDislikes++;
                 }
-                
-                // Сохраняем голос пользователя в подколлекцию
-                transaction.set(userVoteRef, {
-                  vote: voteType,
-                  timestamp: new Date().toISOString(),
-                  userId: userId
-                });
-                
-                // Обновляем счетчики в основном документе
-                transaction.set(newsRef, {
-                  likes: newLikes,
-                  dislikes: newDislikes,
-                  lastUpdated: new Date().toISOString()
-                }, { merge: true });
-              }
-            });
+                newUserVote = voteType;
+            }
             
-            // Получаем обновленные данные
-            const updatedDoc = await getDoc(newsRef);
-            if (updatedDoc.exists()) {
-              const data = updatedDoc.data();
-              item.likes = data.likes || 0;
-              item.dislikes = data.dislikes || 0;
-              
-              // Проверяем голос пользователя
-              const userVoteDoc = await getDoc(userVoteRef);
-              item.userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
-              
-              // Обновляем отображение
-              likeCountSpan.textContent = item.likes;
-              dislikeCountSpan.textContent = item.dislikes;
-              
-              if (item.userVote === 'like') {
+            // 1. МГНОВЕННО МЕНЯЕМ UI (цвет кнопок меняется сразу)
+            item.likes = newLikes;
+            item.dislikes = newDislikes;
+            item.userVote = newUserVote;
+            
+            likeCountSpan.textContent = newLikes;
+            dislikeCountSpan.textContent = newDislikes;
+            
+            if (newUserVote === 'like') {
                 likeBtn.classList.add('active');
                 dislikeBtn.classList.remove('active');
-              } else if (item.userVote === 'dislike') {
+            } else if (newUserVote === 'dislike') {
                 dislikeBtn.classList.add('active');
                 likeBtn.classList.remove('active');
-              } else {
+            } else {
                 likeBtn.classList.remove('active');
                 dislikeBtn.classList.remove('active');
-              }
             }
-          } catch (error) {
-            console.error('Ошибка при сохранении голоса:', error);
-            alert('Не удалось сохранить голос. Попробуйте позже.');
-          }
+            
+            // Блокируем кнопки на время запроса
+            likeBtn.disabled = true;
+            dislikeBtn.disabled = true;
+            
+            try {
+                // 2. ВЫПОЛНЯЕМ ЗАПРОС К СЕРВЕРУ
+                await runTransaction(db, async (transaction) => {
+                    const newsDoc = await transaction.get(newsRef);
+                    
+                    let currentLikes = 0;
+                    let currentDislikes = 0;
+                    let currentVote = null;
+                    
+                    if (newsDoc.exists()) {
+                        const data = newsDoc.data();
+                        currentLikes = data.likes || 0;
+                        currentDislikes = data.dislikes || 0;
+                    }
+                    
+                    // Получаем текущий голос пользователя
+                    const userVoteDoc = await transaction.get(userVoteRef);
+                    if (userVoteDoc.exists()) {
+                        currentVote = userVoteDoc.data().vote;
+                    }
+                    
+                    let finalLikes = currentLikes;
+                    let finalDislikes = currentDislikes;
+                    
+                    // Отменяем предыдущий голос
+                    if (currentVote === 'like') {
+                        finalLikes--;
+                    } else if (currentVote === 'dislike') {
+                        finalDislikes--;
+                    }
+                    
+                    // Если голосуем за тот же тип - просто отменяем
+                    if (currentVote === voteType) {
+                        transaction.delete(userVoteRef);
+                        transaction.update(newsRef, {
+                            likes: finalLikes,
+                            dislikes: finalDislikes,
+                            lastUpdated: new Date().toISOString()
+                        });
+                    } else {
+                        // Добавляем новый голос
+                        if (voteType === 'like') {
+                            finalLikes++;
+                        } else {
+                            finalDislikes++;
+                        }
+                        
+                        transaction.set(userVoteRef, {
+                            vote: voteType,
+                            timestamp: new Date().toISOString(),
+                            userId: userId
+                        });
+                        
+                        transaction.set(newsRef, {
+                            likes: finalLikes,
+                            dislikes: finalDislikes,
+                            lastUpdated: new Date().toISOString()
+                        }, { merge: true });
+                    }
+                });
+                
+                // 3. ОБНОВЛЯЕМ UI СЕРВЕРНЫМИ ДАННЫМИ
+                const updatedDoc = await getDoc(newsRef);
+                if (updatedDoc.exists()) {
+                    const data = updatedDoc.data();
+                    item.likes = data.likes || 0;
+                    item.dislikes = data.dislikes || 0;
+                    
+                    const userVoteDoc = await getDoc(userVoteRef);
+                    item.userVote = userVoteDoc.exists() ? userVoteDoc.data().vote : null;
+                    
+                    // Обновляем отображение финальными данными с сервера
+                    likeCountSpan.textContent = item.likes;
+                    dislikeCountSpan.textContent = item.dislikes;
+                    
+                    if (item.userVote === 'like') {
+                        likeBtn.classList.add('active');
+                        dislikeBtn.classList.remove('active');
+                    } else if (item.userVote === 'dislike') {
+                        dislikeBtn.classList.add('active');
+                        likeBtn.classList.remove('active');
+                    } else {
+                        likeBtn.classList.remove('active');
+                        dislikeBtn.classList.remove('active');
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Ошибка при сохранении голоса:', error);
+                
+                // 4. ОТКАТЫВАЕМ ИЗМЕНЕНИЯ ПРИ ОШИБКЕ
+                item.likes = previousState.likes;
+                item.dislikes = previousState.dislikes;
+                item.userVote = previousState.userVote;
+                
+                likeCountSpan.textContent = previousState.likes;
+                dislikeCountSpan.textContent = previousState.dislikes;
+                
+                if (previousState.likeActive) {
+                    likeBtn.classList.add('active');
+                    dislikeBtn.classList.remove('active');
+                } else if (previousState.dislikeActive) {
+                    dislikeBtn.classList.add('active');
+                    likeBtn.classList.remove('active');
+                } else {
+                    likeBtn.classList.remove('active');
+                    dislikeBtn.classList.remove('active');
+                }
+                
+                alert('Не удалось сохранить голос. Попробуйте позже.');
+                
+            } finally {
+                // Разблокируем кнопки
+                likeBtn.disabled = false;
+                dislikeBtn.disabled = false;
+            }
         }
         
         likeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          handleVote('like');
+            e.stopPropagation();
+            handleVote('like');
         });
         
         dislikeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          handleVote('dislike');
+            e.stopPropagation();
+            handleVote('dislike');
         });
-      });
       
       setTimeout(animateNewsCards, 100);
       
