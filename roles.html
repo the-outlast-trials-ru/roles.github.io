@@ -1610,104 +1610,103 @@
           });
         }
         
-        if (membersBtn && membersBlock) {
-            membersBtn.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('data-expanded') === 'true';
+    if (membersBtn && membersBlock) {
+        membersBtn.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('data-expanded') === 'true';
+            
+            if (isExpanded) {
+                // Закрываем
+                this.setAttribute('data-expanded', 'false');
+                this.classList.remove('expanded');
+                membersBlock.classList.remove('expanded');
+                this.innerHTML = '<span>Участники</span><i class="fas fa-chevron-down"></i>';
+                membersBlock.innerHTML = ''; // Очищаем содержимое при закрытии
+            } else {
+                // Открываем - ВСЕГДА перерисовываем заново с текущим состоянием сортировки
+                this.setAttribute('data-expanded', 'true');
+                this.classList.add('expanded');
+                this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
                 
-                if (isExpanded) {
-                    // Закрываем
-                    this.setAttribute('data-expanded', 'false');
-                    this.classList.remove('expanded');
-                    membersBlock.classList.remove('expanded');
-                    this.innerHTML = '<span>Участники</span><i class="fas fa-chevron-down"></i>';
-                    membersBlock.innerHTML = ''; // Очищаем содержимое при закрытии
-                } else {
-                    // Открываем - ВСЕГДА перерисовываем заново с текущим состоянием сортировки
-                    this.setAttribute('data-expanded', 'true');
-                    this.classList.add('expanded');
-                    this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
+                // Перерисовываем содержимое
+                membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+                membersBlock.classList.add('expanded');
+                
+                // Привязываем обработчик сортировки ЗАНОВО каждый раз при открытии
+                const sortSelect = membersBlock.querySelector('.members-sort-select');
+                if (sortSelect) {
+                    // Удаляем старый обработчик (если есть) через клонирование
+                    const newSortSelect = sortSelect.cloneNode(true);
+                    sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
                     
-                    // Перерисовываем содержимое
-                    membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                    membersBlock.classList.add('expanded');
-                    
-                    // Привязываем обработчик сортировки ЗАНОВО каждый раз при открытии
-                    const sortSelect = membersBlock.querySelector('.members-sort-select');
-                    if (sortSelect) {
-                        // Удаляем старый обработчик (если есть) через клонирование
-                        const newSortSelect = sortSelect.cloneNode(true);
-                        sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
+                    newSortSelect.addEventListener('change', function(e) {
+                        e.stopPropagation();
+                        membersSortState[role.name] = this.value;
+                        // Перерисовываем содержимое с новой сортировкой, но оставляем блок открытым
+                        const currentMembersHtml = renderMembersList(role.name, members, membersSortState[role.name]);
+                        membersBlock.innerHTML = currentMembersHtml;
                         
-                        newSortSelect.addEventListener('change', function(e) {
-                            e.stopPropagation();
-                            membersSortState[role.name] = this.value;
-                            // Перерисовываем содержимое с новой сортировкой, но оставляем блок открытым
-                            const currentMembersHtml = renderMembersList(role.name, members, membersSortState[role.name]);
-                            membersBlock.innerHTML = currentMembersHtml;
+                        // ПРИВЯЗЫВАЕМ ОБРАБОТЧИК ЗАНОВО после перерисовки
+                        const newSortSelectAfterRender = membersBlock.querySelector('.members-sort-select');
+                        if (newSortSelectAfterRender) {
+                            const freshSelect = newSortSelectAfterRender.cloneNode(true);
+                            newSortSelectAfterRender.parentNode.replaceChild(freshSelect, newSortSelectAfterRender);
                             
-                            // ПРИВЯЗЫВАЕМ ОБРАБОТЧИК ЗАНОВО после перерисовки
-                            const newSortSelectAfterRender = membersBlock.querySelector('.members-sort-select');
-                            if (newSortSelectAfterRender) {
-                                const freshSelect = newSortSelectAfterRender.cloneNode(true);
-                                newSortSelectAfterRender.parentNode.replaceChild(freshSelect, newSortSelectAfterRender);
-                                
-                                freshSelect.addEventListener('change', function(e) {
-                                    e.stopPropagation();
-                                    membersSortState[role.name] = this.value;
-                                    membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                                });
-                            }
-                            
-                            // Добавляем обработчик для новых изображений
-                            setTimeout(() => {
-                                membersBlock.querySelectorAll('img').forEach(img => {
-                                    if (!img.hasAttribute('data-modal-attached')) {
-                                        img.setAttribute('data-modal-attached', 'true');
-                                        img.addEventListener('click', function(e) {
-                                            e.stopPropagation();
-                                            openImageModal(this.src);
-                                        });
-                                    }
-                                });
-                            }, 50);
-                        });
-                    }
-                    
-                    // Добавляем обработчик для изображений
-                    setTimeout(() => {
-                        membersBlock.querySelectorAll('img').forEach(img => {
-                            if (!img.hasAttribute('data-modal-attached')) {
-                                img.setAttribute('data-modal-attached', 'true');
-                                img.addEventListener('click', function(e) {
-                                    e.stopPropagation();
-                                    openImageModal(this.src);
-                                });
-                            }
-                        });
-                    }, 50);
+                            freshSelect.addEventListener('change', function(e) {
+                                e.stopPropagation();
+                                membersSortState[role.name] = this.value;
+                                membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+                            });
+                        }
+                        
+                        // Добавляем обработчик для новых изображений
+                        setTimeout(() => {
+                            membersBlock.querySelectorAll('img').forEach(img => {
+                                if (!img.hasAttribute('data-modal-attached')) {
+                                    img.setAttribute('data-modal-attached', 'true');
+                                    img.addEventListener('click', function(e) {
+                                        e.stopPropagation();
+                                        openImageModal(this.src);
+                                    });
+                                }
+                            });
+                        }, 50);
+                    });
                 }
-            });
-        }
-      
-      // Запускаем таймеры после отображения всех карточек
-      setTimeout(() => {
+                
+                // Добавляем обработчик для изображений
+                setTimeout(() => {
+                    membersBlock.querySelectorAll('img').forEach(img => {
+                        if (!img.hasAttribute('data-modal-attached')) {
+                            img.setAttribute('data-modal-attached', 'true');
+                            img.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                openImageModal(this.src);
+                            });
+                        }
+                    });
+                }, 50);
+            }
+        }); // <-- Закрываем addEventListener
+    } // <-- Закрываем if (membersBtn && membersBlock)
+    
+    // Запускаем таймеры после отображения всех карточек
+    setTimeout(() => {
         updateTimers();
-      }, 100);
-      
-      setTimeout(animateRoleCards, 100);
-      setTimeout(() => {
+    }, 100);
+    
+    setTimeout(animateRoleCards, 100);
+    setTimeout(() => {
         // Добавляем обработчики для всех изображений, которые уже есть на странице
         document.querySelectorAll('.role-content-inner img').forEach(img => {
-          if (!img.hasAttribute('data-modal-attached')) {
-            img.setAttribute('data-modal-attached', 'true');
-            img.addEventListener('click', function(e) {
-              e.stopPropagation();
-              openImageModal(this.src);
-            });
-          }
+            if (!img.hasAttribute('data-modal-attached')) {
+                img.setAttribute('data-modal-attached', 'true');
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openImageModal(this.src);
+                });
+            }
         });
-      }, 150);
-    }
+    }, 150);
 
     // Запускаем обновление таймеров каждую секунду
     setInterval(updateTimers, 1000);
