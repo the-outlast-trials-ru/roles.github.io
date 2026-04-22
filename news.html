@@ -1627,7 +1627,7 @@
       const userId = getCurrentUserId();
       
       // Проходим по существующему массиву news
-      for (let i = 0; i < news.length; i++) {
+      for (let i = 0; i <= news.length; i++) {
         const item = news[i];
         // СОЗДАЕМ ID на основе индекса или заголовка
         const newsId = i; // или item.title
