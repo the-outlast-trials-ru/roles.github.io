@@ -1490,7 +1490,7 @@
         
         async function handleVote(voteType) {
           const newsId = item.id;
-          if (!newsId) {
+          if (newsId == null) {
             console.error('Нет ID новости');
             return;
           }
