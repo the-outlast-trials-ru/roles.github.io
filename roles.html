@@ -1423,8 +1423,9 @@
       if (!members || members.length === 0) {
         return '<div class="no-members">Участников с этой ролью пока нет</div>';
       }
-      
+
       const sortedMembers = sortMembers(members, sortType);
+      console.log(members);
       
       let membersHtml = `
         <div class="members-list-header">
