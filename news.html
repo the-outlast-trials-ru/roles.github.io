@@ -1676,15 +1676,36 @@
       return news;
     }
     
-    // Инициализация
+    // Добавьте эту функцию ПЕРЕД initNews()
+    function addIdsToNews() {
+        if (typeof news !== 'undefined' && news.length > 0) {
+            news.forEach((item, index) => {
+                if (!item.id) {
+                    item.id = index; // или используйте item.title + index для уникальности
+                }
+                // Инициализируем поля, если их нет
+                if (item.likes === undefined) item.likes = 0;
+                if (item.dislikes === undefined) item.dislikes = 0;
+                if (item.userVote === undefined) item.userVote = null;
+            });
+            console.log('ID добавлены новостям:', news.map(n => ({ id: n.id, title: n.title })));
+        }
+    }
+    
+    // Измените initNews():
     async function initNews() {
-      console.log('До загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
-      
-      await loadVotesFromFirestore(); // Здесь добавляются ID
-      
-      console.log('После загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
-      
-      displayNews(news); // Теперь у каждой новости есть id
+        console.log('До добавления ID:', news?.length);
+        
+        // СНАЧАЛА добавляем ID
+        addIdsToNews();
+        
+        // ПОТОМ загружаем голоса из Firestore
+        await loadVotesFromFirestore();
+        
+        console.log('После загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
+        
+        // И только потом отображаем
+        displayNews(news);
     }
     
     // Запускаем
