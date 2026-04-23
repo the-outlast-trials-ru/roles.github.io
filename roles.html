@@ -1770,6 +1770,34 @@
           closeImageModal();
         }
       });
+
+      // VIEWED NEWS
+      const totalNews = news.length;
+      const viewed = parseInt(localStorage.getItem("viewedNews") || "0", 10);
+      const unread = Math.max(totalNews - viewed, 0);
+    
+      const newsLink = document.querySelector('a[href="news.html"]');
+    
+      if (!newsLink) return;
+    
+      // удаляем старый индикатор если есть
+      const oldBadge = newsLink.querySelector(".news-badge");
+      if (oldBadge) oldBadge.remove();
+    
+      if (unread > 0) {
+        const badge = document.createElement("span");
+        badge.className = "news-badge";
+        badge.textContent = unread;
+    
+        badge.style.marginLeft = "6px";
+        badge.style.background = "red";
+        badge.style.color = "white";
+        badge.style.borderRadius = "10px";
+        badge.style.padding = "2px 6px";
+        badge.style.fontSize = "12px";
+    
+        newsLink.appendChild(badge);
+      }
     });
   </script>
 </body>
