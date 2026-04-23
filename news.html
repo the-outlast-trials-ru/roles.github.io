@@ -1479,6 +1479,17 @@
                 }
               });
             }, 50);
+
+            // VIEWED NEWS
+            let viewed = parseInt(localStorage.getItem("viewedNews") || "0", 10);
+            const totalNews = typeof news !== "undefined" ? news.length : 0;
+      
+            if (viewed < totalNews) {
+              viewed++;
+              localStorage.setItem("viewedNews", viewed);
+            }
+      
+            updateBadge(totalNews, viewed);
           }
         });
         
