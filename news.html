@@ -1771,17 +1771,27 @@
         }
     }
     
-    // Измените initNews():
     async function initNews() {
         console.log('До добавления ID:', news?.length);
         
         // СНАЧАЛА добавляем ID
         addIdsToNews();
         
-        // ПОТОМ загружаем голоса из Firestore
+        // ЗАГРУЖАЕМ голоса из Firestore
         await loadVotesFromFirestore();
         
-        console.log('После загрузки голосов:', news.map(n => ({ id: n.id, title: n.title })));
+        // ✅ ДОБАВЬТЕ СОРТИРОВКУ (если у вас есть поле date для сортировки)
+        // Предполагаем, что новости должны быть отсортированы по дате (новые сверху)
+        if (news.length > 0 && news[0].date) {
+            news.sort((a, b) => {
+                // Преобразуем даты в timestamp для сравнения
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA; // Новые сверху
+            });
+        }
+        
+        console.log('После загрузки голосов:', news.map(n => ({ id: n.id, title: n.title, date: n.date })));
         
         // И только потом отображаем
         displayNews(news);
