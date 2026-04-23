@@ -1452,6 +1452,23 @@
         // Обработчик для кнопки "Подробнее"
         const moreBtn = newsCard.querySelector('.more-btn');
         const contentBlock = newsCard.querySelector('.news-content-detailed');
+
+        function updateBadge(total, viewed) {
+          const unread = Math.max(total - viewed, 0);
+          const newsLink = document.querySelector('a[href="news.html"]');
+      
+          if (!newsLink) return;
+      
+          const badge = newsLink.querySelector(".news-badge");
+      
+          if (unread <= 0) {
+            if (badge) badge.remove();
+          } else {
+            if (badge) {
+              badge.textContent = unread;
+            }
+          }
+        }
         
         moreBtn.addEventListener('click', function() {
           const isExpanded = this.getAttribute('data-expanded') === 'true';
