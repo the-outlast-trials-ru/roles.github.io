@@ -1441,7 +1441,7 @@
       if (!members || members.length === 0) {
         return '<div class="no-members">Участников с этой ролью пока нет</div>';
       }
-      console.log('works!')
+
       const sortedMembers = sortMembers(members, sortType);
       
       let membersHtml = `
@@ -1611,12 +1611,9 @@
         }
         
         if (membersBtn && membersBlock) {
-          // Сохраняем обработчик отдельно, чтобы он не перезаписывался
-          let sortSelectListenerAdded = false;
-          
           membersBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
-            membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+            
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
               this.classList.remove('expanded');
@@ -1628,25 +1625,22 @@
               membersBlock.classList.add('expanded');
               this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
               
-              // Добавляем обработчик для селекта сортировки (только один раз)
-              if (!sortSelectListenerAdded) {
-                const sortSelect = membersBlock.querySelector('.members-sort-select');
-                if (sortSelect) {
-                  sortSelect.addEventListener('change', function() {
-                    membersSortState[role.name] = this.value;
-                    membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                    // Перепривязываем обработчик после обновления
-                    const newSortSelect = membersBlock.querySelector('.members-sort-select');
-                    if (newSortSelect && newSortSelect !== sortSelect) {
-                      const newValue = newSortSelect.value;
-                      newSortSelect.addEventListener('change', function() {
-                        membersSortState[role.name] = this.value;
-                        membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                      });
-                    }
-                  });
-                  sortSelectListenerAdded = true;
-                }
+              // Рендерим содержимое
+              membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+              
+              // Всегда добавляем обработчик заново (убираем флаг)
+              const sortSelect = membersBlock.querySelector('.members-sort-select');
+              if (sortSelect) {
+                // Удаляем старый обработчик, если он есть
+                const newSortSelect = sortSelect.cloneNode(true);
+                sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
+                
+                newSortSelect.addEventListener('change', function() {
+                  membersSortState[role.name] = this.value;
+                  // Сохраняем состояние развернутости
+                  const currentMembersBlock = this.closest('.members-list');
+                  currentMembersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
+                });
               }
             }
           });
