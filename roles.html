@@ -1501,6 +1501,22 @@
       return membersHtml;
     }
 
+    function attachSortHandler(roleName, members, membersBlock, sortSelect) {
+      const handleSortChange = function() {
+        membersSortState[roleName] = this.value;
+        membersBlock.innerHTML = renderMembersList(roleName, members, membersSortState[roleName]);
+        
+        // Перепривязываем обработчик к новому select
+        const newSortSelect = membersBlock.querySelector('.members-sort-select');
+        if (newSortSelect) {
+          attachSortHandler(roleName, members, membersBlock, newSortSelect);
+        }
+      };
+      
+      sortSelect.removeEventListener('change', handleSortChange);
+      sortSelect.addEventListener('change', handleSortChange);
+    }
+
     function displayRoles(rolesToDisplay) {
       const rolesList = document.getElementById('roles-list');
       const noResults = document.getElementById('no-results');
@@ -1613,6 +1629,7 @@
         if (membersBtn && membersBlock) {
           membersBtn.addEventListener('click', function() {
             const isExpanded = this.getAttribute('data-expanded') === 'true';
+            membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
             
             if (isExpanded) {
               this.setAttribute('data-expanded', 'false');
@@ -1625,22 +1642,10 @@
               membersBlock.classList.add('expanded');
               this.innerHTML = '<span>Скрыть</span><i class="fas fa-chevron-up"></i>';
               
-              // Рендерим содержимое
-              membersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-              
-              // Всегда добавляем обработчик заново (убираем флаг)
+              // Привязываем обработчик
               const sortSelect = membersBlock.querySelector('.members-sort-select');
               if (sortSelect) {
-                // Удаляем старый обработчик, если он есть
-                const newSortSelect = sortSelect.cloneNode(true);
-                sortSelect.parentNode.replaceChild(newSortSelect, sortSelect);
-                
-                newSortSelect.addEventListener('change', function() {
-                  membersSortState[role.name] = this.value;
-                  // Сохраняем состояние развернутости
-                  const currentMembersBlock = this.closest('.members-list');
-                  currentMembersBlock.innerHTML = renderMembersList(role.name, members, membersSortState[role.name]);
-                });
+                attachSortHandler(role.name, members, membersBlock, sortSelect);
               }
             }
           });
