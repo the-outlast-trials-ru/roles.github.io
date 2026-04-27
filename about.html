@@ -276,12 +276,6 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 992px) {
-      .categories-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-    }
-
     @media (max-width: 768px) {
       .bg-image {
         background-image: url('bg-outlast-mobile.jpg');
@@ -302,13 +296,8 @@
       .hero-title { font-size: 1.8rem; }
       .hero-subtitle { font-size: 0.95rem; }
       .description-title { font-size: 1.4rem; }
-      .description-text { font-size: 0.95rem; }
       .category-title { font-size: 1.2rem; }
-      
-      .categories-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
+      .categories-grid { grid-template-columns: 1fr; gap: 20px; }
     }
 
     @media (max-width: 480px) {
@@ -366,6 +355,114 @@
   </main>
 
   <script>
+    // Данные категорий с путями к файлам
+    const categories = [
+      {
+        key: "prime-assets",
+        title: "🔴 Главные активы",
+        description: "Исполнители — свирепые и опасные мутанты, которые охотятся на реагентов во время испытаний. Каждый актив имеет уникальные способности и поведение.",
+        icon: "fa-skull",
+        image: "screenshots/prime-assets.png",
+        file: "game-files/category-prime-assets.html"
+      },
+      {
+        key: "ex-pops",
+        title: "⚡ Экс-попы",
+        description: "Бывшие реагенты, которые не выдержали давления экспериментов и превратились в безумных убийц. Их появление всегда неожиданно и смертельно опасно.",
+        icon: "fa-ghost",
+        image: "screenshots/ex-pops.png",
+        file: "game-files/category-ex-pops.html"
+      },
+      {
+        key: "reagents",
+        title: "🧪 Реагенты",
+        description: "Игровые персонажи — подопытные, проходящие испытания. Каждый реагент имеет свои уникальные перки и стиль игры.",
+        icon: "fa-user-secret",
+        image: "screenshots/реагенты.png",
+        file: "game-files/category-reagents.html"
+      },
+      {
+        key: "specialists",
+        title: "🩺 Специалисты",
+        description: "Особые реагенты с уникальными навыками и способностями. Помогают команде в прохождении сложных испытаний.",
+        icon: "fa-user-md",
+        image: "screenshots/специалисты.png",
+        file: "game-files/category-specialists.html"
+      },
+      {
+        key: "maps",
+        title: "🗺️ Карты",
+        description: "Локации игры — полигон, склад, психиатрическая больница, деревня и другие жуткие места.",
+        icon: "fa-map",
+        image: "screenshots/карты.png",
+        file: "game-files/category-maps.html"
+      },
+      {
+        key: "amps",
+        title: "💊 Ампы",
+        description: "Усилители, которые можно использовать во время испытаний. Дают временные бонусы: ускорение, лечение, невидимость.",
+        icon: "fa-capsules",
+        image: "screenshots/ампы.png",
+        file: "game-files/category-amps.html"
+      },
+      {
+        key: "equipment",
+        title: "🎒 Снаряжение",
+        description: "Предметы, помогающие выжить: аптечки, бинты, батарейки для фонарика, кирпичи и бутылки.",
+        icon: "fa-backpack",
+        image: "screenshots/снаряжение.png",
+        file: "game-files/category-equipment.html"
+      },
+      {
+        key: "items",
+        title: "📦 Предметы",
+        description: "Различные предметы, которые можно найти во время испытаний: ключи, документы, улики.",
+        icon: "fa-cube",
+        image: "screenshots/предметы.png",
+        file: "game-files/category-items.html"
+      },
+      {
+        key: "catalogs",
+        title: "📚 Каталоги",
+        description: "Сборники заданий, достижений и коллекционных предметов. Помогают отслеживать прогресс.",
+        icon: "fa-book",
+        image: "screenshots/каталоги.png",
+        file: "game-files/category-catalogs.html"
+      },
+      {
+        key: "achievements",
+        title: "🏆 Достижения",
+        description: "Специальные награды за выполнение сложных задач. Открывают новые возможности.",
+        icon: "fa-trophy",
+        image: "screenshots/достижения.png",
+        file: "game-files/category-achievements.html"
+      },
+      {
+        key: "recipes",
+        title: "📜 Рецепты",
+        description: "Схемы создания улучшений и предметов. Позволяют крафтить полезные вещи.",
+        icon: "fa-scroll",
+        image: "screenshots/рецепты.png",
+        file: "game-files/category-recipes.html"
+      },
+      {
+        key: "variators",
+        title: "🔄 Вариаторы",
+        description: "Модификаторы испытаний, которые меняют правила игры. Добавляют сложность.",
+        icon: "fa-sliders-h",
+        image: "screenshots/вариаторы.png",
+        file: "game-files/category-variators.html"
+      },
+      {
+        key: "programs",
+        title: "📋 Испытательные программы",
+        description: "Основной режим игры. Программы: Одиночная, Кооперативная, Еженедельные испытания.",
+        icon: "fa-clipboard-list",
+        image: "screenshots/программы.png",
+        file: "game-files/category-programs.html"
+      }
+    ];
+
     function animateOnLoad() {
       const heroSection = document.querySelector('.hero-section');
       const descriptionSection = document.querySelector('.description-section');
@@ -385,116 +482,20 @@
       }
     }
 
-    // Функция для открытия страницы категории
-    function openCategoryPage(categoryKey) {
-      window.location.href = `category-${categoryKey}.html`;
-    }
-
-    const gameCategories = [
-      {
-        key: "prime-assets",
-        title: "Главные активы",
-        description: "Главные активы - это жестокие, невменяемые и в то же время странно харизматичные личности, которые представляют главную угрозу для реагентов. Обычно они охраняют ключевые цели и являются центральными элементами сценария, на котором строится каждое испытание..",
-        icon: "fa-skull",
-        image: "screenshots/prime-assets.png"
-      },
-      {
-        key: "ex-pops",
-        title: "⚡ Экс-попы",
-        description: "Бывшие реагенты, которые не выдержали давления экспериментов и превратились в безумных убийц. Их появление всегда неожиданно и смертельно опасно.",
-        icon: "fa-ghost",
-        image: "screenshots/ex-pops.png"
-      },
-      {
-        key: "reagents",
-        title: "🧪 Реагенты",
-        description: "Игровые персонажи — подопытные, проходящие испытания. Каждый реагент имеет свои уникальные перки и стиль игры.",
-        icon: "fa-user-secret",
-        image: "screenshots/реагенты.png"
-      },
-      {
-        key: "specialists",
-        title: "🩺 Специалисты",
-        description: "Особые реагенты с уникальными навыками и способностями. Помогают команде в прохождении сложных испытаний.",
-        icon: "fa-user-md",
-        image: "screenshots/специалисты.png"
-      },
-      {
-        key: "maps",
-        title: "🗺️ Карты",
-        description: "Локации игры — полигон, склад, психиатрическая больница, деревня и другие жуткие места.",
-        icon: "fa-map",
-        image: "screenshots/карты.png"
-      },
-      {
-        key: "amps",
-        title: "💊 Ампы",
-        description: "Усилители, которые можно использовать во время испытаний. Дают временные бонусы: ускорение, лечение, невидимость.",
-        icon: "fa-capsules",
-        image: "screenshots/ампы.png"
-      },
-      {
-        key: "equipment",
-        title: "🎒 Снаряжение",
-        description: "Предметы, помогающие выжить: аптечки, бинты, батарейки для фонарика, кирпичи и бутылки.",
-        icon: "fa-backpack",
-        image: "screenshots/снаряжение.png"
-      },
-      {
-        key: "items",
-        title: "📦 Предметы",
-        description: "Различные предметы, которые можно найти во время испытаний: ключи, документы, улики.",
-        icon: "fa-cube",
-        image: "screenshots/предметы.png"
-      },
-      {
-        key: "catalogs",
-        title: "📚 Каталоги",
-        description: "Сборники заданий, достижений и коллекционных предметов. Помогают отслеживать прогресс.",
-        icon: "fa-book",
-        image: "screenshots/каталоги.png"
-      },
-      {
-        key: "achievements",
-        title: "🏆 Достижения",
-        description: "Специальные награды за выполнение сложных задач. Открывают новые возможности.",
-        icon: "fa-trophy",
-        image: "screenshots/достижения.png"
-      },
-      {
-        key: "recipes",
-        title: "📜 Рецепты",
-        description: "Схемы создания улучшений и предметов. Позволяют крафтить полезные вещи.",
-        icon: "fa-scroll",
-        image: "screenshots/рецепты.png"
-      },
-      {
-        key: "variators",
-        title: "🔄 Вариаторы",
-        description: "Модификаторы испытаний, которые меняют правила игры. Добавляют сложность.",
-        icon: "fa-sliders-h",
-        image: "screenshots/вариаторы.png"
-      },
-      {
-        key: "programs",
-        title: "📋 Испытательные программы",
-        description: "Основной режим игры. Программы: Одиночная, Кооперативная, Еженедельные испытания.",
-        icon: "fa-clipboard-list",
-        image: "screenshots/программы.png"
-      }
-    ];
-
     function displayCategories() {
       const container = document.getElementById('categories-grid');
       if (!container) return;
       
       container.innerHTML = '';
       
-      gameCategories.forEach(category => {
+      categories.forEach(category => {
         const card = document.createElement('div');
         card.className = 'category-card';
         
-        card.addEventListener('click', () => openCategoryPage(category.key));
+        // Переход на страницу категории
+        card.addEventListener('click', () => {
+          window.location.href = category.file;
+        });
         
         const imageHtml = `<img src="${category.image}" class="category-image" alt="${category.title}" onerror="this.style.display='none'; this.parentElement.querySelector('.category-image-placeholder').style.display='flex';">`;
         
