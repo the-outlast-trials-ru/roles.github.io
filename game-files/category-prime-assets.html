@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Главные активы - The Outlast Trials RU</title>
-  <link rel="icon" href="logo.png" sizes="any">
+  <link rel="icon" href="../logo.png" sizes="any">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* стили остаются те же */
     * {
       margin: 0;
       padding: 0;
@@ -40,7 +39,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('bg-outlast3.jpg');
+      background-image: url('../bg-outlast3.jpg');
       background-size: cover;
       background-position: center 50px;
       background-repeat: no-repeat;
@@ -242,7 +241,7 @@
 
     @media (max-width: 768px) {
       .bg-image {
-        background-image: url('bg-outlast-mobile.jpg');
+        background-image: url('../bg-outlast-mobile.jpg');
         background-position: center top;
         background-attachment: scroll;
         background-position-y: 65px;
@@ -271,7 +270,7 @@
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo">
-        <img src="logo.png" alt="Логотип" class="logo-img">
+        <img src="../logo.png" alt="Логотип" class="logo-img">
         <span class="site-name">The Outlast Trials RU</span>
       </div>
     </div>
@@ -280,17 +279,17 @@
     </button>
     <div class="nav-right">
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-        <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
-        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
-        <li><a href="about.html"><i class="fas fa-info-circle"></i> Об игре</a></li>
+        <li><a href="../index.html"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="../roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="../news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
+        <li><a href="../about.html"><i class="fas fa-info-circle"></i> Об игре</a></li>
       </ul>
     </div>
   </nav>
 
   <main class="content">
     <div class="page-header">
-      <a href="about.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к категориям</a>
+      <a href="../about.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к категориям</a>
       <h1 class="page-title"><i class="fas fa-skull"></i> Главные активы</h1>
       <p class="page-description">Исполнители — свирепые и опасные враги, которые охотятся на реагентов во время испытаний. Нажмите на карточку, чтобы узнать подробную информацию.</p>
     </div>
@@ -342,7 +341,7 @@
         const card = document.createElement('div');
         card.className = 'asset-card';
         
-        // ИСПРАВЛЕНА ССЫЛКА - напрямую на страницу персонажа
+        // Переход на страницу персонажа (файлы лежат в той же папке game-files)
         card.addEventListener('click', () => {
           window.location.href = `${asset.id}.html`;
         });
@@ -408,6 +407,6 @@
       initMobileMenu();
     });
   </script>
-  <script src="maintenance-mode.js"></script>
+  <script src="../maintenance-mode.js"></script>
 </body>
 </html>
