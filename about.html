@@ -244,7 +244,6 @@
     .category-card {
       background: linear-gradient(135deg, rgba(40, 41, 45, 0.9), rgba(30, 31, 34, 0.95));
       border-radius: 16px;
-      padding: 0;
       overflow: hidden;
       border: 1px solid rgba(255, 107, 107, 0.3);
       transition: all 0.3s ease;
@@ -262,7 +261,6 @@
       height: 160px;
       object-fit: cover;
       display: block;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
     }
 
     .category-image-placeholder {
@@ -378,14 +376,12 @@
       <div class="description-text">
         <p><strong>The Outlast Trials</strong> — это новый кооперативный хоррор от Red Barrels, действие которого разворачивается в эпоху Холодной войны. Игроки берут на себя роль «Реагентов» — подопытных, заключенных в секретной лаборатории Муркофф.</p>
         <p>В отличие от предыдущих частей серии, Trials фокусируется на кооперативном прохождении, где до 4 игроков могут объединяться, чтобы выжить в экспериментах корпорации Муркофф. Вас ждут пугающие испытания, психологические пытки и множество врагов, готовых разорвать вас на части.</p>
-        <p>Проходите испытания, собирайте улики, прокачивайте своего персонажа и раскрывайте темные секреты программы Муркофф. Сможете ли вы пережить все ужасы и сохранить рассудок?»</p>
+        <p>Проходите испытания, собирайте улики, прокачивайте своего персонажа и раскрывайте темные секреты программы Муркофф. Сможете ли вы пережить все ужасы и сохранить рассудок?</p>
       </div>
     </section>
 
     <section class="categories-section">
-      <div class="categories-grid" id="categories-grid">
-        <!-- Карточки будут загружены динамически -->
-      </div>
+      <div class="categories-grid" id="categories-grid"></div>
     </section>
   </main>
 
@@ -416,31 +412,31 @@
     const gameCategories = [
       {
         title: "🔴 Главные активы",
-        description: "Исполнители — свирепые и опасные мутанты, которые охотятся на реагентов во время испытаний. Каждый актив имеет уникальные способности и поведение.",
+        description: "Исполнители — свирепые и опасные мутанты, которые охотятся на реагентов во время испытаний. Каждый актив имеет уникальные способности и поведение. Среди них: Берсерк, Гусь Берри, Койл и другие.",
         icon: "fa-skull",
-        image: "screenshots/активы.png"
+        image: "screenshots/prime-assets.png"
       },
       {
         title: "⚡ Экс-попы",
-        description: "Бывшие реагенты, которые не выдержали давления экспериментов и превратились в безумных убийц. Их появление всегда неожиданно.",
+        description: "Бывшие реагенты, которые не выдержали давления экспериментов и превратились в безумных убийц. Их появление всегда неожиданно и смертельно опасно.",
         icon: "fa-ghost",
-        image: "screenshots/экс-попы.png"
+        image: "screenshots/ex-pops.png"
       },
       {
         title: "🧪 Реагенты",
-        description: "Игровые персонажи — подопытные, проходящие испытания. Каждый реагент имеет свои уникальные перки и стиль игры.",
+        description: "Игровые персонажи — подопытные, проходящие испытания. Каждый реагент имеет свои уникальные перки и стиль игры. Выбирайте своего персонажа и развивайте его.",
         icon: "fa-user-secret",
         image: "screenshots/реагенты.png"
       },
       {
         title: "🗺️ Карты",
-        description: "Локации игры — полигон, склад, психиатрическая больница, деревня и другие жуткие места, полные опасностей.",
+        description: "Локации игры — полигон, склад, психиатрическая больница, деревня и другие жуткие места, полные опасностей и секретов.",
         icon: "fa-map",
         image: "screenshots/карты.png"
       },
       {
         title: "💊 Ампы",
-        description: "Усилители, которые можно использовать во время испытаний. Дают временные бонусы: ускорение, лечение, невидимость.",
+        description: "Усилители, которые можно использовать во время испытаний. Дают временные бонусы: ускорение, лечение, невидимость и другие полезные эффекты.",
         icon: "fa-capsules",
         image: "screenshots/ампы.png"
       },
@@ -469,13 +465,12 @@
         const card = document.createElement('div');
         card.className = 'category-card';
         
-        // Проверяем наличие изображения, если нет - показываем иконку
-        const imageHtml = category.image ? 
-          `<img src="${category.image}" class="category-image" alt="${category.title}" onerror="this.style.display='none'; this.parentElement.querySelector('.category-image-placeholder').style.display='flex';">` : '';
+        // Если изображение есть, показываем его
+        const imageHtml = `<img src="${category.image}" class="category-image" alt="${category.title}" onerror="this.style.display='none'; this.parentElement.querySelector('.category-image-placeholder').style.display='flex';">`;
         
         card.innerHTML = `
           ${imageHtml}
-          <div class="category-image-placeholder" style="${category.image ? 'display: none;' : 'display: flex;'}">
+          <div class="category-image-placeholder" style="display: none;">
             <i class="fas ${category.icon}"></i>
           </div>
           <div class="category-content">
