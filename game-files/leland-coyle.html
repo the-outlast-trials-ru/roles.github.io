@@ -2,393 +2,58 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Лиланд Койл - Главные активы - The Outlast Trials RU</title>
-  <link rel="icon" href="logo.png" sizes="any">
+  <title>Лиланд Койл - The Outlast Trials RU</title>
+  <link rel="icon" href="../logo.png" sizes="any">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 380;
-    }
-
-    body {
-      background-color: #0a0a0f;
-      color: #f0f0f0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .main-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-    }
-
-    .bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('bg-outlast.jpg');
-      background-size: cover;
-      background-position: center 50px;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    .bg-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.75) 100%);
-    }
-
-    .navbar {
-      background-color: rgba(26, 26, 46, 0.9);
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #ff2a2a;
-      box-shadow: 0 4px 12px rgba(255, 42, 42, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-img {
-      height: 45px;
-      width: auto;
-      border-radius: 8px;
-    }
-
-    .site-name {
-      font-size: 20px;
-      font-weight: 500;
-      color: #ff2a2a;
-      text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
-    }
-
-    .nav-right {
-      display: flex;
-    }
-
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: 15px;
-    }
-
-    .nav-menu li a {
-      color: #f0f0f0;
-      text-decoration: none;
-      font-size: 16px;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 400;
-      background-color: rgba(40, 41, 45, 0.5);
-    }
-
-    .nav-menu li a:hover {
-      background-color: #ff2a2a;
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .nav-menu li a.active {
-      background-color: #ff2a2a;
-      color: white;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: #f0f0f0;
-      font-size: 24px;
-      cursor: pointer;
-      padding: 5px;
-      z-index: 1001;
-    }
-
-    .content {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 0 15px;
-      flex: 1;
-      width: 100%;
-      position: relative;
-      z-index: 1;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #ff6b6b;
-      text-decoration: none;
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .back-link:hover {
-      color: #ff4757;
-      transform: translateX(-5px);
-    }
-
-    /* Основной блок статьи */
-    .article-wrapper {
-      background: linear-gradient(135deg, rgba(30, 31, 34, 0.8), rgba(20, 21, 24, 0.9));
-      border-radius: 20px;
-      border: 1px solid rgba(255, 107, 107, 0.3);
-      overflow: hidden;
-      backdrop-filter: blur(5px);
-    }
-
-    /* Заголовок с цитатой */
-    .quote-header {
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 71, 87, 0.05));
-      padding: 30px 30px 20px;
-      border-bottom: 1px solid rgba(255, 107, 107, 0.2);
-      text-align: center;
-    }
-
-    .quote-text {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: #ff6b6b;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-
-    .quote-author {
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 10px;
-    }
-
-    /* Основное содержимое с обтеканием */
-    .article-content {
-      padding: 30px;
-    }
-
-    .character-intro {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-bottom: 30px;
-      align-items: flex-start;
-    }
-
-    .character-image {
-      flex: 0 0 280px;
-      text-align: center;
-    }
-
-    .character-image img {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 16px;
-      border: 2px solid rgba(255, 107, 107, 0.4);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .character-title {
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .character-name {
-      font-size: 2.2rem;
-      color: #ff6b6b;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .character-sub {
-      font-size: 1rem;
-      color: #aaa;
-      margin-bottom: 15px;
-      line-height: 1.5;
-    }
-
-    .character-sub i {
-      color: #ff6b6b;
-      margin-right: 5px;
-    }
-
-    .section {
-      margin-top: 25px;
-      clear: both;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      color: #ff6b6b;
-      margin-bottom: 15px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 107, 107, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-text {
-      color: #d0d0d0;
-      line-height: 1.7;
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
-
-    .section-text p {
-      margin-bottom: 15px;
-    }
-
-    .info-box {
-      background: rgba(0, 0, 0, 0.3);
-      border-left: 3px solid #ff6b6b;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-
-    .info-box p {
-      margin: 0;
-      font-style: italic;
-    }
-
-    .audio-player {
-      background: rgba(40, 41, 45, 0.8);
-      border-radius: 30px;
-      padding: 10px 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      margin: 15px 0;
-    }
-
-    .audio-player i {
-      color: #ff6b6b;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    .audio-player span {
-      color: #aaa;
-      font-size: 0.85rem;
-    }
-
-    /* Содержание */
-    .toc {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border: 1px solid rgba(255, 107, 107, 0.2);
-    }
-
-    .toc-title {
-      color: #ff6b6b;
-      font-weight: 600;
-      margin-bottom: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .toc-title i {
-      transition: transform 0.3s ease;
-    }
-
-    .toc-title.collapsed i {
-      transform: rotate(-90deg);
-    }
-
-    .toc-list {
-      list-style: none;
-      padding-left: 15px;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .toc-list.collapsed {
-      display: none;
-    }
-
-    .toc-list li {
-      margin: 8px 0;
-    }
-
-    .toc-list a {
-      color: #bbb;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .toc-list a:hover {
-      color: #ff6b6b;
-    }
-
-    /* Интересные мелочи */
-    .trivia-list {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .trivia-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .trivia-list li i {
-      color: #ff6b6b;
-      margin-top: 3px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rubik', sans-serif; font-weight: 380; }
+    body { background-color: #0a0a0f; color: #f0f0f0; min-height: 100vh; display: flex; flex-direction: column; }
+    .main-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; }
+    .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('../bg-outlast3.jpg'); background-size: cover; background-position: center 50px; background-repeat: no-repeat; background-attachment: fixed; }
+    .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.75) 100%); }
+    .navbar { background-color: rgba(26, 26, 46, 0.9); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff2a2a; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+    .nav-left { display: flex; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-img { height: 45px; width: auto; border-radius: 8px; }
+    .site-name { font-size: 20px; font-weight: 500; color: #ff2a2a; text-shadow: 0 0 10px rgba(255, 42, 42, 0.5); }
+    .nav-right { display: flex; }
+    .nav-menu { display: flex; list-style: none; gap: 15px; }
+    .nav-menu li a { color: #f0f0f0; text-decoration: none; font-size: 16px; padding: 8px 12px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; font-weight: 400; background-color: rgba(40, 41, 45, 0.5); }
+    .nav-menu li a:hover { background-color: #ff2a2a; color: white; transform: translateY(-2px); }
+    .mobile-menu-btn { display: none; background: none; border: none; color: #f0f0f0; font-size: 24px; cursor: pointer; padding: 5px; z-index: 1001; }
+    .content { max-width: 1100px; margin: 20px auto; padding: 0 15px; flex: 1; width: 100%; position: relative; z-index: 1; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: #ff6b6b; text-decoration: none; font-size: 0.95rem; margin-bottom: 20px; transition: all 0.3s ease; }
+    .back-link:hover { color: #ff4757; transform: translateX(-5px); }
+    .article-wrapper { background: linear-gradient(135deg, rgba(30, 31, 34, 0.8), rgba(20, 21, 24, 0.9)); border-radius: 20px; border: 1px solid rgba(255, 107, 107, 0.3); overflow: hidden; backdrop-filter: blur(5px); }
+    .quote-header { background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 71, 87, 0.05)); padding: 30px 30px 20px; border-bottom: 1px solid rgba(255, 107, 107, 0.2); text-align: center; }
+    .quote-text { font-size: 1.2rem; font-style: italic; color: #ff6b6b; max-width: 800px; margin: 0 auto; line-height: 1.5; }
+    .quote-author { font-size: 0.9rem; color: #888; margin-top: 10px; }
+    .article-content { padding: 30px; }
+    .character-intro { display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 30px; align-items: flex-start; }
+    .character-image { flex: 0 0 280px; text-align: center; }
+    .character-image img { width: 100%; max-width: 280px; border-radius: 16px; border: 2px solid rgba(255, 107, 107, 0.4); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); }
+    .character-title { flex: 1; min-width: 250px; }
+    .character-name { font-size: 2.2rem; color: #ff6b6b; margin-bottom: 10px; font-weight: 700; }
+    .character-sub { font-size: 1rem; color: #aaa; margin-bottom: 15px; line-height: 1.5; }
+    .info-box { background: rgba(0, 0, 0, 0.3); border-left: 3px solid #ff6b6b; padding: 15px 20px; margin: 20px 0; border-radius: 8px; }
+    .section { margin-top: 25px; clear: both; }
+    .section-title { font-size: 1.5rem; color: #ff6b6b; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid rgba(255, 107, 107, 0.3); display: flex; align-items: center; gap: 10px; }
+    .section-text { color: #d0d0d0; line-height: 1.7; font-size: 1rem; margin-bottom: 20px; }
+    .toc { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 15px 20px; margin: 20px 0; border: 1px solid rgba(255, 107, 107, 0.2); }
+    .toc-title { color: #ff6b6b; font-weight: 600; margin-bottom: 10px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+    .toc-list { list-style: none; padding-left: 15px; margin-top: 10px; transition: all 0.3s ease; }
+    .toc-list.collapsed { display: none; }
+    .toc-list li { margin: 8px 0; }
+    .toc-list a { color: #bbb; text-decoration: none; transition: color 0.3s ease; font-size: 0.9rem; }
+    .toc-list a:hover { color: #ff6b6b; }
+    .trivia-list { list-style: none; padding-left: 0; }
+    .trivia-list li { padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: flex-start; gap: 12px; }
+    .trivia-list li i { color: #ff6b6b; margin-top: 3px; }
 
     @media (max-width: 768px) {
-      .bg-image {
-        background-image: url('bg-outlast-mobile.jpg');
-        background-position: center top;
-        background-attachment: scroll;
-        background-position-y: 65px;
-      }
-      
+      .bg-image { background-image: url('../bg-outlast-mobile.jpg'); background-position: center top; background-attachment: scroll; background-position-y: 65px; }
       .navbar { padding: 12px 15px; flex-wrap: wrap; }
       .logo-img { height: 40px; }
       .site-name { font-size: 18px; }
@@ -397,20 +62,11 @@
       .nav-menu.active { display: flex !important; }
       .nav-menu li { width: 100%; }
       .nav-menu li a { justify-content: center; padding: 12px; font-size: 18px; width: 100%; }
-      
       .character-intro { flex-direction: column; align-items: center; text-align: center; }
       .character-name { font-size: 1.8rem; }
       .article-content { padding: 20px; }
       .quote-text { font-size: 1rem; }
       .section-title { font-size: 1.3rem; }
-    }
-
-    @media (max-width: 480px) {
-      .character-name { font-size: 1.5rem; }
-      .section-title { font-size: 1.2rem; }
-      .quote-text { font-size: 0.9rem; }
-      .article-content { padding: 15px; }
-      .quote-header { padding: 20px; }
     }
   </style>
 </head>
@@ -423,7 +79,7 @@
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo">
-        <img src="logo.png" alt="Логотип" class="logo-img">
+        <img src="../logo.png" alt="Логотип" class="logo-img" onerror="this.src='logo.png'">
         <span class="site-name">The Outlast Trials RU</span>
       </div>
     </div>
@@ -432,10 +88,10 @@
     </button>
     <div class="nav-right">
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
-        <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
-        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
-        <li><a href="about.html"><i class="fas fa-info-circle"></i> Об игре</a></li>
+        <li><a href="../index.html"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="../roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="../news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
+        <li><a href="../about.html"><i class="fas fa-info-circle"></i> Об игре</a></li>
       </ul>
     </div>
   </nav>
@@ -444,26 +100,15 @@
     <a href="category-prime-assets.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к главным активам</a>
 
     <div class="article-wrapper">
-      <!-- Цитата -->
       <div class="quote-header">
-        <div class="quote-text">
-          «Вот бы кто-нибудь построил тюрьму и для меня. Закрытое и тихое тёплое местечко, откуда я не смог бы сбежать.»
-        </div>
+        <div class="quote-text">«Вот бы кто-нибудь построил тюрьму и для меня. Закрытое и тихое тёплое местечко, откуда я не смог бы сбежать.»</div>
         <div class="quote-author">— Лиланд Койл</div>
-        
-        <div class="audio-player">
-          <i class="fas fa-play-circle" id="playBtn"></i>
-          <span id="audioTime">0:00 / 0:10</span>
-          <audio id="voiceAudio" src="audio/leland-coyle-voice.mp3" preload="metadata"></audio>
-        </div>
       </div>
 
-      <!-- Основное содержимое -->
       <div class="article-content">
-        <!-- Изображение и краткое описание (обтекание) -->
         <div class="character-intro">
           <div class="character-image">
-            <img src="screenshots/leland-coyle.png" alt="Лиланд Койл" onerror="this.src='https://via.placeholder.com/280x280?text=Лиланд+Койл'">
+            <img src="../screenshots/leland-coyle.png" alt="Лиланд Койл" onerror="this.src='https://via.placeholder.com/280x280?text=Лиланд+Койл'">
           </div>
           <div class="character-title">
             <h1 class="character-name">Лиланд Койл</h1>
@@ -478,11 +123,8 @@
           </div>
         </div>
 
-        <!-- Содержание -->
         <div class="toc">
-          <div class="toc-title" id="tocToggle">
-            Содержание <i class="fas fa-chevron-down"></i>
-          </div>
+          <div class="toc-title" id="tocToggle">Содержание <i class="fas fa-chevron-down"></i></div>
           <ul class="toc-list" id="tocList">
             <li><a href="#biography">1. Биография</a></li>
             <li><a href="#trials">2. The Outlast Trials</a></li>
@@ -490,7 +132,6 @@
           </ul>
         </div>
 
-        <!-- Биография -->
         <div class="section" id="biography">
           <h2 class="section-title"><i class="fas fa-user-circle"></i> Биография</h2>
           <div class="section-text">
@@ -500,7 +141,6 @@
           </div>
         </div>
 
-        <!-- The Outlast Trials -->
         <div class="section" id="trials">
           <h2 class="section-title"><i class="fas fa-skull"></i> The Outlast Trials</h2>
           <div class="section-text">
@@ -510,7 +150,6 @@
           </div>
         </div>
 
-        <!-- Интересные мелочи -->
         <div class="section" id="trivia">
           <h2 class="section-title"><i class="fas fa-lightbulb"></i> Интересные мелочи</h2>
           <ul class="trivia-list">
@@ -525,54 +164,8 @@
   </main>
 
   <script>
-    // Аудиоплеер
-    const audio = document.getElementById('voiceAudio');
-    const playBtn = document.getElementById('playBtn');
-    const audioTime = document.getElementById('audioTime');
-
-    if (audio && playBtn) {
-      audio.addEventListener('loadedmetadata', () => {
-        updateTimeDisplay();
-      });
-      
-      audio.addEventListener('timeupdate', () => {
-        updateTimeDisplay();
-      });
-      
-      playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          playBtn.classList.remove('fa-play-circle');
-          playBtn.classList.add('fa-pause-circle');
-        } else {
-          audio.pause();
-          playBtn.classList.remove('fa-pause-circle');
-          playBtn.classList.add('fa-play-circle');
-        }
-      });
-      
-      audio.addEventListener('ended', () => {
-        playBtn.classList.remove('fa-pause-circle');
-        playBtn.classList.add('fa-play-circle');
-      });
-    }
-    
-    function updateTimeDisplay() {
-      if (audio && audioTime) {
-        const current = audio.currentTime || 0;
-        const duration = audio.duration || 0;
-        const currentMin = Math.floor(current / 60);
-        const currentSec = Math.floor(current % 60);
-        const durationMin = Math.floor(duration / 60);
-        const durationSec = Math.floor(duration % 60);
-        audioTime.textContent = `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${durationMin}:${durationSec.toString().padStart(2, '0')}`;
-      }
-    }
-
-    // Содержание (сворачивание)
     const tocToggle = document.getElementById('tocToggle');
     const tocList = document.getElementById('tocList');
-    
     if (tocToggle && tocList) {
       tocToggle.addEventListener('click', () => {
         tocList.classList.toggle('collapsed');
@@ -580,26 +173,21 @@
       });
     }
 
-    // Плавная прокрутка к секциям
     document.querySelectorAll('.toc-list a').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // Мобильное меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navMenu = document.getElementById('nav-menu');
-    
     if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
+      mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         const icon = this.querySelector('i');
         if (navMenu.classList.contains('active')) {
@@ -610,10 +198,8 @@
           icon.classList.add('fa-bars');
         }
       });
-      
-      const navLinks = document.querySelectorAll('.nav-menu a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
           navMenu.classList.remove('active');
           const icon = mobileMenuBtn.querySelector('i');
           if (icon) {
@@ -622,8 +208,7 @@
           }
         });
       });
-      
-      document.addEventListener('click', function(event) {
+      document.addEventListener('click', (event) => {
         if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
           navMenu.classList.remove('active');
           const icon = mobileMenuBtn.querySelector('i');
@@ -635,6 +220,6 @@
       });
     }
   </script>
-  <script src="maintenance-mode.js"></script>
+  <script src="../maintenance-mode.js"></script>
 </body>
 </html>
