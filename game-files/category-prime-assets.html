@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* стили остаются те же */
     * {
       margin: 0;
       padding: 0;
@@ -198,6 +199,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 107, 107, 0.3);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .asset-card:hover {
@@ -290,7 +292,7 @@
     <div class="page-header">
       <a href="about.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к категориям</a>
       <h1 class="page-title"><i class="fas fa-skull"></i> Главные активы</h1>
-      <p class="page-description">Исполнители — свирепые и опасные враги, которые охотятся на реагентов во время испытаний. Каждый актив имеет уникальные способности, поведение и историю.</p>
+      <p class="page-description">Исполнители — свирепые и опасные враги, которые охотятся на реагентов во время испытаний. Нажмите на карточку, чтобы узнать подробную информацию.</p>
     </div>
 
     <div class="assets-grid" id="assets-grid"></div>
@@ -299,29 +301,34 @@
   <script>
     const primeAssets = [
       {
+        id: "leland-coyle",
         number: "01",
         name: "Лиланд Койл",
-        description: "Бывший полицейский, ставший одним из самых опасных исполнителей. Вооружен электрошокером и использует тактику подавления. Особенно опасен в ближнем бою."
+        shortDesc: "Электрический палач полигона"
       },
       {
+        id: "mother-gooseberry",
         number: "02",
         name: "Матушка Гусберри",
-        description: "Свирепая женщина-актив, которая использует лопату и крики, чтобы дезориентировать жертв. Её появление всегда сопровождается жутким смехом."
+        shortDesc: "Безумная хранительница"
       },
       {
+        id: "franco-barbi",
         number: "03",
         name: "Франко Барби",
-        description: "Актив с непредсказуемым поведением. Вооружен мачете и любит засады. Отличается высокой скоростью передвижения."
+        shortDesc: "Тень в темноте"
       },
       {
+        id: "otto-aurora",
         number: "04",
         name: "Отто и Арора Кресс",
-        description: "Опасный дуэт брата и сестры. Используют психологические атаки и координированные действия, чтобы загнать реагентов в ловушку."
+        shortDesc: "Психологический кошмар"
       },
       {
+        id: "lilia-bogomolova",
         number: "05",
         name: "Лилия Богомолова",
-        description: "Загадочный актив с необычными способностями. Использует ловушки и психологические манипуляции, чтобы сбивать с толку реагентов."
+        shortDesc: "Мастер иллюзий"
       }
     ];
 
@@ -335,11 +342,16 @@
         const card = document.createElement('div');
         card.className = 'asset-card';
         
+        // ИСПРАВЛЕНА ССЫЛКА - напрямую на страницу персонажа
+        card.addEventListener('click', () => {
+          window.location.href = `${asset.id}.html`;
+        });
+        
         card.innerHTML = `
           <div class="asset-number">${asset.number}</div>
           <div class="asset-content">
             <h3 class="asset-name">${asset.name}</h3>
-            <p class="asset-description">${asset.description}</p>
+            <p class="asset-description">${asset.shortDesc}</p>
           </div>
         `;
         
