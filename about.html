@@ -276,10 +276,214 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 992px) {
-      .categories-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
+    /* Секция с элементами категории */
+    .category-items-section {
+      margin-top: 30px;
+      margin-bottom: 40px;
+      background: rgba(30, 31, 34, 0.5);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .category-items-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .category-items-title {
+      font-size: 1.5rem;
+      color: #ff6b6b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .close-items-btn {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close-items-btn:hover {
+      color: #ff4757;
+      transform: scale(1.1);
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .item-card {
+      background: linear-gradient(135deg, rgba(40, 41, 45, 0.9), rgba(30, 31, 34, 0.95));
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .item-card:hover {
+      transform: translateY(-5px);
+      border-color: #ff6b6b;
+    }
+
+    .item-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .item-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ff6b6b;
+      margin-bottom: 8px;
+    }
+
+    .item-desc {
+      font-size: 0.85rem;
+      color: #bbbbbb;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 800px;
+      width: 90%;
+      max-height: 85vh;
+      background: linear-gradient(135deg, rgba(40, 41, 45, 0.98), rgba(30, 31, 34, 0.98));
+      border-radius: 20px;
+      border: 1px solid rgba(255, 107, 107, 0.5);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: #ff6b6b;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .modal-close:hover {
+      color: #ff4757;
+      transform: scale(1.1);
+    }
+
+    .modal-header {
+      text-align: center;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 71, 87, 0.05));
+      border-bottom: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .modal-number {
+      font-size: 0.85rem;
+      color: #ff6b6b;
+      letter-spacing: 2px;
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      color: #ff6b6b;
+      margin-top: 8px;
+    }
+
+    .modal-subtitle {
+      font-size: 1rem;
+      color: #cccccc;
+      margin-top: 5px;
+    }
+
+    .modal-image {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .modal-image img {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .modal-body {
+      padding: 20px 25px 25px;
+    }
+
+    .modal-section {
+      margin-bottom: 20px;
+    }
+
+    .modal-section-title {
+      font-size: 1.2rem;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-text {
+      color: #d0d0d0;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .abilities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .ability-tag {
+      background: rgba(255, 107, 107, 0.15);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #ff6b6b;
     }
 
     @media (max-width: 768px) {
@@ -302,20 +506,8 @@
       .hero-title { font-size: 1.8rem; }
       .hero-subtitle { font-size: 0.95rem; }
       .description-title { font-size: 1.4rem; }
-      .description-text { font-size: 0.95rem; }
-      .category-title { font-size: 1.2rem; }
-      
-      .categories-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title { font-size: 1.4rem; }
-      .hero-subtitle { font-size: 0.85rem; }
-      .description-section { padding: 20px; }
-      .category-card { margin: 0 5px; }
+      .modal-title { font-size: 1.4rem; }
+      .items-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -363,9 +555,26 @@
     <section class="categories-section">
       <div class="categories-grid" id="categories-grid"></div>
     </section>
+
+    <!-- Секция для отображения элементов выбранной категории -->
+    <div id="category-items-container" style="display: none;"></div>
   </main>
 
+  <!-- Модальное окно -->
+  <div id="item-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modal-content-inner"></div>
+    </div>
+  </div>
+
+  <script src="category-data.js"></script>
   <script>
+    let currentCategoryId = null;
+    const categoryItemsContainer = document.getElementById('category-items-container');
+    const modal = document.getElementById('item-modal');
+    const modalContentInner = document.getElementById('modal-content-inner');
+
     function animateOnLoad() {
       const heroSection = document.querySelector('.hero-section');
       const descriptionSection = document.querySelector('.description-section');
@@ -385,104 +594,119 @@
       }
     }
 
-    // Функция для открытия страницы категории
-    function openCategoryPage(categoryKey) {
-      window.location.href = `category-${categoryKey}.html`;
+    function closeCategoryItems() {
+      categoryItemsContainer.style.display = 'none';
+      categoryItemsContainer.innerHTML = '';
+      currentCategoryId = null;
     }
 
-    const gameCategories = [
-      {
-        key: "prime-assets",
-        title: "Главные активы",
-        description: "Главные активы - это жестокие, невменяемые и в то же время странно харизматичные личности, которые представляют главную угрозу для реагентов. Обычно они охраняют ключевые цели и являются центральными элементами сценария, на котором строится каждое испытание..",
-        icon: "fa-skull",
-        image: "screenshots/prime-assets.png"
-      },
-      {
-        key: "ex-pops",
-        title: "⚡ Экс-попы",
-        description: "Бывшие реагенты, которые не выдержали давления экспериментов и превратились в безумных убийц. Их появление всегда неожиданно и смертельно опасно.",
-        icon: "fa-ghost",
-        image: "screenshots/ex-pops.png"
-      },
-      {
-        key: "reagents",
-        title: "🧪 Реагенты",
-        description: "Игровые персонажи — подопытные, проходящие испытания. Каждый реагент имеет свои уникальные перки и стиль игры.",
-        icon: "fa-user-secret",
-        image: "screenshots/реагенты.png"
-      },
-      {
-        key: "specialists",
-        title: "🩺 Специалисты",
-        description: "Особые реагенты с уникальными навыками и способностями. Помогают команде в прохождении сложных испытаний.",
-        icon: "fa-user-md",
-        image: "screenshots/специалисты.png"
-      },
-      {
-        key: "maps",
-        title: "🗺️ Карты",
-        description: "Локации игры — полигон, склад, психиатрическая больница, деревня и другие жуткие места.",
-        icon: "fa-map",
-        image: "screenshots/карты.png"
-      },
-      {
-        key: "amps",
-        title: "💊 Ампы",
-        description: "Усилители, которые можно использовать во время испытаний. Дают временные бонусы: ускорение, лечение, невидимость.",
-        icon: "fa-capsules",
-        image: "screenshots/ампы.png"
-      },
-      {
-        key: "equipment",
-        title: "🎒 Снаряжение",
-        description: "Предметы, помогающие выжить: аптечки, бинты, батарейки для фонарика, кирпичи и бутылки.",
-        icon: "fa-backpack",
-        image: "screenshots/снаряжение.png"
-      },
-      {
-        key: "items",
-        title: "📦 Предметы",
-        description: "Различные предметы, которые можно найти во время испытаний: ключи, документы, улики.",
-        icon: "fa-cube",
-        image: "screenshots/предметы.png"
-      },
-      {
-        key: "catalogs",
-        title: "📚 Каталоги",
-        description: "Сборники заданий, достижений и коллекционных предметов. Помогают отслеживать прогресс.",
-        icon: "fa-book",
-        image: "screenshots/каталоги.png"
-      },
-      {
-        key: "achievements",
-        title: "🏆 Достижения",
-        description: "Специальные награды за выполнение сложных задач. Открывают новые возможности.",
-        icon: "fa-trophy",
-        image: "screenshots/достижения.png"
-      },
-      {
-        key: "recipes",
-        title: "📜 Рецепты",
-        description: "Схемы создания улучшений и предметов. Позволяют крафтить полезные вещи.",
-        icon: "fa-scroll",
-        image: "screenshots/рецепты.png"
-      },
-      {
-        key: "variators",
-        title: "🔄 Вариаторы",
-        description: "Модификаторы испытаний, которые меняют правила игры. Добавляют сложность.",
-        icon: "fa-sliders-h",
-        image: "screenshots/вариаторы.png"
-      },
-      {
-        key: "programs",
-        title: "📋 Испытательные программы",
-        description: "Основной режим игры. Программы: Одиночная, Кооперативная, Еженедельные испытания.",
-        icon: "fa-clipboard-list",
-        image: "screenshots/программы.png"
+    function showCategoryItems(categoryId) {
+      const category = categoryData[categoryId];
+      if (!category || !category.items || category.items.length === 0) return;
+      
+      currentCategoryId = categoryId;
+      
+      let itemsHtml = `
+        <div class="category-items-section">
+          <div class="category-items-header">
+            <h3 class="category-items-title">
+              <i class="fas ${category.icon}"></i> 
+              Список: ${category.title}
+            </h3>
+            <button class="close-items-btn" id="close-items-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="items-grid">
+      `;
+      
+      category.items.forEach(item => {
+        itemsHtml += `
+          <div class="item-card" data-category="${categoryId}" data-item-id="${item.id}">
+            <div class="item-number">${item.number}</div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-desc">${item.shortDesc}</div>
+          </div>
+        `;
+      });
+      
+      itemsHtml += `</div></div>`;
+      
+      categoryItemsContainer.innerHTML = itemsHtml;
+      categoryItemsContainer.style.display = 'block';
+      
+      // Прокрутка к секции
+      categoryItemsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Добавляем обработчики на карточки элементов
+      document.querySelectorAll('.item-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const categoryId = card.getAttribute('data-category');
+          const itemId = card.getAttribute('data-item-id');
+          showItemModal(categoryId, itemId);
+        });
+      });
+      
+      // Обработчик закрытия
+      const closeBtn = document.getElementById('close-items-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeCategoryItems);
       }
-    ];
+    }
+
+    function showItemModal(categoryId, itemId) {
+      const category = categoryData[categoryId];
+      if (!category) return;
+      
+      const item = category.items.find(i => i.id === itemId);
+      if (!item || !item.fullData) return;
+      
+      const data = item.fullData;
+      const abilitiesHtml = data.abilities ? data.abilities.map(ability => 
+        `<span class="ability-tag">${ability}</span>`
+      ).join('') : '';
+      
+      modalContentInner.innerHTML = `
+        <div class="modal-header">
+          <div class="modal-number">${category.title} #${item.number}</div>
+          <h2 class="modal-title">${item.name}</h2>
+          <div class="modal-subtitle">${data.title || ''}</div>
+        </div>
+        <div class="modal-image">
+          <img src="${data.image || 'https://via.placeholder.com/400x200?text=Нет+изображения'}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/400x200?text=Изображение+отсутствует'">
+        </div>
+        <div class="modal-body">
+          <div class="modal-section">
+            <h3 class="modal-section-title"><i class="fas fa-user-circle"></i> Биография</h3>
+            <p class="modal-text">${data.biography || 'Информация скоро появится...'}</p>
+          </div>
+          ${abilitiesHtml ? `
+          <div class="modal-section">
+            <h3 class="modal-section-title"><i class="fas fa-bolt"></i> Способности</h3>
+            <div class="abilities-list">${abilitiesHtml}</div>
+            <p class="modal-text" style="margin-top: 12px;">${data.abilitiesDesc || ''}</p>
+          </div>
+          ` : ''}
+          <div class="modal-section">
+            <h3 class="modal-section-title"><i class="fas fa-map-marker-alt"></i> Место обитания</h3>
+            <p class="modal-text"><strong>${data.location || 'Неизвестно'}</strong> — ${data.locationDesc || ''}</p>
+          </div>
+          <div class="modal-section">
+            <h3 class="modal-section-title"><i class="fas fa-history"></i> История</h3>
+            <p class="modal-text">${data.history || 'Информация скоро появится...'}</p>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
     function displayCategories() {
       const container = document.getElementById('categories-grid');
@@ -490,13 +714,13 @@
       
       container.innerHTML = '';
       
-      gameCategories.forEach(category => {
+      for (const [key, category] of Object.entries(categoryData)) {
         const card = document.createElement('div');
         card.className = 'category-card';
         
-        card.addEventListener('click', () => openCategoryPage(category.key));
+        card.addEventListener('click', () => showCategoryItems(key));
         
-        const imageHtml = `<img src="${category.image}" class="category-image" alt="${category.title}" onerror="this.style.display='none'; this.parentElement.querySelector('.category-image-placeholder').style.display='flex';">`;
+        const imageHtml = `<img src="screenshots/${key}.png" class="category-image" alt="${category.title}" onerror="this.style.display='none'; this.parentElement.querySelector('.category-image-placeholder').style.display='flex';">`;
         
         card.innerHTML = `
           ${imageHtml}
@@ -519,7 +743,7 @@
         }
         
         container.appendChild(card);
-      });
+      }
     }
 
     function initMobileMenu() {
@@ -570,6 +794,15 @@
       displayCategories();
       setTimeout(animateOnLoad, 100);
       initMobileMenu();
+      
+      // Закрытие модального окна
+      document.querySelector('.modal-close').addEventListener('click', closeModal);
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+      });
     });
   </script>
   <script src="maintenance-mode.js"></script>
