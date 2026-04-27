@@ -230,13 +230,12 @@
       font-size: 1.3rem;
       font-weight: 600;
       color: #ff6b6b;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
     }
 
+    /* Убираем стиль для описания, так как его больше нет */
     .asset-description {
-      font-size: 0.9rem;
-      color: #bbbbbb;
-      line-height: 1.5;
+      display: none;
     }
 
     @media (max-width: 768px) {
@@ -298,6 +297,7 @@
   </main>
 
   <script>
+    // Массив с главными активами — только номер и имя, без shortDesc
     const primeAssets = [
       {
         id: "leland-coyle",
@@ -341,11 +341,11 @@
           window.location.href = `${asset.id}.html`;
         });
         
+        // Теперь показываем только номер и имя — никакого undefined или описания
         card.innerHTML = `
           <div class="asset-number">${asset.number}</div>
           <div class="asset-content">
             <h3 class="asset-name">${asset.name}</h3>
-            <p class="asset-description">${asset.shortDesc}</p>
           </div>
         `;
         
