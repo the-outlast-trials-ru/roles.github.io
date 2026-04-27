@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Главные активы - The Outlast Trials RU</title>
+  <link rel="icon" href="logo.png" sizes="any">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 380;
+    }
+
+    body {
+      background-color: #0a0a0f;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('bg-outlast3.jpg');
+      background-size: cover;
+      background-position: center 50px;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.75) 100%);
+    }
+
+    .navbar {
+      background-color: rgba(26, 26, 46, 0.9);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ff2a2a;
+      box-shadow: 0 4px 12px rgba(255, 42, 42, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 45px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .site-name {
+      font-size: 20px;
+      font-weight: 500;
+      color: #ff2a2a;
+      text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
+    }
+
+    .nav-right {
+      display: flex;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 15px;
+    }
+
+    .nav-menu li a {
+      color: #f0f0f0;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 400;
+      background-color: rgba(40, 41, 45, 0.5);
+    }
+
+    .nav-menu li a:hover {
+      background-color: #ff2a2a;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .nav-menu li a.active {
+      background-color: #ff2a2a;
+      color: white;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #f0f0f0;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1001;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+      flex: 1;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff6b6b;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #ff4757;
+      transform: translateX(-5px);
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      color: #ff6b6b;
+      text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .page-description {
+      font-size: 1.1rem;
+      color: #cccccc;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .assets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .asset-card {
+      background: linear-gradient(135deg, rgba(40, 41, 45, 0.9), rgba(30, 31, 34, 0.95));
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .asset-card:hover {
+      transform: translateY(-8px);
+      border-color: #ff6b6b;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+    }
+
+    .asset-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin: 20px auto 0;
+    }
+
+    .asset-content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .asset-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ff6b6b;
+      margin-bottom: 15px;
+    }
+
+    .asset-description {
+      font-size: 0.9rem;
+      color: #bbbbbb;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .bg-image {
+        background-image: url('bg-outlast-mobile.jpg');
+        background-position: center top;
+        background-attachment: scroll;
+        background-position-y: 65px;
+      }
+      
+      .navbar { padding: 12px 15px; flex-wrap: wrap; }
+      .logo-img { height: 40px; }
+      .site-name { font-size: 18px; }
+      .mobile-menu-btn { display: block; }
+      .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: rgba(26, 26, 46, 0.95); flex-direction: column; padding: 15px; border-top: 1px solid #2a2a3e; border-bottom: 2px solid #ff2a2a; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 999; backdrop-filter: blur(10px); }
+      .nav-menu.active { display: flex !important; }
+      .nav-menu li { width: 100%; }
+      .nav-menu li a { justify-content: center; padding: 12px; font-size: 18px; width: 100%; }
+      
+      .page-title { font-size: 1.8rem; }
+      .assets-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-background">
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo">
+        <img src="logo.png" alt="Логотип" class="logo-img">
+        <span class="site-name">The Outlast Trials RU</span>
+      </div>
+    </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="nav-right">
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+        <li><a href="roles.html"><i class="fas fa-users"></i> Справочник ролей</a></li>
+        <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости сайта</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> Об игре</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="page-header">
+      <a href="about.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к категориям</a>
+      <h1 class="page-title"><i class="fas fa-skull"></i> Главные активы</h1>
+      <p class="page-description">Исполнители — свирепые и опасные враги, которые охотятся на реагентов во время испытаний. Каждый актив имеет уникальные способности, поведение и историю.</p>
+    </div>
+
+    <div class="assets-grid" id="assets-grid"></div>
+  </main>
+
+  <script>
+    const primeAssets = [
+      {
+        number: "01",
+        name: "Лиланд Койл",
+        description: "Бывший полицейский, ставший одним из самых опасных исполнителей. Вооружен электрошокером и использует тактику подавления. Особенно опасен в ближнем бою."
+      },
+      {
+        number: "02",
+        name: "Матушка Гусберри",
+        description: "Свирепая женщина-актив, которая использует лопату и крики, чтобы дезориентировать жертв. Её появление всегда сопровождается жутким смехом."
+      },
+      {
+        number: "03",
+        name: "Франко Барби",
+        description: "Актив с непредсказуемым поведением. Вооружен мачете и любит засады. Отличается высокой скоростью передвижения."
+      },
+      {
+        number: "04",
+        name: "Отто и Арора Кресс",
+        description: "Опасный дуэт брата и сестры. Используют психологические атаки и координированные действия, чтобы загнать реагентов в ловушку."
+      },
+      {
+        number: "05",
+        name: "Лилия Богомолова",
+        description: "Загадочный актив с необычными способностями. Использует ловушки и психологические манипуляции, чтобы сбивать с толку реагентов."
+      }
+    ];
+
+    function displayAssets() {
+      const container = document.getElementById('assets-grid');
+      if (!container) return;
+      
+      container.innerHTML = '';
+      
+      primeAssets.forEach(asset => {
+        const card = document.createElement('div');
+        card.className = 'asset-card';
+        
+        card.innerHTML = `
+          <div class="asset-number">${asset.number}</div>
+          <div class="asset-content">
+            <h3 class="asset-name">${asset.name}</h3>
+            <p class="asset-description">${asset.description}</p>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+    }
+
+    function initMobileMenu() {
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          navMenu.classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+        
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+          });
+        });
+        
+        document.addEventListener('click', function(event) {
+          if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      displayAssets();
+      initMobileMenu();
+    });
+  </script>
+  <script src="maintenance-mode.js"></script>
+</body>
+</html>
