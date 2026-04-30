@@ -293,18 +293,18 @@
 
   <script>
     const exPops = [
-      { id: "regular-machete", number: "01", name: "Обычные экс-попы (с мачете)" },
-      { id: "regular-claws", number: "02", name: "Обычные экс-попы (с когтями)" },
-      { id: "big-ex-pop", number: "03", name: "Большие экс-попы" },
-      { id: "berserker", number: "04", name: "Берсеркер" },
-      { id: "night-hunter", number: "05", name: "Night hunter" },
-      { id: "pusher", number: "06", name: "Pusher" },
-      { id: "pitcher", number: "07", name: "Pitcher" },
-      { id: "screamer", number: "08", name: "Крикун" },
-      { id: "grabber", number: "09", name: "Хватун" },
-      { id: "scapegoat", number: "10", name: "Козлы отпущения" },
-      { id: "skinnerman", number: "11", name: "Скиннермэн" },
-      { id: "imposters", number: "12", name: "Самозванцы" }
+      { id: "regular-machete", number: "01", name: "Обычные экс-попы (с мачете)", file: "regular-machete.html" },
+      { id: "regular-claws", number: "02", name: "Обычные экс-попы (с когтями)", file: "regular-claws.html" },
+      { id: "big-ex-pop", number: "03", name: "Большие экс-попы", file: "big-ex-pop.html" },
+      { id: "berserker", number: "04", name: "Берсеркер", file: "berserker.html" },
+      { id: "night-hunter", number: "05", name: "Night hunter", file: "night-hunter.html" },
+      { id: "pusher", number: "06", name: "Pusher", file: "pusher.html" },
+      { id: "pitcher", number: "07", name: "Pitcher", file: "pitcher.html" },
+      { id: "screamer", number: "08", name: "Крикун", file: "screamer.html" },
+      { id: "grabber", number: "09", name: "Хватун", file: "grabber.html" },
+      { id: "scapegoat", number: "10", name: "Козлы отпущения", file: "scapegoat.html" },
+      { id: "skinnerman", number: "11", name: "Скиннермэн", file: "skinnerman.html" },
+      { id: "imposters", number: "12", name: "Самозванцы", file: "imposters.html" }
     ];
 
     function displayItems() {
@@ -318,7 +318,7 @@
         card.className = 'item-card';
         
         card.addEventListener('click', () => {
-          alert(`Страница "${item.name}" в разработке. Подробная информация появится позже.`);
+          window.location.href = item.file;
         });
         
         card.innerHTML = `
