@@ -542,6 +542,36 @@ const membersData = {
     { name: "vpechatlyaet", nickname: "iwatchyourstream" },
     { name: "yuioppoiuy", nickname: "yuioppoiyu" },
     { name: "Zetrix", nickname: "8e8raluv" }
-  ]
+  ],
+   "80. Grubbs": [
+    { name: "Angel", nickname: "angel_99850" },
+    { name: "Миками", nickname: "mikamizxc" },
+    { name: "бихбихвхв", nickname: "sosisoci" },
+    { name: "Connotic", nickname: "connottag" },
+    { name: "Darkmatter", nickname: "cryptofaw" },
+    { name: "devstvennica", nickname: "devstevennica" },
+    { name: "dr'tekta(r)", nickname: "harleyquinn1656" },
+    { name: "godshakur", nickname: "godshakur" },
+    { name: "Gordon", nickname: "tillttroya" },
+    { name: "Greeen", nickname: "greeen0442" },
+    { name: "kayuri", nickname: "kkayuri1" },
+    { name: "KKTR", nickname: "kktr" },
+    { name: "Krosis Luk", nickname: "krosis_luk" },
+    { name: "marlene.bright", nickname: "marlene.bright." },
+    { name: "MaxRb", nickname: "reborndr" },
+    { name: "MILLION DOLLAR BABY", nickname: "solvevoy" },
+    { name: "Molekula", nickname: "chelmolekula" },
+    { name: "MR Oper|Lomtik BAJbIHA", nickname: "527243364" },
+    { name: "murasakibara", nickname: "urumka" },
+    { name: "owlet", nickname: "guts079356" },
+    { name: "picnic", nickname: "createdmentally" },
+    { name: "Rubaka mini", nickname: "dudesdl" },
+    { name: "sumiya", nickname: "berserk_1998qwe_66745" },
+    { name: "Tabaluga", nickname: "drivenice" },
+    { name: "vint", nickname: "vint_cool" },
+    { name: "Wacky", nickname: "smehford" },
+    { name: "Wolfram.METTA", nickname: "drkn.metta9901" },
+    { name: "zombie clown", nickname: "zonmbeeclown" }
+   ]
 };
 
