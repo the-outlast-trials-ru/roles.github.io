@@ -189,7 +189,7 @@
     /* Сетка каталогов */
     .catalogs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 25px;
     }
 
@@ -208,9 +208,9 @@
       box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
     }
 
-    .catalog-image {
+    .catalog-cover {
       width: 100%;
-      height: 200px;
+      aspect-ratio: 3 / 4;
       object-fit: cover;
       display: block;
     }
@@ -221,14 +221,14 @@
     }
 
     .catalog-title {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: #ff6b6b;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
     .catalog-subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #aaaaaa;
     }
 
@@ -253,9 +253,9 @@
 
     .book-container {
       position: relative;
-      width: 800px;
+      width: 900px;
       max-width: 90vw;
-      height: 500px;
+      height: 650px;
       perspective: 1500px;
     }
 
@@ -264,34 +264,26 @@
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.5s ease;
     }
 
     .book-page {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #2a2a3a, #1a1a2a);
+      background: #1a1a2a;
       border-radius: 8px;
       backface-visibility: hidden;
-      overflow-y: auto;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 107, 107, 0.3);
     }
 
-    .book-page::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .book-page::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-
-    .book-page::-webkit-scrollbar-thumb {
-      background: #ff6b6b;
-      border-radius: 10px;
+    .book-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .page-left {
@@ -368,37 +360,6 @@
       transform: scale(1.1);
     }
 
-    .page-content {
-      color: #e0e0e0;
-    }
-
-    .page-content h2 {
-      color: #ff6b6b;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-    }
-
-    .page-content p {
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    .page-content ul {
-      margin-left: 20px;
-      margin-bottom: 15px;
-    }
-
-    .page-content li {
-      margin-bottom: 8px;
-    }
-
-    .page-number {
-      text-align: center;
-      margin-top: 20px;
-      color: #888;
-      font-size: 0.8rem;
-    }
-
     @media (max-width: 768px) {
       .bg-image {
         background-image: url('../bg-outlast-mobile.jpg');
@@ -418,9 +379,7 @@
       
       .page-title { font-size: 1.8rem; }
       .catalogs-grid { grid-template-columns: 1fr; }
-      .book-container { height: 400px; }
-      .book-page { padding: 20px; }
-      .page-content h2 { font-size: 1.2rem; }
+      .book-container { height: 450px; }
     }
   </style>
 </head>
@@ -466,12 +425,10 @@
       <span class="book-close">&times;</span>
       <div class="book" id="book">
         <div class="book-page page-left" id="page-left">
-          <div class="page-content" id="page-left-content"></div>
-          <div class="page-number" id="page-left-number"></div>
+          <img id="leftPageImg" src="" alt="Страница">
         </div>
         <div class="book-page page-right" id="page-right">
-          <div class="page-content" id="page-right-content"></div>
-          <div class="page-number" id="page-right-number"></div>
+          <img id="rightPageImg" src="" alt="Страница">
         </div>
       </div>
       <div class="book-nav">
@@ -482,124 +439,131 @@
   </div>
 
   <script>
-    // Данные каталогов (полные страницы для книжки)
+    // Данные каталогов (только обложка и массив страниц-картинок)
     const catalogsData = [
       {
         id: "project-judas",
         title: "ПРОЕКТ «ИУДА»",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-иуда.png",
+        cover: "../screenshots/каталог-иуда.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Проект «Иуда» — первый экспериментальный каталог поведенческой одежды Муркофф. Включает в себя предметы, разработанные для подопытных, проходящих программу «Предательство».</p><h3>Содержит:</h3><ul><li>Костюм «Предатель»</li><li>Маска «Искажённая личность»</li><li>Аксессуар «Серебряник»</li></ul>" },
-          { title: "Костюм «Предатель»", content: "<h3>Костюм «Предатель»</h3><p>Тёмный плащ с капюшоном, украшенный символикой Иуды.</p><p><strong>Особенности:</strong> Увеличивает скрытность в темноте на 15%.</p>" },
-          { title: "Маска «Искажённая личность»", content: "<h3>Маска «Искажённая личность»</h3><p>Маска с двумя лицами — ангела и демона.</p><p><strong>Особенности:</strong> Пугает врагов при обнаружении, заставляя их отступать на секунду.</p>" }
+          "../screenshots/иуда-1.png",
+          "../screenshots/иуда-2.png",
+          "../screenshots/иуда-3.png",
+          "../screenshots/иуда-4.png"
         ]
       },
       {
         id: "project-messiah",
         title: "ПРОЕКТ «МЕССИЯ»",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-мессия.png",
+        cover: "../screenshots/каталог-мессия.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Проект «Мессия» — каталог, посвящённый религиозным мотивам и искуплению.</p><h3>Содержит:</h3><ul><li>Риза «Искупитель»</li><li>Нимб «Святой»</li><li>Посох «Пастырь»</li></ul>" },
-          { title: "Риза «Искупитель»", content: "<h3>Риза «Искупитель»</h3><p>Длинное облачение священнослужителя с золотым шитьём.</p><p><strong>Особенности:</strong> Восстанавливает здоровье после выполнения заданий.</p>" },
-          { title: "Нимб «Святой»", content: "<h3>Нимб «Святой»</h3><p>Светящийся нимб над головой.</p><p><strong>Особенности:</strong> Привлекает внимание врагов, но повышает защиту.</p>" }
+          "../screenshots/мессия-1.png",
+          "../screenshots/мессия-2.png",
+          "../screenshots/мессия-3.png"
         ]
       },
       {
         id: "deep-burn",
         title: "ГЛУБОКИЙ ОЖОГ",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-ожог.png",
+        cover: "../screenshots/каталог-ожог.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Каталог «Глубокий ожог» посвящён выживанию в экстремальных условиях.</p><h3>Содержит:</h3><ul><li>Огнеупорный костюм</li><li>Маска «Обгоревший»</li><li>Перчатки «Жар»</li></ul>" },
-          { title: "Огнеупорный костюм", content: "<h3>Огнеупорный костюм</h3><p>Специальный костюм, защищающий от огня и высокой температуры.</p><p><strong>Особенности:</strong> Полная защита от огня на 30 секунд.</p>" }
+          "../screenshots/ожог-1.png",
+          "../screenshots/ожог-2.png",
+          "../screenshots/ожог-3.png"
         ]
       },
       {
         id: "project-diarchy",
         title: "ПРОЕКТ «ДИАРХИЯ»",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-диархия.png",
+        cover: "../screenshots/каталог-диархия.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Проект «Диархия» — каталог, вдохновлённый двойственностью власти.</p><h3>Содержит:</h3><ul><li>Мундир «Правитель»</li><li>Корона «Тирания»</li><li>Плащ «Справедливость»</li></ul>" },
-          { title: "Мундир «Правитель»", content: "<h3>Мундир «Правитель»</h3><p>Парадный мундир с эполетами и наградами.</p><p><strong>Особенности:</strong> Увеличивает урон в ближнем бою.</p>" }
+          "../screenshots/диархия-1.png",
+          "../screenshots/диархия-2.png"
         ]
       },
       {
         id: "season-5",
         title: "СЕЗОН 5",
         subtitle: "100% ЗАВЕРШЕНО",
-        image: "../screenshots/сезон-5.png",
+        cover: "../screenshots/сезон-5.png",
         pages: [
-          { title: "Обзор сезона", content: "<p>Пятый сезон программы Муркофф завершён.</p><h3>Награды:</h3><ul><li>Эксклюзивный скин «Ветеран»</li><li>Значок «Покоритель»</li><li>Аватар «Пятый элемент»</li></ul>" },
-          { title: "Скин «Ветеран»", content: "<h3>Скин «Ветеран»</h3><p>Особая награда для тех, кто прошёл все испытания пятого сезона.</p>" }
+          "../screenshots/сезон5-1.png",
+          "../screenshots/сезон5-2.png"
         ]
       },
       {
         id: "amelia",
         title: "АМЕЛИЯ",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-амелия.png",
+        cover: "../screenshots/каталог-амелия.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Каталог «Амелия» назван в честь одного из первых реагентов.</p><h3>Содержит:</h3><ul><li>Платье «Амелия»</li><li>Причёска «Локоны»</li><li>Аксессуар «Медальон»</li></ul>" },
-          { title: "Платье «Амелия»", content: "<h3>Платье «Амелия»</h3><p>Элегантное платье викторианской эпохи.</p><p><strong>Особенности:</strong> Повышает скорость передвижения.</p>" }
+          "../screenshots/амелия-1.png",
+          "../screenshots/амелия-2.png",
+          "../screenshots/амелия-3.png"
         ]
       },
       {
         id: "season-4",
         title: "СЕЗОН 4",
         subtitle: "100% ЗАВЕРШЕНО",
-        image: "../screenshots/сезон-4.png",
+        cover: "../screenshots/сезон-4.png",
         pages: [
-          { title: "Обзор сезона", content: "<p>Четвёртый сезон программы Муркофф завершён.</p><h3>Награды:</h3><ul><li>Скин «Испытатель»</li><li>Значок «Сезонный»</li><li>Аксессуар «Знак отличия»</li></ul>" }
+          "../screenshots/сезон4-1.png",
+          "../screenshots/сезон4-2.png"
         ]
       },
       {
         id: "prime-time",
         title: "ПРАЙМ-ТАЙМ",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-прайм.png",
+        cover: "../screenshots/каталог-прайм.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Каталог «Прайм-тайм» посвящён главным активам.</p><h3>Содержит:</h3><ul><li>Скин «Койл»</li><li>Скин «Гусберри»</li><li>Скин «Барби»</li></ul>" },
-          { title: "Скин «Койл»", content: "<h3>Скин «Койл»</h3><p>Костюм в стиле Лиланда Койла.</p><p><strong>Особенности:</strong> Электрические разряды при атаке.</p>" }
+          "../screenshots/прайм-1.png",
+          "../screenshots/прайм-2.png",
+          "../screenshots/прайм-3.png"
         ]
       },
       {
         id: "project-recidive",
         title: "ПРОЕКТ «РЕЦИДИВ»",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-рецидив.png",
+        cover: "../screenshots/каталог-рецидив.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Проект «Рецидив» для тех, кто вернулся на испытания.</p><h3>Содержит:</h3><ul><li>Костюм «Возвращение»</li><li>Маска «Призрак прошлого»</li></ul>" },
-          { title: "Костюм «Возвращение»", content: "<h3>Костюм «Возвращение»</h3><p>Потёртая тюремная роба с нашивками.</p>" }
+          "../screenshots/рецидив-1.png",
+          "../screenshots/рецидив-2.png"
         ]
       },
       {
         id: "winter-brings-death",
         title: "ЗИМА ПРИНОСИТ СМЕРТЬ",
         subtitle: "КАТАЛОГ ПОВЕДЕНЧЕСКОЙ ОДЕЖДЫ МЕРКОФФ",
-        image: "../screenshots/каталог-зима.png",
+        cover: "../screenshots/каталог-зима.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Зимний тематический каталог.</p><h3>Содержит:</h3><ul><li>Шуба «Мороз»</li><li>Шапка «Стужа»</li><li>Варежки «Холод»</li></ul>" },
-          { title: "Шуба «Мороз»", content: "<h3>Шуба «Мороз»</h3><p>Тёплая шуба с белым мехом.</p><p><strong>Особенности:</strong> Защита от холода.</p>" }
+          "../screenshots/зима-1.png",
+          "../screenshots/зима-2.png"
         ]
       },
       {
         id: "deluxe",
         title: "ДЕЛЮКС – КАТАЛОГ",
         subtitle: "2025",
-        image: "../screenshots/каталог-делюкс.png",
+        cover: "../screenshots/каталог-делюкс.png",
         pages: [
-          { title: "Обзор каталога", content: "<p>Делюкс-каталог 2025 года — эксклюзивные предметы для коллекционеров.</p><h3>Содержит:</h3><ul><li>Золотой скин «Избранный»</li><li>Платиновый аксессуар</li><li>Эксклюзивный значок</li></ul>" },
-          { title: "Золотой скин «Избранный»", content: "<h3>Золотой скин «Избранный»</h3><p>Полностью золотой костюм для самых преданных реагентов.</p><p><strong>Особенности:</strong> Привлекает внимание всех врагов.</p>" }
+          "../screenshots/делюкс-1.png",
+          "../screenshots/делюкс-2.png",
+          "../screenshots/делюкс-3.png",
+          "../screenshots/делюкс-4.png"
         ]
       }
     ];
 
     let currentCatalog = null;
-    let currentPage = 0;
-    let totalPages = 0;
+    let currentSpread = 0; // текущий разворот (0 = первые две страницы)
+    let totalSpreads = 0;
     let isAnimating = false;
 
     function displayCatalogs() {
@@ -617,7 +581,7 @@
         });
         
         card.innerHTML = `
-          <img src="${catalog.image}" class="catalog-image" alt="${catalog.title}" onerror="this.style.display='none'">
+          <img src="${catalog.cover}" class="catalog-cover" alt="${catalog.title}" onerror="this.src='https://via.placeholder.com/300x400?text=${encodeURIComponent(catalog.title)}'">
           <div class="catalog-content">
             <h3 class="catalog-title">${catalog.title}</h3>
             <p class="catalog-subtitle">${catalog.subtitle}</p>
@@ -630,44 +594,38 @@
 
     function openCatalog(catalog) {
       currentCatalog = catalog;
-      currentPage = 0;
-      totalPages = catalog.pages.length;
+      currentSpread = 0;
+      totalSpreads = Math.ceil(catalog.pages.length / 2);
       isAnimating = false;
       
       document.getElementById('catalogModal').classList.add('active');
       document.body.style.overflow = 'hidden';
       
-      updateBookPages();
+      updateBookSpread();
       updateNavButtons();
     }
 
-    function updateBookPages() {
-      const leftPageIdx = currentPage * 2;
-      const rightPageIdx = currentPage * 2 + 1;
+    function updateBookSpread() {
+      const leftPageImg = document.getElementById('leftPageImg');
+      const rightPageImg = document.getElementById('rightPageImg');
       
-      const leftContent = document.getElementById('page-left-content');
-      const rightContent = document.getElementById('page-right-content');
-      const leftNumber = document.getElementById('page-left-number');
-      const rightNumber = document.getElementById('page-right-number');
+      const leftIdx = currentSpread * 2;
+      const rightIdx = currentSpread * 2 + 1;
       
-      // Левая страница
-      if (leftPageIdx < totalPages) {
-        const page = currentCatalog.pages[leftPageIdx];
-        leftContent.innerHTML = `<h2>${page.title}</h2>${page.content}`;
-        leftNumber.textContent = `Страница ${leftPageIdx + 1} из ${totalPages}`;
+      if (leftIdx < currentCatalog.pages.length) {
+        leftPageImg.src = currentCatalog.pages[leftIdx];
+        leftPageImg.alt = `Страница ${leftIdx + 1}`;
       } else {
-        leftContent.innerHTML = '<h2>Конец каталога</h2><p>Это последняя страница.</p>';
-        leftNumber.textContent = `—`;
+        leftPageImg.src = '';
+        leftPageImg.alt = 'Пустая страница';
       }
       
-      // Правая страница
-      if (rightPageIdx < totalPages) {
-        const page = currentCatalog.pages[rightPageIdx];
-        rightContent.innerHTML = `<h2>${page.title}</h2>${page.content}`;
-        rightNumber.textContent = `Страница ${rightPageIdx + 1} из ${totalPages}`;
+      if (rightIdx < currentCatalog.pages.length) {
+        rightPageImg.src = currentCatalog.pages[rightIdx];
+        rightPageImg.alt = `Страница ${rightIdx + 1}`;
       } else {
-        rightContent.innerHTML = '<h2>Пустая страница</h2><p>Здесь пока ничего нет.</p>';
-        rightNumber.textContent = `—`;
+        rightPageImg.src = '';
+        rightPageImg.alt = 'Пустая страница';
       }
     }
 
@@ -675,13 +633,13 @@
       const prevBtn = document.getElementById('prevPageBtn');
       const nextBtn = document.getElementById('nextPageBtn');
       
-      if (currentPage === 0) {
+      if (currentSpread === 0) {
         prevBtn.classList.add('disabled');
       } else {
         prevBtn.classList.remove('disabled');
       }
       
-      if (currentPage >= Math.ceil(totalPages / 2) - 1) {
+      if (currentSpread >= totalSpreads - 1) {
         nextBtn.classList.add('disabled');
       } else {
         nextBtn.classList.remove('disabled');
@@ -690,17 +648,16 @@
 
     function nextPage() {
       if (isAnimating) return;
-      if (currentPage >= Math.ceil(totalPages / 2) - 1) return;
+      if (currentSpread >= totalSpreads - 1) return;
       
       isAnimating = true;
       const book = document.getElementById('book');
-      const rightPage = document.querySelector('.page-right');
       
-      book.style.transform = 'translateX(-50%) rotateY(-30deg)';
+      book.style.transform = 'translateX(-30px) rotateY(-5deg)';
       
       setTimeout(() => {
-        currentPage++;
-        updateBookPages();
+        currentSpread++;
+        updateBookSpread();
         updateNavButtons();
         
         book.style.transform = '';
@@ -713,17 +670,16 @@
 
     function prevPage() {
       if (isAnimating) return;
-      if (currentPage === 0) return;
+      if (currentSpread === 0) return;
       
       isAnimating = true;
       const book = document.getElementById('book');
-      const leftPage = document.querySelector('.page-left');
       
-      book.style.transform = 'translateX(50%) rotateY(30deg)';
+      book.style.transform = 'translateX(30px) rotateY(5deg)';
       
       setTimeout(() => {
-        currentPage--;
-        updateBookPages();
+        currentSpread--;
+        updateBookSpread();
         updateNavButtons();
         
         book.style.transform = '';
@@ -738,7 +694,7 @@
       document.getElementById('catalogModal').classList.remove('active');
       document.body.style.overflow = '';
       currentCatalog = null;
-      currentPage = 0;
+      currentSpread = 0;
     }
 
     function initMobileMenu() {
