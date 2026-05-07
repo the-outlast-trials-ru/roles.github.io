@@ -231,7 +231,7 @@
       color: #aaaaaa;
     }
 
-    /* Модальное окно для просмотра каталога */
+    /* Модальное окно для просмотра каталога - УВЕЛИЧЕННОЕ */
     .catalog-modal {
       display: none;
       position: fixed;
@@ -252,14 +252,15 @@
 
     .book-container {
       position: relative;
-      width: 90vw;
-      max-width: 1000px;
-      height: 70vh;
-      max-height: 700px;
+      width: 95vw;
+      max-width: 1400px;
+      height: 85vh;
+      max-height: 850px;
       background: #1a1a2a;
       border-radius: 12px;
-      border: 1px solid rgba(255, 107, 107, 0.3);
+      border: 2px solid rgba(255, 107, 107, 0.4);
       overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .book-viewer {
@@ -269,11 +270,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #111118;
     }
 
     .current-page-img {
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 95%;
+      max-height: 95%;
       object-fit: contain;
       display: block;
       transition: transform 0.2s ease, opacity 0.2s ease;
@@ -288,18 +290,18 @@
       justify-content: space-between;
       pointer-events: none;
       z-index: 10;
-      padding: 0 10px;
+      padding: 0 15px;
     }
 
     .book-nav-btn {
       pointer-events: auto;
-      width: 45px;
-      height: 45px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      background: rgba(255, 107, 107, 0.8);
+      background: rgba(255, 107, 107, 0.85);
       border: none;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -320,29 +322,42 @@
 
     .book-close {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 28px;
+      top: 15px;
+      right: 20px;
+      font-size: 32px;
       color: white;
       cursor: pointer;
       transition: all 0.3s ease;
       z-index: 20;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .book-close:hover {
       color: #ff6b6b;
       transform: scale(1.1);
+      background: rgba(0, 0, 0, 0.8);
     }
 
     .page-counter {
       position: absolute;
-      bottom: 10px;
+      bottom: 15px;
       left: 0;
       right: 0;
       text-align: center;
-      color: #888;
-      font-size: 0.8rem;
+      color: #aaa;
+      font-size: 0.9rem;
       z-index: 20;
+      background: rgba(0, 0, 0, 0.5);
+      width: fit-content;
+      margin: 0 auto;
+      padding: 5px 15px;
+      border-radius: 20px;
     }
 
     @media (max-width: 768px) {
@@ -364,8 +379,27 @@
       
       .page-title { font-size: 1.8rem; }
       .catalogs-grid { grid-template-columns: 1fr; }
-      .book-container { height: 50vh; }
-      .book-nav-btn { width: 35px; height: 35px; font-size: 1rem; }
+      
+      .book-container { 
+        width: 98vw; 
+        height: 70vh; 
+      }
+      .book-nav-btn { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1rem; 
+      }
+      .book-close {
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+        top: 10px;
+        right: 12px;
+      }
+      .page-counter {
+        font-size: 0.75rem;
+        bottom: 10px;
+      }
     }
   </style>
 </head>
@@ -430,7 +464,9 @@
         cover: "../screenshots/каталог-иуда.png",
         pages: [
           "../screenshots/иуда-1.png",
-          "../screenshots/иуда-2.png"
+          "../screenshots/иуда-2.png",
+          "../screenshots/иуда-3.png",
+          "../screenshots/иуда-4.png"
         ]
       },
       {
